@@ -1,0 +1,3 @@
+[submodule "submodules/minetest_game"]
+	path = submodules/minetest_game
+	url = https://github.com/minetest/minetest_game

@@ -1,4 +1,10 @@
 # Aurum
+* Direct Downloads
+  * [Stable](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
+  * [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
+* Repositories
+  * [Compiled](https://github.com/tigris-mt/aurum-compiled)
+  * [Development](https://github.com/tigris-mt/aurum)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.

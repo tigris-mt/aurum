@@ -1,4 +1,5 @@
 # Aurum
+
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.
 
@@ -8,3 +9,13 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 * Help system (manual, in-game help, etc.)
 * FOSS
 * Stable worlds and APIs.
+
+## World Layout
+### Seven Planes
+* Aurum (gold, metal) in the center. The Material Plane.
+* The Aether (light) above.
+* The Loom (dark, twisting) below.
+* Inferno (flame, power) to the north.
+* Abyss (cold, stasis) to the south.
+* The Ancient Roots (nature, growth) to the east.
+* The Fleeting Fell (psyche, decay) to the west.

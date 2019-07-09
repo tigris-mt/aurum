@@ -1,0 +1,10 @@
+# Aurum
+## General Goals
+In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.
+
+* Past alpha stage (completion).
+* More than 6 hours of play.
+* No obvious/breaking/super-annoying bugs or crashes.
+* Help system (manual, in-game help, etc.)
+* FOSS
+* Stable worlds and APIs.

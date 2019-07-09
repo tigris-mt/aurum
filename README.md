@@ -1,6 +1,5 @@
 # Aurum
 * Direct Downloads
-  * [Stable](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
   * [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Repositories
   * [Compiled](https://github.com/tigris-mt/aurum-compiled)

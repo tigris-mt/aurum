@@ -1,3 +1,6 @@
 [submodule "submodules/minetest_game"]
 	path = submodules/minetest_game
 	url = https://github.com/minetest/minetest_game
+[submodule "mods/smartfs"]
+	path = mods/smartfs
+	url = https://github.com/minetest-mods/smartfs

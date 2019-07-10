@@ -29,6 +29,10 @@ function aurum.box.collide_box(a, b)
     return true
 end
 
+function aurum.box.collide_point(box, point)
+	return aurum.box.collide_box(box, aurum.box.new(point, point))
+end
+
 -- Get the extremes of the box.
 function aurum.box.extremes(box)
 	local min, max = vector.sort(box.a, box.b)

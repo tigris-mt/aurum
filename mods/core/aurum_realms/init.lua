@@ -102,10 +102,15 @@ function m.register(id, def)
 	-- Relative 0,0,0 point.
 	r.center = vector.divide(r.size, 2)
 
-	-- Find a global position for the center.
-	r.global = vector.add(assert(get_position(r), "out of room, cannot add a realm of this size"), r.center)
+	-- Find a global position.
+	r.global_corner = assert(get_position(r), "out of room, cannot add a realm of this size")
+	-- Global center.
+	r.global_center = vector.add(r.global_corner, r.center)
 
-	minetest.log("action", ("Registered realm (%s) centered at %s, size %s: %s"):format(id, minetest.pos_to_string(r.global), minetest.pos_to_string(r.size), r.description))
+	-- Global bounding box.
+	r.box = aurum.box.new(r.global_corner, vector.add(r.global_corner, r.size))
+
+	minetest.log("action", ("Registered realm (%s) centered at %s, size %s: %s"):format(id, minetest.pos_to_string(r.global_center), minetest.pos_to_string(r.size), r.description))
 
 	realms[id] = r
 	return r
@@ -115,12 +120,21 @@ end
 
 -- Get position within realm.
 function aurum.rpos(realm_id, global_pos)
-	return vector.sub(realms[realm_id].global, global_pos)
+	return vector.sub(realms[realm_id].global_center, global_pos)
 end
 
 -- Get global position from realm.
 function aurum.gpos(realm_id, realm_pos)
-	return vector.add(realms[realm_id].global, global_pos)
+	return vector.add(realms[realm_id].global_center, global_pos)
+end
+
+-- Returns realm id or nil
+function aurum.pos_to_realm(global_pos)
+	for id,realm in pairs(realms) do
+		if aurum.box.collide_point(realm.box, global_pos) then
+			return id
+		end
+	end
 end
 
 aurum.dofile("default_realms.lua")

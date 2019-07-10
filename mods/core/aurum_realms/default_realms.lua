@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.realms.register("aurum_realms:aurum", {
 	description = S("Aurum"),
-	size = vector.new(480, 480, 480),
+	size = vector.new(8000, 800, 8000),
 })
 
 function aurum_spawn(player)

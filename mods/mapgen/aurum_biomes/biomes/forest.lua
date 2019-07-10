@@ -8,13 +8,7 @@ aurum.biomes.register("aurum:aurum", {
 	humidity_point = 50,
 })
 
-local oak = aurum.trees.types["aurum_trees:oak"].decorations
-for k,v in pairs(oak) do
-	minetest.register_decoration(table.combine({
-		deco_type = "schematic",
-		place_on = {"group:soil"},
-		sidelen = 80,
-		fill_ratio = 0.005 / #table.keys(oak),
-		biomes = {"aurum_forest"},
-	}, v))
-end
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:oak",
+	biomes = {"aurum_forest"},
+})

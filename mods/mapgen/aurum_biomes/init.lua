@@ -16,5 +16,26 @@ function aurum.biomes.register(realm, def)
 	return minetest.register_biome(def)
 end
 
+function aurum.biomes.register_tree_decoration(def)
+	local d = aurum.trees.types[def.name].decorations
+	local def = table.combine({
+		-- Relative rarity.
+		rarity = 1,
+		-- Tree types to use.
+		schematics = table.keys(d),
+		-- Decoration biomes.
+		biomes = nil,
+	}, def)
+	for _,k in ipairs(def.schematics) do
+		minetest.register_decoration(table.combine({
+			deco_type = "schematic",
+			place_on = {"group:soil"},
+			sidelen = 80,
+			fill_ratio = 0.005 * (def.rarity or 1) / #def.schematics,
+			biomes = def.biomes,
+		}, d[k]))
+	end
+end
+
 aurum.dofile("biomes/grassland.lua")
 aurum.dofile("biomes/forest.lua")

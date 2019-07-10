@@ -21,3 +21,6 @@ aurum.dofile("lua_utils.lua")
 
 -- Helpful geometric functions.
 aurum.dofile("geometry/box.lua")
+
+-- Node sounds.
+aurum.dofile("sounds.lua")

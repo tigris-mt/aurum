@@ -1,5 +1,5 @@
 * Base world generation.
-  * Nodes: Stone, dirt, grass, wood, leaves, saplings.
+  * Nodes: Stone, dirt, grass, trunk, leaves, saplings.
     * Sounds
   * Biomes: Grasslands, forests.
 * Base player.

@@ -1,6 +1,8 @@
+local S = minetest.get_translator()
+
 aurum.realms.register("aurum_realms:aurum", {
-	description = "Aurum",
-	size = vector.new(8192, 2048, 8192),
+	description = S("Aurum"),
+	size = vector.new(480, 480, 480),
 })
 
 function aurum_spawn(player)
@@ -13,6 +15,6 @@ minetest.register_on_newplayer(aurum_spawn)
 minetest.register_on_respawnplayer(aurum_spawn)
 
 aurum.realms.register("aurum_realms:aether", {
-	description = "The Aether",
-	size = vector.new(8192, 2048, 8192),
+	description = S("The Aether"),
+	size = vector.new(480, 480, 480),
 })

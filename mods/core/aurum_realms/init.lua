@@ -12,7 +12,7 @@ end
 local realms = {}
 
 -- Realm sizes must be aligned
-m.ALIGN = 32
+m.ALIGN = 80
 local function coord_ok(value)
 	return (value % m.ALIGN) == 0
 end
@@ -21,29 +21,27 @@ local function allocate_position(realm)
 	minetest.log("action", "Allocating position for new realm: " .. realm.id)
 
 	-- Loop through all possible positions until a space is found that does not collide.
-	for x=aurum.WORLD.min.x, aurum.WORLD.max.x, realm.size.x do
-		for y=aurum.WORLD.min.y, aurum.WORLD.max.y, realm.size.y do
-			for z=aurum.WORLD.min.z, aurum.WORLD.max.z, realm.size.z do
-				local corner = vector.new(x, y, z)
-				local box = aurum.box.new(corner, vector.add(corner, realm.size))
+	for x=aurum.WORLDA.min.x, aurum.WORLDA.max.x, realm.size.x do
+		for z=aurum.WORLDA.min.z, aurum.WORLDA.max.z, realm.size.z do
+			local corner = vector.new(x, realm.y - realm.size.y / 2, z)
+			local box = aurum.box.new(corner, vector.add(corner, realm.size))
 
-				local ok = true
+			local ok = true
 
-				-- For all stored realms...
-				for _,store in pairs(realm_store) do
-					-- If this potential position collides with the stored realm.
-					local otherbox = aurum.box.new(store.corner, vector.add(store.corner, store.size))
-					if aurum.box.collide_box(box, otherbox) then
-						-- Skip this position.
-						ok = false
-						break
-					end
+			-- For all stored realms...
+			for _,store in pairs(realm_store) do
+				-- If this potential position collides with the stored realm.
+				local otherbox = aurum.box.new(store.corner, vector.add(store.corner, store.size))
+				if aurum.box.collide_box(box, otherbox) then
+					-- Skip this position.
+					ok = false
+					break
 				end
+			end
 
-				-- No collisions, use this position.
-				if ok then
-					return corner
-				end
+			-- No collisions, use this position.
+			if ok then
+				return corner
 			end
 		end
 	end
@@ -87,6 +85,9 @@ function m.register(id, def)
 
 		-- Realm size.
 		size = vector.new(1024, 1024, 1024),
+
+		-- Realm Y location.
+		y = 0,
 	}, def, {
 		id = id,
 	})
@@ -108,9 +109,9 @@ function m.register(id, def)
 	r.local_box = aurum.box.new(vector.multiply(r.center, -1), r.center)
 
 	-- Global bounding box.
-	r.global_box = aurum.box.translate(r.local_box, r.global_corner)
+	r.global_box = aurum.box.new(r.global_corner, vector.add(r.global_corner, r.size))
 
-	minetest.log("action", ("Registered realm (%s) centered at %s, size %s: %s"):format(id, minetest.pos_to_string(r.global_center), minetest.pos_to_string(r.size), r.description))
+	minetest.log("action", ("Registered realm (%s) centered at %s, size %s"):format(id, minetest.pos_to_string(r.global_center), minetest.pos_to_string(r.size)))
 
 	realms[id] = r
 	return r
@@ -146,5 +147,21 @@ function aurum.pos_to_realm(global_pos)
 		end
 	end
 end
+
+minetest.register_on_generated(function(minp, maxp, seed)
+	if aurum.pos_to_realm(minp) and aurum.pos_to_realm(maxp) then
+		return
+	end
+	local c_air = minetest.get_content_id("air")
+
+	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
+	local area = VoxelArea:new{MinEdge = emin, MaxEdge = emax}
+	local data = vm:get_data()
+	for i in area:iterp(emin, emax) do
+		data[i] = c_air
+	end
+	vm:set_data(data)
+	vm:write_to_map()
+end)
 
 aurum.dofile("default_realms.lua")

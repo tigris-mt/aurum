@@ -11,6 +11,12 @@ aurum.WORLD = {
 	max = vector.new(31000, 31000, 31000),
 }
 
+-- The world size, aligned to chunks.
+aurum.WORLDA = {
+	min = vector.new(-30000, -30000, -30000),
+	max = vector.new(30000, 30000, 30000),
+}
+
 aurum.dofile("lua_utils.lua")
 
 -- Helpful geometric functions.

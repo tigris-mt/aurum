@@ -116,6 +116,11 @@ function m.register(id, def)
 	return r
 end
 
+-- Get a realm definition.
+function m.get(id)
+	return realms[id]
+end
+
 -- General functions to convert between realm and global positions.
 
 -- Get position within realm.

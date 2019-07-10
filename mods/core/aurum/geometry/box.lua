@@ -40,7 +40,7 @@ function aurum.box.extremes(box)
 end
 
 -- Get the box translated to a position
-function aurum.box.translated(box, pos)
+function aurum.box.translate(box, pos)
 	return aurum.box.new(vector.add(box.a, pos), vector.add(box.b, pos))
 end
 

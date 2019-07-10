@@ -11,9 +11,6 @@ end
 
 local realms = {}
 
--- A realm is an NxNxN cube.
--- They are allocated first-come, first-served; but once a biome ID is registered its global position will be remembered in storage.
-
 -- Realm sizes must be aligned
 m.ALIGN = 32
 local function coord_ok(value)
@@ -116,12 +113,17 @@ function m.register(id, def)
 	return r
 end
 
+-- Remove a realm by ID, freeing the id and stored position.
+-- Note that if any of this realm has already been generated, *weird things* can happen.
+function m.unregister(id)
+	realms[id] = nil
+	realm_store[id] = nil
+end
+
 -- Get a realm definition.
 function m.get(id)
 	return realms[id]
 end
-
--- General functions to convert between realm and global positions.
 
 -- Get position within realm.
 function aurum.rpos(realm_id, global_pos)

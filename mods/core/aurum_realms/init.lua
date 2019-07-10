@@ -177,3 +177,4 @@ minetest.register_on_generated(function(minp, maxp, seed)
 end)
 
 aurum.dofile("default_realms.lua")
+aurum.dofile("spawn.lua")

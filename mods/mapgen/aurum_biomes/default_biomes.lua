@@ -1,4 +1,4 @@
-aurum.biomes.register("aurum_realms:aurum", {
+aurum.biomes.register("aurum:aurum", {
 	name = "aurum_barrens",
 	node_top = "aurum_base:dirt",
 	depth_top = 2,
@@ -9,7 +9,7 @@ aurum.biomes.register("aurum_realms:aurum", {
 	humidity_point = 50,
 })
 
-aurum.biomes.register("aurum_realms:aurum", {
+aurum.biomes.register("aurum:aurum", {
 	name = "aurum_barrens_underground",
 	node_stone = "aurum_base:stone",
 	y_max = 0,

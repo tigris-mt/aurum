@@ -18,6 +18,9 @@ function m.register(name, def)
 
 		-- Leafdecay distance.
 		leafdecay = 4,
+
+		-- Decoration definitions.
+		decorations = {},
 	}, def, {
 		name = name
 	})
@@ -74,8 +77,22 @@ function m.register(name, def)
 		walkable = true,
 	})
 
+	for _,n in ipairs{
+		"simple",
+		"wide",
+		"tall",
+	} do
+		def.decorations[n] = {
+			schematic = aurum.dofile("decorations/" .. n .. ".lua")(def),
+			rotation = "random",
+			flags = {place_center_x = true, place_center_y = false, place_center_z = true}
+		}
+	end
+
 	m.types[name] = def
 end
+
+aurum.dofile("decorations/init.lua")
 
 m.register("aurum_trees:oak", {
 	description = "Oak",

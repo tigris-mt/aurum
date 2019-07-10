@@ -7,3 +7,6 @@
 [submodule "mods/core/doc"]
 	path = mods/core/doc
 	url = https://repo.or.cz/minetest_doc_modpack.git
+[submodule "mods/core/sfinv_buttons"]
+	path = mods/core/sfinv_buttons
+	url = https://repo.or.cz/minetest_sfinv_buttons.git

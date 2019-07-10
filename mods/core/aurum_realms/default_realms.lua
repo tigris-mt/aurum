@@ -13,8 +13,3 @@ end
 
 minetest.register_on_newplayer(aurum_spawn)
 minetest.register_on_respawnplayer(aurum_spawn)
-
-aurum.realms.register("aurum_realms:aether", {
-	description = S("The Aether"),
-	size = vector.new(480, 480, 480),
-})

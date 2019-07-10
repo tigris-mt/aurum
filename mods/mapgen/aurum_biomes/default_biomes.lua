@@ -1,5 +1,3 @@
-minetest.register_alias("mapgen_stone", "aurum_base:stone")
-
 aurum.biomes.register("aurum_realms:aurum", {
 	name = "aurum_barrens",
 	node_top = "aurum_base:dirt",

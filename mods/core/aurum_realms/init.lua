@@ -17,12 +17,15 @@ local function coord_ok(value)
 	return (value % m.ALIGN) == 0
 end
 
+-- There must be sizable "buffer" space between realms.
+m.SPACING = 800
+
 local function allocate_position(realm)
 	minetest.log("action", "Allocating position for new realm: " .. realm.id)
 
 	-- Loop through all possible positions until a space is found that does not collide.
-	for x=aurum.WORLDA.min.x, aurum.WORLDA.max.x, realm.size.x do
-		for z=aurum.WORLDA.min.z, aurum.WORLDA.max.z, realm.size.z do
+	for x=aurum.WORLDA.min.x, aurum.WORLDA.max.x, realm.size.x + m.SPACING do
+		for z=aurum.WORLDA.min.z, aurum.WORLDA.max.z, realm.size.z + m.SPACING do
 			local corner = vector.new(x, realm.y - realm.size.y / 2, z)
 			local box = aurum.box.new(corner, vector.add(corner, realm.size))
 
@@ -84,7 +87,7 @@ function m.register(id, def)
 		description = "?",
 
 		-- Realm size.
-		size = vector.new(1024, 1024, 1024),
+		size = vector.new(480, 480, 480),
 
 		-- Realm Y location.
 		y = 0,
@@ -148,18 +151,27 @@ function aurum.pos_to_realm(global_pos)
 	end
 end
 
+-- Clear all blocks outside of a realm.
 minetest.register_on_generated(function(minp, maxp, seed)
+	-- If this block is within a realm, cancel.
 	if aurum.pos_to_realm(minp) and aurum.pos_to_realm(maxp) then
 		return
 	end
+
+	-- Replace with air.
 	local c_air = minetest.get_content_id("air")
 
+	-- Read all data.
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local area = VoxelArea:new{MinEdge = emin, MaxEdge = emax}
 	local data = vm:get_data()
+
+	-- Set all data to air.
 	for i in area:iterp(emin, emax) do
 		data[i] = c_air
 	end
+
+	-- And write back.
 	vm:set_data(data)
 	vm:write_to_map()
 end)

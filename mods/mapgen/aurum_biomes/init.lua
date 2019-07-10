@@ -15,3 +15,5 @@ function aurum.biomes.register(realm, def)
 
 	return minetest.register_biome(def)
 end
+
+aurum.dofile("default_biomes.lua")

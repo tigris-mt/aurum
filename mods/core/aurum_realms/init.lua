@@ -135,7 +135,7 @@ end
 
 -- Get global position from realm.
 function aurum.gpos(realm_id, realm_pos)
-	return vector.add(realms[realm_id].global_center, global_pos)
+	return vector.add(realms[realm_id].global_center, realm_pos)
 end
 
 -- Returns realm id or nil

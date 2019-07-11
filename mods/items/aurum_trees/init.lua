@@ -120,7 +120,7 @@ function m.register(name, def)
 
 	subnode("leaves", {
 		description = S"Leaves",
-		_doc_items_longdesc = S"A bundle of soft leaves.",
+		_doc_items_longdesc = S"A bundle of soft leaves. They will decay when not near a trunk.",
 		sounds = aurum.sounds.grass(),
 
 		drawtype = "allfaces_optional",

@@ -25,20 +25,27 @@ function m.register(name, def)
 		name = name
 	})
 
+	-- Register and set a part of the tree.
+	-- Will set def[sub] to the new node's name.
 	local function subnode(sub, default)
+		-- If a string is specified, just use that for the part.
+		-- An empty string indicates that the tree does not use this part.
 		if type(def[sub]) == "string" then
-			return def[sub]
-		elseif type(def[sub]) == "boolean" then
-			return nil
+			return (#def[sub] > 0) and def[sub] or nil
 		end
 
+		-- Combine the defs.
 		local spec = table.combine(default, def[sub] or {})
+
+		-- Create the final part def.
+		-- Builds a translatable description according to the tree's S parameter.
 		local ndef = table.combine({
 			name = name .. "_" .. sub,
 			description = def.S(def.description .. " @1", spec.description),
 			tiles = {def.texture_base .. "_" .. sub .. ".png"},
 		}, spec)
 
+		-- Register and set name in tree's table.
 		minetest.register_node(ndef.name, ndef)
 		def[sub] = ndef.name
 	end
@@ -47,6 +54,7 @@ function m.register(name, def)
 		description = S"Trunk",
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
+		groups = {dig_hand = 4, dig_chop = 2, tree = 1, flammable = 1},
 	})
 
 	subnode("leaves", {
@@ -58,13 +66,14 @@ function m.register(name, def)
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,
-		groups = {leafdecay = def.leafdecay},
+		groups = {dig_chop = 1, dig_hand = 2, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
 	})
 
 	subnode("planks", {
 		description = S"Planks",
 		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
 		sounds = aurum.sounds.wood(),
+		groups = {dig_chop = 1, dig_hand = 4, wood = 1, flammable = 1},
 	})
 
 	subnode("sapling", {
@@ -78,6 +87,7 @@ function m.register(name, def)
 			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
 		},
 		walkable = true,
+		groups = {dig_hand = 1, flammable = 1, sapling = 1},
 	})
 
 	for _,n in ipairs{
@@ -105,7 +115,4 @@ m.register("aurum_trees:oak", {
 m.register("aurum_trees:birch", {
 	description = "Birch",
 	texture_base = "aurum_trees_birch",
-	leaves = {
-		tiles = {"aurum_trees_oak_leaves.png"},
-	},
 })

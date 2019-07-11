@@ -5,4 +5,5 @@
 * Base player.
   * Mana, regeneration, HUD.
   * Tools.
+    * Hammer, Pickaxe, Machete, Shovel
   * Equipment inventory.

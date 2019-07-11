@@ -10,10 +10,10 @@ aurum.biomes.register("aurum:aurum", {
 
 aurum.biomes.register_tree_decoration({
 	name = "aurum_trees:oak",
-	--biomes = {"aurum_forest"},
+	biomes = {"aurum_forest"},
 })
 
 aurum.biomes.register_tree_decoration({
 	name = "aurum_trees:birch",
-	--biomes = {"aurum_forest"},
+	biomes = {"aurum_forest"},
 })

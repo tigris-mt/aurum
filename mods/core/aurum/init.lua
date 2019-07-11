@@ -24,7 +24,7 @@ function aurum.drop_item(pos, item)
 	end
 	local obj = minetest.add_item(vector.apply(pos, r), item)
 	if obj then
-		obj:set_velocity(vector.multiply(vector.apply(vector.new(0, 0, 0), r), 3))
+		obj:set_velocity(vector.multiply(vector.apply(vector.new(0, 1, 0), r), 3))
 	end
 end
 

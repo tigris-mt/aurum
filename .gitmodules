@@ -13,3 +13,9 @@
 [submodule "mods/entities/item_drop"]
 	path = mods/entities/item_drop
 	url = https://github.com/minetest-mods/item_drop
+[submodule "mods/player/hudbars"]
+	path = mods/player/hudbars
+	url = https://repo.or.cz/minetest_hudbars.git
+[submodule "mods/player/xmana"]
+	path = mods/player/xmana
+	url = https://github.com/tigris-mt/xmana

@@ -53,3 +53,8 @@ end
 function aurum.box.new_cbox(box)
     return aurum.geometry.Box.new(vector.new(box[1], box[2], box[3]), vector.new(box[4], box[5], box[6]))
 end
+
+-- From radius
+function aurum.box.new_radius(center, radius)
+	return aurum.box.new(vector.sub(center, radius), vector.add(center, radius))
+end

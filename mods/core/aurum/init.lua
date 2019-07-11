@@ -17,6 +17,17 @@ aurum.WORLDA = {
 	max = vector.new(30000, 30000, 30000),
 }
 
+-- Drop item with slightly random position and velocity.
+function aurum.drop_item(pos, item)
+	local function r(c)
+		return c - 0.5 + math.random()
+	end
+	local obj = minetest.add_item(vector.apply(pos, r), item)
+	if obj then
+		obj:set_velocity(vector.multiply(vector.apply(vector.new(0, 0, 0), r), 3))
+	end
+end
+
 aurum.dofile("lua_utils.lua")
 
 -- Helpful geometric functions.

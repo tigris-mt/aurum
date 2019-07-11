@@ -132,7 +132,7 @@ function m.register(name, def)
 		drop = {
 			max_items = 1,
 			items = {
-				{rarity = 20, items = {sapling.name}},
+				{rarity = 10, items = {sapling.name}},
 				{rarity = 1, items = {name .. "_leaves"}},
 			},
 		},
@@ -154,13 +154,5 @@ function m.register(name, def)
 end
 
 aurum.dofile("decorations/init.lua")
-
-m.register("aurum_trees:oak", {
-	description = "Oak",
-	texture_base = "aurum_trees_oak",
-})
-
-m.register("aurum_trees:birch", {
-	description = "Birch",
-	texture_base = "aurum_trees_birch",
-})
+aurum.dofile("default_trees.lua")
+aurum.dofile("leafdecay.lua")

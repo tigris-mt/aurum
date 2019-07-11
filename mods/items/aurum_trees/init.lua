@@ -24,6 +24,8 @@ function m.register(name, def)
 
 		-- Growth terrain.
 		terrain = {"group:soil"},
+		-- Description of what this tree grows on.
+		terrain_desc = S"any dirt or soil",
 	}, def, {
 		name = name
 	})
@@ -38,13 +40,14 @@ function m.register(name, def)
 		end
 
 		-- Combine the defs.
-		local spec = table.combine(default, def[sub] or {})
+		local spec = table.combine(default, {
+			-- Builds a translatable description according to the tree's S parameter.
+			description = def.S(def.description .. " @1", default.description or ""),
+		}, def[sub] or {})
 
 		-- Create the final part def.
-		-- Builds a translatable description according to the tree's S parameter.
 		local ndef = table.combine({
 			name = name .. "_" .. sub,
-			description = def.S(def.description .. " @1", spec.description),
 			tiles = {def.texture_base .. "_" .. sub .. ".png"},
 		}, spec)
 
@@ -70,7 +73,7 @@ function m.register(name, def)
 
 	local sapling = subnode("sapling", {
 		description = S"Sapling",
-		_doc_items_longdesc = S"A young tree. Given time, light, and soil, it will grow.",
+		_doc_items_longdesc = S"A young tree. Given time, it will grow." .. "\n" .. def.S("It grows on @1.", def.terrain_desc),
 		sounds = aurum.sounds.grass(),
 		paramtype = "light",
 		drawtype = "plantlike",

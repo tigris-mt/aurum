@@ -19,3 +19,6 @@
 [submodule "mods/player/xmana"]
 	path = mods/player/xmana
 	url = https://github.com/tigris-mt/xmana
+[submodule "mods/player/hbhunger"]
+	path = mods/player/hbhunger
+	url = https://repo.or.cz/minetest_hbhunger.git

@@ -21,6 +21,7 @@ For tools, group number is a level rating, from 1 to 5.
 
 # Interaction
 * `flammable=1`: This node can burn.
+* `grow_plant=1`: This node has a _on_grow_plant(pos, node) function defined.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.
 * `sapling=1`: This node is a sapling.

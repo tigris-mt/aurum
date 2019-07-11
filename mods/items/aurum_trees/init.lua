@@ -21,6 +21,9 @@ function m.register(name, def)
 
 		-- Decoration definitions.
 		decorations = {},
+
+		-- Growth terrain.
+		terrain = {"group:soil"},
 	}, def, {
 		name = name
 	})
@@ -48,6 +51,7 @@ function m.register(name, def)
 		-- Register and set name in tree's table.
 		minetest.register_node(ndef.name, ndef)
 		def[sub] = ndef.name
+		return ndef
 	end
 
 	subnode("trunk", {
@@ -55,6 +59,60 @@ function m.register(name, def)
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_hand = 4, dig_chop = 2, tree = 1, flammable = 1},
+	})
+
+	subnode("planks", {
+		description = S"Planks",
+		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
+		sounds = aurum.sounds.wood(),
+		groups = {dig_chop = 1, dig_hand = 4, wood = 1, flammable = 1},
+	})
+
+	local sapling = subnode("sapling", {
+		description = S"Sapling",
+		_doc_items_longdesc = S"A young tree. Given time, light, and soil, it will grow.",
+		sounds = aurum.sounds.grass(),
+		paramtype = "light",
+		drawtype = "plantlike",
+		selection_box = {
+			type = "fixed",
+			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
+		},
+		walkable = true,
+		groups = {dig_hand = 1, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
+
+		_on_grow_plant = function(pos, node)
+			-- Ensure there's at least some room above the sapling.
+			for y=1,3 do
+				if minetest.get_node(vector.add(pos, vector.new(0, y, 0))).name ~= "air" then
+					return false
+				end
+			end
+			-- Ensure we're on valid terrain.
+			local below = vector.add(pos, vector.new(0, -1, 0))
+			if #minetest.find_nodes_in_area(below, below, def.terrain) == 0 then
+				return false
+			end
+			-- Select and place a random schematic.
+			local dk = table.keys(def.decorations)
+			local d = def.decorations[dk[math.random(#dk)]]
+			minetest.remove_node(pos)
+			minetest.place_schematic(pos, d.schematic, d.rotation, {}, false, d.flags)
+			return true
+		end,
+
+		on_construct = function(pos)
+			minetest.get_node_timer(pos):start(math.random(60 * 4, 60 * 20))
+		end,
+
+		on_timer = function(pos)
+			local node = minetest.get_node(pos)
+			local def = minetest.registered_nodes[node.name]
+			if def._on_grow_plant then
+				-- Restart the timer if growth was not successful.
+				return not def._on_grow_plant(pos, node)
+			end
+		end,
 	})
 
 	subnode("leaves", {
@@ -71,31 +129,10 @@ function m.register(name, def)
 		drop = {
 			max_items = 1,
 			items = {
-				{rarity = 20, items = {name .. "_sapling"}},
+				{rarity = 20, items = {sapling.name}},
 				{rarity = 1, items = {name .. "_leaves"}},
 			},
 		},
-	})
-
-	subnode("planks", {
-		description = S"Planks",
-		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
-		sounds = aurum.sounds.wood(),
-		groups = {dig_chop = 1, dig_hand = 4, wood = 1, flammable = 1},
-	})
-
-	subnode("sapling", {
-		description = S"Sapling",
-		_doc_items_longdesc = S"A young tree. Given time, light, and soil, it will grow.",
-		sounds = aurum.sounds.grass(),
-		paramtype = "light",
-		drawtype = "plantlike",
-		selection_box = {
-			type = "fixed",
-			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-		},
-		walkable = true,
-		groups = {dig_hand = 1, flammable = 1, sapling = 1},
 	})
 
 	for _,n in ipairs{

@@ -2,7 +2,11 @@
   * Nodes: Stone, dirt, grass, trunk, leaves, saplings.
     * Sounds
   * Biomes: Grasslands, forests.
+  * Leaf decay.
+  * Sapling growth.
 * Base player.
+  * Item pickup
+  * Item dropping
   * Mana, regeneration, HUD.
   * Tools.
     * Hammer, Pickaxe, Machete, Shovel

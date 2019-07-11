@@ -7,3 +7,15 @@ aurum.biomes.register("aurum:aurum", {
 	heat_point = 40,
 	humidity_point = 40,
 })
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:oak",
+	biomes = {"aurum_grassland"},
+	rarity = 0.01,
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:birch",
+	biomes = {"aurum_grassland"},
+	rarity = 0.01,
+})

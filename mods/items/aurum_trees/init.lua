@@ -67,6 +67,14 @@ function m.register(name, def)
 		paramtype = "light",
 		place_param2 = 1,
 		groups = {dig_chop = 1, dig_hand = 2, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
+
+		drop = {
+			max_items = 1,
+			items = {
+				{rarity = 20, items = {name .. "_sapling"}},
+				{rarity = 1, items = {name .. "_leaves"}},
+			},
+		},
 	})
 
 	subnode("planks", {

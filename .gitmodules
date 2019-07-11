@@ -10,3 +10,6 @@
 [submodule "mods/core/sfinv_buttons"]
 	path = mods/core/sfinv_buttons
 	url = https://repo.or.cz/minetest_sfinv_buttons.git
+[submodule "mods/entities/item_drop"]
+	path = mods/entities/item_drop
+	url = https://github.com/minetest-mods/item_drop

@@ -1,6 +1,4 @@
 * Base player.
-  * Item pickup
-  * Item dropping
   * Mana, regeneration, HUD.
   * Tools.
     * Hammer, Pickaxe, Machete, Shovel

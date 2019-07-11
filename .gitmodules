@@ -22,3 +22,9 @@
 [submodule "mods/player/hbhunger"]
 	path = mods/player/hbhunger
 	url = https://repo.or.cz/minetest_hbhunger.git
+[submodule "mods/player/player_monoids"]
+	path = mods/player/player_monoids
+	url = https://github.com/minetest-mods/player_monoids
+[submodule "mods/player/armor_monoid"]
+	path = mods/player/armor_monoid
+	url = https://github.com/minetest-mods/armor_monoid

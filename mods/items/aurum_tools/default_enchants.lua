@@ -1,0 +1,1 @@
+aurum.tools.enchants.hand = {}

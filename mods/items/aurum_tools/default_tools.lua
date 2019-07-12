@@ -47,6 +47,12 @@ local function register(type, name, texture, def)
 		sound = aurum.sounds.tool(),
 		inventory_image = ("%s^aurum_tools_%s.png^[makealpha:255,0,255"):format(texture, type),
 		_enchants = {type},
+		_doc_items_longdesc = ({
+			pickaxe = S"A tool for extracting stone, metal, and other hard substances.",
+			shovel = S"Used for collecting soft or crumbling material such as dirt and gravel.",
+			machete = S"A sharp blade to chop down wood and vegetation.",
+			hammer = S"A deadly weapon, built to crush.",
+		})[type]
 	}
 
 	-- Make it look like we're digging.

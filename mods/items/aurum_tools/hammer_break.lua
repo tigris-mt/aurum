@@ -1,3 +1,5 @@
+local S = minetest.get_translator()
+
 local old = minetest.get_node_drops
 function minetest.get_node_drops(node, toolname)
 	local ret = old(node, toolname)
@@ -12,3 +14,10 @@ function minetest.get_node_drops(node, toolname)
 	end
 	return ret
 end
+
+doc.sub.items.register_factoid("nodes", "drop_destroy", function(itemstring, def)
+	if minetest.get_item_group(itemstring, "dig_hammer") > 0 then
+		return S("When dug with a hammer, this node will drop @1.", minetest.registered_nodes[def._hammer_drop].description)
+	end
+	return ""
+end)

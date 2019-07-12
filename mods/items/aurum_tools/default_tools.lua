@@ -10,8 +10,35 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 		max_drop_level = 0,
 		groupcaps = {
 			dig_hand = {
-				times = {0.25, 0.5, 1, 2, 4},
+				times = {
+					[1] = 2,
+					[2] = 1.5,
+					[3] = 0.5,
+				},
 				uses = 0,
+				maxlevel = 3,
+			},
+			-- The hand can dig the lowest levels of all other groups, but slowly.
+			dig_pick = {
+				times = {
+					[3] = 6
+				},
+				uses = 0,
+				maxlevel = 0,
+			},
+			dig_chop = {
+				times = {
+					[3] = 3
+				},
+				uses = 0,
+				maxlevel = 0,
+			},
+			dig_shovel = {
+				times = {
+					[3] = 1.5,
+				},
+				uses = 0,
+				maxlevel = 0,
 			},
 		},
 		damage_groups = {

@@ -7,7 +7,7 @@ minetest.register_node("aurum_base:stone", {
 	tiles = {"aurum_base_stone.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.stone(),
-	groups = {dig_pick = 1, dig_hand = 5},
+	groups = {dig_pick = 3},
 })
 
 minetest.register_node("aurum_base:dirt", {
@@ -17,7 +17,7 @@ minetest.register_node("aurum_base:dirt", {
 	tiles = {"aurum_base_dirt.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.dirt(),
-	groups = {soil = 1, dig_shovel = 1, dig_hand = 3},
+	groups = {soil = 1, dig_shovel = 3},
 })
 
 minetest.register_node("aurum_base:grass", {
@@ -27,5 +27,5 @@ minetest.register_node("aurum_base:grass", {
 	tiles = {"aurum_base_grass.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.grass(),
-	groups = {soil = 1, dig_shovel = 1, dig_hand = 3},
+	groups = {soil = 1, dig_shovel = 3},
 })

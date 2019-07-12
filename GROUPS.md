@@ -1,10 +1,16 @@
 # Digging
-For tools, group number is a level rating, from 1 to 5.
-*Lower* level is easier.
+For tools, group number is a level rating, from 3 to 1.
 * `dig_pick=x`: Pickaxe.
 * `dig_chop=x`: Machete.
 * `dig_shovel=x`: Shovel.
 * `dig_hand=x`: Hand.
+
+## Levels
+Toughless levels range from 0 to 3.
+* 0: Hand/Stone
+* 1: Copper/Bronze
+* 2: Iron/Steel
+* 3: Gold (when enchanted)
 
 # Damage
 ## Physical

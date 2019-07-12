@@ -61,14 +61,14 @@ function m.register(name, def)
 		description = S"Trunk",
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
-		groups = {dig_hand = 4, dig_chop = 2, tree = 1, flammable = 1},
+		groups = {dig_chop = 3, tree = 1, flammable = 1},
 	})
 
 	subnode("planks", {
 		description = S"Planks",
 		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
 		sounds = aurum.sounds.wood(),
-		groups = {dig_chop = 1, dig_hand = 4, wood = 1, flammable = 1},
+		groups = {dig_chop = 3, wood = 1, flammable = 1},
 	})
 
 	local sapling = subnode("sapling", {
@@ -82,7 +82,7 @@ function m.register(name, def)
 			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
 		},
 		walkable = true,
-		groups = {dig_hand = 1, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
+		groups = {dig_hand = 3, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
 
 		_on_grow_plant = function(pos, node)
 			-- Ensure there's at least some room above the sapling.
@@ -127,7 +127,7 @@ function m.register(name, def)
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,
-		groups = {dig_chop = 1, dig_hand = 2, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
+		groups = {dig_chop = 3, dig_hand = 3, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
 
 		drop = {
 			max_items = 1,

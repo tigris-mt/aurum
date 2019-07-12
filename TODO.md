@@ -18,3 +18,8 @@
   * Tools.
   * Eternal flare
     * Made from mana beans, paste, and sticks.
+* Enchanting
+  * Tools.
+  * Weapons.
+  * Enchanted flare.
+  * Item naming.

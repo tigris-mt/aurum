@@ -49,6 +49,7 @@ function m.register(name, def)
 		local ndef = table.combine({
 			name = name .. "_" .. sub,
 			tiles = {def.texture_base .. "_" .. sub .. ".png"},
+			_tree = def,
 		}, spec)
 
 		-- Register and set name in tree's table.
@@ -73,7 +74,7 @@ function m.register(name, def)
 
 	subnode("sapling", {
 		description = S"Sapling",
-		_doc_items_longdesc = S"A young tree. Given time, it will grow." .. "\n" .. def.S("It grows on @1.", def.terrain_desc),
+		_doc_items_longdesc = S"A young tree.",
 		sounds = aurum.sounds.grass(),
 		paramtype = "light",
 		drawtype = "plantlike",
@@ -152,6 +153,15 @@ function m.register(name, def)
 
 	m.types[name] = def
 end
+
+doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
+	if minetest.get_item_group(itemstring, "sapling") > 0 then
+		if def._tree then
+			return S("This sapling will grow into a tree when left for some time on @1.", def._tree.terrain_desc)
+		end
+	end
+	return ""
+end)
 
 aurum.dofile("decorations/init.lua")
 aurum.dofile("default_trees.lua")

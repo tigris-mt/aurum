@@ -45,7 +45,7 @@ function aurum.tools.get_enchants(name)
 	return ret
 end
 
-doc.sub.items.register_factoid("tools", "misc", function(itemstring, def)
+doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
 	if def._enchant_levels then
 		local keys = {}
 		for k,v in pairs(aurum.tools.get_enchants(itemstring)) do
@@ -55,6 +55,7 @@ doc.sub.items.register_factoid("tools", "misc", function(itemstring, def)
 		end
 		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#keys > 0) and ("\n" .. S("Enchantment types: @1", table.concat(keys, ", "))) or "")
 	end
+	return ""
 end)
 
 aurum.tools.enchants = {}

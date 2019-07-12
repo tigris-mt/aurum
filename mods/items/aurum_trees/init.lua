@@ -75,7 +75,7 @@ function m.register(name, def)
 	subnode("sapling", {
 		description = S"Sapling",
 		_doc_items_longdesc = S"A young tree.",
-		sounds = aurum.sounds.grass(),
+		sounds = aurum.sounds.leaves(),
 		paramtype = "light",
 		drawtype = "plantlike",
 		selection_box = {
@@ -122,7 +122,7 @@ function m.register(name, def)
 	subnode("leaves", {
 		description = S"Leaves",
 		_doc_items_longdesc = S"A bundle of soft leaves. They will decay when not near a trunk.",
-		sounds = aurum.sounds.grass(),
+		sounds = aurum.sounds.leaves(),
 
 		drawtype = "allfaces_optional",
 		waving = 2,

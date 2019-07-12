@@ -70,107 +70,83 @@ local function register(type, name, texture, def)
 	}))
 end
 
--- Pickaxes
-
-register("pickaxe", "stone", "aurum_base_stone.png", {
-	description = S"Stone Pickaxe",
-	_enchant_levels = 1,
-	tool_capabilities = {
-		full_punch_interval = 1.3,
-		groupcaps = {
-			dig_pick = {
-				times = {
-					[2] = 2,
-					[3] = 1,
-				},
-				uses = 20,
-				maxlevel = 0,
-			},
-		},
-		damage_groups = {
-			pierce = 3,
-		},
+local variants = {
+	stone = {
+		desc = "Stone",
+		texture = "aurum_base_stone.png",
+		level = 0,
+		enchant_levels = 1,
 	},
-})
+}
 
--- Shovels
+for variant,vdef in pairs(variants) do
+	local function dig(a, b, c)
+		return {
+			times = {
+				[1] = a - vdef.level / 5,
+				[2] = b - vdef.level / 5,
+				[3] = c - vdef.level / 5,
+			},
+			uses = 20 * math.ceil((vdef.level + 1) / 2),
+			maxlevel = math.floor(vdef.level),
+		}
+	end
 
-register("shovel", "stone", "aurum_base_stone.png", {
-	description = S"Stone Shovel",
-	_enchant_levels = 1,
-	tool_capabilities = {
-		full_punch_interval = 1.4,
-		groupcaps = {
-			dig_dig = {
-				times = {
-					[1] = 1.8,
-					[2] = 1.2,
-					[3] = 0.5,
-				},
-				uses = 20,
-				maxlevel = 0,
+	register("pickaxe", variant, vdef.texture, {
+		description = S(vdef.desc .. " Pickaxe"),
+		_enchant_levels = vdef.enchant_levels,
+		tool_capabilities = {
+			full_punch_interval = 1.3 - vdef.level / 10,
+			groupcaps = {
+				dig_pick = dig(3, 2, 1),
+			},
+			damage_groups = {
+				pierce = 3 + math.floor(vdef.level),
 			},
 		},
-		damage_groups = {
-			pierce = 1,
-			blade = 1,
-		},
-	},
-})
+	})
 
--- Machetes
-
-register("machete", "stone", "aurum_base_stone.png", {
-	description = S"Stone Machete",
-	_enchant_levels = 1,
-	tool_capabilities = {
-		full_punch_interval = 1.2,
-		groupcaps = {
-			dig_chop = {
-				times = {
-					[1] = 3,
-					[2] = 2,
-					[3] = 1.3,
-				},
-				uses = 20,
-				maxlevel = 0,
+	register("shovel", variant, vdef.texture, {
+		description = S(vdef.desc .. " Shovel"),
+		_enchant_levels = vdef.enchant_levels,
+		tool_capabilities = {
+			full_punch_interval = 1.4 - vdef.level / 10,
+			groupcaps = {
+				dig_dig = dig(1.8, 1.2, 0.5),
 			},
-			dig_snap = {
-				times = {
-					[1] = 2.8,
-					[2] = 1.4,
-					[3] = 0.4,
-				},
-				uses = 20,
-				maxlevel = 0,
+			damage_groups = {
+				pierce = 1,
+				blade = 1 + math.floor(vdef.level),
 			},
 		},
-		damage_groups = {
-			blade = 3,
-		},
-	},
-})
+	})
 
--- Hammers
-
-register("hammer", "stone", "aurum_base_stone.png", {
-	description = S"Stone Hammer",
-	_enchant_levels = 1,
-	tool_capabilities = {
-		full_punch_interval = 1.8,
-		groupcaps = {
-			dig_hammer = {
-				times = {
-					[1] = 3,
-					[2] = 2,
-					[3] = 1,
-				},
-				uses = 20,
-				maxlevel = 0,
+	register("machete", variant, vdef.texture, {
+		description = S(vdef.desc .. " Machete"),
+		_enchant_levels = vdef.enchant_levels,
+		tool_capabilities = {
+			full_punch_interval = 1.2 - vdef.level / 10,
+			groupcaps = {
+				dig_chop = dig(3, 2, 1.3),
+				dig_snap = dig(2.8, 1.4, 0.4),
+			},
+			damage_groups = {
+				blade = 3 + math.floor(vdef.level),
 			},
 		},
-		damage_groups = {
-			impact = 6,
+	})
+
+	register("hammer", variant, vdef.texture, {
+		description = S(vdef.desc .. " Hammer"),
+		_enchant_levels = vdef.enchant_levels,
+		tool_capabilities = {
+			full_punch_interval = 1.8 - vdef.level / 10,
+			groupcaps = {
+				dig_hammer = dig(3, 2, 1),
+			},
+			damage_groups = {
+				impact = 6 + math.floor(vdef.level),
+			},
 		},
-	},
-})
+	})
+end

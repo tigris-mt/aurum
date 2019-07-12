@@ -52,24 +52,31 @@ function m.register(name, def)
 		}, spec)
 
 		-- Register and set name in tree's table.
-		minetest.register_node(ndef.name, ndef)
+		minetest.register_node(":" .. ndef.name, ndef)
 		def[sub] = ndef.name
 		return ndef
 	end
 
-	subnode("trunk", {
+	local trunk = subnode("trunk", {
 		description = S"Trunk",
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, tree = 1, flammable = 1},
 	})
 
-	subnode("planks", {
+	local planks = subnode("planks", {
 		description = S"Planks",
 		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, wood = 1, flammable = 1},
 	})
+
+	minetest.register_craft{
+		output = planks.name .. " 4",
+		recipe = {
+			{trunk.name},
+		},
+	}
 
 	local sapling = subnode("sapling", {
 		description = S"Sapling",

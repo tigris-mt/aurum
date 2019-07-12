@@ -2,8 +2,8 @@
 For tools, group number is a level rating, from 3 to 1.
 * `dig_pick=x`: Pickaxe.
 * `dig_chop=x`: Machete.
-* `dig_shovel=x`: Shovel.
-* `dig_hand=x`: Hand.
+* `dig_dig=x`: Shovel.
+* `dig_handle=x`: Hand.
 
 ## Levels
 Toughless levels range from 0 to 3.
@@ -27,7 +27,7 @@ Toughless levels range from 0 to 3.
 
 # Interaction
 * `flammable=1`: This node can burn.
-* `grow_plant=1`: This node has a _on_grow_plant(pos, node) function defined.
+* `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.
 * `sapling=1`: This node is a sapling.

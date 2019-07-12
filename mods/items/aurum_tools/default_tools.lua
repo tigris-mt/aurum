@@ -1,5 +1,9 @@
 local S = minetest.get_translator()
 
+local function handdig(time)
+	return {times = {[3] = time}, uses = 0, maxlevel = 0}
+end
+
 local handdef = aurum.tools.register("aurum_tools:hand", {
 	type = "none",
 	_doc_items_longdesc = S"Tools were invented by the primates to surpass the limits of their own limbs, but your hand is not useless on its own. It can dig many nodes with no enhancements at all.",
@@ -9,7 +13,7 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {
-			dig_hand = {
+			dig_handle = {
 				times = {
 					[1] = 2,
 					[2] = 1.5,
@@ -19,27 +23,9 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 				maxlevel = 3,
 			},
 			-- The hand can dig the lowest levels of all other groups, but slowly.
-			dig_pick = {
-				times = {
-					[3] = 6
-				},
-				uses = 0,
-				maxlevel = 0,
-			},
-			dig_chop = {
-				times = {
-					[3] = 3
-				},
-				uses = 0,
-				maxlevel = 0,
-			},
-			dig_shovel = {
-				times = {
-					[3] = 1.5,
-				},
-				uses = 0,
-				maxlevel = 0,
-			},
+			dig_pick = handdig(6),
+			dig_chop = handdig(3),
+			dig_dig = handdig(1.5),
 		},
 		damage_groups = {
 			impact = 1,

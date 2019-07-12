@@ -82,7 +82,7 @@ function m.register(name, def)
 			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
 		},
 		walkable = true,
-		groups = {dig_hand = 3, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
+		groups = {dig_handle = 3, dig_chop = 3, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
 
 		_on_grow_plant = function(pos, node)
 			-- Ensure there's at least some room above the sapling.
@@ -127,7 +127,7 @@ function m.register(name, def)
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,
-		groups = {dig_chop = 3, dig_hand = 3, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
+		groups = {dig_chop = 3, dig_handle = 3, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
 
 		drop = {
 			max_items = 1,

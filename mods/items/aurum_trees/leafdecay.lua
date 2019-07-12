@@ -6,6 +6,11 @@ minetest.register_abm{
 	chance = 5,
 	catch_up = false,
 	action = function(pos, node)
+		-- If param2 has been set, then do not decay as this implies manual placing.
+		if node.param2 ~= 0 then
+			return
+		end
+
 		-- If trunk nearby, do nothing.
 		if minetest.find_node_near(pos, minetest.get_item_group(node.name, "leafdecay"), {"group:tree"}) then
 			return

@@ -33,4 +33,5 @@ Toughless levels range from 0 to 3.
 * `sapling=1`: This node is a sapling.
 * `soil=1`: Things may grow here.
 * `tree=1`: This node is part of a tree (trunk or branch).
+* `tree_trunk=1`: This node is specifically a tree trunk.
 * `wood=1`: This node is wood (planks).

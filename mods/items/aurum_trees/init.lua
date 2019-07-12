@@ -61,7 +61,7 @@ function m.register(name, def)
 		description = S"Trunk",
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
-		groups = {dig_chop = 3, tree = 1, flammable = 1},
+		groups = {dig_chop = 3, tree = 1, tree_trunk = 1, flammable = 1},
 	})
 
 	subnode("planks", {
@@ -155,4 +155,5 @@ end
 
 aurum.dofile("decorations/init.lua")
 aurum.dofile("default_trees.lua")
+aurum.dofile("fuel.lua")
 aurum.dofile("leafdecay.lua")

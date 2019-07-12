@@ -71,3 +71,9 @@ aurum.sounds.leaves = aurum.sounds.grass
 aurum.sounds.register("water", {
 	footstep = {name = "default_water_footstep", gain = 1 / 4},
 })
+
+function aurum.sounds.tool()
+	return {
+		breaks = "default_tool_breaks",
+	}
+end

@@ -4,6 +4,8 @@ For tools, group number is a level rating, from 3 to 1.
 * `dig_chop=x`: Machete.
 * `dig_dig=x`: Shovel.
 * `dig_handle=x`: Hand.
+* `dig_snap=x`: Machete/hand.
+* `dig_hammer=x`: Rare, for nodes that can be dug by hammer (and probably will drop something different).
 
 ## Levels
 Toughless levels range from 0 to 3.

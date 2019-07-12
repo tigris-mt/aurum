@@ -28,3 +28,6 @@
 [submodule "mods/player/armor_monoid"]
 	path = mods/player/armor_monoid
 	url = https://github.com/minetest-mods/armor_monoid
+[submodule "mods/core/craftguide"]
+	path = mods/core/craftguide
+	url = https://github.com/minetest-mods/craftguide.git

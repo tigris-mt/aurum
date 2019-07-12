@@ -47,12 +47,6 @@ local function register(type, name, texture, def)
 		sound = aurum.sounds.tool(),
 		inventory_image = ("%s^aurum_tools_%s.png^[makealpha:255,0,255"):format(texture, type),
 		_enchants = {type},
-		_doc_items_longdesc = ({
-			pickaxe = S"A tool for extracting stone, metal, and other hard substances.",
-			shovel = S"Used for collecting soft or crumbling material such as dirt and gravel.",
-			machete = S"A sharp blade to chop down wood and vegetation.",
-			hammer = S"A deadly weapon, built to crush.",
-		})[type]
 	}
 
 	-- Make it look like we're digging.
@@ -94,6 +88,7 @@ for variant,vdef in pairs(variants) do
 
 	register("pickaxe", variant, vdef.texture, {
 		description = S(vdef.desc .. " Pickaxe"),
+		_doc_items_longdesc = S"A tool for extracting stone, metal, and other hard substances.",
 		_enchant_levels = vdef.enchant_levels,
 		tool_capabilities = {
 			full_punch_interval = 1.3 - vdef.level / 10,
@@ -108,6 +103,7 @@ for variant,vdef in pairs(variants) do
 
 	register("shovel", variant, vdef.texture, {
 		description = S(vdef.desc .. " Shovel"),
+		_doc_items_longdesc = S"Used for collecting soft or crumbling material such as dirt and gravel.",
 		_enchant_levels = vdef.enchant_levels,
 		tool_capabilities = {
 			full_punch_interval = 1.4 - vdef.level / 10,
@@ -123,6 +119,7 @@ for variant,vdef in pairs(variants) do
 
 	register("machete", variant, vdef.texture, {
 		description = S(vdef.desc .. " Machete"),
+		_doc_items_longdesc = S"A sharp blade to chop down wood and vegetation.",
 		_enchant_levels = vdef.enchant_levels,
 		tool_capabilities = {
 			full_punch_interval = 1.2 - vdef.level / 10,
@@ -138,6 +135,7 @@ for variant,vdef in pairs(variants) do
 
 	register("hammer", variant, vdef.texture, {
 		description = S(vdef.desc .. " Hammer"),
+		_doc_items_longdesc = S"A deadly weapon, built to crush.",
 		_enchant_levels = vdef.enchant_levels,
 		tool_capabilities = {
 			full_punch_interval = 1.8 - vdef.level / 10,

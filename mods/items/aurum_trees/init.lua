@@ -57,28 +57,21 @@ function m.register(name, def)
 		return ndef
 	end
 
-	local trunk = subnode("trunk", {
+	subnode("trunk", {
 		description = S"Trunk",
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, tree = 1, flammable = 1},
 	})
 
-	local planks = subnode("planks", {
+	subnode("planks", {
 		description = S"Planks",
 		_doc_items_longdesc = S"Wood cut into planks. Firm and useful.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, wood = 1, flammable = 1},
 	})
 
-	minetest.register_craft{
-		output = planks.name .. " 4",
-		recipe = {
-			{trunk.name},
-		},
-	}
-
-	local sapling = subnode("sapling", {
+	subnode("sapling", {
 		description = S"Sapling",
 		_doc_items_longdesc = S"A young tree. Given time, it will grow." .. "\n" .. def.S("It grows on @1.", def.terrain_desc),
 		sounds = aurum.sounds.grass(),
@@ -139,7 +132,7 @@ function m.register(name, def)
 		drop = {
 			max_items = 1,
 			items = {
-				{rarity = 10, items = {sapling.name}},
+				{rarity = 10, items = {def.sapling}},
 				{rarity = 1, items = {name .. "_leaves"}},
 			},
 		},

@@ -26,6 +26,10 @@ Toughless levels range from 0 to 3.
 * `chill`: Cold/dark.
 * `psyche`: Mental/magic.
 
+## Rare
+* `drown`: For drowning/suffocating.
+* `poison`: For damage over time.
+
 # Crafting
 
 # Interaction

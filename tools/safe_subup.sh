@@ -3,6 +3,7 @@ set -e
 
 # Modules developed alongside aurum. They are safe to update regularly with no chance of breakage.
 SAFE="
+	mods/core/gdamage
 	mods/player/xmana
 "
 

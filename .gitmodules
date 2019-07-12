@@ -31,3 +31,6 @@
 [submodule "mods/core/craftguide"]
 	path = mods/core/craftguide
 	url = https://github.com/minetest-mods/craftguide.git
+[submodule "mods/core/gdamage"]
+	path = mods/core/gdamage
+	url = https://github.com/tigris-mt/gdamage.git

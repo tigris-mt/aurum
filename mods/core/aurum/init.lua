@@ -30,6 +30,8 @@ end
 
 aurum.dofile("lua_utils.lua")
 
+aurum.dofile("damage.lua")
+
 -- Helpful geometric functions.
 aurum.dofile("geometry/box.lua")
 

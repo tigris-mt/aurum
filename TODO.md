@@ -1,5 +1,6 @@
 * Metal and ores.
   * Progression: Stone, Copper, Tin/Bronze, Iron/Steel, Gold (soft, but can be heavily enchanted)
+    * Metal tools.
   * Supplements: Mana beans (instead of coal)
 * Crafting
   * Organic paste (from grass).

@@ -46,5 +46,4 @@ function aurum.biomes.register_tree_decoration(def)
 	end
 end
 
-aurum.dofile("biomes/grassland.lua")
-aurum.dofile("biomes/forest.lua")
+aurum.dofile("biomes/aurum.lua")

@@ -1,3 +1,13 @@
+-- Barrens
+
+aurum.biomes.register("aurum:aurum", {
+	name = "aurum_barrens",
+	node_top = "aurum_base:gravel",
+	depth_top = 1,
+	heat_point = 30,
+	humidity_point = 30,
+})
+
 -- Grassland
 
 aurum.biomes.register("aurum:aurum", {

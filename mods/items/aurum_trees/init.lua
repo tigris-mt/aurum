@@ -76,6 +76,11 @@ function m.register(name, def)
 		groups = {dig_chop = 3, wood = 1, flammable = 1},
 	})
 
+	minetest.register_craft{
+		output = def.planks .. " 4",
+		recipe = {{def.trunk}},
+	}
+
 	subnode("sapling", {
 		description = S"Sapling",
 		_doc_items_longdesc = S"A young tree.",

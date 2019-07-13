@@ -28,6 +28,16 @@ function aurum.drop_item(pos, item)
 	end
 end
 
+-- Get or load node.
+function aurum.force_get_node(pos)
+	local node = minetest.get_node_or_nil(pos)
+	if not node then
+		VoxelManip():read_from_map(pos, pos)
+		node = minetest.get_node(pos)
+	end
+	return node
+end
+
 aurum.dofile("lua_utils.lua")
 
 aurum.dofile("damage.lua")

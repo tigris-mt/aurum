@@ -1,7 +1,20 @@
 -- Get the central spawn point for a realm.
 function aurum.realms.get_spawn(id)
 	local pos = aurum.gpos(id, vector.new(0, 0, 0))
-	return table.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
+	pos = table.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
+
+	for y=0,75 do
+		local t = vector.add(pos, y)
+		local function above(n)
+			return aurum.force_get_node(vector.add(t, vector.new(0, n, 0))).name
+		end
+
+		if above(0) == "air" and above(1) == "air" and above(2) == "air" then
+			return t
+		end
+	end
+
+	return pos
 end
 
 minetest.register_chatcommand("rteleport", {

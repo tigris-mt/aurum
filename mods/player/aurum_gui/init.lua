@@ -1,0 +1,1 @@
+aurum.dofile("inventory.lua")

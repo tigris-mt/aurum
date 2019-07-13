@@ -40,7 +40,10 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 })
 
 -- Register the standard hand with the same def as our hand.
-minetest.register_tool(":", handdef)
+local nhd = table.copy(handdef)
+nhd.type = "none"
+nhd.description = nil
+minetest.register_tool(":", nhd)
 
 local function register(type, name, texture, def)
 	local odef = {

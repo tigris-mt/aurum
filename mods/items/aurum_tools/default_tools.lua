@@ -74,17 +74,42 @@ local variants = {
 		level = 0,
 		enchant_levels = 1,
 	},
+	copper = {
+		desc = "Copper",
+		texture = aurum.ore.ores["aurum_ore:copper"].texture,
+		level = 1,
+		enchant_levels = 2,
+	},
+	bronze = {
+		desc = "Bronze",
+		texture = aurum.ore.ores["aurum_ore:bronze"].texture,
+		level = 1.5,
+		enchant_levels = 4,
+	},
+	iron = {
+		desc = "Iron",
+		texture = aurum.ore.ores["aurum_ore:iron"].texture,
+		level = 2,
+		enchant_levels = 6,
+	},
+	gold = {
+		desc = "Gold",
+		texture = aurum.ore.ores["aurum_ore:gold"].texture,
+		level = 3,
+		enchant_levels = 9,
+		durability = 0.15,
+	},
 }
 
 for variant,vdef in pairs(variants) do
 	local function dig(a, b, c)
 		return {
 			times = {
-				[1] = a - vdef.level / 5,
-				[2] = b - vdef.level / 5,
-				[3] = c - vdef.level / 5,
+				[1] = a - vdef.level / 15,
+				[2] = b - vdef.level / 15,
+				[3] = c - vdef.level / 15,
 			},
-			uses = 20 * math.ceil((vdef.level + 1) / 2),
+			uses = 20 * math.ceil(vdef.level / 2) * (vdef.durability or 1),
 			maxlevel = math.floor(vdef.level),
 		}
 	end
@@ -94,7 +119,7 @@ for variant,vdef in pairs(variants) do
 		_doc_items_longdesc = S"A tool for extracting stone, metal, and other hard substances.",
 		_enchant_levels = vdef.enchant_levels,
 		tool_capabilities = {
-			full_punch_interval = 1.3 - vdef.level / 10,
+			full_punch_interval = 1.3 - vdef.level / 15,
 			groupcaps = {
 				dig_pick = dig(3, 2, 1),
 			},

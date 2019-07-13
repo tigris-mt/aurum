@@ -6,7 +6,6 @@ minetest.register_node("aurum_base:stone", {
 	_doc_items_hidden = false,
 	tiles = {"aurum_base_stone.png"},
 	is_ground_content = true,
-	light_source = 5,
 	sounds = aurum.sounds.stone(),
 	groups = {dig_pick = 3, dig_hammer = 3},
 	_hammer_drop = "aurum_base:gravel",

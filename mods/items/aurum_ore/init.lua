@@ -26,11 +26,25 @@ function aurum.ore.register(name, def)
 	}, def)
 
 	minetest.register_node(":" .. name .. "_ore", {
-		_doc_items_longdesc = S"A mineable block of material.",
+		_doc_items_longdesc = S"A mineable block of metal ore.",
 		description = S("@1 Ore", def.description),
 		tiles = {("aurum_base_stone.png^((%s^aurum_ore_ore.png)^[makealpha:255,0,255)"):format(def.texture)},
 		groups = {dig_pick = math.max(1, def.level), level = def.level},
 		sounds = aurum.sounds.stone(),
+	})
+
+	minetest.register_craftitem(":" .. name .. "_ingot", {
+		_doc_items_longdesc = S"Smelted metal molded into a portable shape.",
+		description = S("@1 Ingot", def.description),
+		inventory_image = ("(%s^aurum_ore_ingot.png)^[makealpha:255,0,255"):format(def.texture),
+	})
+
+	minetest.register_node(":" .. name .. "_block", {
+		_doc_items_longdesc = S"A solid chunk of metal.",
+		description = S("@1 Block", def.description),
+		tiles = {("%s^aurum_ore_block.png"):format(def.texture)},
+		groups = {dig_pick = math.min(3, def.level + 1), level = math.min(3, def.level + 1)},
+		sounds = aurum.sounds.metal(),
 	})
 
 	for _,realmid in ipairs(def.realms) do
@@ -49,7 +63,6 @@ function aurum.ore.register(name, def)
 			y_min = realm.global_box.a.y,
 		}
 		minetest.register_ore(d)
-		print(dump(d))
 
 		if def.growth then
 			minetest.register_ore(table.combine(d, {

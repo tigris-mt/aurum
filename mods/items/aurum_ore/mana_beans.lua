@@ -11,6 +11,10 @@ aurum.ore.register("aurum_ore:mana_beans", {
 	ore_override = {
 		_doc_items_longdesc = S"A small deposit of mana. It is not very pure, but still useful.",
 		description = S"Mana Bean Deposit",
+
+		paramtype = "light",
+		light_source = 3,
+
 		drop = {
 			items = {
 				{items = {"aurum_ore:mana_bean"}, rarity = 1},

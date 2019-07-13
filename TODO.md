@@ -22,5 +22,5 @@
 * Environment
   * Water
   * Lava
-    * Laval affected by fire resistance.
+    * Lava affected by fire resistance.
   * Fall damage resistance.

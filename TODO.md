@@ -20,3 +20,4 @@
   * Lava
     * Lava affected by fire resistance.
   * Fall damage resistance.
+  * Biomes have oceans and underground.

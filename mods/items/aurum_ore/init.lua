@@ -44,7 +44,7 @@ function aurum.ore.register(name, def)
 			_doc_items_longdesc = S"A solid chunk of metal.",
 			description = S("@1 Block", def.description),
 			tiles = {("%s^aurum_ore_block.png"):format(def.texture)},
-			groups = {dig_pick = math.min(3, def.level + 1), level = math.min(3, def.level + 1)},
+			groups = {dig_pick = math.max(1, 3 - def.level), level = math.min(3, def.level + 1)},
 			sounds = aurum.sounds.metal(),
 		})
 	end
@@ -54,7 +54,7 @@ function aurum.ore.register(name, def)
 			_doc_items_longdesc = S"A mineable block of metal ore.",
 			description = S("@1 Ore", def.description),
 			tiles = {("aurum_base_stone.png^((%s^aurum_ore_ore.png)^[makealpha:255,0,255)"):format(def.texture)},
-			groups = {dig_pick = math.max(1, def.level), level = def.level},
+			groups = {dig_pick = math.min(3, 3 - def.level + 1), level = def.level},
 			sounds = aurum.sounds.stone(),
 		}, def.ore_override))
 

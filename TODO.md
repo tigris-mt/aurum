@@ -1,5 +1,3 @@
-* Base player.
-  * Scaled up fall/drown damage.
 * Metal and ores.
   * Progression: Stone, Copper, Tin/Bronze, Iron/Steel, Gold (soft, but can be heavily enchanted)
   * Supplements: Mana beans (instead of coal)
@@ -14,10 +12,15 @@
     * Ingots, blocks.
   * Sticks, planks.
   * Tools.
+  * Armor.
   * Eternal flare
     * Made from mana beans, paste, and sticks.
 * Enchanting
-  * Tools.
-  * Weapons.
+  * Tools, armor, weapons.
   * Enchanted flare.
   * Item naming.
+* Environment
+  * Water
+  * Lava
+    * Laval affected by fire resistance.
+  * Fall damage resistance.

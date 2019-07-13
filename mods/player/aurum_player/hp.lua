@@ -1,3 +1,7 @@
+aurum.player.default_hp_max = tonumber(minetest.settings:get("aurum_player.hp_max")) or 100
+-- Builtin damage (fall damage, drown damage) must be scaled by this amount.
+aurum.player.hp_max_scaling = aurum.player.default_hp_max / minetest.PLAYER_MAX_HP_DEFAULT
+
 aurum.player.hp_max_monoid = player_monoids.make_monoid{
     combine = function(a, b)
         return a * b
@@ -9,7 +13,7 @@ aurum.player.hp_max_monoid = player_monoids.make_monoid{
         end
         return r
     end,
-    identity = tonumber(minetest.settings:get("aurum_player.hp_max")) or 100,
+    identity = aurum.player.default_hp_max,
     apply = function(n, player)
         player:set_properties{hp_max = n}
     end,
@@ -23,3 +27,11 @@ end
 
 minetest.register_on_newplayer(set)
 minetest.register_on_respawnplayer(set)
+
+minetest.register_on_player_hpchange(function(player, hp_change, reason)
+	if reason.type == "fall" or reason.type == "drown" then
+		return hp_change * aurum.player.hp_max_scaling
+	else
+		return hp_change
+	end
+end, true)

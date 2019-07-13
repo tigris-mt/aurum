@@ -3,9 +3,10 @@
     * Used in crafting table.
   * Paste + gravel = dirt.
     * Grass spreads to bare dirt.
-  * Hammering stone makes gravel.
+  * Crafting table.
   * Furnace.
-    * Ingots, blocks.
+    * Smelting ingots.
+    * Crafting blocks.
   * Sticks, planks.
   * Tools.
   * Armor.

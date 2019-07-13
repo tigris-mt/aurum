@@ -1,6 +1,6 @@
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:tree_trunk",
+	recipe = "group:tree",
 	burntime = 30
 }
 

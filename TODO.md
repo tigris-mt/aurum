@@ -1,9 +1,4 @@
 * Crafting
-  * Organic paste (from grass).
-    * Used in crafting table.
-  * Paste + gravel = dirt.
-    * Grass spreads to bare dirt.
-  * Crafting table.
   * Furnace.
     * Smelting ingots.
     * Crafting blocks.
@@ -24,6 +19,7 @@
   * Fall damage resistance.
   * Biomes have oceans and underground.
 * Plants
+  * Grass spreads to bare dirt.
   * Wild plants/flowers.
   * Farming.
 * Mobs

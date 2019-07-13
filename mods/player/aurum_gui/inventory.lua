@@ -1,13 +1,22 @@
 sfinv.override_page("sfinv:crafting", {
 	get = function(self, player, context)
 		return sfinv.make_formspec(player, context, [[
-			list[current_player;craft;2.625,0.75;2,2;]
-			list[current_player;craftpreview;5.75,1.5;1,1;]
+			image_button[0.75,1.5;1,1;craftguide_book.png;craftguide;]
+			tooltip[craftguide;Crafting Guide]
+			list[current_player;craft;1.75,0.5;3,3]
+			list[current_player;craftpreview;5.75,1.5;1,1]
 			image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]
 			listring[current_player;main]
 			listring[current_player;craft]
 		]], true)
-	end
+	end,
+
+	on_player_receive_fields = function(self, player, context, fields)
+		if fields.craftguide then
+			craftguide.show(player:get_player_name())
+			return true
+		end
+	end,
 })
 
 local form = smartfs.create("aurum_player:equipment", function(state)

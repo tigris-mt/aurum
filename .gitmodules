@@ -37,3 +37,6 @@
 [submodule "mods/player/gequip"]
 	path = mods/player/gequip
 	url = https://github.com/tigris-mt/gequip
+[submodule "mods/core/central_message"]
+	path = mods/core/central_message
+	url = https://repo.or.cz/minetest_central_message.git

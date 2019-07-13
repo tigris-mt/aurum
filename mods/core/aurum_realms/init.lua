@@ -91,11 +91,12 @@ function m.register(id, def)
 
 		-- Realm Y location.
 		y = 0,
-
-		-- Default stone node.
-		stone = "aurum_base:stone",
 	}, def, {
 		id = id,
+		-- Default biome setup.
+		biome_default = table.combine({
+			node_stone = "aurum_base:stone",
+		}, def.biome_default or {})
 	})
 
 	-- Ensure valid positioning.

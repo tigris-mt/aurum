@@ -91,6 +91,9 @@ function m.register(id, def)
 
 		-- Realm Y location.
 		y = 0,
+
+		-- Default stone node.
+		stone = "aurum_base:stone",
 	}, def, {
 		id = id,
 	})

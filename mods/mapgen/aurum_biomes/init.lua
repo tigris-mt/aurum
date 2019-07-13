@@ -1,8 +1,13 @@
 aurum.biomes = {}
 
+-- List of biomes per realm.
+aurum.biomes.realms = {}
+
 -- Register a biome with the position limits defined relative to and limited by a realm's box.
 function aurum.biomes.register(realm, def)
-	local def = table.copy(def)
+	local def = table.combine({
+		node_stone = aurum.realms.get(realm).stone,
+	}, def)
 
 	-- Construct original biome box.
 	local min = table.combine(aurum.realms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
@@ -12,6 +17,9 @@ function aurum.biomes.register(realm, def)
 	-- Set new biome box.
 	def.min_pos = box.a
 	def.max_pos = box.b
+
+	aurum.biomes.realms[realm] = aurum.biomes.realms[realm] or {}
+	table.insert(aurum.biomes.realms[realm], def.name)
 
 	return minetest.register_biome(def)
 end

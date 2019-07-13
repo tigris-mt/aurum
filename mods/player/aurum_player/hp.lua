@@ -28,6 +28,10 @@ end
 minetest.register_on_newplayer(set)
 minetest.register_on_respawnplayer(set)
 
+minetest.register_on_joinplayer(function(player)
+	player:set_properties{hp_max = aurum.player.hp_max_monoid:value(player)}
+end)
+
 minetest.register_on_player_hpchange(function(player, hp_change, reason)
 	if reason.type == "fall" or reason.type == "drown" then
 		return hp_change * aurum.player.hp_max_scaling

@@ -34,7 +34,9 @@ Toughless levels range from 0 to 3.
 
 # Interaction
 * `flammable=1`: This node can burn.
-* `cook_smelter=1`: This node requires a smelter to cook.
+* `cook_temp=x`: This node can only be cooked in a cooker with a temperature range including x.
+  * `Smelter`: 10-20
+  * `Flare Box`: 0-10
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.

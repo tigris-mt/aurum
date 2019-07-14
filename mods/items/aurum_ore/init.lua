@@ -72,7 +72,7 @@ function aurum.ore.register(name, def)
 			_doc_items_longdesc = S"A mineable block of metal ore.",
 			description = S("@1 Ore", def.description),
 			tiles = {("aurum_base_stone.png^((%s^aurum_ore_ore.png)^[makealpha:255,0,255)"):format(def.texture)},
-			groups = {dig_pick = math.min(3, 3 - def.level + 1), level = def.level, cook_smelter = 1},
+			groups = {dig_pick = math.min(3, 3 - def.level + 1), level = def.level, cook_temp = 13 + def.level},
 			sounds = aurum.sounds.stone(),
 		}, def.ore_override))
 

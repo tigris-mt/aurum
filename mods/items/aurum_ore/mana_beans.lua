@@ -22,10 +22,17 @@ aurum.ore.register("aurum_ore:mana_beans", {
 	},
 	ingot = false,
 	block = false,
+	recipes = false,
 })
 
 minetest.register_craftitem("aurum_ore:mana_bean", {
 	description = S"Mana Bean",
-	_doc_items_longdesc = S"An impure nugget of mana. It vibrates slightly when touched.",
+	_doc_items_longdesc = S"An impure nugget of mana. It vibrates slightly when touched and is a powerful fuel.",
 	inventory_image = "aurum_ore_mana_bean.png",
 })
+
+minetest.register_craft{
+	type = "fuel",
+	recipe = "aurum_ore:mana_bean",
+	burntime = 8,
+}

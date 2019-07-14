@@ -1,12 +1,12 @@
 * Crafting
   * Furnace.
-    * Smelting ingots.
-    * Crafting blocks.
-  * Sticks, planks.
   * Tools.
   * Armor.
   * Eternal flare
     * Made from mana beans, paste, and sticks.
+* Death.
+  * Drop items.
+  * Set respawn point.
 * Enchanting
   * Gain mana from mining.
   * Tools, armor, weapons.
@@ -27,3 +27,4 @@
   * Taming.
   * Hostile.
 * NPC structures and mobs.
+* Teleportation

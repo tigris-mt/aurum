@@ -28,6 +28,8 @@ function aurum.ore.register(name, def)
 		ingot = name .. "_ingot",
 		block = name .. "_block",
 
+		recipes = true,
+
 		ore_override = {},
 	}, def)
 
@@ -47,6 +49,22 @@ function aurum.ore.register(name, def)
 			groups = {dig_pick = math.max(1, 3 - def.level), level = math.min(3, def.level + 1)},
 			sounds = aurum.sounds.metal(),
 		})
+
+		if def.recipes then
+			minetest.register_craft{
+				output = def.block,
+				recipe = {
+					{def.ingot, def.ingot, def.ingot},
+					{def.ingot, def.ingot, def.ingot},
+					{def.ingot, def.ingot, def.ingot},
+				},
+			}
+
+			minetest.register_craft{
+				output = def.ingot .. " 9",
+				recipe = {{def.block}},
+			}
+		end
 	end
 
 	if def.ore then
@@ -54,9 +72,17 @@ function aurum.ore.register(name, def)
 			_doc_items_longdesc = S"A mineable block of metal ore.",
 			description = S("@1 Ore", def.description),
 			tiles = {("aurum_base_stone.png^((%s^aurum_ore_ore.png)^[makealpha:255,0,255)"):format(def.texture)},
-			groups = {dig_pick = math.min(3, 3 - def.level + 1), level = def.level},
+			groups = {dig_pick = math.min(3, 3 - def.level + 1), level = def.level, cook_smelter = 1},
 			sounds = aurum.sounds.stone(),
 		}, def.ore_override))
+
+		if def.recipes and def.ingot then
+			minetest.register_craft{
+				type = "cooking",
+				output = def.ingot,
+				recipe = def.ore,
+			}
+		end
 
 		for _,realmid in ipairs(def.realms) do
 			local realm = aurum.realms.get(realmid)

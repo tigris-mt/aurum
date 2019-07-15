@@ -6,7 +6,7 @@ For tools, group number is a level rating, from 3 to 1.
 * `dig_handle=x`: Hand.
 * `dig_snap=x`: Machete/hand.
 * `dig_hammer=x`: Rare, for nodes that can be dug by hammer and will drop something different.
-  * The drop is defined in `_hammer_drop`.
+	* The drop is defined in `_hammer_drop`.
 
 ## Levels
 Toughless levels range from 0 to 3.
@@ -28,15 +28,15 @@ Toughless levels range from 0 to 3.
 
 # Crafting
 * `equipment`: For equipment.
-  * Must define `eq_x` group.
+	* Must define `eq_x` group.
 * `stick`: For sticks. The doc modpack semi-requires a stick group.
 * `tool`: For tools.
 
 # Interaction
 * `flammable=1`: This node can burn.
 * `cook_temp=x`: This node can only be cooked in a cooker with a temperature range including x.
-  * `Smelter`: 10-20
-  * `Flare Box`: 0-10
+	* `Smelter`: 10-20
+	* `Flare Box`: 0-10
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.

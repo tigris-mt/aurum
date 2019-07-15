@@ -1,9 +1,9 @@
 # Aurum
 * Direct Downloads
-  * [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
+	* [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Repositories
-  * [Compiled](https://github.com/tigris-mt/aurum-compiled)
-  * [Development](https://github.com/tigris-mt/aurum)
+	* [Compiled](https://github.com/tigris-mt/aurum-compiled)
+	* [Development](https://github.com/tigris-mt/aurum)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.
@@ -29,7 +29,7 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 * Variety of environments between the seven planes.
 * NPCs, villages, discoverable lore.
 * Progression through actions such as mining or defeating mobs.
-  * This will grant "mana" to be used in upgrading items and personal attributes or charging rods.
+	* This will grant "mana" to be used in upgrading items and personal attributes or charging rods.
 * Story progression through conquering the seven planes.
-  * Conquering each plane (in some various manner) will grant you a "crown jewel" with appropriate properties.
-  * The jewels can be combined into a crown. Wearing it on a throne in the Aether will win the game.
+	* Conquering each plane (in some various manner) will grant you a "crown jewel" with appropriate properties.
+	* The jewels can be combined into a crown. Wearing it on a throne in the Aether will win the game.

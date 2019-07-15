@@ -50,6 +50,7 @@ function m.register(name, def)
 			name = name .. "_" .. sub,
 			tiles = {def.texture_base .. "_" .. sub .. ".png"},
 			_tree = def,
+			is_ground_content = false,
 		}, spec)
 
 		-- Register and set name in tree's table.
@@ -142,7 +143,7 @@ function m.register(name, def)
 		drop = {
 			max_items = 1,
 			items = {
-				{rarity = 10, items = {def.sapling}},
+				{rarity = 20, items = {def.sapling}},
 				{rarity = 1, items = {name .. "_leaves"}},
 			},
 		},

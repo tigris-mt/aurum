@@ -109,7 +109,7 @@ for variant,vdef in pairs(variants) do
 				[2] = b - vdef.level / 15,
 				[3] = c - vdef.level / 15,
 			},
-			uses = 20 * math.ceil(vdef.level / 2) * (vdef.durability or 1),
+			uses = 20 * math.ceil(math.max(1, vdef.level) / 2) * (vdef.durability or 1),
 			maxlevel = math.floor(vdef.level),
 		}
 	end

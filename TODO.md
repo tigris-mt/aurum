@@ -1,8 +1,8 @@
 * Crafting
-	* Furnace.
 	* Tools.
 	* Eternal flare
 		* Made from mana beans, paste, and sticks.
+	* Flare Box
 * Armor
 * Death
 	* Drop items.

@@ -62,9 +62,16 @@ local function register(type, name, texture, def)
 		def._doc_items_hidden = false
 	end
 
-	aurum.tools.register("aurum_tools:" .. type .. "_" .. name, table.combine(odef, def, {
+	local tn = "aurum_tools:" .. type .. "_" .. name
+
+	aurum.tools.register(tn, table.combine(odef, def, {
 		groups = table.combine({["tool_" .. type] = 1}, def.groups or {}),
 	}))
+
+	minetest.register_craft{
+		output = tn,
+		recipe = def.recipe,
+	}
 end
 
 local variants = {
@@ -73,31 +80,36 @@ local variants = {
 		texture = "aurum_base_stone.png",
 		level = 0,
 		enchant_levels = 1,
+		material = "aurum_base:stone",
 	},
 	copper = {
 		desc = "Copper",
 		texture = aurum.ore.ores["aurum_ore:copper"].texture,
 		level = 1,
 		enchant_levels = 2,
+		material = "aurum_ore:copper_ingot",
 	},
 	bronze = {
 		desc = "Bronze",
 		texture = aurum.ore.ores["aurum_ore:bronze"].texture,
 		level = 1.5,
 		enchant_levels = 4,
+		material = "aurum_ore:bronze_ingot",
 	},
 	iron = {
 		desc = "Iron",
 		texture = aurum.ore.ores["aurum_ore:iron"].texture,
 		level = 2,
 		enchant_levels = 6,
+		material = "aurum_ore:iron_ingot",
 	},
 	gold = {
 		desc = "Gold",
 		texture = aurum.ore.ores["aurum_ore:gold"].texture,
 		level = 3,
-		enchant_levels = 9,
+		enchant_levels = 12,
 		durability = 0.15,
+		material = "aurum_ore:gold_ingot",
 	},
 }
 
@@ -127,6 +139,11 @@ for variant,vdef in pairs(variants) do
 				pierce = 3 + math.floor(vdef.level),
 			},
 		},
+		recipe = {
+			{vdef.material, vdef.material, vdef.material},
+			{"", "aurum_base:sticky_stick", ""},
+			{"", "aurum_base:stick", ""},
+		},
 	})
 
 	register("shovel", variant, vdef.texture, {
@@ -142,6 +159,11 @@ for variant,vdef in pairs(variants) do
 				pierce = 1,
 				blade = 1 + math.floor(vdef.level),
 			},
+		},
+		recipe = {
+			{"", vdef.material, ""},
+			{"", "aurum_base:sticky_stick", ""},
+			{"", "aurum_base:stick", ""},
 		},
 	})
 
@@ -159,6 +181,11 @@ for variant,vdef in pairs(variants) do
 				blade = 3 + math.floor(vdef.level),
 			},
 		},
+		recipe = {
+			{vdef.material, vdef.material, ""},
+			{vdef.material, "aurum_base:sticky_stick", ""},
+			{"", "aurum_base:stick", ""},
+		},
 	})
 
 	register("hammer", variant, vdef.texture, {
@@ -173,6 +200,11 @@ for variant,vdef in pairs(variants) do
 			damage_groups = {
 				impact = 6 + math.floor(vdef.level),
 			},
+		},
+		recipe = {
+			{vdef.material, vdef.material, vdef.material},
+			{vdef.material, "aurum_base:sticky_stick", vdef.material},
+			{"", "aurum_base:stick", ""},
 		},
 	})
 end

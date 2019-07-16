@@ -1,5 +1,5 @@
 * Crafting
-	* Tools.
+	* Bronze
 	* Eternal flare
 		* Made from mana beans, paste, and sticks.
 	* Flare Box
@@ -19,10 +19,13 @@
 		* Lava affected by fire resistance.
 	* Fall damage resistance.
 	* Biomes have oceans and underground.
+	* Realm borders.
 * Plants
 	* Grass spreads to bare dirt.
 	* Wild plants/flowers.
 	* Farming.
+	* Method of quickly growing plants.
+		* Something found in the Ancient Roots?
 * Mobs
 	* Farming.
 	* Taming.

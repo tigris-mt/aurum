@@ -19,3 +19,4 @@ gequip.register_type("feet", {
 
 aurum.dofile("actions.lua")
 aurum.dofile("armor.lua")
+aurum.dofile("doc.lua")

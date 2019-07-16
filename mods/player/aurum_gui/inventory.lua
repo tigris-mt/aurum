@@ -37,7 +37,31 @@ local form = smartfs.create("aurum_player:equipment", function(state)
 	i(3.5, 1, "gequip_chest")
 	i(3.5, 2, "gequip_legs")
 	i(3.5, 3, "gequip_feet")
+
+	local function g(n)
+		return S(n .. ": @1%", 100 - minetest.get_player_by_name(state.location.player):get_armor_groups()[n])
+	end
+	state:label(0, 0, "armor", table.concat({
+		"Protected:",
+		g("blade"),
+		g("pierce"),
+		g("impact"),
+		"-",
+		g("burn"),
+		g("chill"),
+		g("psyche"),
+	}, "\n"))
 end)
+
+-- Refresh SFInv page on equipment update.
+local old = gequip.refresh
+function gequip.refresh(player)
+	local ret = old(player)
+	if sfinv.get_page(player) == "aurum_player:equipment" then
+		sfinv.set_page(player, "aurum_player:equipment")
+	end
+	return ret
+end
 
 -- Add to inventories.
 smartfs.add_to_inventory(form, "aurum_base_grass.png", S"Equipment", true)

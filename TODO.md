@@ -1,4 +1,3 @@
-* Armor
 * Death
 	* Drop items.
 	* Set respawn point.

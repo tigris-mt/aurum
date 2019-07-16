@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.realms.register("aurum:aurum", {
 	description = S("Aurum"),
-	size = vector.new(8000, 800, 8000),
+	size = vector.new(8000, 1600, 8000),
 })
 
 if not minetest.settings:get("static_spawnpoint") then

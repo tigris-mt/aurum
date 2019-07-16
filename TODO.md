@@ -33,3 +33,4 @@
 * The Loom
 	* Node-based "worm" "mob" that eats blocks.
 		* Heckweaver, eats nodes and leaves behind Heck.
+* Flight

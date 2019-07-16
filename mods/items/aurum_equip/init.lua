@@ -1,4 +1,5 @@
 local S = minetest.get_translator()
+aurum.equip = {}
 
 gequip.register_type("head", {
 	description = S"Head",
@@ -15,3 +16,6 @@ gequip.register_type("legs", {
 gequip.register_type("feet", {
 	description = S"Feet",
 })
+
+aurum.dofile("actions.lua")
+aurum.dofile("armor.lua")

@@ -64,3 +64,11 @@ function table.spairs(t, f)
 		end
 	end
 end
+
+function table.map(t, f)
+	local ret = {}
+	for k,v in pairs(t) do
+		ret[k] = f(v, k)
+	end
+	return ret
+end

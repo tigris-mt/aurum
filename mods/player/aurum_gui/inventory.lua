@@ -29,12 +29,14 @@ sfinv.override_page("sfinv:crafting", {
 local form = smartfs.create("aurum_player:equipment", function(state)
     state:size(8, 6)
 
-    state:inventory(3.5, 0, 1, 1, "gequip_head")
-	state:inventory(3.5, 1, 1, 1, "gequip_chest")
-	state:inventory(3.5, 2, 1, 1, "gequip_legs")
-	state:inventory(3.5, 3, 1, 1, "gequip_feet")
-
-    state:element("code", {name = "listring", code = "listring[current_player;jewelry]listring[current_player;main]"})
+	local function i(x, y, n)
+		state:inventory(x, y, 1, 1, n)
+		state:element("code", {name = "listring_" .. n, code = "listring[current_player;" .. n .. "]listring[current_player;main]"})
+	end
+	i(3.5, 0, "gequip_head")
+	i(3.5, 1, "gequip_chest")
+	i(3.5, 2, "gequip_legs")
+	i(3.5, 3, "gequip_feet")
 end)
 
 -- Add to inventories.

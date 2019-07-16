@@ -36,7 +36,7 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 	groups = {not_in_creative_inventory = 1},
 
 	_enchant_levels = 2,
-	_enchants = {"hand"},
+	_enchants = {"tool", "hand"},
 })
 
 -- Register the standard hand with the same def as our hand.
@@ -130,6 +130,7 @@ for variant,vdef in pairs(variants) do
 		description = S(vdef.desc .. " Pickaxe"),
 		_doc_items_longdesc = S"A tool for extracting stone, metal, and other hard substances.",
 		_enchant_levels = vdef.enchant_levels,
+		_enchants = {"tool", "pickaxe"},
 		tool_capabilities = {
 			full_punch_interval = 1.3 - vdef.level / 15,
 			groupcaps = {
@@ -150,6 +151,7 @@ for variant,vdef in pairs(variants) do
 		description = S(vdef.desc .. " Shovel"),
 		_doc_items_longdesc = S"Used for collecting soft or crumbling material such as dirt and gravel.",
 		_enchant_levels = vdef.enchant_levels,
+		_enchants = {"tool", "shovel"},
 		tool_capabilities = {
 			full_punch_interval = 1.4 - vdef.level / 10,
 			groupcaps = {
@@ -171,6 +173,7 @@ for variant,vdef in pairs(variants) do
 		description = S(vdef.desc .. " Machete"),
 		_doc_items_longdesc = S"A sharp blade to chop down wood and vegetation.",
 		_enchant_levels = vdef.enchant_levels,
+		_enchants = {"tool", "machete"},
 		tool_capabilities = {
 			full_punch_interval = 1.2 - vdef.level / 10,
 			groupcaps = {
@@ -192,6 +195,7 @@ for variant,vdef in pairs(variants) do
 		description = S(vdef.desc .. " Hammer"),
 		_doc_items_longdesc = S"A deadly weapon, built to crush.",
 		_enchant_levels = vdef.enchant_levels,
+		_enchants = {"tool", "weapon", "hammer"},
 		tool_capabilities = {
 			full_punch_interval = 1.8 - vdef.level / 10,
 			groupcaps = {

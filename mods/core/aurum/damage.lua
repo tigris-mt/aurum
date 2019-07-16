@@ -6,9 +6,6 @@ for _,v in ipairs{
 	"burn",
 	"chill",
 	"psyche",
-
-	"drown",
-	"poison",
 } do
 	gdamage.register(v)
 end

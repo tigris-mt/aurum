@@ -28,7 +28,6 @@ Toughless levels range from 0 to 3.
 
 # Crafting
 * `equipment`: For equipment.
-	* Must define `eq_x` group.
 * `stick`: For sticks. The doc modpack semi-requires a stick group.
 * `tool`: For tools.
 

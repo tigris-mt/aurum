@@ -41,7 +41,7 @@ function aurum.tools.get_enchants(name)
 
 	local ret = {}
 	for _,index in ipairs(def._enchants) do
-		ret = table.combine(ret, aurum.tools.enchants[index])
+		ret = table.combine(ret, aurum.tools.get_category_enchants(index) or {})
 	end
 
 	return ret
@@ -60,8 +60,6 @@ doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
 	return ""
 end)
 
-aurum.tools.enchants = {}
-
-aurum.dofile("default_enchants.lua")
+aurum.dofile("enchants.lua")
 aurum.dofile("default_tools.lua")
 aurum.dofile("hammer_break.lua")

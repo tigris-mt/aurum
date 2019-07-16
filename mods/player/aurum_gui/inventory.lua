@@ -17,7 +17,7 @@ sfinv.override_page("sfinv:crafting", {
 
 	on_player_receive_fields = function(self, player, context, fields)
 		if fields.craftguide then
-			craftguide.show(player:get_player_name())
+			sfinv.set_page(player, "craftguide:craftguide")
 			return true
 		elseif fields.help then
 			doc.show_doc(player:get_player_name())

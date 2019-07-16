@@ -95,6 +95,8 @@ function aurum.cook.register(name, def)
 		allow_metadata_inventory_move = allow_metadata_inventory_move,
 		allow_metadata_inventory_take = allow_metadata_inventory_take,
 
+		_doc_items_usagehelp = S"Insert fuel in the bottom slot and something to smelt in the top slot.",
+
 		on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
 			local inv = meta:get_inventory()
@@ -292,7 +294,6 @@ aurum.cook.register("aurum_cook:smelter", {
 	node = {
 		description = S"Smelter",
 		_doc_items_longdesc = S"Stone piled into a smelting furnace.",
-		_doc_items_usagehelp = S"Insert fuel in the bottom slot and something to smelt in the top slot.",
 		_doc_items_hidden = false,
 
 		tiles = {
@@ -331,5 +332,59 @@ minetest.register_craft{
 		{"aurum_base:stone", "aurum_base:stone", "aurum_base:stone"},
 		{"aurum_base:stone", "", "aurum_base:stone"},
 		{"aurum_base:stone", "aurum_base:stone", "aurum_base:stone"},
+	},
+}
+
+aurum.cook.register("aurum_cook:oven", {
+	range = {0, 10},
+	node = {
+		description = S"Flare Oven",
+		_doc_items_longdesc = S"A fuel-fired flare furnace.",
+		_doc_items_hidden = false,
+
+		drawtype = "nodebox",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0.25, 0.5},
+				{-0.2, 0.25, -0.2, 0.2, 0.8, 0.2},
+			},
+		},
+
+		tiles = {
+			"aurum_cook_oven_top.png", "aurum_cook_oven.png",
+			"aurum_cook_oven.png", "aurum_cook_oven.png",
+			"aurum_cook_oven.png", "aurum_cook_oven_front.png",
+		},
+
+		paramtype2 = "facedir",
+		on_place = minetest.rotate_node,
+		sounds = aurum.sounds.stone(),
+
+		groups = {dig_pick = 2},
+	},
+	active = {
+		tiles = {
+			"aurum_cook_oven_top.png", "aurum_cook_oven.png",
+			"aurum_cook_oven.png", "aurum_cook_oven.png",
+			"aurum_cook_oven.png",
+			{
+				image = "aurum_cook_oven_front_active.png",
+				animation = {
+					type = "vertical_frames",
+					aspect_w = 16,
+					aspect_h = 16,
+					length = 1,
+				},
+			},
+		},
+	},
+})
+
+minetest.register_craft{
+	output = "aurum_cook:oven",
+	recipe = {
+		{"aurum_base:stone", "aurum_base:stone", "aurum_base:stone"},
+		{"aurum_base:stone", "aurum_flare:flare", "aurum_base:stone"},
 	},
 }

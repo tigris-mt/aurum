@@ -12,7 +12,7 @@ aurum.ore.register("aurum_ore:tin", {
 	description = S"Tin",
 	texture = "aurum_ore_white.png^[colorize:#d3d4d5:255",
 	level = 1, depth = -100,
-	rarity = 10, num = 6, size = 3,
+	rarity = 11, num = 6, size = 3,
 	growths = {-300, -600},
 })
 
@@ -22,6 +22,15 @@ aurum.ore.register("aurum_ore:bronze", {
 	level = 1,
 	ore = false,
 })
+
+minetest.register_craft{
+	output = "aurum_ore:bronze_ingot 9",
+	recipe = {
+		{"aurum_ore:copper_ingot", "aurum_ore:copper_ingot", "aurum_ore:copper_ingot"},
+		{"aurum_ore:copper_ingot", "aurum_ore:tin_ingot", "aurum_ore:copper_ingot"},
+		{"aurum_ore:copper_ingot", "aurum_ore:copper_ingot", "aurum_ore:copper_ingot"},
+	},
+}
 
 aurum.ore.register("aurum_ore:iron", {
 	description = S"Iron",

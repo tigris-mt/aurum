@@ -1,5 +1,4 @@
 * Crafting
-	* Bronze
 	* Eternal flare
 		* Made from mana beans, paste, and sticks.
 	* Flare Box

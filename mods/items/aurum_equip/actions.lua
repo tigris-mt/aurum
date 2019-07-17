@@ -5,8 +5,8 @@ local default_effects = {
 }
 
 gequip.register_eqdef_init(function(eqdef)
-	eqdef.armor = gdamage.armor_defaults(1)
-	eqdef.effects = default_effects
+	eqdef.armor = table.combine(gdamage.armor_defaults(1), eqdef.armor or {})
+	eqdef.effects = table.combine(default_effects, eqdef.effects or {})
 end)
 
 gequip.register_action("aurum_equip:armor", {

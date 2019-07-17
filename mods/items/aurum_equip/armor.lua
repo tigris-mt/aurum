@@ -173,5 +173,3 @@ aurum.equip.register_armor_set("aurum_equip:gold", {
 		impact = 0.8,
 	},
 })
-
-aurum.dofile("armor_enchants.lua")

@@ -7,7 +7,6 @@ aurum.tools.register_enchant_callback{
 
 	apply = function(state, stack)
 		stack:get_meta():set_string("eqdef", minetest.serialize(state.eqdef))
-		return stack
 	end,
 }
 

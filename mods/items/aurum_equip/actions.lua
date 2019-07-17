@@ -1,11 +1,22 @@
+local default_effects = {
+	speed = 1,
+	gravity = 1,
+	jump = 1,
+}
+
+gequip.register_eqdef_init(function(eqdef)
+	eqdef.armor = gdamage.armor_defaults(1)
+	eqdef.effects = default_effects
+end)
+
 gequip.register_action("aurum_equip:armor", {
 	init = function(state)
-		state.armor = {}
+		state.armor = gdamage.armor_defaults(1)
 	end,
 
 	add = function(state, r)
-		for k,v in pairs(r.armor or {}) do
-			state.armor[k] = (state.armor[k] or 1) * v
+		for k,v in pairs(r.armor) do
+			state.armor[k] = state.armor[k] * v
 		end
 	end,
 
@@ -16,16 +27,11 @@ gequip.register_action("aurum_equip:armor", {
 
 gequip.register_action("aurum_equip:effects", {
 	init = function(state)
-		state.effects = {
-			speed = 1,
-			gravity = 1,
-			jump = 1,
-		}
+		state.effects = default_effects
 	end,
 
 	add = function(state, r)
-		for k,v in pairs(r.effects or {}) do
-			assert(state.effects[k])
+		for k,v in pairs(r.effects) do
 			state.effects[k] = state.effects[k] * v
 		end
 	end,

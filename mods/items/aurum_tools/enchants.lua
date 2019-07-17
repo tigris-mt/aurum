@@ -64,6 +64,15 @@ function aurum.tools.set_item_enchants(stack, enchants)
 	return aurum.tools.refresh_item(stack)
 end
 
+aurum.tools.enchant_callbacks = {}
+
+function aurum.tools.register_enchant_callback(def)
+	table.insert(aurum.tools.enchant_callbacks, table.combine({
+		init = function(state, stack) end,
+		apply = function(state, stack) end,
+	}, def))
+end
+
 -- Refresh item properties from def and enchants.
 -- Returns stack.
 function aurum.tools.refresh_item(stack)
@@ -71,10 +80,12 @@ function aurum.tools.refresh_item(stack)
 
 	-- Create initial state from base properties.
 	local state = {
-		caps = stack:get_definition().tool_capabilities,
-		eqdef = gequip.get_eqdef(stack, true),
 		description = {stack:get_definition().description},
 	}
+
+	for _,v in ipairs(aurum.tools.enchant_callbacks) do
+		v.init(state, stack)
+	end
 
 	local applied = false
 
@@ -91,9 +102,21 @@ function aurum.tools.refresh_item(stack)
 	stack:set_name(applied and stack:get_definition()._enchanted or stack:get_definition()._unenchanted)
 
 	-- Write refreshed data.
-	stack:get_meta():set_tool_capabilities(state.caps)
-	stack:get_meta():set_string("eqdef", minetest.serialize(state.eqdef))
+	for _,v in ipairs(aurum.tools.enchant_callbacks) do
+		v.apply(state, stack)
+	end
 	stack:get_meta():set_string("description", table.concat(state.description, "\n"))
 
 	return stack
 end
+
+aurum.tools.register_enchant_callback{
+	init = function(state, stack)
+		state.caps = stack:get_definition().tool_capabilities
+	end,
+
+	apply = function(state, stack)
+		stack:get_meta():set_tool_capabilities(state.caps)
+		return stack
+	end,
+}

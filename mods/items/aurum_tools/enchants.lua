@@ -32,21 +32,17 @@ function aurum.tools.get_possible_enchants(name)
 
 	local ret = {}
 	for _,index in ipairs(def._enchants) do
-		ret = table.combine(ret, aurum.tools.get_category_enchants(index) or {})
+		ret = table.icombine(ret, aurum.tools.get_category_enchants(index) or {})
 	end
 
 	return ret
 end
 
 doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
-	if aurum.tools.get_possible_enchants(itemstring) then
-		local keys = {}
-		for k,v in pairs(aurum.tools.get_possible_enchants(itemstring)) do
-			if v then
-				table.insert(keys, k)
-			end
-		end
-		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#keys > 0) and ("\n" .. S("Enchantment types: @1", table.concat(keys, ", "))) or "")
+	local possible = aurum.tools.get_possible_enchants(itemstring)
+	if possible then
+		table.sort(possible)
+		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#possible > 0) and ("\n" .. S("Enchantment types: @1", table.concat(possible, ", "))) or "")
 	end
 	return ""
 end)

@@ -9,6 +9,7 @@
 	* Fall damage resistance.
 	* Biomes have oceans and underground.
 	* Realm borders.
+	* Don't spawn underground.
 * Plants
 	* Grass spreads to bare dirt.
 	* Wild plants/flowers.
@@ -27,3 +28,4 @@
 		* Heckweaver, eats nodes and leaves behind Heck.
 * Flight
 * Creative or giveme inventory.
+* Hand swapping.

@@ -1,3 +1,4 @@
+local S = minetest.get_translator()
 aurum.tools.enchants = {}
 
 function aurum.tools.get_category_enchants(category)
@@ -13,6 +14,86 @@ end
 function aurum.tools.register_enchant(name, def)
 	local def = table.combine({
 		categories = {},
+
+		description = "?",
+
+		apply = function(state, level, stack) end,
 	}, def)
 	aurum.tools.enchants[name] = def
+end
+
+-- Get possible enchant types for a tool, returns array or nil if unenchantable.
+function aurum.tools.get_possible_enchants(name)
+	local def = minetest.registered_items[name]
+
+	if (def._enchant_levels or 0) == 0 then
+		return nil
+	end
+
+	local ret = {}
+	for _,index in ipairs(def._enchants) do
+		ret = table.combine(ret, aurum.tools.get_category_enchants(index) or {})
+	end
+
+	return ret
+end
+
+doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
+	if aurum.tools.get_possible_enchants(itemstring) then
+		local keys = {}
+		for k,v in pairs(aurum.tools.get_possible_enchants(itemstring)) do
+			if v then
+				table.insert(keys, k)
+			end
+		end
+		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#keys > 0) and ("\n" .. S("Enchantment types: @1", table.concat(keys, ", "))) or "")
+	end
+	return ""
+end)
+
+-- Get a table of item enchants.
+function aurum.tools.get_item_enchants(stack)
+	local meta = stack:get_meta()
+	return meta:contains("enchants") and minetest.deserialize(meta:get_string("enchants")) or {}
+end
+
+-- Write back enchants and refresh properties.
+-- Returns stack.
+function aurum.tools.set_item_enchants(stack, enchants)
+	stack:get_meta():set_string("enchants", minetest.serialize(enchants))
+	return aurum.tools.refresh_item(stack)
+end
+
+-- Refresh item properties from def and enchants.
+-- Returns stack.
+function aurum.tools.refresh_item(stack)
+	local enchants = aurum.tools.get_item_enchants(stack)
+
+	-- Create initial state from base properties.
+	local state = {
+		caps = stack:get_definition().tool_capabilities,
+		eqdef = gequip.get_eqdef(stack, true),
+		description = {stack:get_definition().description},
+	}
+
+	local applied = false
+
+	-- Apply all enchantments.
+	for name,level in table.spairs(enchants) do
+		if level > 0 then
+			applied = true
+			table.insert(state.description, S("@1: @2", aurum.tools.enchants[name].description, level))
+			stack = aurum.tools.enchants[name].apply(state, level, stack) or stack
+		end
+	end
+
+	-- Update enchanted variant.
+	stack:set_name(applied and stack:get_definition()._enchanted or stack:get_definition()._unenchanted)
+
+	-- Write refreshed data.
+	stack:get_meta():set_tool_capabilities(state.caps)
+	stack:get_meta():set_string("eqdef", minetest.serialize(state.eqdef))
+	stack:get_meta():set_string("description", table.concat(state.description, "\n"))
+
+	return stack
 end

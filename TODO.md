@@ -1,5 +1,7 @@
 * Enchanting
-	* Tools, armor, weapons.
+	* Enchantment spawning.
+	* Enchanting "table".
+	* Extract own mana into physical form.
 	* Enchanted flare.
 	* Item naming.
 * Environment

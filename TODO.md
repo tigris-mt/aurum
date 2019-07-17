@@ -1,5 +1,4 @@
 * Death
-	* Set respawn point.
 	* Death outside of realms.
 * Enchanting
 	* Gain mana from mining.
@@ -30,3 +29,4 @@
 	* Node-based "worm" "mob" that eats blocks.
 		* Heckweaver, eats nodes and leaves behind Heck.
 * Flight
+* Creative or giveme inventory.

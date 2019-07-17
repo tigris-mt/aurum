@@ -1,5 +1,4 @@
 * Enchanting
-	* Gain mana from mining.
 	* Tools, armor, weapons.
 	* Enchanted flare.
 	* Item naming.

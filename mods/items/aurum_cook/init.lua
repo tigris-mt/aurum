@@ -156,6 +156,12 @@ function aurum.cook.register(name, def)
 						mt.cooking = mt.cooking + run
 						-- If we have enough time and there is room...
 						if mt.cooking >= result.time and inv:room_for_item("dst", result.item) then
+							-- Add total mana.
+							local mana = minetest.get_item_group(inv:get_list("src")[1]:get_name(), "cook_xmana")
+							if mana > 0 then
+								meta:set_int("mana", meta:get_int("mana") + mana)
+								meta:set_int("mana_num", meta:get_int("mana_num") + 1)
+							end
 							-- Set the items.
 							inv:add_item("dst", result.item)
 							inv:set_list("src", replacement.items)
@@ -240,6 +246,13 @@ function aurum.cook.register(name, def)
 			if not minetest.get_node_timer(pos):is_started() then
 				minetest.get_node_timer(pos):start(1)
 			end
+		end,
+
+		on_metadata_inventory_take = function(pos, _, _, _, player)
+			local meta = minetest.get_meta(pos)
+			aurum.player.mana_sparks(player, vector.add(pos, vector.new(0, 1, 0)), "smelting", meta:get_int("mana_num"), meta:get_int("mana"))
+			meta:set_int("mana", 0)
+			meta:set_int("mana_num", 0)
 		end,
 
 		on_blast = function(pos)

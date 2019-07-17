@@ -259,7 +259,9 @@ function aurum.cook.register(name, def)
 		end,
 
 		on_blast = function(pos)
-			return table.icombine(get_drops(pos), {name})
+			local drops = table.icombine(get_drops(pos), {name})
+			minetest.remove_node(pos)
+			return drops
 		end,
 
 		on_destruct = function(pos)

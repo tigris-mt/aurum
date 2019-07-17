@@ -248,7 +248,10 @@ function aurum.cook.register(name, def)
 			end
 		end,
 
-		on_metadata_inventory_take = function(pos, _, _, _, player)
+		on_metadata_inventory_take = function(pos, listname, _, _, player)
+			if listname ~= "dst" then
+				return
+			end
 			local meta = minetest.get_meta(pos)
 			aurum.player.mana_sparks(player, vector.add(pos, vector.new(0, 1, 0)), "smelting", meta:get_int("mana_num"), meta:get_int("mana"))
 			meta:set_int("mana", 0)

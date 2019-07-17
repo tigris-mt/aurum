@@ -1,5 +1,3 @@
-* Death
-	* Death outside of realms.
 * Enchanting
 	* Gain mana from mining.
 	* Tools, armor, weapons.

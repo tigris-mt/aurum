@@ -10,3 +10,13 @@ aurum.tools.register_enchant_callback{
 		return stack
 	end,
 }
+
+aurum.tools.register_enchant("smash", {
+	categories = {
+		hammer = true,
+	},
+	description = S"Smash",
+	apply = function(state, level, stack)
+		state.tool_capabilities.damage_groups.impact = state.tool_capabilities.damage_groups.impact + level
+	end,
+})

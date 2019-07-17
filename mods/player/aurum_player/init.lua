@@ -19,3 +19,9 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
+-- Drop mana sparks in the world. May be influenced by equipment.
+-- Reasons: digging, smelting, killing
+function aurum.player.mana_sparks(player, pos, reason, min, max)
+	xmana.sparks(pos, math.random(min, max), player:get_player_name())
+end

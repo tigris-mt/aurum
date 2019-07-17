@@ -21,7 +21,7 @@ aurum.ore.register("aurum_ore:mana_beans", {
 		},
 
 		after_dig_node = function(pos, _, _, player)
-			xmana.sparks(pos, math.random(1, 2), player:get_player_name())
+			aurum.player.mana_sparks(player, pos, "digging", 1, 2)
 		end,
 	},
 

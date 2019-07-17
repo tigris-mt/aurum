@@ -9,7 +9,7 @@ function aurum.equip.register_armor(name, def)
 		armor = {},
 		slot = "?",
 		recipe = nil,
-		durability = 100,
+		durability = 1,
 	}, def)
 
 	aurum.tools.register(name, {
@@ -51,8 +51,8 @@ function aurum.equip.register_armor_set(prefix, def)
 		-- Base armor levels (in fraction of damage blocked).
 		armor = {},
 
-		-- Average uses.
-		durability = 100,
+		-- Durability multiplier.
+		durability = 1,
 	}, def)
 
 	aurum.equip.register_armor(prefix .. "_boots", {

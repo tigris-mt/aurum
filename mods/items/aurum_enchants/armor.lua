@@ -2,11 +2,15 @@ local S = minetest.get_translator()
 
 aurum.tools.register_enchant_callback{
 	init = function(state, stack)
-		state.eqdef = gequip.get_eqdef(stack, true)
+		if stack:get_definition()._eqtype then
+			state.eqdef = gequip.get_eqdef(stack, true)
+		end
 	end,
 
 	apply = function(state, stack)
-		stack:get_meta():set_string("eqdef", minetest.serialize(state.eqdef))
+		if stack:get_definition()._eqtype then
+			stack:get_meta():set_string("eqdef", minetest.serialize(state.eqdef))
+		end
 	end,
 }
 

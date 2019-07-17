@@ -33,10 +33,10 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 		},
 	},
 
-	groups = {not_in_creative_inventory = 1},
+	groups = {tool = 1, not_in_creative_inventory = 1},
 
 	_enchant_levels = 2,
-	_enchants = {"tool", "hand"},
+	_enchants = {"hand"},
 })
 
 -- Register the standard hand with the same def as our hand.
@@ -65,7 +65,7 @@ local function register(type, name, texture, def)
 	local tn = "aurum_tools:" .. type .. "_" .. name
 
 	aurum.tools.register(tn, table.combine(odef, def, {
-		groups = table.combine({["tool_" .. type] = 1}, def.groups or {}),
+		groups = table.combine({["tool_" .. type] = 1, tool = 1}, def.groups or {}),
 	}))
 
 	minetest.register_craft{

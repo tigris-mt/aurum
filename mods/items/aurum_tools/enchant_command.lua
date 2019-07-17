@@ -1,18 +1,18 @@
 local S = minetest.get_translator()
 
-minetest.register_privilege("force_enchant", {
+minetest.register_privilege("enchant", {
 	S"Can modify item enchantments.",
 	give_to_singleplayer = false,
 })
 
-minetest.register_chatcommand("fenchant", {
+minetest.register_chatcommand("enchant", {
 	params = S"<enchant> <level>",
-	description = S"Forcibly modify the enchantments on the wielded item",
-	privs = {force_enchant = true},
+	description = S"Modify the enchantments on the wielded item",
+	privs = {enchant = true},
 	func = function(player, param)
 		local player = minetest.get_player_by_name(player)
 		if not player then
-			return false, S"No player!"
+			return false, S"No player."
 		end
 
 		local split = param:split(" ")

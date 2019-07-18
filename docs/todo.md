@@ -1,5 +1,4 @@
 * Plants
-	* Grass spreads to bare dirt.
 	* Wild plants/flowers.
 	* Farming.
 	* Method of quickly growing plants.

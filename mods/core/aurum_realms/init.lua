@@ -18,7 +18,7 @@ local function coord_ok(value)
 end
 
 -- There must be sizable "buffer" space between realms.
-m.SPACING = 800
+m.SPACING = 400
 
 local function allocate_position(realm)
 	minetest.log("action", "Allocating position for new realm: " .. realm.id)

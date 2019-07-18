@@ -11,3 +11,5 @@ aurum.dofile("paste.lua")
 
 -- Dirt behaviour.
 aurum.dofile("dirt.lua")
+-- Lava behaviour.
+aurum.dofile("lava_cooling.lua")

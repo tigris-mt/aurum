@@ -1,5 +1,4 @@
 * Environment
-	* Realm borders.
 	* Don't spawn underground.
 	* Realm sky/environment.
 * Plants

@@ -12,7 +12,7 @@ end
 local realms = {}
 
 -- Realm sizes must be aligned
-m.ALIGN = 80
+m.ALIGN = 16
 local function coord_ok(value)
 	return (value % m.ALIGN) == 0
 end
@@ -162,24 +162,51 @@ function aurum.pos_to_realm(global_pos)
 	end
 end
 
--- Clear all blocks outside of a realm.
+function aurum.box_to_realm(global_box)
+	for id,realm in pairs(realms) do
+		if aurum.box.collide_box(realm.global_box, global_box) then
+			return id
+		end
+	end
+end
+
+-- Generate the realm border.
 minetest.register_on_generated(function(minp, maxp, seed)
-	-- If this block is within a realm, cancel.
-	if aurum.pos_to_realm(minp) and aurum.pos_to_realm(maxp) then
+	-- Check if any part of the block is in a realm.
+	local realm = aurum.box_to_realm(aurum.box.new(minp, maxp))
+
+	-- If not within a realm, then we don't need to generate the border.
+	if not realm then
 		return
 	end
 
-	-- Replace with air.
-	local c_air = minetest.get_content_id("air")
+	realm = m.get(realm)
 
 	-- Read all data.
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 	local area = VoxelArea:new{MinEdge = emin, MaxEdge = emax}
 	local data = vm:get_data()
 
-	-- Set all data to air.
-	for i in area:iterp(emin, emax) do
-		data[i] = c_air
+	local center = vector.divide(vector.add(emin, emax), 2)
+
+	local c_border = minetest.get_content_id((maxp.y > 0) and "aurum_base:limit" or "aurum_base:foundation")
+
+	for _,axis in ipairs{"x", "y", "z"} do
+		local sign = math.sign(center[axis] - realm.global_center[axis])
+		local corner = (sign < 0) and "a" or "b"
+		local border = realm.global_box[corner][axis]
+
+		if emin[axis] <= border and emax[axis] >= border then
+			local emin = table.copy(emin)
+			local emax = table.copy(emax)
+
+			emin[axis] = border
+			emax[axis] = border
+
+			for i in area:iterp(emin, emax) do
+				data[i] = c_border
+			end
+		end
 	end
 
 	-- And write back.

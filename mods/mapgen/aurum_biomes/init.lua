@@ -3,6 +3,11 @@ aurum.biomes = {}
 -- List of biomes per realm.
 aurum.biomes.realms = {}
 
+-- List of biomes per variant.
+aurum.biomes.variants = {}
+
+aurum.biomes.biomes = {}
+
 -- Register a biome with the position limits defined relative to and limited by a realm's box.
 function aurum.biomes.register(realm, def)
 	local def = table.combine(aurum.realms.get(realm).biome_default, def)
@@ -18,8 +23,22 @@ function aurum.biomes.register(realm, def)
 
 	aurum.biomes.realms[realm] = aurum.biomes.realms[realm] or {}
 	table.insert(aurum.biomes.realms[realm], def.name)
-
 	return minetest.register_biome(def)
+end
+
+function aurum.biomes.register_all(realm, def)
+	aurum.biomes.biomes[def.name] = def
+
+	for suffix,variant in pairs(def._variants) do
+		local vdef = table.combine(def, variant, {
+			name = (suffix == "base") and def.name or (def.name .. "_" .. suffix)
+		})
+
+		aurum.biomes.variants[suffix] = aurum.biomes.variants[suffix] or {}
+		table.insert(aurum.biomes.variants[suffix], def.name)
+
+		aurum.biomes.register(realm, vdef)
+	end
 end
 
 function aurum.biomes.register_tree_decoration(def)
@@ -43,5 +62,7 @@ function aurum.biomes.register_tree_decoration(def)
 		}, d[k]))
 	end
 end
+
+aurum.dofile("variants.lua")
 
 aurum.dofile("biomes/aurum.lua")

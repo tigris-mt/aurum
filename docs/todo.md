@@ -1,5 +1,4 @@
 * Environment
-	* Biomes have oceans and underground.
 	* Realm borders.
 	* Don't spawn underground.
 	* Realm sky/environment.

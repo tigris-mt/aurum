@@ -11,6 +11,15 @@ minetest.register_node("aurum_base:stone", {
 	_hammer_drop = "aurum_base:gravel",
 })
 
+minetest.register_node("aurum_base:sand", {
+	description = S"Sand",
+	_doc_items_longdesc = S"Soft and unstable grains.",
+	tiles = {"aurum_base_sand.png"},
+	is_ground_content = true,
+	sounds = aurum.sounds.sand(),
+	groups = {dig_dig = 3, falling_node = 1},
+})
+
 minetest.register_node("aurum_base:gravel", {
 	description = S("Gravel"),
 	_doc_items_longdesc = S("Rough, unstable bits of stone."),

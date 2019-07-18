@@ -1,23 +1,40 @@
 -- Barrens
 
-aurum.biomes.register("aurum:aurum", {
+aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_barrens",
-	node_top = "aurum_base:gravel",
-	depth_top = 1,
 	heat_point = 30,
 	humidity_point = 30,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:gravel",
+			depth_top = 1,
+			node_filler = "aurum_base:stone",
+			depth_fillter = 1,
+		},
+		ocean = aurum.biomes.v_ocean{
+			node_top = "aurum_base:stone",
+			node_filler = "aurum_base:stone",
+		},
+		under = aurum.biomes.v_under{},
+	},
 })
 
 -- Grassland
 
-aurum.biomes.register("aurum:aurum", {
+aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_grassland",
-	node_top = "aurum_base:grass",
-	depth_top = 1,
-	node_filler = "aurum_base:dirt",
-	depth_filler = 4,
 	heat_point = 40,
 	humidity_point = 40,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:grass",
+			depth_top = 1,
+			node_filler = "aurum_base:dirt",
+			depth_filler = 4,
+		},
+		ocean = aurum.biomes.v_ocean{},
+		under = aurum.biomes.v_under{},
+	},
 })
 
 aurum.biomes.register_tree_decoration({
@@ -34,14 +51,11 @@ aurum.biomes.register_tree_decoration({
 
 -- Forest
 
-aurum.biomes.register("aurum:aurum", {
+aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
-	node_top = "aurum_base:grass",
-	depth_top = 1,
-	node_filler = "aurum_base:dirt",
-	depth_filler = 4,
 	heat_point = 50,
 	humidity_point = 50,
+	_variants = aurum.biomes.biomes.aurum_grassland._variants,
 })
 
 aurum.biomes.register_tree_decoration({

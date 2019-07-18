@@ -35,10 +35,10 @@ local list = {
 for _,d in ipairs(list) do
 	local def = {
 		deco_type = "schematic",
-		place_on = {"group:soil", "aurum_base:gravel", "group:stone"},
+		place_on = {"group:soil", "aurum_base:gravel", "aurum_base:stone"},
 		sidelen = 80,
 		fill_ratio = 0.0005 / #list,
-		biomes = {"aurum_grassland"},
+		biomes = {"aurum_grassland", "aurum_forest"},
 		schematic = d.schematic,
 		rotation = "random",
 		flags = {place_center_x = true, place_center_y = false, place_center_z = true, force_placement = true},

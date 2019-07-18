@@ -3,7 +3,7 @@ local LIGHT = 10
 local RADIUS = 4
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
-	if minetest.get_item_group(itemstring, "dirt_spread") then
+	if minetest.get_item_group(itemstring, "dirt_spread") > 0 then
 		return S("This node spreads to nearby (@1 cube radius) dirt with a light level of @2 or greater above.", RADIUS, LIGHT)
 	end
 	return ""
@@ -35,7 +35,7 @@ minetest.register_abm{
 }
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
-	if minetest.get_item_group(itemstring, "dirt_smother") then
+	if minetest.get_item_group(itemstring, "dirt_smother") > 0 then
 		return S"This node becomes dirt if an opaque and dark node is on top of it for some time."
 	end
 	return ""

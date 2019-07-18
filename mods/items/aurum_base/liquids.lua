@@ -25,6 +25,7 @@ function aurum.base.register_liquid(name, def, flowing_def)
 		liquidtype = "flowing",
 		tiles = def.tiles,
 		groups = {not_in_creative_inventory = 1},
+		_doc_items_create_entry = false,
 	}
 	minetest.register_node(":" .. name .. "_source", table.combine(defaults, def, {groups = table.combine(defaults.groups or {}, def.groups or {})}))
 	minetest.register_node(":" .. name .. "_flowing", table.combine(defaults, def, flowing_defaults, flowing_def, {groups = table.combine(defaults.groups or {}, def.groups or {}, flowing_defaults.groups or {}, flowing_def.groups or {})}))

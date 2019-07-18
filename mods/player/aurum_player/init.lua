@@ -2,6 +2,7 @@ aurum.player = {}
 
 aurum.dofile("death.lua")
 aurum.dofile("hp.lua")
+aurum.dofile("realm.lua")
 aurum.dofile("spawn.lua")
 
 -- "Void" damage.

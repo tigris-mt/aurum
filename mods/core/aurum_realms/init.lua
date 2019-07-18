@@ -91,6 +91,9 @@ function m.register(id, def)
 
 		-- Realm Y location.
 		y = 0,
+
+		-- Apply client-side appearances.
+		apply_player = function(player) end,
 	}, def, {
 		id = id,
 		-- Default biome setup.
@@ -103,7 +106,7 @@ function m.register(id, def)
 			node_cave_liquid = {"aurum_base:water_source", "aurum_base:lava_source"},
 			node_dungeon = "aurum_base:stone",
 			node_dungeon_stair = "aurum_base:stone",
-		}, def.biome_default or {})
+		}, def.biome_default or {}),
 	})
 
 	-- Ensure valid positioning.

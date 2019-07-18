@@ -46,7 +46,7 @@ minetest.register_node("aurum_base:grass", {
 	tiles = {"aurum_base_grass.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.grass(),
-	groups = {soil = 1, dig_dig = 3, dirt_spread = 1},
+	groups = {soil = 1, dig_dig = 3, dirt_spread = 1, dirt_smother = 1},
 })
 
 minetest.register_node("aurum_base:foundation", {

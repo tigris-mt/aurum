@@ -38,6 +38,7 @@ Toughless levels range from 0 to 3.
 	* `Flare Box`: 0-10
 * `cook_xmana=x`: This node provides up to x mana when smelted.
 * `dirt_base=1`: This node can be replaced by dirt spreaders.
+* `dirt_smother=1`: This node will be replaced by dirt if an opaque block is on top of it.
 * `dirt_spread=1`: This node will spread to nodes with light.
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
 * `lava=1`: This node is lava.

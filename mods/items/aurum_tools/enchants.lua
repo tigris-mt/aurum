@@ -41,6 +41,7 @@ end
 doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
 	local possible = aurum.tools.get_possible_enchants(itemstring)
 	if possible then
+		possible = table.map(possible, function(v) return aurum.tools.enchants[v].description end)
 		table.sort(possible)
 		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#possible > 0) and ("\n" .. S("Enchantment types: @1", table.concat(possible, ", "))) or "")
 	end

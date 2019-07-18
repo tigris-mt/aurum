@@ -1,6 +1,6 @@
 * Enchanting
-	* Enchantment spawning.
-	* Enchanting "table".
+	* Way to gain enchantments.
+	* Enchantment applying.
 	* Extract own mana into physical form.
 	* Enchanted flare.
 	* Item naming.
@@ -12,6 +12,7 @@
 	* Biomes have oceans and underground.
 	* Realm borders.
 	* Don't spawn underground.
+	* Realm sky/environment.
 * Plants
 	* Grass spreads to bare dirt.
 	* Wild plants/flowers.

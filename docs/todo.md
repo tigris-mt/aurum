@@ -1,14 +1,4 @@
-* Enchanting
-	* Way to gain enchantments.
-	* Enchantment applying.
-	* Extract own mana into physical form.
-	* Enchanted flare.
-	* Item naming.
 * Environment
-	* Water
-	* Lava
-		* Lava affected by fire resistance.
-	* Fall damage resistance.
 	* Biomes have oceans and underground.
 	* Realm borders.
 	* Don't spawn underground.
@@ -32,3 +22,9 @@
 * Flight
 * Creative or giveme inventory.
 * Hand swapping.
+* Enchanting
+	* Way to gain enchantments.
+	* Enchantment applying.
+	* Extract own mana into physical form.
+	* Enchanted flare.
+	* Item naming.

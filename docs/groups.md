@@ -38,9 +38,12 @@ Toughless levels range from 0 to 3.
 	* `Flare Box`: 0-10
 * `cook_xmana=x`: This node provides up to x mana when smelted.
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
+* `lava=1`: This node is lava.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.
+* `liquid=1`: This node is liquid.
 * `sapling=1`: This node is a sapling.
 * `soil=1`: Things may grow here.
 * `tree=1`: This node is a tree trunk.
+* `water=1`: This node is water.
 * `wood=1`: This node is wood (planks).

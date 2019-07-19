@@ -1,4 +1,3 @@
-* Fire
 * Liquid transport.
 * Plants
 	* Wild plants/flowers.

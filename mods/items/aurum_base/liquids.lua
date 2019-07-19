@@ -1,5 +1,13 @@
 local S = minetest.get_translator()
 
+minetest.register_craft{
+	output = "bucket:bucket_empty",
+	recipe = {
+		{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
+		{"", "aurum_ore:iron_ingot", ""},
+	}
+}
+
 function aurum.base.register_liquid(name, def, flowing_def)
 	local defaults = {
 		drawtype = "liquid",
@@ -85,6 +93,15 @@ aurum.base.register_liquid("aurum_base:water", {
 	},
 })
 
+bucket.register_liquid(
+	"aurum_base:water_source",
+	"aurum_base:water_flowing",
+	"aurum_base:bucket_water",
+	"bucket_water.png",
+	S"Water Bucket"
+)
+minetest.register_alias("bucket:bucket_water", "aurum_base:bucket_water")
+
 aurum.base.register_liquid("aurum_base:river_water", {
 	description = S"River Water",
 	tiles = {
@@ -137,6 +154,17 @@ aurum.base.register_liquid("aurum_base:river_water", {
 		},
 	},
 })
+
+bucket.register_liquid(
+	"aurum_base:river_water_source",
+	"aurum_base:river_water_flowing",
+	"aurum_base:bucket_river_water",
+	"bucket_river_water.png",
+	S"River Water Bucket",
+	{},
+	true
+)
+minetest.register_alias("bucket:bucket_river_water", "aurum_base:bucket_river_water")
 
 aurum.base.register_liquid("aurum_base:lava", {
 	description = S"Lava",
@@ -191,4 +219,20 @@ aurum.base.register_liquid("aurum_base:lava", {
 			},
 		},
 	},
+})
+
+bucket.register_liquid(
+	"aurum_base:lava_source",
+	"aurum_base:lava_flowing",
+	"aurum_base:bucket_lava",
+	"bucket_lava.png",
+	S"Lava Bucket"
+)
+minetest.register_alias("bucket:bucket_lava", "aurum_base:bucket_lava")
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "bucket:bucket_lava",
+	burntime = 60,
+	replacements = {{"bucket:bucket_lava", "bucket:bucket_empty"}},
 })

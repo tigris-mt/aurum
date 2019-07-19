@@ -43,3 +43,6 @@
 [submodule "mods/env/fire"]
 	path = mods/env/fire
 	url = https://github.com/tigris-mt/fire
+[submodule "mods/items/bucket"]
+	path = mods/items/bucket
+	url = https://github.com/tigris-mt/bucket

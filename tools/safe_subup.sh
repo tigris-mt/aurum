@@ -5,6 +5,7 @@ set -e
 SAFE="
 	mods/core/gdamage
 	mods/env/fire
+	mods/items/bucket
 	mods/player/gequip
 	mods/player/xmana
 "

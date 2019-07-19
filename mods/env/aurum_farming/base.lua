@@ -10,7 +10,7 @@ end)
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	if minetest.get_item_group(itemstring, "soil_wet") > 0 then
-		return S("This node can support plants of level.", minetest.get_item_group(itemstring, "soil_wet"))
+		return S("This node can support plants of level @1.", minetest.get_item_group(itemstring, "soil_wet"))
 	end
 	return ""
 end)
@@ -57,7 +57,7 @@ end
 
 minetest.register_node("aurum_farming:fertilizer", {
 	description = S"Fertilizer",
-	_doc_items_longdesc = S"It may not look good or have a nice smell, but fertilizer is vital for your survival.",
+	_doc_items_longdesc = S"It may not look good or have a nice smell, but fertilizer is vital for your survival. Just don't fall in!",
 	_doc_items_hidden = false,
 	groups = {fertilizer = 1, liquid = 1, disable_jump = 1, dig_dig = 2, soil = 1, flammable = 1},
 	sounds = aurum.sounds.dirt(),

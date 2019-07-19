@@ -29,6 +29,7 @@ function aurum.base.register_liquid(name, def, flowing_def)
 	}
 	minetest.register_node(":" .. name .. "_source", table.combine(defaults, def, {groups = table.combine(defaults.groups or {}, def.groups or {})}))
 	minetest.register_node(":" .. name .. "_flowing", table.combine(defaults, def, flowing_defaults, flowing_def, {groups = table.combine(defaults.groups or {}, def.groups or {}, flowing_defaults.groups or {}, flowing_def.groups or {})}))
+	doc.add_entry_alias("nodes", name .. "_source", "nodes", name .. "_flowing")
 end
 
 aurum.base.register_liquid("aurum_base:water", {

@@ -15,6 +15,7 @@ function aurum.tools.register_variant(name)
 		inventory_image = (def.inventory_image and #def.inventory_image > 0) and (def.inventory_image .. "^aurum_tools_enchanted.png") or nil,
 		wield_image = (def.wield_image and #def.wield_image > 0) and (def.wield_image .. "^aurum_tools_enchanted.png") or nil,
 	}))
+	doc.add_entry_alias("nodes", name, "nodes", name .. "_enchanted")
 	return properties
 end
 

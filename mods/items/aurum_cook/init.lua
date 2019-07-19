@@ -285,6 +285,8 @@ function aurum.cook.register(name, def)
 	minetest.register_node(def.name, def.node)
 	minetest.register_node(def.active_name, def.active)
 
+	doc.add_entry_alias("nodes", def.name, "nodes", def.active_name)
+
 	cook_nodes[def.name] = def
 	cook_nodes[def.active_name] = def
 end

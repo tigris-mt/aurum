@@ -19,11 +19,11 @@ function aurum.flora.spread(pos, node)
 	local spread = minetest.registered_nodes[node.name]._flora_spread_node or "group:soil"
 
 	if #minetest.find_nodes_in_area(under, under, spread) == 0 then
-		return
+		return false
 	end
 
 	if minetest.get_node_light(pos) < LIGHT then
-		return
+		return false
 	end
 
 	-- Default to spreading the current node.
@@ -35,12 +35,12 @@ function aurum.flora.spread(pos, node)
 		-- The callback may have provided a new node to spread.
 		spread_node = cs or spread_node
 		if cancel == false then
-			return
+			return true
 		end
 	end
 
 	if #minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), "group:flora") > LIMIT then
-		return
+		return false
 	end
 
 	local targets = minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), spread)
@@ -48,7 +48,7 @@ function aurum.flora.spread(pos, node)
 		local tabove = vector.add(target, vector.new(0, 1, 0))
 		if minetest.get_node_light(tabove) >= LIGHT then
 			minetest.set_node(tabove, {name = spread_node})
-			return
+			return true
 		end
 	end
 end

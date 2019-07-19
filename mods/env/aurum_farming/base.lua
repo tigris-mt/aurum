@@ -81,6 +81,12 @@ minetest.register_node("aurum_farming:fertilizer", {
 	on_rightclick = aurum.farming.fertilizer_rightclick,
 })
 
+minetest.register_craft{
+	type = "fuel",
+	recipe = "group:fertilizer",
+	burntime = 10,
+}
+
 minetest.register_node("aurum_farming:soil_1", {
 	description = S"Wet Soil",
 	groups = {soil = 1, soil_wet = 1, dig_dig = 2},

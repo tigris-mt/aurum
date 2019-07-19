@@ -70,3 +70,19 @@ aurum.biomes.register_tree_decoration({
 	name = "aurum_trees:birch",
 	biomes = {"aurum_forest"},
 })
+
+-- Desert
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_desert",
+	_groups = {"desert"},
+	heat_point = 80,
+	humidity_point = 10,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:sand",
+			depth_top = 8,
+		},
+		ocean = aurum.biomes.v_ocean{},
+		under = aurum.biomes.v_under{},
+	},
+})

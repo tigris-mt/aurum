@@ -37,7 +37,7 @@ end
 for _,d in ipairs(list) do
 	local def = {
 		deco_type = "schematic",
-		place_on = {"group:soil", "aurum_base:gravel", "aurum_base:stone"},
+		place_on = {"group:soil", "aurum_base:gravel", "group:stone", "group:sand"},
 		sidelen = 80,
 		fill_ratio = 0.0001 / #list,
 		biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),

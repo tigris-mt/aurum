@@ -51,17 +51,20 @@ Toughless levels range from 0 to 3.
 * `flora=1`: This node will spread to soil or `_flora_spread_node` in def.
 	* If `_on_flora_spread(pos, node)` is defined, then it will be called before the actual spreading. If it returns false, spread will be cancelled.
 	* It may return a second node name for the node to spread.
-* `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
+* `grow_plant=1`: This node has an `_on_grow_plant(pos, node)` function defined.
+	* `_on_grow_plant` returns true if the plant grew and false if it did not.
 * `igniter=1`: This node ignites fire.
 * `item_burn=1`: This node destroys items that fall inside.
 * `lava=1`: This node is lava.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.
 * `liquid=1`: This node is liquid.
+* `sand=1`: This node is sand.
 * `sapling=1`: This node is a sapling.
 * `soil=1`: Things may grow here.
 * `soil_wet=x`: This soil is fertile and crops of level x or lower can grow here.
 	* `This soil will dry out into dirt if not near group:water.`
+* `stone=1`: This node is stone.
 * `tree=1`: This node is a tree trunk.
 * `water=1`: This node is water.
 * `wood=1`: This node is wood (planks).

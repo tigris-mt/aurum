@@ -25,6 +25,16 @@ function aurum.flora.spread(pos, node)
 		return
 	end
 
+	local spread_node = node.name
+
+	if minetest.registered_nodes[node.name]._on_flora_spread then
+		local cancel, cs = minetest.registered_nodes[node.name]._on_flora_spread(pos, node)
+		spread_node = cs or spread_node
+		if cancel == false then
+			return
+		end
+	end
+
 	if #minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), "group:flora") > LIMIT then
 		return
 	end
@@ -33,7 +43,7 @@ function aurum.flora.spread(pos, node)
 	for _,target in ipairs(table.shuffled(targets)) do
 		local tabove = vector.add(target, vector.new(0, 1, 0))
 		if minetest.get_node_light(tabove) >= LIGHT then
-			minetest.set_node(tabove, {name = node.name})
+			minetest.set_node(tabove, {name = spread_node})
 			return
 		end
 	end

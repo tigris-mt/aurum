@@ -48,6 +48,8 @@ Toughless levels range from 0 to 3.
 * `dirt_smother=1`: This node will be replaced by dirt if an opaque block is on top of it.
 * `dirt_spread=1`: This node will spread to nodes with light.
 * `flora=1`: This node will spread to soil or `_flora_spread_node` in def.
+	* If `_on_flora_spread(pos, node)` is defined, then it will be called before the actual spreading. If it returns false, spread will be cancelled.
+	* It may return a second node name for the node to spread.
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
 * `igniter=1`: This node ignites fire.
 * `item_burn=1`: This node destroys items that fall inside.

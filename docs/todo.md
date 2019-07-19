@@ -24,3 +24,4 @@
 	* Extract own mana into physical form.
 	* Enchanted flare.
 	* Item naming.
+* Awards

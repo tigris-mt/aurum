@@ -15,6 +15,11 @@ Toughless levels range from 0 to 3.
 * 2: Iron/Steel
 * 3: Gold (when enchanted)
 
+# Biomes
+* `aurum:aurum`: The biome's realm will be added as a group.
+* `barren`: Devoid of life.
+* `green`: Living, green. Plant life.
+
 # Damage
 ## Physical
 * `impact`: Crushing blows. Good damage against most targets. Should suffer penalty underwater, against very tough enemies, or against the incorporeal.

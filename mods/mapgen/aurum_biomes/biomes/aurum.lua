@@ -2,6 +2,7 @@
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_barrens",
+	_groups = {"barren"},
 	heat_point = 30,
 	humidity_point = 30,
 	_variants = {
@@ -23,6 +24,7 @@ aurum.biomes.register_all("aurum:aurum", {
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_grassland",
+	_groups = {"green"},
 	heat_point = 40,
 	humidity_point = 40,
 	_variants = {
@@ -53,6 +55,7 @@ aurum.biomes.register_tree_decoration({
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
+	_groups = aurum.biomes.biomes.aurum_grassland._groups,
 	heat_point = 50,
 	humidity_point = 50,
 	_variants = aurum.biomes.biomes.aurum_grassland._variants,

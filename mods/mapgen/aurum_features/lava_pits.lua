@@ -40,7 +40,7 @@ for _,d in ipairs(list) do
 		place_on = {"group:soil", "aurum_base:gravel", "aurum_base:stone"},
 		sidelen = 80,
 		fill_ratio = 0.0001 / #list,
-		biomes = {"aurum_grassland", "aurum_forest"},
+		biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
 		schematic = d.schematic,
 		rotation = "random",
 		flags = {place_center_x = true, place_center_y = false, place_center_z = true, force_placement = true},
@@ -51,7 +51,7 @@ for _,d in ipairs(list) do
 
 	-- More common in the barrens.
 	minetest.register_decoration(table.combine(def, {
-		fill_ratio = 0.0005 / #list,
-		biomes = {"aurum_barrens"},
+		fill_ratio = 0.0004 / #list,
+		biomes = aurum.biomes.get_all_group("barren", {"base"}),
 	}))
 end

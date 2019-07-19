@@ -9,6 +9,22 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
+function aurum.base.dirt_spread(pos, node)
+	local rvec = vector.new(RADIUS, RADIUS, RADIUS)
+	local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(pos, rvec), vector.add(pos, rvec), "group:dirt_base")
+	local target = nil
+	for _,tpos in ipairs(nodes) do
+		local above = vector.add(tpos, vector.new(0, 1, 0))
+		if minetest.get_node_light(above) >= LIGHT then
+			target = tpos
+			break
+		end
+	end
+	if target then
+		minetest.set_node(target, node)
+	end
+end
+
 minetest.register_abm{
 	label = "Dirt Spreading",
 	nodenames = {"group:dirt_spread"},
@@ -17,21 +33,7 @@ minetest.register_abm{
 	interval = 20,
 	chance = 10,
 
-	action = function(pos, node)
-		local rvec = vector.new(RADIUS, RADIUS, RADIUS)
-		local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(pos, rvec), vector.add(pos, rvec), "group:dirt_base")
-		local target = nil
-		for _,tpos in ipairs(nodes) do
-			local above = vector.add(tpos, vector.new(0, 1, 0))
-			if minetest.get_node_light(above) >= LIGHT then
-				target = tpos
-				break
-			end
-		end
-		if target then
-			minetest.set_node(target, node)
-		end
-	end,
+	action = aurum.base.dirt_spread,
 }
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)

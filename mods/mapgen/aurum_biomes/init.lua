@@ -26,12 +26,23 @@ function aurum.biomes.register(realm, def)
 	return minetest.register_biome(def)
 end
 
+local function add_suffix(name, suffix)
+	 return (suffix == "base") and name or (name .. "_" .. suffix)
+end
+
 function aurum.biomes.register_all(realm, def)
+	def = table.combine({
+		_groups = {},
+		_variants = {},
+	}, def)
+
+	table.insert(def._groups, realm)
+
 	aurum.biomes.biomes[def.name] = def
 
 	for suffix,variant in pairs(def._variants) do
 		local vdef = table.combine(def, variant, {
-			name = (suffix == "base") and def.name or (def.name .. "_" .. suffix)
+			name = add_suffix(def.name, suffix)
 		})
 
 		aurum.biomes.variants[suffix] = aurum.biomes.variants[suffix] or {}
@@ -39,6 +50,27 @@ function aurum.biomes.register_all(realm, def)
 
 		aurum.biomes.register(realm, vdef)
 	end
+end
+
+function aurum.biomes.get_all_group(group, variants)
+	local ret = {}
+	for name,def in pairs(aurum.biomes.biomes) do
+		local ok = false
+		for _,bgroup in ipairs(def._groups) do
+			if bgroup == group then
+				ok = true
+				break
+			end
+		end
+		if ok then
+			for _,v in ipairs(variants) do
+				if def._variants[v] then
+					table.insert(ret, add_suffix(def.name, v))
+				end
+			end
+		end
+	end
+	return ret
 end
 
 function aurum.biomes.register_tree_decoration(def)

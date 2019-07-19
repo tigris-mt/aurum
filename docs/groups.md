@@ -43,6 +43,7 @@ Toughless levels range from 0 to 3.
 * `dirt_smother=1`: This node will be replaced by dirt if an opaque block is on top of it.
 * `dirt_spread=1`: This node will spread to nodes with light.
 * `grow_plant=1`: This node has an _on_grow_plant(pos, node) function defined.
+* `igniter=1`: This node ignites fire.
 * `item_burn=1`: This node destroys items that fall inside.
 * `lava=1`: This node is lava.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.

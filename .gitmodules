@@ -40,3 +40,6 @@
 [submodule "mods/core/central_message"]
 	path = mods/core/central_message
 	url = https://repo.or.cz/minetest_central_message.git
+[submodule "mods/env/fire"]
+	path = mods/env/fire
+	url = https://github.com/tigris-mt/fire

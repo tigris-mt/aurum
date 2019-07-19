@@ -164,7 +164,7 @@ aurum.base.register_liquid("aurum_base:lava", {
 	},
 	light_source = 14,
 	post_effect_color = {a = 200, r = 255, g = 48, b = 0},
-	groups = {lava = 1},
+	groups = {lava = 1, item_burn = 1},
 	liquid_viscosity = 7,
 	damage_per_second = 40,
 	_damage_type = "burn",

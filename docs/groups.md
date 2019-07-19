@@ -47,6 +47,7 @@ Toughless levels range from 0 to 3.
 * `dirt_base=1`: This node can be replaced by dirt spreaders.
 * `dirt_smother=1`: This node will be replaced by dirt if an opaque block is on top of it.
 * `dirt_spread=1`: This node will spread to nodes with light.
+* `fertilizer=x`: This fertilizer will turn the soil under it into fertile soil of level x when placed and right-clicked with a shovel.
 * `flora=1`: This node will spread to soil or `_flora_spread_node` in def.
 	* If `_on_flora_spread(pos, node)` is defined, then it will be called before the actual spreading. If it returns false, spread will be cancelled.
 	* It may return a second node name for the node to spread.
@@ -59,6 +60,8 @@ Toughless levels range from 0 to 3.
 * `liquid=1`: This node is liquid.
 * `sapling=1`: This node is a sapling.
 * `soil=1`: Things may grow here.
+* `soil_wet=x`: This soil is fertile and crops of level x or lower can grow here.
+	* `This soil will dry out into dirt if not near group:water.`
 * `tree=1`: This node is a tree trunk.
 * `water=1`: This node is water.
 * `wood=1`: This node is wood (planks).

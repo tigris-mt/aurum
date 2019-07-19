@@ -17,6 +17,9 @@ aurum.WORLDA = {
 	max = vector.new(30000, 30000, 30000),
 }
 
+-- Tool wear max.
+aurum.TOOL_WEAR = 65535
+
 -- Drop item with slightly random position and velocity.
 function aurum.drop_item(pos, item)
 	local function r(c)

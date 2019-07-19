@@ -24,20 +24,22 @@ local function make(size)
 	return {schematic = aurum.trees.schematic(size, nodes), size = size}
 end
 
-local list = {
-	make(vector.new(2, 2, 2)),
-	make(vector.new(3, 4, 3)),
-	make(vector.new(2, 3, 4)),
-	make(vector.new(4, 4, 3)),
-	make(vector.new(5, 5, 6)),
-}
+local list = {}
+
+for x=1,7 do
+	for y=2,6 do
+		for z=1,7 do
+			table.insert(list, make(vector.new(x, y, z)))
+		end
+	end
+end
 
 for _,d in ipairs(list) do
 	local def = {
 		deco_type = "schematic",
 		place_on = {"group:soil", "aurum_base:gravel", "aurum_base:stone"},
 		sidelen = 80,
-		fill_ratio = 0.0005 / #list,
+		fill_ratio = 0.0001 / #list,
 		biomes = {"aurum_grassland", "aurum_forest"},
 		schematic = d.schematic,
 		rotation = "random",
@@ -46,8 +48,10 @@ for _,d in ipairs(list) do
 	}
 
 	minetest.register_decoration(def)
+
+	-- More common in the barrens.
 	minetest.register_decoration(table.combine(def, {
-		fill_ratio = 0.001 / #list,
+		fill_ratio = 0.0005 / #list,
 		biomes = {"aurum_barrens"},
 	}))
 end

@@ -72,3 +72,14 @@ function table.map(t, f)
 	end
 	return ret
 end
+
+function table.shuffled(t)
+	local ret = {}
+	local keys = table.keys(t)
+	while #keys > 0 do
+		local ki = math.random(#keys)
+		table.insert(ret, t[keys[ki]])
+		table.remove(keys, ki)
+	end
+	return ret
+end

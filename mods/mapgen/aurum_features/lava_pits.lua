@@ -52,6 +52,9 @@ for _,d in ipairs(list) do
 	-- More common in the barrens.
 	minetest.register_decoration(table.combine(def, {
 		fill_ratio = 0.0004 / #list,
-		biomes = aurum.biomes.get_all_group("barren", {"base"}),
+		biomes = table._and(
+			aurum.biomes.get_all_group("aurum:aurum", {"base"}),
+			aurum.biomes.get_all_group("barren", {"base"})
+		),
 	}))
 end

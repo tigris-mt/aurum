@@ -1,3 +1,5 @@
+local S = minetest.get_translator()
+
 local RADIUS = 4
 local LIGHT = 13
 local LIMIT = 3

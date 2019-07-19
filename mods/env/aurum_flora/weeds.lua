@@ -1,4 +1,7 @@
+local S = minetest.get_translator()
+
 aurum.flora.register("aurum_flora:grass_spike", {
+	description = S"Grass Spike",
 	tiles = {"aurum_flora_grass_spike.png"},
 	selection_box = {
 		type = "fixed",

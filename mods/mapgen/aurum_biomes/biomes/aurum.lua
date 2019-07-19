@@ -55,7 +55,7 @@ aurum.biomes.register_tree_decoration({
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
-	_groups = aurum.biomes.biomes.aurum_grassland._groups,
+	_groups = table.icombine(aurum.biomes.biomes.aurum_grassland._groups, {"forest"}),
 	heat_point = 50,
 	humidity_point = 50,
 	_variants = aurum.biomes.biomes.aurum_grassland._variants,

@@ -101,3 +101,22 @@ minetest.register_abm{
 		end
 	end,
 }
+
+minetest.register_ore{
+	ore_type = "blob",
+	ore = "aurum_farming:fertilizer",
+	wherein = "group:soil",
+	clust_scarcity = 13 * 13 * 13,
+	clust_size = 3,
+
+	noise_threshold = 0,
+	noise_params = {
+		offset = 0.5,
+		seed = 13,
+		scale = 0.25,
+		spread = vector.new(200, 200, 200),
+		octaves = 1,
+	},
+
+	biomes = aurum.biomes.get_all_group("forest", {"base"})
+}

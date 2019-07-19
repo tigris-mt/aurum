@@ -1,3 +1,4 @@
+-- Register standard damage types with gdamage.
 for _,v in ipairs{
 	"impact",
 	"blade",

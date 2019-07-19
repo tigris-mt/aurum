@@ -17,19 +17,28 @@ function aurum.ore.register(name, def)
 		-- The digging level of the ore.
 		level = 0,
 
+		-- Rarity (<rarity>^3 is used).
 		rarity = 8,
+		-- Ores per generation.
 		num = 9,
+		-- Size of generation.
 		size = 3,
 
+		-- How deep does this ore start appearing?
 		depth = 10,
+		-- Growths (e.g. {-100, -200}), will create new generation levels with more of the ore beginning at each specified y-level.
 		growths = {},
 
+		-- Names of the sub blocks.
+		-- If false, will not create them.
 		ore = name .. "_ore",
 		ingot = name .. "_ingot",
 		block = name .. "_block",
 
+		-- Register default crafts?
 		recipes = true,
 
+		-- Override for the ore node registration def.
 		ore_override = {},
 	}, def)
 

@@ -29,6 +29,7 @@ function aurum.box.collide_box(a, b)
     return true
 end
 
+-- Check if <point> collides with <box>.
 function aurum.box.collide_point(box, point)
 	return aurum.box.collide_box(box, aurum.box.new(point, point))
 end

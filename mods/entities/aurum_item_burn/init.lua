@@ -1,3 +1,4 @@
+-- Override __builtin:item to destroy itself if within group:item_burn nodes.
 local old = minetest.registered_entities["__builtin:item"].on_step
 minetest.registered_entities["__builtin:item"].on_step = function(self, ...)
 	old(self, ...)

@@ -1,5 +1,6 @@
 aurum.flora = {}
 
+-- Register a flora node. Passes to minetest.register_node() with suitable defaults set.
 function aurum.flora.register(name, def)
 	minetest.register_node(name, table.combine({
 		drawtype = "plantlike",

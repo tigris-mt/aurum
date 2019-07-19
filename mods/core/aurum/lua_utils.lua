@@ -65,6 +65,8 @@ function table.spairs(t, f)
 	end
 end
 
+-- Apply f() to all elements of t and return the result.
+-- The signature of f is f(value, key), and it returns the new value.
 function table.map(t, f)
 	local ret = {}
 	for k,v in pairs(t) do
@@ -73,6 +75,7 @@ function table.map(t, f)
 	return ret
 end
 
+-- Return a shuffled version of an array.
 function table.shuffled(t)
 	local ret = {}
 	local keys = table.keys(t)

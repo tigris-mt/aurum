@@ -9,6 +9,7 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
+-- Spread dirt <node> from <pos>.
 function aurum.base.dirt_spread(pos, node)
 	local rvec = vector.new(RADIUS, RADIUS, RADIUS)
 	local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(pos, rvec), vector.add(pos, rvec), "group:dirt_base")

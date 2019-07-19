@@ -28,7 +28,7 @@ function aurum.drop_item(pos, item)
 	end
 end
 
--- Get or load node.
+-- Get a node, loading it from disk if necessary.
 function aurum.force_get_node(pos)
 	local node = minetest.get_node_or_nil(pos)
 	if not node then

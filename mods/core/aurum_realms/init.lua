@@ -156,6 +156,7 @@ function aurum.gpos(realm_id, realm_pos)
 	return vector.add(realms[realm_id].global_center, realm_pos)
 end
 
+-- Checks which realm a point is in.
 -- Returns realm id or nil
 function aurum.pos_to_realm(global_pos)
 	for id,realm in pairs(realms) do
@@ -165,6 +166,8 @@ function aurum.pos_to_realm(global_pos)
 	end
 end
 
+-- Checks which realm a box is colliding with. Does not support multiple collisions.
+-- Returns realm id or nil.
 function aurum.box_to_realm(global_box)
 	for id,realm in pairs(realms) do
 		if aurum.box.collide_box(realm.global_box, global_box) then

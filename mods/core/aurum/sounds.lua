@@ -1,5 +1,7 @@
 aurum.sounds = {}
 
+-- Register a sound template, suitable for nodedef `sounds = x` or similiar.
+-- Will create a function aurum.sounds.<name>([def]) where def can override any sound in the template.
 function aurum.sounds.register(name, defaults)
 	aurum.sounds[name] = function(def)
 		return table.combine({
@@ -72,6 +74,7 @@ aurum.sounds.register("water", {
 	footstep = {name = "default_water_footstep", gain = 1 / 4},
 })
 
+-- Suitable for tooldefs.
 function aurum.sounds.tool()
 	return {
 		breaks = "default_tool_breaks",

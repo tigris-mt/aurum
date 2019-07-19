@@ -11,6 +11,7 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
+-- Run flora spreading logic at pos for node.
 function aurum.flora.spread(pos, node)
 	local under = vector.add(pos, vector.new(0, -1, 0))
 	local above = vector.add(pos, vector.new(0, 1, 0))
@@ -25,10 +26,13 @@ function aurum.flora.spread(pos, node)
 		return
 	end
 
+	-- Default to spreading the current node.
 	local spread_node = node.name
 
+	-- If the node has an _on_flora_spread callback, run that.
 	if minetest.registered_nodes[node.name]._on_flora_spread then
 		local cancel, cs = minetest.registered_nodes[node.name]._on_flora_spread(pos, node)
+		-- The callback may have provided a new node to spread.
 		spread_node = cs or spread_node
 		if cancel == false then
 			return

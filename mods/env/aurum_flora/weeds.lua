@@ -29,6 +29,9 @@ minetest.register_decoration{
 	biomes = aurum.biomes.get_all_group("green", {"base"}),
 }
 
+-- Register <max> grass nodes from <base_name> to <base_name>_<max>.
+-- <def> is passed to aurum.flora.register() with suitable defaults.
+-- <decodef> is passed to minetest.register_decoration() with suitable defaults.
 function aurum.flora.register_grass(base_name, max, def, decodef)
 	for i=1,max do
 		local name = (i == 1) and base_name or (base_name .. "_" .. i)

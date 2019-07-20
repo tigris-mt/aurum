@@ -14,3 +14,11 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 * Help system (manual, in-game help, etc.)
 * FOSS
 * Stable worlds and APIs.
+
+## 3rd Party Content and Licenses
+Such content is included as submodules and symlinked if necessary.
+In the development repository, you can view each submodule for its specifics.
+In the compiled repository, certain submodules are removed for the sake of space, linked here:
+* [minetest_game](https://github.com/minetest/minetest_game)
+
+You can view the materials that originate from such submodules in [symlink_report.txt](symlink_report.txt)

@@ -1,5 +1,4 @@
 * Plants
-	* Farming.
 	* Method of quickly growing plants.
 		* Something found in the Ancient Roots?
 * Mobs

@@ -1,15 +1,13 @@
 ## World Layout
-### Seven Planes
-* Aurum (gold, metal) in the center. The Material Plane.
-* The Aether (light) above.
-* The Loom (dark, twisting) below.
-* Inferno (flame, power) to the north.
-* Abyss (cold, stasis) to the south.
-* The Ancient Roots (nature, growth) to the east.
-* The Fleeting Fell (psyche, decay) to the west.
+### Realms
+* Aurum: Standard green world with stone and ore. Green and grey.
+* The Loom: Twisted version of Aurum, filled with hostility and strange materials. Red and orange.
+* The Aether: Landmass floating on the void (no underground). White and gold. The realm of Hyperion.
+* Primus Hortum: The vortex of natural life, filled with decay and new growth to no end. Dark green and brown.
+* Ultimus Hortum: The remains of the ancient world, a frozen wasteland filled with the spectres of the past. Very little life. Blue and black.
 
 ## Game Goals
-* Variety of environments between the seven planes.
+* Variety of environments between the realms.
 * NPCs, villages, discoverable lore.
 * Progression through actions such as mining or defeating mobs.
 	* This will grant "mana" to be used in upgrading items and personal attributes or charging rods.

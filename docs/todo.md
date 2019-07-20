@@ -1,3 +1,4 @@
+* Scrolls to hold enchantments and spells.
 * Plants
 	* Method of quickly growing plants.
 		* Something found in the Ancient Roots?

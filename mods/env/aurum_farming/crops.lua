@@ -1,5 +1,12 @@
 local S = minetest.get_translator()
 
+doc.sub.items.register_factoid(nil, "use", function(itemstring, def)
+	if minetest.get_item_group(itemstring, "edible") > 0 then
+		return S("This item provides @1 satiation when eaten.", minetest.get_item_group(itemstring, "edible"))
+	end
+	return ""
+end)
+
 function aurum.farming.grow_plant(i, next_name, def, pos, node)
 	local below = vector.add(pos, vector.new(0, -1, 0))
 	local bnode = minetest.get_node(below)
@@ -58,6 +65,8 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		time = function()
 			return math.random(300, 900)
 		end,
+		seed_name = base_name .. "_seed",
+		product_name = base_name .. "_product",
 	}, def)
 	local last_name = base_name .. "_" .. def.max
 
@@ -67,6 +76,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 
 		aurum.flora.register(":" .. name, table.combine({
 			description = S("@1 Plant", def.description),
+			_doc_items_usagehelp = S("Give this plant at least @1 light and wet, fertilized soil of level @2 or higher for growth and harvest. It grows in @3 stages.", def.light, def.level, def.max),
 			groups = {flora = 0, not_in_creative_inventory = (i ~= 1) and 1 or 0, farming_plant = next_name and 1 or 2},
 			_doc_items_create_entry = (i == 1),
 			_on_grow_plant = next_name and (function(...)
@@ -85,14 +95,11 @@ function aurum.farming.register_crop(base_name, def, decodef)
 			drop = def.drops(i) or "",
 			tiles = {def.texture .. "_" .. i .. ".png"},
 		}, def.node or {}))
-
-		if i ~= 1 then
-			doc.add_entry_alias("nodes", base_name, "nodes", name)
-		end
 	end
 
 	if def.seed then
-		minetest.register_node(base_name .. "_seed", table.combine({
+		minetest.register_node(def.seed_name, table.combine({
+			_doc_items_usagehelp = S("Plant this seed on wet, fertilized soil of level @1 or higher.", def.level),
 			description = S("@1 Seed", def.description),
 			inventory_image = def.texture .. "_seed.png",
 			wield_image = def.texture .. "_seed.png",
@@ -103,7 +110,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 			end,
 			on_place = function(itemstack, placer, pointed_thing)
 				local pos = minetest.get_pointed_thing_position(pointed_thing)
-				if minetest.get_item_group(minetest.get_node(pos).name, "soil_wet") < 1 then
+				if minetest.get_item_group(minetest.get_node(pos).name, "soil_wet") < def.level then
 					return itemstack
 				else
 					return minetest.item_place(itemstack, placer, pointed_thing)
@@ -113,7 +120,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 	end
 
 	if def.product then
-		minetest.register_craftitem(base_name .. "_product", table.combine({
+		minetest.register_craftitem(def.product_name, table.combine({
 			description = def.description,
 			inventory_image = def.texture .. "_product.png",
 		}, def.product))

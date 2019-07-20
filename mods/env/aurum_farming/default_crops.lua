@@ -7,6 +7,7 @@ aurum.farming.register_crop("aurum_farming:carrot", {
 
 	seed = {},
 	product = {
+		groups = {edible = 2},
 		on_use = minetest.item_eat(2),
 	},
 

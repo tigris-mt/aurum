@@ -6,6 +6,11 @@
 * Primus Hortum: The vortex of natural life, filled with decay and new growth to no end. Dark green and brown.
 * Ultimus Hortum: The remains of the ancient world, a frozen wasteland filled with the spectres of the past. Very little life. Blue and black.
 
+## Tentative Lore
+The previous titan of the world abandoned it and let Primus Hortum and the Loom leak into Aurum, corrupting it and decaying into Ultimus Hortum.
+You are another titan come to reverse the corruption of Aurum. Of the remaining inhabitants, some look for your coming and others hate it.
+You must conquer all realms and overtake the previous titan's power based in the Aether to become the true Titan of Aurum.
+
 ## Game Goals
 * Variety of environments between the realms.
 * NPCs, villages, discoverable lore.

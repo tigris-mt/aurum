@@ -21,4 +21,4 @@ In the development repository, you can view each submodule for its specifics.
 In the compiled repository, certain submodules are removed for the sake of space, linked here:
 * [minetest_game](https://github.com/minetest/minetest_game)
 
-You can view the materials that originate from such submodules in [symlink_report.txt](symlink_report.txt)
+You can view the assets and code that originate from such submodules in [symlink_report.txt](symlink_report.txt)

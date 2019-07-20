@@ -69,6 +69,13 @@ end
 aurum.flora.register_grass("aurum_flora:grass_weed", 5, {
 	description = S"Grass Weed",
 	_texture = "aurum_flora_grass",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			-4 / 16, -8 / 16, -4 / 16,
+			4 / 16, 4 / 16, 4 / 16,
+		},
+	},
 }, {
 	place_on = {"group:soil"},
 	noise_params = {

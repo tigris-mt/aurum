@@ -3,7 +3,7 @@ minetest.register_alias("mapgen_stone", "aurum_base:stone")
 minetest.register_alias("mapgen_water_source", "aurum_base:water_source")
 minetest.register_alias("mapgen_water_flowing", "aurum_base:water_flowing")
 
-local biome_size = (tonumber(minetest.settings:get("aurum.biome_size")) or 1) * 0.4
+local biome_size = (tonumber(minetest.settings:get("aurum.biome_size")) or 1) * 0.3
 
 minetest.set_mapgen_setting_noiseparams("mg_biome_np_heat", {
 	offset = 50,

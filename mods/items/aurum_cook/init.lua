@@ -25,8 +25,7 @@ function aurum.cook.register(name, def)
 	end
 
 	local function allow_metadata_inventory_put(pos, listname, _, stack, player)
-		if minetest.is_protected(pos, player:get_player_name()) then
-			minetest.record_protection_violation(pos, player:get_player_name())
+		if aurum.is_protected(pos, player) then
 			return 0
 		end
 
@@ -47,8 +46,7 @@ function aurum.cook.register(name, def)
 	end
 
 	local function allow_metadata_inventory_take(pos, _, _, stack, player)
-		if minetest.is_protected(pos, player:get_player_name()) then
-			minetest.record_protection_violation(pos, player:get_player_name())
+		if aurum.is_protected(pos, player) then
 			return 0
 		end
 		return stack:get_count()

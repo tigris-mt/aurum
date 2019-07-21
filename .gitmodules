@@ -46,3 +46,6 @@
 [submodule "mods/items/bucket"]
 	path = mods/items/bucket
 	url = https://github.com/tigris-mt/bucket
+[submodule "mods/player/show_wielded_item"]
+	path = mods/player/show_wielded_item
+	url = https://repo.or.cz/minetest_show_wielded_item.git

@@ -53,8 +53,7 @@ minetest.register_node("aurum_player:hyperion_totem", {
 	groups = {dig_chop = 3},
 
 	on_rightclick = function(pos, _, player)
-		if minetest.is_protected(pos, player:get_player_name()) then
-			minetest.record_protection_violation(pos, player:get_player_name())
+		if aurum.is_protected(pos, player) then
 			return
 		end
 

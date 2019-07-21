@@ -34,8 +34,7 @@ function aurum.farming.fertilizer_rightclick(pos, node, player, item)
 		return
 	end
 
-	if minetest.is_protected(pos, player:get_player_name()) or minetest.is_protected(under, player:get_player_name()) then
-		minetest.record_protection_violation(pos, player:get_player_name())
+	if aurum.is_protected(pos, player) or aurum.is_protected(under, player) then
 		return
 	end
 

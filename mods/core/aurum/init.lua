@@ -46,6 +46,17 @@ function aurum.in_creative(player)
 	return has_creative and creative.is_enabled_for(player:get_player_name()) or false
 end
 
+function aurum.is_protected(pos, player_or_name, quiet)
+	local name = (type(player_or_name) == "string") and player_or_name or player_or_name:get_player_name()
+	if minetest.is_protected(pos, name) then
+		if not quiet then
+			minetest.record_protection_violation(pos, name)
+		end
+		return true
+	end
+	return false
+end
+
 aurum.dofile("lua_utils.lua")
 
 aurum.dofile("damage.lua")

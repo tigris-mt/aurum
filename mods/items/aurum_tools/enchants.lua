@@ -18,6 +18,11 @@ function aurum.tools.register_enchant(name, def)
 		description = "?",
 
 		apply = function(state, level, stack) end,
+
+		-- Required mana level threshold to apply this enchantment.
+		mana_level = function(level)
+			return math.pow(level + 1, 2)
+		end,
 	}, def)
 	aurum.tools.enchants[name] = def
 end
@@ -59,6 +64,23 @@ end
 function aurum.tools.set_item_enchants(stack, enchants)
 	stack:get_meta():set_string("enchants", minetest.serialize(enchants))
 	return aurum.tools.refresh_item(stack)
+end
+
+function aurum.tools.get_item_info(stack)
+	local def = minetest.registered_items[stack:get_name()]
+	if not def or not aurum.tools.get_possible_enchants(stack:get_name()) then
+		return nil
+	end
+	local enchants = aurum.tools.get_item_enchants(stack)
+	local used = 0
+	for _,v in pairs(enchants) do
+		used = used + v
+	end
+	return {
+		total = def._enchant_levels,
+		used = used,
+		enchants = enchants,
+	}
 end
 
 aurum.tools.enchant_callbacks = {}

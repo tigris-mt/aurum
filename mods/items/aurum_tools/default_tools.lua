@@ -62,7 +62,7 @@ local function register(type, name, texture, def)
 		def._doc_items_hidden = false
 	end
 
-	local tn = "aurum_tools:" .. type .. "_" .. name
+	local tn = "aurum_tools:" .. name .. "_" .. type
 
 	aurum.tools.register(tn, table.combine(odef, def, {
 		groups = table.combine({["tool_" .. type] = 1, tool = 1}, def.groups or {}),

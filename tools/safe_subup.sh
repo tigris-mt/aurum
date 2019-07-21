@@ -14,5 +14,7 @@ echo "Updating safe submodules..."
 
 for m in $SAFE; do
 	echo "$m"
-	git submodule update --remote --init --recursive "$m"
+	git submodule update --remote --init --recursive "$m" &
 done
+
+wait

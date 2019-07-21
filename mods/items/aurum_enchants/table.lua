@@ -104,6 +104,8 @@ end
 
 minetest.register_node("aurum_enchants:table", {
 	description = S"Enchanting Table",
+	_doc_items_longdesc = "",
+	_doc_items_hidden = false,
 	tiles = {gold .. "^aurum_enchants_table_top.png", gold, gold .. "^aurum_enchants_table_side.png"},
 	paramtype = "light",
 	light_source = 10,

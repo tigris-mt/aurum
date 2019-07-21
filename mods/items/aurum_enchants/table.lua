@@ -24,10 +24,15 @@ form = smartfs.create("aurum_enchants:table", function(state)
 
 		if info.scroll_info then
 			if info.tool_info then
-				info.valid = info.scroll_info.level <= (info.tool_info.total - info.tool_info.used + (info.tool_info.enchants[info.scroll_info.name] or 0))
+				-- The current level (or 0) of this particular enchantment on the tool
+				local current_enchantment = (info.tool_info.enchants[info.scroll_info.name] or 0)
+				-- Will this enchantment fit in the tool? Subtract current_enchantment since it will be replaced with the new level.
+				info.valid = (info.scroll_info.level - current_enchantment) <= (info.tool_info.total - info.tool_info.used)
 			end
 
+			-- How many mana leves are required to perform this enchantment?
 			info.required_mana = aurum.tools.enchants[info.scroll_info.name].mana_level(info.scroll_info.level)
+			-- Does the player have enough mana levels?
 			info.enough_mana = player and xmana.mana_to_level(xmana.mana(player)) >= info.required_mana
 		end
 
@@ -35,6 +40,8 @@ form = smartfs.create("aurum_enchants:table", function(state)
 	end
 
 	local info = get_info()
+
+	-- Create info display.
 	local infot = {}
 	if info.scroll_info then
 		table.insert(infot, S("Required mana level: @1", info.required_mana))
@@ -59,12 +66,15 @@ form = smartfs.create("aurum_enchants:table", function(state)
 			return
 		end
 		if info.valid then
+			-- Overwrite tool with new enchantment level.
 			meta:get_inventory():set_list("tool", {
 				aurum.tools.set_item_enchants(ItemStack(info.tool), table.combine(info.tool_info.enchants, {
 					[info.scroll_info.name] = info.scroll_info.level,
 				})),
 			})
+			-- Consume scroll.
 			meta:get_inventory():set_list("scroll", {})
+			-- Consume half the required mana.
 			xmana.mana(player, -xmana.level_to_mana(info.required_mana) / 2, true, "enchanting")
 		end
 

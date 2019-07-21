@@ -10,12 +10,12 @@
 	* Enchantment applying.
 	* Item naming.
 * Magic (potions and rods).
+	* Spells created by rituals to be applied to potions and/or rods.
 	* Plant growth stimulant.
 
 # Extended Gameplay
 * Moreblocks or similiar.
 * Flight
-* Creative or giveme inventory.
 * Hand swapping.
 * Awards
 

@@ -51,7 +51,7 @@ function aurum.farming.fertilizer_rightclick(pos, node, player, item)
 	})
 
 	local wear = aurum.TOOL_WEAR / item:get_tool_capabilities().groupcaps.dig_dig.uses
-	item:add_wear(wear)
+	item:add_wear(aurum.in_creative(player) and 0 or wear)
 	return item
 end
 

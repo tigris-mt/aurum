@@ -41,6 +41,11 @@ function aurum.force_get_node(pos)
 	return node
 end
 
+local has_creative = minetest.get_modpath("creative")
+function aurum.in_creative(player)
+	return has_creative and creative.is_enabled_for(player:get_player_name()) or false
+end
+
 aurum.dofile("lua_utils.lua")
 
 aurum.dofile("damage.lua")

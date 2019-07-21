@@ -23,6 +23,9 @@ function aurum.tools.register_enchant(name, def)
 		mana_level = function(level)
 			return math.pow(level + 1, 2)
 		end,
+
+		-- How high can naturally generated enchantments of this kind go?
+		max_level = 3,
 	}, def)
 	aurum.tools.enchants[name] = def
 end

@@ -52,15 +52,6 @@ function aurum.cook.register(name, def)
 		return stack:get_count()
 	end
 
-	local function get_drops(pos)
-		local ret = {}
-		local inv = minetest.get_meta(pos):get_inventory()
-		for _,items in pairs(inv:get_lists()) do
-			ret = table.icombine(ret, items)
-		end
-		return ret
-	end
-
 	local form = smartfs.create(name, function(state)
 		state:size(8, 8)
 
@@ -256,17 +247,9 @@ function aurum.cook.register(name, def)
 			meta:set_int("mana_num", 0)
 		end,
 
-		on_blast = function(pos)
-			local drops = table.icombine(get_drops(pos), {name})
-			minetest.remove_node(pos)
-			return drops
-		end,
+		on_blast = aurum.drop_all_blast,
 
-		on_destruct = function(pos)
-			for _,drop in ipairs(get_drops(pos)) do
-				aurum.drop_item(pos, drop)
-			end
-		end,
+		on_destruct = aurum.drop_all,
 
 		is_ground_content = false,
 	}, def.node)

@@ -57,6 +57,27 @@ function aurum.is_protected(pos, player_or_name, quiet)
 	return false
 end
 
+local function get_drops(pos)
+	local ret = {}
+	local inv = minetest.get_meta(pos):get_inventory()
+	for _,items in pairs(inv:get_lists()) do
+		ret = table.icombine(ret, items)
+	end
+	return ret
+end
+
+function aurum.drop_all_blast(pos)
+	local drops = table.icombine(get_drops(pos), {name})
+	minetest.remove_node(pos)
+	return drops
+end
+
+function aurum.drop_all(pos)
+	for _,drop in ipairs(get_drops(pos)) do
+		aurum.drop_item(pos, drop)
+	end
+end
+
 aurum.dofile("lua_utils.lua")
 
 aurum.dofile("damage.lua")

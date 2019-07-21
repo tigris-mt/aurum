@@ -93,15 +93,6 @@ end)
 
 local gold = minetest.registered_nodes["aurum_ore:gold_block"].tiles[1]
 
-local function get_drops(pos)
-	local ret = {}
-	local inv = minetest.get_meta(pos):get_inventory()
-	for _,items in pairs(inv:get_lists()) do
-		ret = table.icombine(ret, items)
-	end
-	return ret
-end
-
 minetest.register_node("aurum_enchants:table", {
 	description = S"Enchanting Table",
 	_doc_items_longdesc = "",
@@ -160,17 +151,9 @@ minetest.register_node("aurum_enchants:table", {
 		form:attach_to_node(pos)
 	end,
 
-	on_blast = function(pos)
-		local drops = table.icombine(get_drops(pos), {name})
-		minetest.remove_node(pos)
-		return drops
-	end,
+	on_blast = aurum.drop_all_blast,
 
-	on_destruct = function(pos)
-		for _,drop in ipairs(get_drops(pos)) do
-			aurum.drop_item(pos, drop)
-		end
-	end,
+	on_destruct = aurum.drop_all,
 })
 
 minetest.register_craft{

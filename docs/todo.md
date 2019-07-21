@@ -8,8 +8,6 @@
 * Enchanting
 	* Way to gain enchantments.
 	* Enchantment applying.
-	* Extract own mana into physical form.
-	* Enchanted flare.
 	* Item naming.
 * Magic (potions and rods).
 	* Plant growth stimulant.

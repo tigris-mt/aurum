@@ -8,7 +8,7 @@ form = smartfs.create("aurum_enchants:table", function(state)
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
-	state:label(2, 0, "scroll_label", S"Scroll")
+	state:label(2, 0, "scroll_label", S"Enchantment Scroll")
 	state:inventory(2, 0.5, 1, 1, "scroll"):setLocation(invloc)
 	state:label(6, 0, "tool_label", S"Tool")
 	state:inventory(6, 0.5, 1, 1, "tool"):setLocation(invloc)
@@ -95,8 +95,6 @@ local gold = minetest.registered_nodes["aurum_ore:gold_block"].tiles[1]
 
 minetest.register_node("aurum_enchants:table", {
 	description = S"Enchanting Table",
-	_doc_items_longdesc = "",
-	_doc_items_hidden = false,
 	tiles = {gold .. "^aurum_enchants_table_top.png", gold, gold .. "^aurum_enchants_table_side.png"},
 	paramtype = "light",
 	light_source = 10,

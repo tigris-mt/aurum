@@ -49,3 +49,6 @@
 [submodule "mods/player/show_wielded_item"]
 	path = mods/player/show_wielded_item
 	url = https://repo.or.cz/minetest_show_wielded_item.git
+[submodule "mods/env/treasurer"]
+	path = mods/env/treasurer
+	url = https://repo.or.cz/minetest_treasurer.git

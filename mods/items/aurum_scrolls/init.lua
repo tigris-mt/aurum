@@ -75,7 +75,7 @@ function aurum.scrolls.new(def)
 	}, def)
 	def.description = def.description or ("Magic Scroll: %s %s %d"):format(def.type, def.name, def.level)
 	stack:get_meta():set_string("contents", minetest.serialize(def))
-	stack:get_meta():set_string("description", def.description)
+	aurum.set_stack_description(stack, def.description)
 	return stack
 end
 

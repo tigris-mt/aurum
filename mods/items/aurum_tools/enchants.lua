@@ -127,7 +127,7 @@ function aurum.tools.refresh_item(stack)
 	for _,v in ipairs(aurum.tools.enchant_callbacks) do
 		v.apply(state, stack)
 	end
-	stack:get_meta():set_string("description", table.concat(state.description, "\n"))
+	aurum.set_stack_description(stack, table.concat(state.description, "\n"))
 
 	return stack
 end

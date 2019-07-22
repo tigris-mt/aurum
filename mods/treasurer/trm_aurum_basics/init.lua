@@ -23,6 +23,21 @@ minetest.register_on_mods_loaded(function()
 		end
 	end
 
+	local num_trees = #table.keys(aurum.trees.types)
+	for k,v in pairs(aurum.trees.types) do
+		treasurer.register_treasure(v.planks, 0.3 / num_trees, 1, {1, 10}, 0, {"building_block"})
+		treasurer.register_treasure(v.sapling, 0.3 / num_trees, 2, {1, 10}, 0, {"seed"})
+	end
+
 	treasurer.register_treasure("aurum_flare:flare", 0.5, 1, {1, 10}, 0, {"light"})
-	treasurer.register_treasure("aurum_storage:box", 0.5, 3, {1, 10}, 0, {"worker"})
+
+	list({
+		"aurum_cook:oven",
+		"aurum_cook:smelter",
+		"aurum_storage:box",
+	}, 0.5, 3, {1, 10}, 0, {"worker"})
+
+	list({
+		"aurum_farming:carrot_seed",
+	}, 0.5, 2, {1, 5}, 0, {"seed"})
 end)

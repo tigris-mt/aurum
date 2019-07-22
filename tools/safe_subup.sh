@@ -8,6 +8,7 @@ SAFE="
 	mods/items/bucket
 	mods/player/gequip
 	mods/player/xmana
+	mods/treasurer/tsm_agnostic_dungeon
 "
 
 echo "Updating safe submodules..."

@@ -52,3 +52,6 @@
 [submodule "mods/env/treasurer"]
 	path = mods/env/treasurer
 	url = https://repo.or.cz/minetest_treasurer.git
+[submodule "mods/treasurer/tsm_agnostic_dungeon"]
+	path = mods/treasurer/tsm_agnostic_dungeon
+	url = https://github.com/tigris-mt/tsm_agnostic_dungeon

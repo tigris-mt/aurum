@@ -67,6 +67,7 @@ Toughless levels range from 0 to 3.
 * `soil_wet=x`: This soil is fertile and crops of level x or lower can grow here.
 	* `This soil will dry out into dirt if not near group:water.`
 * `stone=1`: This node is stone.
+* `storage=x`: This node can store x stacks.
 * `tree=1`: This node is a tree trunk.
 * `water=1`: This node is water.
 * `wood=1`: This node is wood (planks).

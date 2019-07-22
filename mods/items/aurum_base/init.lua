@@ -4,6 +4,9 @@ aurum.base = {}
 aurum.dofile("base.lua")
 aurum.dofile("liquids.lua")
 
+-- Base building blocks, crafted.
+aurum.dofile("building_blocks.lua")
+
 -- Sticks.
 aurum.dofile("sticks.lua")
 -- Organic paste.

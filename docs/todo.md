@@ -11,6 +11,9 @@
 * Magic (potions and rods).
 	* Spells created by rituals to be applied to potions and/or rods.
 	* Plant growth stimulant.
+* Documentation for Mechanics
+	* Rituals
+	* Enchantments
 
 # Extended Gameplay
 * Moreblocks or similiar.

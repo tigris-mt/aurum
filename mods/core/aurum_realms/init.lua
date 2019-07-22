@@ -112,8 +112,8 @@ function m.register(id, def)
 			node_riverbed = "aurum_base:sand",
 			depth_riverbed = 2,
 			node_cave_liquid = {"aurum_base:water_source", "aurum_base:lava_source"},
-			node_dungeon = "aurum_base:stone",
-			node_dungeon_stair = "aurum_base:stone",
+			node_dungeon = "aurum_base:stone_brick",
+			node_dungeon_stair = "aurum_base:stone_brick",
 		}, def.biome_default or {}),
 	})
 

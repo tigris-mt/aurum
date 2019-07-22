@@ -35,6 +35,8 @@ minetest.register_on_mods_loaded(function()
 		"aurum_cook:oven",
 		"aurum_cook:smelter",
 		"aurum_storage:box",
+		"aurum_magic:altar",
+		"aurum_enchants:table",
 	}, 0.5, 3, {1, 10}, 0, {"worker"})
 
 	list({

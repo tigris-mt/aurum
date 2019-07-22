@@ -62,6 +62,9 @@ minetest.register_node("aurum_magic:altar", {
 					for y=v.size.a.y,v.size.b.y do
 						for z=v.size.a.z,v.size.b.z do
 							local noff = vector.new(x, y, z)
+							if v.protected and aurum.is_protected(at(noff), player) then
+								return false
+							end
 							if not vector.equals(noff, vector.new(0, 0, 0)) then
 								if not aurum.match_item(minetest.get_node(at(noff)).name, v.hashed_recipe[minetest.hash_node_position(noff)] or "air") then
 									return false
@@ -78,6 +81,27 @@ minetest.register_node("aurum_magic:altar", {
 				return
 			end
 		end
+
+		minetest.add_particlespawner{
+			minpos = vector.add(pos, vector.new(0, 0.75, 0)),
+			maxpos = vector.add(pos, vector.new(0, 1.25, 0)),
+
+			minvel = vector.new(-0.5, 0.5, -0.5),
+			maxvel = vector.new(0.5, 1.5, 0.5),
+
+			collisiondetection = true,
+			collision_removal = true,
+
+			minsize = 1,
+			maxsize = 2,
+
+			amount = math.random(3, 5),
+			time = 1,
+			texture = "default_item_smoke.png",
+
+			minexptime = 1,
+			maxexptime = 3,
+		}
 	end,
 })
 

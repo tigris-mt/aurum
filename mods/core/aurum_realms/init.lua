@@ -148,7 +148,7 @@ end
 
 -- Get position within realm.
 function aurum.rpos(realm_id, global_pos)
-	return vector.sub(global_pos, realms[realm_id].global_center)
+	return vector.subtract(global_pos, realms[realm_id].global_center)
 end
 
 -- Get global position from realm.

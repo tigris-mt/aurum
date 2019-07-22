@@ -14,17 +14,10 @@ end
 
 function aurum.player.realm_refresh(player)
 	local realm = aurum.pos_to_realm(vector.round(player:get_pos()))
-
-	-- No change.
-	if realms[player:get_player_name()] == realm then
-		return
-	end
-
 	realms[player:get_player_name()] = realm
 
 	if realm then
 		local r = aurum.realms.get(realm)
-
 		r.apply_player(player)
 	end
 end

@@ -93,7 +93,15 @@ function m.register(id, def)
 		y = 0,
 
 		-- Apply client-side appearances.
-		apply_player = function(player) end,
+		apply_player = function(player)
+			player:set_sky({}, "regular", {})
+			player:set_clouds({density = 0.4})
+
+			aurum.realms.check_underground(player, -100, function()
+				player:set_sky(0, "plain", {})
+				player:set_clouds{density = 0}
+			end)
+		end,
 	}, def, {
 		id = id,
 		-- Default biome setup.
@@ -222,3 +230,4 @@ end)
 
 aurum.dofile("default_realms.lua")
 aurum.dofile("spawn.lua")
+aurum.dofile("check_underground.lua")

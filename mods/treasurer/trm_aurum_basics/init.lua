@@ -1,0 +1,28 @@
+local function list(l, ...)
+	local p = {...}
+	p[1] = p[1] / #l
+	for _,n in ipairs(l) do
+		treasurer.register_treasure(n, unpack(p))
+	end
+end
+
+minetest.register_on_mods_loaded(function()
+	list({
+		"aurum_base:stone",
+		"aurum_base:dirt",
+		"aurum_base:sand",
+	}, 0.35, 0, {1, 30}, 0, {"raw"})
+
+	local num_ores = #table.keys(aurum.ore.ores)
+	for k,v in pairs(aurum.ore.ores) do
+		if v.ingot then
+			treasurer.register_treasure(v.ingot, 0.3 / num_ores, v.level, {1, 10}, 0, {"processed"})
+		end
+		if v.block then
+			treasurer.register_treasure(v.block, 0.1 / num_ores, v.level + 1, {1, 10}, 0, {"processed"})
+		end
+	end
+
+	treasurer.register_treasure("aurum_flare:flare", 0.5, 1, {1, 10}, 0, {"light"})
+	treasurer.register_treasure("aurum_storage:box", 0.5, 3, {1, 10}, 0, {"worker"})
+end)

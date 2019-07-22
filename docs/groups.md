@@ -71,3 +71,11 @@ Toughless levels range from 0 to 3.
 * `tree=1`: This node is a tree trunk.
 * `water=1`: This node is water.
 * `wood=1`: This node is wood (planks).
+
+# Treasurer
+* `enchant`: Enchanted/enchanting items.
+* `magic`: All magic items.
+* `processed`: Processed items such as ingots.
+* `raw`: Natural, unprocessed items.
+* `scroll`: Scrolls, magic paper.
+* `worker`: Such as smelter or enchanting table.

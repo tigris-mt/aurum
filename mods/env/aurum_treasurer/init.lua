@@ -1,3 +1,4 @@
+local S = minetest.get_translator()
 aurum.treasurer = {}
 
 local map = {}
@@ -23,3 +24,26 @@ function treasurer.treasure_to_itemstack(treasure)
 	end
 	return ret
 end
+
+minetest.register_chatcommand("givemetreasure", {
+	params = S"[<amount>] [<min preciousness>] [<max preciousness>] [<group>]",
+	description = S"Generates treasure.",
+	privs = {give = true},
+	func = function(name, params)
+		local player = minetest.get_player_by_name(name)
+		if not player then
+			return false, S"No player."
+		end
+
+		local split = params:split(" ")
+		local num = tonumber(split[1]) or 1
+		local pmin = tonumber(split[2]) or 0
+		local pmax = tonumber(split[3]) or 10
+		local group = split[4]
+
+		for i=1,num do
+			player:get_inventory():add_item("main", treasurer.select_random_treasures(1, pmin, pmax, group)[1] or ItemStack(""))
+		end
+		return true, "Produced treasure."
+	end,
+})

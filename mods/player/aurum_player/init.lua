@@ -13,7 +13,7 @@ minetest.register_globalstep(function(dtime)
 		timer = 0
 
 		for _,player in ipairs(minetest.get_connected_players()) do
-			if not aurum.pos_to_realm(player:get_pos()) then
+			if not aurum.pos_to_realm(player:get_pos()) and not minetest.check_player_privs(player, "noclip") then
 				if player:get_hp() > 0 then
 					player:set_hp(0)
 				end

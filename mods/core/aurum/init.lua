@@ -88,6 +88,18 @@ function aurum.set_stack_description(stack, description)
 	stack:get_meta():set_string("description", table.concat(split, "\n"))
 end
 
+function aurum.match_item(item, test)
+	local mod, name = test:match("([^:]*):(.*)")
+	mod = mod or ""
+	name = name or ""
+
+	if mod == "group" then
+		return minetest.get_item_group(item, name) > 0
+	else
+		return item == test
+	end
+end
+
 aurum.dofile("lua_utils.lua")
 
 aurum.dofile("damage.lua")

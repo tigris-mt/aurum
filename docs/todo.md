@@ -6,6 +6,7 @@
 * NPC structures and mobs.
 * Teleportation (local and between realms).
 * Enchanting
+	* Way to get scrolls.
 	* Item naming.
 * Magic (potions and rods).
 	* Spells created by rituals to be applied to potions and/or rods.

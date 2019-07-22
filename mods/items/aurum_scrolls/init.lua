@@ -34,9 +34,17 @@ minetest.register_craft{
 	},
 }
 
+-- Erasure craft.
+minetest.register_craft{
+	output = "aurum_scrolls:scroll",
+	recipe = {
+		{"aurum_scrolls:scroll_full", "aurum_ore:iron_ingot"},
+	},
+}
+
 minetest.register_craftitem("aurum_scrolls:scroll_full", {
 	description = S"Active Magic Scroll",
-	_doc_items_longdesc = S"This faintly humming roll of paper contains magic.",
+	_doc_items_longdesc = S"This faintly humming roll of paper contains magic. It can be erased with iron.",
 	inventory_image = "aurum_scrolls_scroll_full.png",
 	groups = {paper = 1},
 	stack_max = 1,

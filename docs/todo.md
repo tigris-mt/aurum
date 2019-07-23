@@ -1,25 +1,25 @@
 # Base Gameplay
 * Mobs
-	* Farming.
-	* Taming.
-	* Hostile.
-* NPC structures and mobs.
-* Teleportation (local and between realms).
+	* Farming
+	* Taming
+	* Hostile
+* NPC structures and mobs
+* Teleportation (local and between realms)
 * Enchanting
-	* Way to get scrolls.
-	* Item naming.
-* Magic (potions and rods).
-	* Spells created by rituals to be applied to potions and/or rods.
-	* Plant growth stimulant.
+	* Way to get scrolls
+	* Item naming
+* Magic (potions and rods)
+	* Plant growth stimulant
 * Documentation for Mechanics
 	* Rituals
 	* Enchantments
 
 # Extended Gameplay
-* Moreblocks or similiar.
+* Moreblocks or similiar
 * Flight
-* Hand swapping.
+* Hand swapping
 * Awards
+* Automation/circuits
 
 # Outer Realms - See design/overview.md
 * The Loom

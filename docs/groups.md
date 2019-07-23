@@ -33,6 +33,7 @@ Toughless levels range from 0 to 3.
 
 # Crafting
 * `equipment`: For equipment.
+* `rod`: For rods.
 * `stick`: For sticks. The doc modpack semi-requires a stick group.
 * `tool`: For tools.
 
@@ -78,4 +79,5 @@ Toughless levels range from 0 to 3.
 * `processed`: Processed items such as ingots.
 * `raw`: Natural, unprocessed items.
 * `scroll`: Scrolls, magic paper.
+* `spell`: Spell or bespelled item.
 * `worker`: Such as smelter or enchanting table.

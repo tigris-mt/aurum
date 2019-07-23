@@ -77,7 +77,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		aurum.flora.register(":" .. name, table.combine({
 			description = S("@1 Plant", def.description),
 			_doc_items_usagehelp = S("Give this plant at least @1 light and wet, fertilized soil of level @2 or higher for growth and harvest. It grows in @3 stages.", def.light, def.level, def.max),
-			groups = {flora = 0, not_in_creative_inventory = (i ~= 1) and 1 or 0, farming_plant = next_name and 1 or 2},
+			groups = {flora = 0, not_in_creative_inventory = (i ~= 1) and 1 or 0, farming_plant = next_name and 1 or 2, grow_plant = next_name and 1 or 0},
 			_doc_items_create_entry = (i == 1),
 			_on_grow_plant = next_name and (function(...)
 				return aurum.farming.grow_plant(i, next_name, def, ...)

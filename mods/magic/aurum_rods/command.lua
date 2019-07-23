@@ -31,9 +31,10 @@ minetest.register_chatcommand("bespellrod", {
 			return false, S"Not a rod."
 		end
 		stack:set_wear(0)
-		stack:get_meta():set_string("spell", spell)
-		stack:get_meta():set_int("spell_level", level)
-		stack = aurum.tools.refresh_item(stack)
+		stack = aurum.rods.set_item(stack, {
+			spell = spell,
+			level = level,
+		})
 		player:set_wielded_item(stack)
 
 		return true, S("Bespelled: @1 @2.", spell, level)

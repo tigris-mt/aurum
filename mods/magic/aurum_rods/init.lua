@@ -1,4 +1,5 @@
 local S = minetest.get_translator()
+aurum.rods = {}
 
 aurum.tools.register("aurum_rods:rod", {
 	description = S"Rod",
@@ -12,9 +13,10 @@ aurum.tools.register("aurum_rods:rod", {
 	groups = {rod = 1},
 
 	on_use = function(stack, player, pointed_thing)
-		local spell = aurum.magic.spells[stack:get_meta():get_string("spell")]
+		local data = aurum.rods.get_item(stack)
+		local spell = aurum.magic.spells[data.spell]
 		if spell then
-			local level = math.max(1, stack:get_meta():get_int("spell_level"))
+			local level = data.level
 
 			-- Durability boost.
 			local durability = stack:get_meta():get_int("rod_durability")
@@ -52,6 +54,19 @@ minetest.register_craft{
 		{"aurum_ore:bronze_ingot"},
 	},
 }
+
+function aurum.rods.get_item(stack)
+	return {
+		spell = stack:get_meta():get_string("spell"),
+		level = math.max(1, stack:get_meta():get_int("spell_level")),
+	}
+end
+
+function aurum.rods.set_item(stack, data)
+	stack:get_meta():set_string("spell", data.spell)
+	stack:get_meta():set_int("spell_level", data.level)
+	return aurum.tools.refresh_item(stack)
+end
 
 aurum.tools.register_enchant_callback{
 	init = function(state, stack)

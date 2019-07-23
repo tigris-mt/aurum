@@ -59,7 +59,7 @@ form = smartfs.create("aurum_rods:table", function(state)
 end)
 
 minetest.register_node("aurum_rods:table", {
-	description = S"Rod Table",
+	description = S"Rod Bespelling Table",
 	tiles = {"aurum_base_stone.png^aurum_rods_table_top.png", "aurum_base_stone.png"},
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,

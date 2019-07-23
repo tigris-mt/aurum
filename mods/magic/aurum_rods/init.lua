@@ -2,6 +2,8 @@ local S = minetest.get_translator()
 
 aurum.tools.register("aurum_rods:rod", {
 	description = S"Rod",
+	_doc_items_longdesc = "A bronze rod with a gold tip, intended for holding spells. It can be bespelled in a Rod Bespelling Table.",
+	_doc_items_usage = "Punch something (or nothing) to use the spell held within the rod. The rod will wear out faster with higher-level spells.",
 	inventory_image = "aurum_rods_rod.png",
 	_enchant_levels = 6,
 	_enchants = {"rod"},
@@ -29,7 +31,7 @@ aurum.tools.register("aurum_rods:rod", {
 			-- Apply level boost.
 			level = level + power
 
-			if not spell.apply_requirements(level, player) then
+			if not spell.apply_requirements(pointed_thing, level, player) then
 				return
 			end
 
@@ -97,4 +99,5 @@ aurum.tools.register_enchant("rod_power", {
 	end,
 })
 
+aurum.dofile("command.lua")
 aurum.dofile("table.lua")

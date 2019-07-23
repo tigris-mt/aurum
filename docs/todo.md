@@ -8,13 +8,13 @@
 * Enchanting
 	* Way to get scrolls
 	* Item naming
-* Magic (potions and rods)
-	* Plant growth stimulant
 * Documentation for Mechanics
 	* Rituals
+	* Spells
 	* Enchantments
 
 # Extended Gameplay
+* Dye
 * Moreblocks or similiar
 * Flight
 * Hand swapping

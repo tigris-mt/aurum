@@ -16,7 +16,7 @@ function aurum.magic.register_spell(name, def)
 		max_level = 3,
 
 		-- Attempt to apply spell requirements. Return true if all is ok.
-		apply_requirements = function(level, owner)
+		apply_requirements = function(pointed_thing, level, owner)
 			return true
 		end,
 

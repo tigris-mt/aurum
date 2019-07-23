@@ -6,12 +6,14 @@
 * NPC structures and mobs
 * Teleportation (local and between realms)
 * Enchanting
-	* Way to get scrolls
 	* Item naming
 * Documentation for Mechanics
 	* Rituals
 	* Spells
 	* Enchantments
+* Rituals
+	* Gaining enchanting scrolls
+	* Gaining spell scrolls
 
 # Extended Gameplay
 * Dye

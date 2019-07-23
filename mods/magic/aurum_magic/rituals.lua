@@ -4,10 +4,25 @@ aurum.magic.rituals = {}
 
 function aurum.magic.register_ritual(name, def)
 	local def = table.combine({
+		-- Description of the ritual.
 		description = "",
+
+		-- Box of the recipe/protection area.
+		-- There must be room for 0,0,0 and the altar.
 		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 0, 1)),
+
+		-- List of {<relative pos>, <node>}. Accepts group:name item strings.
+		-- Altar sits at 0,0,0 with -x going up according to the arrows on the altar and -z going to the left.
 		recipe = {},
-		apply = function(at, player) end,
+
+		-- Apply the ritual.
+		-- <at> is a function converting a relative position to a rotated, offset global position.
+		-- Return true to indicate success, false to indicate failure (no effects).
+		apply = function(at, player)
+			return true
+		end,
+
+		-- Check for protection first?
 		protected = false,
 	}, def)
 
@@ -62,7 +77,7 @@ minetest.register_node("aurum_magic:altar", {
 					for y=v.size.a.y,v.size.b.y do
 						for z=v.size.a.z,v.size.b.z do
 							local noff = vector.new(x, y, z)
-							if v.protected and aurum.is_protected(at(noff), player) then
+							if v.protected and aurum.is_protected(at(noff), player, true) then
 								return false
 							end
 							if not vector.equals(noff, vector.new(0, 0, 0)) then
@@ -77,11 +92,15 @@ minetest.register_node("aurum_magic:altar", {
 			end
 
 			if check() then
-				v.apply(at, player)
-				return
+				if v.apply(at, player) then
+					return
+				else
+					break
+				end
 			end
 		end
 
+		-- Smoke effect on failure.
 		minetest.add_particlespawner{
 			minpos = vector.add(pos, vector.new(0, 0.75, 0)),
 			maxpos = vector.add(pos, vector.new(0, 1.25, 0)),

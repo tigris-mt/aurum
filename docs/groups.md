@@ -57,6 +57,7 @@ Toughless levels range from 0 to 3.
 	* `_on_grow_plant` returns true if the plant grew and false if it did not.
 * `igniter=1`: This node ignites fire.
 * `item_burn=1`: This node destroys items that fall inside.
+* `ladder=1`: This node is a ladder.
 * `lava=1`: This node is lava.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.

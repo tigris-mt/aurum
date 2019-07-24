@@ -19,7 +19,11 @@ function aurum.ladders.register(name, def)
 		walkable = false,
 		climbable = true,
 		selection_box = {type = "wallmounted"},
-	}, def)
+	}, def, {
+		groups = table.combine({
+			ladder = 1,
+		}, def.groups or {})
+	})
 
 	minetest.register_node(name, def)
 	aurum.ladders.ladders[name] = def

@@ -19,7 +19,45 @@ doc.add_entry("basics", "spells", {
 
 doc.add_category("rituals", {
 	name = S"Rituals",
-	build_formspec = doc.entry_builders.formspec,
+	build_formspec = function(def)
+		local x = doc.FORMSPEC.ENTRY_START_X
+		local y = doc.FORMSPEC.ENTRY_START_Y
+		local w = doc.FORMSPEC.ENTRY_WIDTH
+		local h = doc.FORMSPEC.ENTRY_HEIGHT
+		local fs = ""
+
+		local text = {}
+		if def.longdesc then
+			table.insert(text, def.longdesc)
+		end
+		if def.type == "spell" then
+			table.insert(text, S"Insert empty scrolls into the box. When the ritual is cast, a number of spell scrolls will be produced. Fewer scrolls means higher-level spells.")
+		end
+		table.insert(text, S"The recipe is to the right. Each section represents a slice in the vertical stack. The altar is the center, sections above the altar must be placed above it during the ritual.")
+		fs = fs .. doc.widgets.text(table.concat(text, "\n\n"), nil, nil, w / 3)
+
+		x = x + w / 3 + 0.5
+		y = y + 0.5
+
+		local total = vector.subtract(def.size.b, def.size.a)
+		local scale = math.min(1, 3 / total.y, 7 / total.x)
+
+		for _,pos in ipairs(aurum.box.iterate(def.size)) do
+			local rpos = vector.subtract(pos, def.size.a)
+			local hash = minetest.hash_node_position(pos)
+			local node = vector.equals(pos, vector.new(0, 0, 0)) and "aurum_magic:altar" or def.hashed_recipe[hash] or ""
+			if node then
+				fs = fs .. ("item_image_button[%d,%d;%d,%d;%s;%d_%d_%d;%d,%d,%d]"):format(
+					x + rpos.x, y + rpos.z + (total.y - rpos.y) * (total.y + scale),
+					scale, scale,
+					node,
+					pos.x, pos.y, pos.z,
+					pos.x, pos.y, pos.z)
+			end
+		end
+
+		return fs
+	end,
 })
 
 doc.add_entry("basics", "rituals", {

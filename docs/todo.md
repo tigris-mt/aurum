@@ -7,8 +7,6 @@
 * Teleportation (local and between realms)
 * Enchanting
 	* Item naming
-* Documentation for Mechanics
-	* Rituals
 * Rituals
 	* Gaining enchanting scrolls
 	* Gaining spell scrolls

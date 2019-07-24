@@ -41,6 +41,10 @@ function aurum.magic.register_ritual(name, def)
 	def.hashed_recipe = hashed
 
 	aurum.magic.rituals[name] = def
+	doc.add_entry("rituals", name, {
+		name = def.description,
+		data = def,
+	})
 end
 
 minetest.register_node("aurum_magic:altar", {

@@ -42,10 +42,13 @@ function aurum.force_get_node(pos)
 end
 
 local has_creative = minetest.get_modpath("creative")
+-- Is a player in creative?
 function aurum.in_creative(player)
 	return has_creative and creative.is_enabled_for(player:get_player_name()) or false
 end
 
+-- Is pos protected against a player?
+-- Quiet option may be respected, for times when the player does not need to be aware of protection.
 function aurum.is_protected(pos, player_or_name, quiet)
 	local name = (type(player_or_name) == "string") and player_or_name or player_or_name:get_player_name()
 	if minetest.is_protected(pos, name) then
@@ -57,6 +60,7 @@ function aurum.is_protected(pos, player_or_name, quiet)
 	return false
 end
 
+-- Get all inventory drops from meta at pos.
 local function get_drops(pos)
 	local ret = {}
 	local inv = minetest.get_meta(pos):get_inventory()
@@ -66,12 +70,14 @@ local function get_drops(pos)
 	return ret
 end
 
+-- Default on_blast callback, will drop all inventory and remove+drop self.
 function aurum.drop_all_blast(pos)
 	local drops = table.icombine(get_drops(pos), {name})
 	minetest.remove_node(pos)
 	return drops
 end
 
+-- Default on_destruct callback, will drop all inventory.
 function aurum.drop_all(pos)
 	for _,drop in ipairs(get_drops(pos)) do
 		aurum.drop_item(pos, drop)
@@ -88,6 +94,8 @@ function aurum.set_stack_description(stack, description)
 	stack:get_meta():set_string("description", table.concat(split, "\n"))
 end
 
+-- Does the <item> itemstring match <test> itemstring?
+-- Test can be a group:groupname itemstring.
 function aurum.match_item(item, test)
 	local mod, name = test:match("([^:]*):(.*)")
 	mod = mod or ""

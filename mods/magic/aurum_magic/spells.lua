@@ -33,6 +33,8 @@ function aurum.magic.register_spell(name, def)
 		table.insert(docs, def.longdesc)
 	end
 
+	table.insert(docs, S("Maximum level: @1", def.max_level))
+
 	doc.add_entry("spells", name, {
 		name = def.description,
 		data = table.concat(docs, "\n\n"),

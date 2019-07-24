@@ -21,6 +21,9 @@
 * Awards
 * Automation/circuits
 
+# Random Ideas
+* Add sychophants to the jungles.
+
 # Outer Realms - See design/overview.md
 * The Loom
 	* Node-based "worm" "mob" that eats blocks.

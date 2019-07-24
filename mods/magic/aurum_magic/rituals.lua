@@ -6,6 +6,7 @@ function aurum.magic.register_ritual(name, def)
 	local def = table.combine({
 		-- Description of the ritual.
 		description = "",
+		longdesc = "",
 
 		-- Box of the recipe/protection area.
 		-- There must be room for 0,0,0 and the altar.
@@ -25,6 +26,8 @@ function aurum.magic.register_ritual(name, def)
 		-- Check for protection first?
 		protected = false,
 	}, def)
+
+	def.size = aurum.box.extremes(def.size)
 
 	-- Saved hashed node positions for easier recall.
 	local hashed = {}
@@ -54,37 +57,32 @@ minetest.register_node("aurum_magic:altar", {
 
 	on_rightclick = function(pos, node, player)
 		local function at(offset)
-			local actual = vector.new(0, 0, 0)
+			local actual = vector.new(0, offset.y, 0)
 			if node.param2 % 4 == 0 then
-				actual.z = -offset.x
-				actual.x = offset.z
-			elseif node.param2 % 4 == 1 then
-				actual.x = -offset.x
-				actual.z = -offset.z
-			elseif node.param2 % 4 == 2 then
-				actual.z = offset.x
-				actual.x = -offset.z
-			elseif node.param2 % 4 == 3 then
 				actual.x = offset.x
+				actual.z = -offset.z
+			elseif node.param2 % 4 == 1 then
+				actual.x = -offset.z
+				actual.z = -offset.x
+			elseif node.param2 % 4 == 2 then
+				actual.x = -offset.x
 				actual.z = offset.z
+			elseif node.param2 % 4 == 3 then
+				actual.x = offset.z
+				actual.z = offset.x
 			end
 			return vector.add(pos, actual)
 		end
 
 		for k,v in pairs(aurum.magic.rituals) do
 			local function check()
-				for x=v.size.a.x,v.size.b.x do
-					for y=v.size.a.y,v.size.b.y do
-						for z=v.size.a.z,v.size.b.z do
-							local noff = vector.new(x, y, z)
-							if v.protected and aurum.is_protected(at(noff), player, true) then
-								return false
-							end
-							if not vector.equals(noff, vector.new(0, 0, 0)) then
-								if not aurum.match_item(minetest.get_node(at(noff)).name, v.hashed_recipe[minetest.hash_node_position(noff)] or "air") then
-									return false
-								end
-							end
+				for _,noff in ipairs(aurum.box.iterate(v.size)) do
+					if v.protected and aurum.is_protected(at(noff), player, true) then
+						return false
+					end
+					if not vector.equals(noff, vector.new(0, 0, 0)) then
+						if not aurum.match_item(minetest.get_node(at(noff)).name, v.hashed_recipe[minetest.hash_node_position(noff)] or "air") then
+							return false
 						end
 					end
 				end
@@ -132,3 +130,38 @@ minetest.register_craft{
 		{"", "group:wood", ""},
 	},
 }
+
+function aurum.magic.spell_ritual_inv(pos, listname, spell, standard)
+	local inv = minetest.get_meta(pos):get_inventory()
+
+	-- Number of scrolls.
+	local ns = 0
+	for i,v in ipairs(inv:get_list(listname)) do
+		if v:get_name() == "aurum_scrolls:scroll" then
+			ns = ns + v:get_count()
+		end
+	end
+
+	ns = math.min(standard, ns)
+
+	local level = math.min(aurum.magic.spells[spell].max_level, math.floor(math.max(1, standard / ns) + 0.5))
+	local scroll = aurum.magic.new_spell_scroll(spell, level)
+
+	local applied = 0
+
+	for i=1,ns do
+		-- Remove empty scroll.
+		local removed = inv:remove_item(listname, "aurum_scrolls:scroll")
+		-- Test if new scroll will fit.
+		if inv:room_for_item(listname, scroll) then
+			inv:add_item(listname, scroll)
+			applied = applied + 1
+		else
+			-- Undo removal and break out of loop, no more room.
+			inv:add_item(listname, removed)
+			break
+		end
+	end
+
+	return applied > 0
+end

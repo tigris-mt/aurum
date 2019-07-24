@@ -8,13 +8,13 @@ function aurum.box.collide_box(a, b)
     }
 
     local function beyond(axis)
-        if e.a.min[axis] < e.b.min[axis] and e.a.max[axis] < e.b.min[axis] then
+        if e.a.a[axis] < e.b.a[axis] and e.a.b[axis] < e.b.a[axis] then
             return true
-        elseif e.a.min[axis] > e.b.max[axis] and e.a.max[axis] > e.b.max[axis] then
+        elseif e.a.a[axis] > e.b.b[axis] and e.a.b[axis] > e.b.b[axis] then
             return true
-        elseif e.b.min[axis] < e.a.min[axis] and e.b.max[axis] < e.a.min[axis] then
+        elseif e.b.a[axis] < e.a.a[axis] and e.b.b[axis] < e.a.a[axis] then
             return true
-        elseif e.b.min[axis] > e.a.max[axis] and e.b.max[axis] > e.a.max[axis] then
+        elseif e.b.a[axis] > e.a.b[axis] and e.b.b[axis] > e.a.b[axis] then
             return true
         else
             return false
@@ -37,7 +37,7 @@ end
 -- Get the extremes of the box.
 function aurum.box.extremes(box)
 	local min, max = vector.sort(box.a, box.b)
-	return {min = min, max = max}
+	return aurum.box.new(min, max)
 end
 
 -- Get the box translated to a position
@@ -58,4 +58,17 @@ end
 -- From radius
 function aurum.box.new_radius(center, radius)
 	return aurum.box.new(vector.sub(center, radius), vector.add(center, radius))
+end
+
+function aurum.box.iterate(box)
+	local poses = {}
+	local box = aurum.box.extremes(box)
+	for x=box.a.x,box.b.x do
+		for y=box.a.y,box.b.y do
+			for z=box.a.z,box.b.z do
+				table.insert(poses, vector.new(x, y, z))
+			end
+		end
+	end
+	return poses
 end

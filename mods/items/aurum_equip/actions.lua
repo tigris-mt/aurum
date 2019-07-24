@@ -19,6 +19,9 @@ gequip.register_action("aurum_equip:armor", {
 		for k,v in pairs(r.armor) do
 			state.armor[k] = state.armor[k] * v
 		end
+
+		-- Fall armor is half-affected by impact armor.
+		state.armor.fall = (state.armor.fall * state.armor.impact + state.armor.fall) / 2
 	end,
 
 	apply = function(state, player)

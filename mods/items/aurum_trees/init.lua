@@ -11,7 +11,7 @@ function m.register(name, def)
 		description = "Generic",
 
 		-- Base texture, will add subnames to it.
-		texture_base = "aurum_trees_generic",
+		texture_base = "aurum_trees_generic_%s.png",
 
 		-- Translator.
 		S = S,
@@ -19,15 +19,21 @@ function m.register(name, def)
 		-- Leafdecay distance.
 		leafdecay = 4,
 
-		-- Decoration definitions.
-		decorations = {},
-
 		-- Growth terrain.
 		terrain = {"group:soil"},
 		-- Description of what this tree grows on.
 		terrain_desc = S"any dirt or soil",
 	}, def, {
-		name = name
+		name = name,
+
+		-- What decoration schematics should be included?
+		decorations = table.combine({
+			simple = true,
+			wide = true,
+			tall = true,
+		}, def.decorations or {}),
+
+		decodefs = {},
 	})
 
 	-- Register and set a part of the tree.
@@ -48,7 +54,7 @@ function m.register(name, def)
 		-- Create the final part def.
 		local ndef = table.combine({
 			name = name .. "_" .. sub,
-			tiles = {def.texture_base .. "_" .. sub .. ".png"},
+			tiles = {def.texture_base:format(sub)},
 			_tree = def,
 			is_ground_content = false,
 		}, spec)
@@ -64,7 +70,7 @@ function m.register(name, def)
 		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, tree = 1, flammable = 1},
-		tiles = {def.texture_base .. "_trunk_top.png", def.texture_base .. "_trunk_top.png", def.texture_base .. "_trunk.png"},
+		tiles = {def.texture_base:format("trunk_top"), def.texture_base:format("trunk_top"), def.texture_base:format("trunk")},
 
 		paramtype2 = "facedir",
 		on_place = minetest.rotate_node,
@@ -108,8 +114,8 @@ function m.register(name, def)
 				return false
 			end
 			-- Select and place a random schematic.
-			local dk = table.keys(def.decorations)
-			local d = def.decorations[dk[math.random(#dk)]]
+			local dk = table.keys(def.decodefs)
+			local d = def.decodefs[dk[math.random(#dk)]]
 			minetest.remove_node(pos)
 			minetest.place_schematic(pos, d.schematic, d.rotation, {}, false, d.flags)
 			return true
@@ -149,12 +155,8 @@ function m.register(name, def)
 		},
 	})
 
-	for _,n in ipairs{
-		"simple",
-		"wide",
-		"tall",
-	} do
-		def.decorations[n] = {
+	for n in pairs(table.map(def.decorations, function(v) return v or nil end)) do
+		def.decodefs[n] = {
 			schematic = aurum.dofile("decorations/" .. n .. ".lua")(def),
 			rotation = "random",
 			flags = {place_center_x = true, place_center_y = false, place_center_z = true}

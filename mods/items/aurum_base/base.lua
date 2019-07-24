@@ -46,7 +46,18 @@ minetest.register_node("aurum_base:grass", {
 	tiles = {"aurum_base_grass.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.grass(),
-	groups = {soil = 1, dig_dig = 3, dirt_spread = 1, dirt_smother = 1, grow_plant = 1},
+	groups = {soil = 1, dig_dig = 3, dirt_spread = 1, dirt_smother = 1, grow_plant = 1, grass_soil = 1},
+	_on_grow_plant = aurum.base.dirt_spread,
+})
+
+minetest.register_node("aurum_base:dark_grass", {
+	description = S"Dark Grass",
+	_doc_items_longdesc = S"A dark variant of grass found in hot, wet areas.",
+	_doc_items_hidden = false,
+	tiles = {"aurum_base_grass.png^[colorize:#000000:127"},
+	is_ground_content = true,
+	sounds = aurum.sounds.grass(),
+	groups = {soil = 1, dig_dig = 3, dirt_spread = 1, dirt_smother = 1, grow_plant = 1, grass_soil = 1},
 	_on_grow_plant = aurum.base.dirt_spread,
 })
 

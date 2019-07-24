@@ -9,7 +9,7 @@ minetest.register_craftitem("aurum_base:paste", {
 minetest.register_craft{
 	output = "aurum_base:paste 3",
 	recipe = {
-		{"aurum_base:grass"},
+		{"group:grass_soil"},
 	},
 }
 

@@ -75,7 +75,7 @@ end
 
 function aurum.biomes.register_tree_decoration(def)
 	local treedef = aurum.trees.types[def.name]
-	local d = treedef.decorations
+	local d = treedef.decodefs
 	local def = table.combine({
 		-- Relative rarity.
 		rarity = 1,

@@ -107,7 +107,7 @@ minetest.register_abm{
 	end,
 }
 
-minetest.register_ore{
+local blob = {
 	ore_type = "blob",
 	ore = "aurum_farming:fertilizer",
 	wherein = "group:soil",
@@ -125,3 +125,11 @@ minetest.register_ore{
 
 	biomes = aurum.biomes.get_all_group("forest", {"base"})
 }
+
+minetest.register_ore(blob)
+
+-- More common in dark grass.
+minetest.register_ore(table.combine(blob, {
+	wherein = "aurum_base:dark_grass",
+	clust_scarcity = 10 * 10 * 10,
+}))

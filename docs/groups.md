@@ -53,6 +53,7 @@ Toughless levels range from 0 to 3.
 * `flora=1`: This node will spread to soil or `_flora_spread_node` in def.
 	* If `_on_flora_spread(pos, node)` is defined, then it will be called before the actual spreading. If it returns false, spread will be cancelled.
 	* It may return a second node name for the node to spread.
+* `grass_soil=1`: This node is grassy soil.
 * `grow_plant=1`: This node has an `_on_grow_plant(pos, node)` function defined.
 	* `_on_grow_plant` returns true if the plant grew and false if it did not.
 * `igniter=1`: This node ignites fire.

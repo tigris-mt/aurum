@@ -71,6 +71,31 @@ aurum.biomes.register_tree_decoration({
 	biomes = {"aurum_forest"},
 })
 
+-- Jungle
+
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_jungle",
+	_groups = aurum.biomes.biomes.aurum_forest._groups,
+	heat_point = 80,
+	humidity_point = 80,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:dark_grass",
+			depth_top = 1,
+			node_filler = "aurum_base:dirt",
+			depth_filler = 4,
+		},
+		ocean = aurum.biomes.v_ocean{},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:pander",
+	biomes = {"aurum_jungle"},
+	rarity = 20,
+})
+
 -- Desert
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_desert",

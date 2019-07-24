@@ -19,7 +19,10 @@
 * Automation/circuits
 
 # Random Ideas
-* Add sychophants to the jungles.
+* Karma system.
+	* Adds new "karma" armor group, bad karma gives you a vulnerability.
+	* To offset this, bad karma may be a requirement to use some powerful pysche spells or similiar.
+* Add sychophants (some kind of mob) to the jungles.
 
 # Outer Realms - See design/overview.md
 * The Loom

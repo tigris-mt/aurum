@@ -173,3 +173,10 @@ function aurum.magic.spell_ritual_inv(pos, listname, spell, standard)
 
 	return applied > 0
 end
+
+function aurum.magic.register_spell_ritual(spell, def)
+	return aurum.magic.register_ritual("spell_" .. spell, table.combine({
+		description = S("Spell Creation: @1", aurum.magic.spells[spell].description),
+		type = "spell",
+	}, def))
+end

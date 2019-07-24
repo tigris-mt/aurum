@@ -1,7 +1,6 @@
 local S = minetest.get_translator()
 
-aurum.magic.register_ritual("spell_extinguish", {
-	description = S"Spell Creation: Extinguish",
+aurum.magic.register_spell_ritual("extinguish", {
 	longdesc = S"Molds water and lava into the essence of anti-fire.",
 
 	size = aurum.box.new(vector.new(-1, 0, 0), vector.new(1, 1, 0)),
@@ -33,10 +32,8 @@ local fertilizer_wall = {}
 for _,pos in ipairs(aurum.box.iterate(aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, -1)))) do
 	table.insert(fertilizer_wall, {pos, "aurum_farming:fertilizer"})
 end
-aurum.magic.register_ritual("spell_growth", {
-	description = S"Spell Creation: Growth",
+aurum.magic.register_spell_ritual("growth", {
 	longdesc = S"Extracts the primal energy of fertilizer and burn it into spell scrolls of growth.",
-	type = "spell",
 
 	size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, 0)),
 

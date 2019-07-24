@@ -31,7 +31,7 @@ doc.add_category("rituals", {
 			table.insert(text, def.longdesc)
 		end
 		if def.type == "spell" then
-			table.insert(text, S"Insert empty scrolls into the box. When the ritual is cast, a number of spell scrolls will be produced. Fewer scrolls means higher-level spells.")
+			table.insert(text, S"Insert empty scrolls into the scroll hole. When the ritual is cast, a number of spell scrolls will be produced. Fewer scrolls means higher-level spells.")
 		end
 		table.insert(text, S"The recipe is to the right. Each section represents a slice in the vertical stack. The altar is the center, sections above the altar must be placed above it during the ritual.")
 		fs = fs .. doc.widgets.text(table.concat(text, "\n\n"), nil, nil, w / 3)

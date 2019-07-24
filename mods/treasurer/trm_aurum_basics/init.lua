@@ -31,6 +31,8 @@ minetest.register_on_mods_loaded(function()
 
 	treasurer.register_treasure("aurum_flare:flare", 0.5, 1, {1, 10}, 0, {"light"})
 
+	list(table.keys(aurum.ladders.ladders), 0.5, 0, {1, 20}, 0, {"ladder"})
+
 	list({
 		"aurum_base:stone_brick",
 	}, 0.5, 1, {1, 30}, 0, {"building_block"})

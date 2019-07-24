@@ -11,7 +11,7 @@ form = smartfs.create("aurum_stamp:stamper", function(state)
 	state:inventory(0, 0, 1, 1, "item"):setLocation(invloc)
 	state:inventory(0, 2, 8, 4, "main")
 
-	state:field(1.75, 0.4, 5, 1, "text", S"Text (blank to reset)")
+	state:field(1.75, 0.4, 5, 1, "text", S"Text")
 
 	local required = xmana.level_to_mana(2)
 
@@ -28,7 +28,8 @@ form = smartfs.create("aurum_stamp:stamper", function(state)
 
 		local stack = meta:get_inventory():get_list("item")[1]
 		if stack:get_count() > 0 then
-			stack:get_meta():set_string("description_override", state:get("text"):getText())
+			local text = state:get("text"):getText()
+			stack:get_meta():set_string("description_override", (#text > 0) and text or stack:get_definition().description)
 			stack = aurum.set_stack_description(stack, stack:get_meta():get_string("description"))
 			xmana.mana(player, -required, true)
 			meta:get_inventory():set_list("item", {stack})

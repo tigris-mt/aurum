@@ -6,6 +6,7 @@ aurum.tools.register_enchant("durability", {
 		armor = true,
 	},
 	description = S"Durability",
+	longdesc = S"Improves the durability (maximum uses) of tools and armor.",
 	apply = function(state, level, stack)
 		-- Tool durability.
 		if minetest.get_item_group(stack:get_name(), "tool") > 0 then

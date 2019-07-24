@@ -99,6 +99,7 @@ aurum.tools.register_enchant("rod_strength", {
 		rod = true,
 	},
 	description = S"Rod Strength",
+	longdesc = S"Improves the strength of a rod, allowing it to cast more spells before breaking.",
 	apply = function(state, level, stack)
 		state.rod_durability = state.rod_durability * (level + 1)
 	end,
@@ -109,6 +110,7 @@ aurum.tools.register_enchant("rod_power", {
 		rod = true,
 	},
 	description = S"Rod Power",
+	longdesc = S"Adds to the power of a rod, giving a boost in power to the spells it casts. This boost of power does not reduce the rod's durability.",
 	apply = function(state, level, stack)
 		state.rod_power = state.rod_power + level
 	end,

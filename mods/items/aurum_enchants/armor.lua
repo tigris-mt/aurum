@@ -19,6 +19,7 @@ aurum.tools.register_enchant("speed", {
 		boots = true,
 	},
 	description = S"Speed",
+	longdesc = S"Increases the wearer's movement speed.",
 	apply = function(state, level)
 		state.eqdef.effects.speed = state.eqdef.effects.speed * (1 + (level + 1) / 5)
 	end,
@@ -29,6 +30,7 @@ aurum.tools.register_enchant("psyche_shield", {
 		helmet = true,
 	},
 	description = S"Psyche Shield",
+	longdesc = S"Shields the wearer against psyche damage.",
 	apply = function(state, level)
 		state.eqdef.armor.psyche = state.eqdef.armor.psyche / (1 + level / 3)
 	end,

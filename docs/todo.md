@@ -10,7 +10,6 @@
 * Documentation for Mechanics
 	* Rituals
 	* Spells
-	* Enchantments
 * Rituals
 	* Gaining enchanting scrolls
 	* Gaining spell scrolls

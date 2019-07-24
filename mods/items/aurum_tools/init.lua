@@ -34,6 +34,23 @@ function aurum.tools.register(name, def)
 	return def
 end
 
+doc.add_category("enchants", {
+	name = S"Enchants",
+	description = S"Attribute boosts for usable items",
+	build_formspec = doc.entry_builders.text,
+})
+
+doc.add_entry("basics", "enchants", {
+	name = S"Enchanting",
+	data = {
+		text = table.concat({
+			S"Enchantments are contained within scrolls of enchantment. They provide attribute boosts and benefits for items.",
+			S"By using an Enchanting Table, you can add appropriate enchantments to items such as tools or armor.",
+			S"Items can only support a certain level of enchantment, so the number and level of their enchanting is limited.",
+		}, "\n"),
+	},
+})
+
 aurum.dofile("enchants.lua")
 aurum.dofile("default_tools.lua")
 aurum.dofile("hammer_break.lua")

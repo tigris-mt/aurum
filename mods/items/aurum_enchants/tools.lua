@@ -18,6 +18,7 @@ aurum.tools.register_enchant("smash", {
 		hammer = true,
 	},
 	description = S"Smash",
+	longdesc = S"Improves the damage of hammers.",
 	apply = function(state, level, stack)
 		state.tool_capabilities.damage_groups.impact = state.tool_capabilities.damage_groups.impact + level
 	end,

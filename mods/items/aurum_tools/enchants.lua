@@ -16,6 +16,7 @@ function aurum.tools.register_enchant(name, def)
 		categories = {},
 
 		description = "?",
+		longdesc = nil,
 
 		apply = function(state, level, stack) end,
 
@@ -27,7 +28,25 @@ function aurum.tools.register_enchant(name, def)
 		-- How high can naturally generated enchantments of this kind go?
 		max_level = 3,
 	}, def)
+
 	aurum.tools.enchants[name] = def
+
+	local docs = {}
+
+	if def.longdesc then
+		table.insert(docs, def.longdesc)
+	end
+
+	local category_keys = table.keys(table.map(def.categories, function(v) return v or nil end))
+	if #category_keys > 0 then
+		table.sort(category_keys)
+		table.insert(docs, S("Enchantment categories: @1", table.concat(category_keys, ", ")))
+	end
+
+	doc.add_entry("enchants", name, {
+		name = def.description,
+		data = table.concat(docs, "\n\n"),
+	})
 end
 
 -- Get possible enchant types for a tool, returns array or nil if unenchantable.

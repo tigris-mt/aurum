@@ -5,8 +5,6 @@
 	* Hostile
 * NPC structures and mobs
 * Teleportation (local and between realms)
-* Enchanting
-	* Item naming
 * Rituals
 	* Gaining enchanting scrolls
 

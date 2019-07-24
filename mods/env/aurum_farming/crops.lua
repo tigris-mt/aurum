@@ -94,6 +94,12 @@ function aurum.farming.register_crop(base_name, def, decodef)
 			},
 			drop = def.drops(i) or "",
 			tiles = {def.texture .. "_" .. i .. ".png"},
+
+			after_dig_node = function(pos, _, _, player)
+				if not next_name then
+					aurum.player.mana_sparks(player, pos, "digging", 1, def.level)
+				end
+			end,
 		}, def.node or {}))
 	end
 

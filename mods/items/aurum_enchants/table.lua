@@ -150,7 +150,6 @@ minetest.register_node("aurum_enchants:table", {
 	end,
 
 	on_blast = aurum.drop_all_blast,
-
 	on_destruct = aurum.drop_all,
 })
 

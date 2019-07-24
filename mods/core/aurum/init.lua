@@ -92,6 +92,7 @@ function aurum.set_stack_description(stack, description)
 		split[1] = override
 	end
 	stack:get_meta():set_string("description", table.concat(split, "\n"))
+	return stack
 end
 
 -- Does the <item> itemstring match <test> itemstring?

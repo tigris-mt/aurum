@@ -31,28 +31,30 @@ end
 
 for k,v in pairs(aurum.trees.types) do
 	local subname = k:match("[^:]*:(.*)")
-	aurum.ladders.register("aurum_ladders:" .. subname, {
-		description = S("@1 Ladder", v.description),
-		_texture = minetest.registered_nodes[v.planks].tiles[1],
-		groups = {dig_chop = 3},
-		sounds = aurum.sounds.wood(),
-	})
 
-	minetest.register_craft{
-		type = "fuel",
-		recipe = "aurum_ladders:" .. subname,
-		burntime = 2,
-	}
-
-	minetest.register_craft{
-		output = "aurum_ladders:" .. subname .. " 16",
-		recipe = {
-			{v.planks, "", v.planks},
-			{v.planks, v.planks, v.planks},
-			{v.planks, "", v.planks},
-		},
-	}
 end
+
+aurum.ladders.register("aurum_ladders:wood", {
+	description = S"Wooden Ladder",
+	_texture = minetest.registered_nodes["aurum_trees:oak_planks"].tiles[1],
+	groups = {dig_chop = 3},
+	sounds = aurum.sounds.wood(),
+})
+
+minetest.register_craft{
+	type = "fuel",
+	recipe = "aurum_ladders:wood",
+	burntime = 2,
+}
+
+minetest.register_craft{
+	output = "aurum_ladders:wood 6",
+	recipe = {
+		{"group:stick", "", "group:stick"},
+		{"group:stick", "group:stick", "group:stick"},
+		{"group:stick", "", "group:stick"},
+	},
+}
 
 aurum.ladders.register("aurum_ladders:iron", {
 	description = S"Iron Ladder",
@@ -62,7 +64,7 @@ aurum.ladders.register("aurum_ladders:iron", {
 })
 
 minetest.register_craft{
-		output = "aurum_ladders:iron 8",
+		output = "aurum_ladders:iron 12",
 		recipe = {
 			{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
 			{"aurum_ore:iron_ingot", "aurum_ore:iron_ingot", "aurum_ore:iron_ingot"},

@@ -9,7 +9,6 @@
 	* Item naming
 * Documentation for Mechanics
 	* Rituals
-	* Spells
 * Rituals
 	* Gaining enchanting scrolls
 	* Gaining spell scrolls

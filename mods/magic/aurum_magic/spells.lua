@@ -13,6 +13,7 @@ end
 function aurum.magic.register_spell(name, def)
 	local def = table.combine({
 		description = "",
+		longdesc = nil,
 		max_level = 3,
 
 		-- Attempt to apply spell requirements. Return true if all is ok.
@@ -25,4 +26,15 @@ function aurum.magic.register_spell(name, def)
 	}, def)
 
 	aurum.magic.spells[name] = def
+
+	local docs = {}
+
+	if def.longdesc then
+		table.insert(docs, def.longdesc)
+	end
+
+	doc.add_entry("spells", name, {
+		name = def.description,
+		data = table.concat(docs, "\n\n"),
+	})
 end

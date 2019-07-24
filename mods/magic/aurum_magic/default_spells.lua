@@ -17,7 +17,7 @@ aurum.magic.register_spell("extinguish", {
 
 aurum.magic.register_spell("growth", {
 	description = S"Growth",
-	longdesc = S"Forces a plant to mature immediately.",
+	longdesc = S"Forces a plant to mature immediately. Higher levels make a plant go through more stages of growth at a time.",
 
 	apply_requirements = function(pointed_thing, _, player)
 		local pos = minetest.get_pointed_thing_position(pointed_thing)

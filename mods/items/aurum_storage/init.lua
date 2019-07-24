@@ -35,9 +35,10 @@ function aurum.storage.register(name, def)
 		state:inventory(state:getSize().w / 2 - def.width / 2, 0, def.width, def.height, "main"):setLocation(invloc)
 
 		local pix = state:getSize().w / 2 - 8 / 2
+		local piy = def.height + 0.5
 
 		state:element("code", {name = "player_main", code = [[
-			list[current_player;main;]] .. pix .. [[,4.25;8,4]
+			list[current_player;main;]] .. pix .. [[,]] .. piy .. [[;8,4]
 		]]})
 
 		state:element("code", {name = "listring", code = [[
@@ -101,5 +102,38 @@ minetest.register_craft{
 		{"group:wood", "group:wood", "group:wood"},
 		{"group:wood", "", "group:wood"},
 		{"group:wood", "group:wood", "group:wood"},
+	},
+}
+
+aurum.storage.register("aurum_storage:scroll_hole", {
+	width = 2,
+	height = 2,
+	node = {
+		description = S"Scroll Hole",
+		drawtype = "nodebox",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.25, -0.2, -0.25, -0.1, 0.2, 0.25},
+				{-0.25, -0.5, -0.25, 0.25, 0.2, -0.1},
+				{0.25, -0.2, 0.25, 0.1, 0.2, -0.25},
+				{0.25, -0.5, 0.25, -0.25, 0.2, 0.1},
+			},
+		},
+		tiles = {"aurum_base_stone_brick.png"},
+		sounds = aurum.sounds.stone(),
+		groups = {dig_pick = 2},
+	},
+	valid_item = function(stack)
+		return minetest.get_item_group(stack:get_name(), "scroll") > 0
+	end,
+})
+
+minetest.register_craft{
+	output = "aurum_storage:scroll_hole",
+	recipe = {
+		{"aurum_base:stone_brick", "", "aurum_base:stone_brick"},
+		{"aurum_base:stone_brick", "", "aurum_base:stone_brick"},
+		{"aurum_base:stone_brick", "", "aurum_base:stone_brick"},
 	},
 }

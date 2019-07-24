@@ -44,6 +44,7 @@ minetest.register_on_mods_loaded(function()
 		"aurum_magic:altar",
 		"aurum_enchants:table",
 		"aurum_rods:table",
+		"aurum_storage:scroll_hole",
 	}, 0.5, 3, {1, 10}, 0, {"worker"})
 
 	list({

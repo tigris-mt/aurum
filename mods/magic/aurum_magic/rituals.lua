@@ -57,9 +57,9 @@ minetest.register_node("aurum_magic:altar", {
 			{-0.25, -0.5, -0.25, 0.25, 0, 0.25},
 		},
 	},
-	tiles = {"aurum_magic_altar_top.png", "aurum_trees_oak_planks.png"},
+	tiles = {"aurum_magic_altar_top.png", "aurum_base_stone.png"},
 	sounds = aurum.sounds.wood(),
-	groups = {dig_chop = 3, flammable = 1},
+	groups = {dig_pick = 3},
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
 
@@ -133,9 +133,9 @@ minetest.register_node("aurum_magic:altar", {
 minetest.register_craft{
 	output = "aurum_magic:altar",
 	recipe = {
-		{"group:wood", "aurum_scrolls:scroll", "group:wood"},
-		{"group:wood", "group:wood", "group:wood"},
-		{"", "group:wood", ""},
+		{"group:stone", "aurum_scrolls:scroll", "group:stone"},
+		{"group:stone", "group:stone", "group:stone"},
+		{"", "group:stone", ""},
 	},
 }
 

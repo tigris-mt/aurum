@@ -22,7 +22,7 @@ minetest.register_craftitem("aurum_scrolls:scroll", {
 	description = S"Empty Magic Scroll",
 	_doc_items_longdesc = S"Made from paper and unrefined mana dust, this scroll is ever so slightly tingly to the touch.",
 	inventory_image = "aurum_scrolls_scroll.png",
-	groups = {paper = 1},
+	groups = {paper = 1, scroll = 1},
 })
 
 minetest.register_craft{
@@ -46,7 +46,7 @@ minetest.register_craftitem("aurum_scrolls:scroll_full", {
 	description = S"Active Magic Scroll",
 	_doc_items_longdesc = S"This faintly humming roll of paper contains magic. It can be erased with iron.",
 	inventory_image = "aurum_scrolls_scroll_full.png",
-	groups = {paper = 1},
+	groups = {paper = 1, scroll = 1},
 	stack_max = 1,
 })
 

@@ -46,13 +46,27 @@ doc.add_category("rituals", {
 			local rpos = vector.subtract(pos, def.size.a)
 			local hash = minetest.hash_node_position(pos)
 			local node = vector.equals(pos, vector.new(0, 0, 0)) and "aurum_magic:altar" or def.hashed_recipe[hash] or ""
+			local mod, name = node:match("([^:]*):(.*)")
+			if mod == "group" then
+				for k,v in pairs(minetest.registered_items) do
+					if (v.groups[name] or 0) > 0 then
+						node = k
+						break
+					end
+				end
+			end
+			local image_name = ("%d_%d_%d"):format(pos.x, pos.y, pos.z)
 			if node then
-				fs = fs .. ("item_image_button[%d,%d;%d,%d;%s;%d_%d_%d;%d,%d,%d]"):format(
+				fs = fs .. ("item_image_button[%d,%d;%d,%d;%s;%s;%d,%d,%d%s]"):format(
 					x + rpos.x, y + rpos.z + (total.y - rpos.y) * (total.y + scale),
 					scale, scale,
 					node,
+					image_name,
 					pos.x, pos.y, pos.z,
-					pos.x, pos.y, pos.z)
+					(mod == "group") and "\nG" or "")
+			end
+			if mod == "group" then
+				fs = fs .. ("tooltip[%s;%s]"):format(image_name, minetest.formspec_escape(S("Any node in group '@1'", name)))
 			end
 		end
 

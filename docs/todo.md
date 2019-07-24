@@ -9,7 +9,6 @@
 	* Item naming
 * Rituals
 	* Gaining enchanting scrolls
-	* Gaining spell scrolls
 
 # Extended Gameplay
 * Dye

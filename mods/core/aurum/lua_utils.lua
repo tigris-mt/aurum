@@ -86,21 +86,3 @@ function table.shuffled(t)
 	end
 	return ret
 end
-
--- Return only common elements of passed arrays.
-function table._and(...)
-	local params = {...}
-	local ret = {}
-	for _,t in ipairs(params) do
-		for _,k in ipairs(t) do
-			ret[k] = (ret[k] or 0) + 1
-		end
-	end
-	return table.keys(table.map(ret, function(v, k)
-		if ret[k] < #params then
-			return nil
-		else
-			return v
-		end
-	end))
-end

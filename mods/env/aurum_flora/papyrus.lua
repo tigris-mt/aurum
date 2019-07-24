@@ -82,10 +82,10 @@ minetest.register_decoration{
 	},
 	y_max = 2,
 	y_min = 0,
-	biomes = table._and(
-		aurum.biomes.get_all_group("desert", {"base"}),
-		aurum.biomes.get_all_group("aurum:aurum", {"base"})
-	),
+	biomes = aurum.set.to_array(aurum.set.intersection(
+		aurum.set(aurum.biomes.get_all_group("desert", {"base"})),
+		aurum.set(aurum.biomes.get_all_group("aurum:aurum", {"base"}))
+	)),
 }
 
 minetest.register_abm{

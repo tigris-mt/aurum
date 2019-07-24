@@ -8,6 +8,10 @@ function aurum.magic.register_ritual(name, def)
 		description = "",
 		longdesc = "",
 
+		-- What type of ritual is it?
+		-- Options are: nil, "spell"
+		type = nil,
+
 		-- Box of the recipe/protection area.
 		-- There must be room for 0,0,0 and the altar.
 		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 0, 1)),

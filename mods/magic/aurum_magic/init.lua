@@ -17,6 +17,22 @@ doc.add_entry("basics", "spells", {
 	},
 })
 
+doc.add_category("rituals", {
+	name = S"Rituals",
+	build_formspec = doc.entry_builders.formspec,
+})
+
+doc.add_entry("basics", "rituals", {
+	name = S"Rituals",
+	data = {
+		text = table.concat({
+			S"Rituals are powerful invocations to perform certain magical actions.",
+			S"All rituals are centered around an altar, but each ritual has its own rules.",
+			S"Rituals and their setup are described in their own documentation category.",
+		}, "\n"),
+	},
+})
+
 aurum.dofile("rituals.lua")
 aurum.dofile("spells.lua")
 

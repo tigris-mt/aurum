@@ -101,6 +101,7 @@ function aurum.match_item(item, test)
 end
 
 aurum.dofile("lua_utils.lua")
+aurum.dofile("set.lua")
 
 aurum.dofile("damage.lua")
 

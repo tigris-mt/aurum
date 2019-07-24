@@ -7,6 +7,7 @@ end
 aurum.magic.register_ritual("spell_growth", {
 	description = S"Spell Creation: Growth",
 	longdesc = S"Extract the primal energy of fertilizer and burn it into spell scrolls of growth.",
+	type = "spell",
 
 	size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, 0)),
 

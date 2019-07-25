@@ -50,6 +50,7 @@ doc.add_entry("basics", "enchants", {
 			S"Enchantments are contained within scrolls of enchantment. They provide attribute boosts and benefits for items.",
 			S"By using an Enchanting Table, you can add appropriate enchantments to items such as tools or armor.",
 			S"Items can only support a certain level of enchantment, so the number and level of their enchanting is limited.",
+			S"Scrolls of enchantment can be copied or potentially improved using an Enchanter's Copying Desk, costing mana and mana beans.",
 		}, "\n"),
 	},
 })

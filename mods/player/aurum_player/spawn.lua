@@ -17,7 +17,7 @@ if not minetest.settings:get("static_spawnpoint") then
 		local start = aurum.realms.get_spawn("aurum:aurum")
 		local finish = vector.add(start, vector.new(0, 16, 0))
 		minetest.emerge_area(start, finish, function(_, _, remaining)
-			if remaining <= 0 then
+			if remaining <= 0 and not minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
 				aurum.player.teleport(player, aurum.realms.get_spawn("aurum:aurum"))
 			end
 		end)
@@ -58,7 +58,7 @@ minetest.register_node("aurum_player:hyperion_totem", {
 		end
 
 		player:get_meta():set_string("aurum_player:spawnpoint", minetest.pos_to_string(pos))
-		minetest.chat_send_player(player:get_player_name(), S("Your respawn point is now @1", minetest.pos_to_string(pos)))
+		aurum.info_message(player, S("Your respawn point is now @1", minetest.pos_to_string(pos)))
 	end,
 })
 

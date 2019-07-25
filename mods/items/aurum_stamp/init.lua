@@ -22,7 +22,7 @@ form = smartfs.create("aurum_stamp:stamper", function(state)
 		end
 
 		if xmana.mana(player) < required then
-			minetest.chat_send_player(name, "Not enough mana.")
+			aurum.info_message(player, S"Not enough mana.")
 			return
 		end
 

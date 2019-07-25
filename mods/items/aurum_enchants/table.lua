@@ -62,7 +62,7 @@ form = smartfs.create("aurum_enchants:table", function(state)
 
 		local info = get_info(player)
 		if not info.enough_mana then
-			minetest.chat_send_player(name, "Not enough mana levels.")
+			aurum.info_message(player, S"Not enough mana levels.")
 			return
 		end
 		if info.valid then

@@ -109,6 +109,11 @@ function aurum.match_item(item, test)
 	end
 end
 
+function aurum.info_message(player, message)
+	cmsg.push_message_player(player, message)
+	minetest.chat_send_player(player:get_player_name(), message)
+end
+
 aurum.dofile("lua_utils.lua")
 aurum.dofile("set.lua")
 

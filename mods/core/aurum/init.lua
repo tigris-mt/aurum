@@ -1,5 +1,7 @@
 aurum = {}
 
+aurum.VERSION = "0.10.0"
+
 -- Do a file relative to the current mod.
 aurum.dofile = function(path)
 	return dofile(minetest.get_modpath(minetest.get_current_modname()) .. "/" .. path)

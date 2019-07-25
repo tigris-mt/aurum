@@ -1,6 +1,8 @@
 local S = minetest.get_translator()
 aurum.tools = {}
 
+aurum.tools.tools = {}
+
 -- Returns the variant properties.
 function aurum.tools.register_variant(name)
 	local def = minetest.registered_items[name]
@@ -16,6 +18,7 @@ function aurum.tools.register_variant(name)
 		wield_image = (def.wield_image and #def.wield_image > 0) and (def.wield_image .. "^aurum_tools_enchanted.png") or nil,
 	}))
 	doc.add_entry_alias("tools", name, "tools", name .. "_enchanted")
+	aurum.tools.tools[name] = properties
 	return properties
 end
 

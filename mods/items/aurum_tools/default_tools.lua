@@ -33,7 +33,7 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 		},
 	},
 
-	groups = {tool = 1, not_in_creative_inventory = 1},
+	groups = {not_in_creative_inventory = 1},
 
 	_enchant_levels = 2,
 	_enchants = {"hand"},

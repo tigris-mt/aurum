@@ -26,10 +26,10 @@ minetest.register_on_mods_loaded(function()
 				aurum.treasurer.register_itemstack(aurum.magic.new_spell_scroll(k, i), 0.75 / i / total, 2 + i, 1, 0, {"spell", "scroll", "magic"})
 			end)
 			table.insert(queue, function()
-				aurum.treasurer.register_itemstack(aurum.rods.set_item(ItemStack("aurum_rods:rod"), {
+				trm_aurum_tools.register(aurum.rods.set_item(ItemStack("aurum_rods:rod"), {
 					spell = k,
 					level = i,
-				}), 0.5 / i / total, 2 + i, 1, {1, aurum.TOOL_WEAR}, {"spell", "magic"})
+				}), 0.5 / i / total, 2 + i, 1, {1, aurum.TOOL_WEAR}, {"spell", "magic", "enchantable"})
 			end)
 		end
 	end

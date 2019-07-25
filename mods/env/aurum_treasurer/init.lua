@@ -2,6 +2,7 @@ local S = minetest.get_translator()
 aurum.treasurer = {}
 
 local map = {}
+local callbacks = {}
 local index = 0
 
 -- Register an itemstack with metadata along will all other fields.
@@ -9,18 +10,32 @@ local index = 0
 function aurum.treasurer.register_itemstack(stack, ...)
 	index = index + 1
 	local key = ("aurum_treasurer:%d"):format(index)
-	map[key] = stack
+	map[key] = {
+		stack = stack,
+		index = index,
+	}
 	return treasurer.register_treasure(key, ...)
+end
+
+-- Callback will be called before treasure is given.
+function aurum.treasurer.register_itemstack_callback(stack, callback, ...)
+	local ret = aurum.treasurer.register_itemstack(stack, ...)
+	callbacks[index] = callback
+	return ret
 end
 
 -- Override that catches special itemstack keys and replaces the name and metadata.
 local old = treasurer.treasure_to_itemstack
 function treasurer.treasure_to_itemstack(treasure)
 	local ret = old(treasure)
-	local over = map[treasure.name]
-	if over then
-		ret:set_name(over:get_name())
-		ret:get_meta():from_table(over:get_meta():to_table())
+	local mapped = map[treasure.name]
+	if mapped then
+		ret:set_name(mapped.stack:get_name())
+		ret:get_meta():from_table(mapped.stack:get_meta():to_table())
+
+		if callbacks[mapped.index] then
+			ret = callbacks[mapped.index](ret)
+		end
 	end
 	return ret
 end

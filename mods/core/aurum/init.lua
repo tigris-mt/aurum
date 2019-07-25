@@ -1,6 +1,5 @@
-aurum = {}
-
-aurum.VERSION = "0.10.0"
+-- Create aurum global.
+dofile((minetest.get_modpath(minetest.get_current_modname()) .. "/aurum_table.lua")
 
 -- Do a file relative to the current mod.
 aurum.dofile = function(path)

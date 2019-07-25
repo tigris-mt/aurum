@@ -12,14 +12,14 @@ function aurum.biomes.v_ocean(def)
 		node_filler = "aurum_base:sand",
 		depth_filler = 3,
 		y_max = 0,
-		y_min = -255,
+		y_min = -100,
 		node_cave_liquid = "aurum_base:water_source",
 	}, def)
 end
 
 function aurum.biomes.v_under(def)
 	return table.combine({
-		y_max = -255,
+		y_max = -100,
 		y_min = aurum.WORLD.min.y,
 	}, def)
 end

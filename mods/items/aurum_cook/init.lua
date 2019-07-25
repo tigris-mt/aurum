@@ -40,11 +40,6 @@ function aurum.cook.register(name, def)
 		end
 	end
 
-	local function allow_metadata_inventory_move(pos, from_list, from_index, to_list, to_index, count, player)
-		local inv = minetest.get_meta(pos):get_inventory()
-		return allow_metadata_inventory_put(pos, to_list, to_index, inv:get_stack(from_list, from_index), player)
-	end
-
 	local function allow_metadata_inventory_take(pos, _, _, stack, player)
 		if aurum.is_protected(pos, player) then
 			return 0
@@ -81,7 +76,7 @@ function aurum.cook.register(name, def)
 
 	def.node = table.combine({
 		allow_metadata_inventory_put = allow_metadata_inventory_put,
-		allow_metadata_inventory_move = allow_metadata_inventory_move,
+		allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 		allow_metadata_inventory_take = allow_metadata_inventory_take,
 
 		_doc_items_usagehelp = S"Insert fuel in the bottom slot and something to smelt in the top slot.",

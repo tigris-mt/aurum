@@ -63,9 +63,7 @@ function aurum.storage.register(name, def)
 			return def.valid_item(stack) and stack:get_count() or 0
 		end,
 
-		allow_metadata_inventory_move = function()
-			return 0
-		end,
+		allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 
 		allow_metadata_inventory_take = function(pos, _, _, stack, player)
 			return (def.protected and aurum.is_protected(pos, player)) and 0 or stack:get_count()

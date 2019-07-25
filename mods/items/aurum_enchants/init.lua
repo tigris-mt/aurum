@@ -14,4 +14,5 @@ function aurum.enchants.new_scroll(enchant, level)
 	}
 end
 
+aurum.dofile("copying_desk.lua")
 aurum.dofile("table.lua")

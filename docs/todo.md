@@ -5,8 +5,6 @@
 	* Hostile
 * NPC structures and mobs
 * Teleportation (local and between realms)
-* Rituals
-	* Gaining enchanting scrolls
 
 # Extended Gameplay
 * Dye

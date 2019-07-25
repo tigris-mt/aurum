@@ -133,9 +133,7 @@ minetest.register_node("aurum_enchants:table", {
 		return stack:get_count()
 	end,
 
-	allow_metadata_inventory_move = function()
-		return 0
-	end,
+	allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 
 	allow_metadata_inventory_take = function(pos, _, _, stack, player)
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()

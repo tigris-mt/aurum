@@ -69,6 +69,9 @@ minetest.register_node("aurum_stamp:stamper", {
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
 
+	paramtype = "light",
+	sunlight_propagates = true,
+
 	groups = {dig_pick = 2},
 	sounds = aurum.sounds.metal(),
 
@@ -83,9 +86,7 @@ minetest.register_node("aurum_stamp:stamper", {
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()
 	end,
 
-	allow_metadata_inventory_move = function()
-		return 0
-	end,
+	allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 
 	allow_metadata_inventory_take = function(pos, _, _, stack, player)
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()

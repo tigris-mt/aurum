@@ -18,7 +18,7 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 ## License
 Unless otherwise noted (such as 3rd party content described in a section below):
 * Code is under the [ISC license](LICENSE.md).
-* Media is under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/).
+* Media is under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## 3rd Party Content and Licenses
 Such content is included as submodules and symlinked if necessary.

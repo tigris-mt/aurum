@@ -44,7 +44,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		if def.biome_map[biome_name] then
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
 				local rotation = rng:next() % (3 + 1)
-				rotation = 1
 				local limit = vector.subtract(def.schematic.size, 1)
 				if rotation == 1 or rotation == 3 then
 					limit = vector.new(limit.z, limit.y, limit.x)
@@ -54,25 +53,25 @@ minetest.register_on_generated(function(minp, maxp, seed)
 					local actual = vector.new(0, offset.y, 0)
 					if rotation % 4 == 0 then
 						actual.x = offset.x
-						actual.z = -offset.z
-					elseif rotation % 4 == 1 then
-						actual.x = -offset.x
-						actual.z = -offset.z
-					elseif rotation % 4 == 2 then
-						actual.x = -offset.x
 						actual.z = offset.z
-					elseif rotation % 4 == 3 then
+					elseif rotation % 4 == 1 then
 						actual.x = offset.z
 						actual.z = offset.x
+					elseif rotation % 4 == 2 then
+						actual.z = limit.x - offset.x
+						actual.x = offset.z
+					elseif rotation % 4 == 3 then
+						actual.z = limit.x - offset.x
+						actual.x = limit.z - offset.z
 					end
 					return vector.add(pos, actual)
 				end
 				if prob(def.rarity) then
-					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true, {place_center_x = true, place_center_z = true})
-					def.on_generated(aurum.box.extremes(aurum.box.new(
-							at(table.combine(vector.apply(vector.divide(limit, -2), math.floor), {y = 0})),
-							at(table.combine(vector.apply(vector.divide(limit, 2), math.floor), {y = limit.y}))
-						)), at)
+					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true)
+					def.on_generated(aurum.box.new(
+							at(vector.new(0, 0, 0)),
+							at(limit)
+						), at)
 				end
 			end
 		end

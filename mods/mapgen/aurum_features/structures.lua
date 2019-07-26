@@ -59,6 +59,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		return
 	end
 
+	-- TODO: Use the seed for random structure choices.
 	local function prob(chance)
 		return math.random() <= chance
 	end

@@ -3,7 +3,7 @@
 	* Farming
 	* Taming
 	* Hostile
-* NPC structures and mobs
+	* NPC
 * Teleportation (local and between realms)
 
 # Extended Gameplay

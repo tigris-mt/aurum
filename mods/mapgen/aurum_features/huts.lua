@@ -43,13 +43,15 @@ aurum.features.register_decoration{
 	on_generated = function(c)
 		local ph = c:ph(1)
 
-		minetest.set_node(ph[1], {name = "aurum_storage:box"})
-		c:treasures(ph[1], "main", c:random(2, 4), {
-			{
-				count = math.random(1, 3),
-				preciousness = {0, 2},
-				groups = {"building_block"},
-			},
-		})
+		if #ph > 0 then
+			minetest.set_node(ph[1], {name = "aurum_storage:box"})
+			c:treasures(ph[1], "main", c:random(2, 4), {
+				{
+					count = math.random(1, 3),
+					preciousness = {0, 2},
+					groups = {"building_block"},
+				},
+			})
+		end
 	end,
 }

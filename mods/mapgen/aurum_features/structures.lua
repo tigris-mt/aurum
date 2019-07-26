@@ -3,10 +3,22 @@ local idx = 0
 
 function aurum.features.register_decoration(def)
 	local def = table.combine({
+		-- What nodes to place on?
 		place_on = {},
+
+		-- Rarity per node.
 		rarity = 0.01,
+
+		-- Biomes to generate in.
 		biomes = {},
-		on_generated = function(box) end,
+
+		-- Called on generation.
+		on_generated = function(context) end,
+
+		-- Called on offsetting, must return new pos.
+		on_offset = function(pos) return pos end,
+
+		-- Schematic table.
 		schematic = nil,
 	}, def)
 
@@ -29,6 +41,19 @@ local metatable = {
 	-- Convert relative position to absolute position.
 	at = function(self, pos)
 		return self._at(pos)
+	end,
+
+	-- Convert relative facing direction to absolute direction.
+	dir = function(self, o)
+		if self.rotation == 0 then
+			return o
+		elseif self.rotation == 1 then
+			return vector.new(o.z, o.y, -o.x)
+		elseif self.rotation == 2 then
+			return vector.new(-o.x, o.y, -o.z)
+		elseif self.rotation == 3 then
+			return vector.new(-o.z, o.y, o.x)
+		end
 	end,
 
 	-- Get all placeholder <n> nodes.
@@ -86,9 +111,10 @@ local metatable = {
 	end,
 }
 
-function aurum.features.structure_context(box, at)
+function aurum.features.structure_context(box, at, rotation)
 	return setmetatable({
 		box = box,
+		rotation = rotation,
 		_at = at,
 		_ph = {},
 	}, {__index = metatable})
@@ -111,6 +137,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	for _,def in pairs(aurum.features.decorations) do
 		if def.biome_map[biome_name] then
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
+				local pos = def.on_offset(pos)
+
 				-- Random rotation 0 to 270 degrees.
 				local rotation = math.random(0, 3)
 
@@ -130,18 +158,20 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 				local function at(offset)
 					local actual = vector.new(0, offset.y, 0)
-					if rotation % 4 == 0 then
+					if rotation == 0 then
 						actual.x = offset.x
 						actual.z = offset.z
-					elseif rotation % 4 == 1 then
+					elseif rotation == 1 then
+						actual.z = limit.x - offset.x
 						actual.x = offset.z
+					elseif rotation == 2 then
+						actual.x = limit.x - offset.x
+						actual.z = limit.z - offset.z
+					elseif rotation == 3 then
 						actual.z = offset.x
-					elseif rotation % 4 == 2 then
-						actual.z = limit.x - offset.x
-						actual.x = offset.z
-					elseif rotation % 4 == 3 then
-						actual.z = limit.x - offset.x
 						actual.x = limit.z - offset.z
+					else
+						error("invalid rotation: " .. rotation)
 					end
 					return vector.add(real_pos, actual)
 				end
@@ -149,13 +179,13 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				if prob(def.rarity) then
 					-- Place schematic.
 					local rotname = {"0", "90", "180", "270"}
-					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true, {place_center_x = true, place_center_z = true})
+					minetest.place_schematic(pos, def.schematic, rotname[rotation + 1], {}, true, {place_center_x = true, place_center_z = true})
 
 					-- Run callback.
 					def.on_generated(aurum.features.structure_context(aurum.box.new(
 						at(vector.new(0, 0, 0)),
 						at(limit)
-					), at))
+					), at, rotation))
 				end
 			end
 		end

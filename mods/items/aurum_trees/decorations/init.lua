@@ -11,7 +11,7 @@ function aurum.trees.schematic(size, nodes)
 		for z,zn in ipairs(yn) do
 			local z = #yn - z
 			for x,xn in ipairs(zn) do
-				local x = (x - 1)
+				local x = x - 1
 				local pos = vector.new(x, y, z)
 				assert(area:containsp(pos))
 				local nd = type(xn) == "string" and {name = xn, prob = 255} or xn

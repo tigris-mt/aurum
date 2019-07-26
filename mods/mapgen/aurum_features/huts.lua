@@ -24,9 +24,9 @@ aurum.features.register_decoration{
 		},
 		{
 			{op, op, op, op, op},
+			{op, "aurum_features:ph_1", air, "aurum_features:ph_1", op},
 			{op, air, air, air, op},
-			{op, air, air, air, op},
-			{op, "aurum_features:ph_1", air, air, op},
+			{op, "aurum_features:ph_1", air, "aurum_features:ph_1", op},
 			{op, op, air, op, op},
 			{air, air, air, air, air},
 		},
@@ -40,16 +40,16 @@ aurum.features.register_decoration{
 		},
 	}),
 
-	on_generated = function(box, at)
-		for _,bpos in ipairs(minetest.find_nodes_in_area(box.a, box.b, "aurum_features:ph_1")) do
-			minetest.set_node(bpos, {name = "aurum_storage:box"})
-			local inv = minetest.get_meta(bpos):get_inventory()
+	on_generated = function(c)
+		local ph = c:ph(1)
 
-			for _,stack in ipairs(treasurer.select_random_treasures(10, 0, 2, "building_block")) do
-				inv:add_item("main", stack)
-			end
+		minetest.set_node(ph[1], {name = "aurum_storage:box"})
+		local inv = minetest.get_meta(ph[1]):get_inventory()
 
-			inv:set_list("main", table.shuffled(inv:get_list("main")))
+		for _,stack in ipairs(treasurer.select_random_treasures(10, 0, 2, "building_block")) do
+			inv:add_item("main", stack)
 		end
+
+		inv:set_list("main", table.shuffled(inv:get_list("main")))
 	end,
 }

@@ -25,6 +25,31 @@ for i=1,99 do
 	})
 end
 
+local metatable = {
+	at = function(self, pos)
+		return self._at(pos)
+	end,
+	ph = function(self, n)
+		if self._ph[n] then
+			return self._ph[n]
+		end
+		local poses = table.shuffled(minetest.find_nodes_in_area(self.box.a, self.box.b, "aurum_features:ph_" .. n))
+		self._ph[n] = poses
+		for _,pos in ipairs(poses) do
+			minetest.remove_node(pos)
+		end
+		return poses
+	end,
+}
+
+function aurum.features.structure_context(box, at)
+	return setmetatable({
+		box = box,
+		_at = at,
+		_ph = {},
+	}, {__index = metatable})
+end
+
 minetest.register_on_generated(function(minp, maxp, seed)
 	local center = vector.divide(vector.add(minp, maxp), 2)
 	local biome = minetest.get_biome_data(center)
@@ -84,10 +109,10 @@ minetest.register_on_generated(function(minp, maxp, seed)
 					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true, {place_center_x = true, place_center_z = true})
 
 					-- Run callback.
-					def.on_generated(aurum.box.new(
-							at(vector.new(0, 0, 0)),
-							at(limit)
-						), at)
+					def.on_generated(aurum.features.structure_context(aurum.box.new(
+						at(vector.new(0, 0, 0)),
+						at(limit)
+					), at))
 				end
 			end
 		end

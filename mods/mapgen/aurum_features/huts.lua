@@ -3,7 +3,7 @@ local air = "air"
 
 aurum.features.register_decoration{
 	place_on = {"group:soil"},
-	rarity = 0.001,
+	rarity = 0.000005,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
 	schematic = aurum.trees.schematic(vector.new(5, 4, 6), {
 		{

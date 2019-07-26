@@ -59,17 +59,15 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		return
 	end
 
-	local rng = PseudoRandom(seed)
-
 	local function prob(chance)
-		return rng:next() / 32767 <= chance
+		return math.random() <= chance
 	end
 
 	for _,def in pairs(aurum.features.decorations) do
 		if def.biome_map[biome_name] then
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
-				-- Random rotation 0 to 3.
-				local rotation = rng:next() % (3 + 1)
+				-- Random rotation 0 to 270 degrees.
+				local rotation = math.random(0, 3)
 
 				-- Calculate limit.
 				local limit = vector.subtract(def.schematic.size, 1)

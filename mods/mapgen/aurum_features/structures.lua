@@ -26,9 +26,13 @@ for i=1,99 do
 end
 
 local metatable = {
+	-- Convert relative position to absolute position.
 	at = function(self, pos)
 		return self._at(pos)
 	end,
+
+	-- Get all placeholder <n> nodes.
+	-- First call will cache positions and remove actual placeholder nodes.
 	ph = function(self, n)
 		if self._ph[n] then
 			return self._ph[n]
@@ -39,6 +43,46 @@ local metatable = {
 			minetest.remove_node(pos)
 		end
 		return poses
+	end,
+
+	-- Random function. Could potentially use seed.
+	random = function(self, ...)
+		return math.random(...)
+	end,
+
+	-- Shuffled function. Could potentially use seed.
+	shuffled = function(self, ...)
+		return table.shuffled(...)
+	end,
+
+	-- Add treasures to list at pos.
+	treasures = function(self, pos, listname, count, loot)
+		local inv = minetest.get_meta(pos):get_inventory()
+
+		local shuffled = self:shuffled(loot)
+		local ti = 0
+		for i=1,count do
+			ti = ti + 1
+			if ti > #shuffled then
+				ti = 1
+			end
+
+			local search = shuffled[ti]
+			if search then
+				for _,stack in ipairs(treasurer.select_random_treasures(
+					search.count,
+					search.preciousness[1],
+					search.preciousness[2],
+					search.groups
+				) or {}) do
+					-- Ignore overflow.
+					inv:add_item(listname, stack)
+				end
+			end
+		end
+
+		-- Shuffle inventory slots.
+		inv:set_list(listname, self:shuffled(inv:get_list(listname)))
 	end,
 }
 

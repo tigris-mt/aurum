@@ -44,12 +44,12 @@ aurum.features.register_decoration{
 		local ph = c:ph(1)
 
 		minetest.set_node(ph[1], {name = "aurum_storage:box"})
-		local inv = minetest.get_meta(ph[1]):get_inventory()
-
-		for _,stack in ipairs(treasurer.select_random_treasures(10, 0, 2, "building_block")) do
-			inv:add_item("main", stack)
-		end
-
-		inv:set_list("main", table.shuffled(inv:get_list("main")))
+		c:treasures(ph[1], "main", c:random(2, 4), {
+			{
+				count = math.random(1, 3),
+				preciousness = {0, 2},
+				groups = {"building_block"},
+			},
+		})
 	end,
 }

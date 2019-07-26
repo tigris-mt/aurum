@@ -12,7 +12,7 @@ end)
 
 gequip.register_action("aurum_equip:armor", {
 	init = function(state)
-		state.armor = gdamage.armor_defaults(1)
+		state.armor = table.copy(gdamage.armor_defaults(1))
 	end,
 
 	add = function(state, r)
@@ -31,7 +31,7 @@ gequip.register_action("aurum_equip:armor", {
 
 gequip.register_action("aurum_equip:effects", {
 	init = function(state)
-		state.effects = default_effects
+		state.effects = table.copy(default_effects)
 	end,
 
 	add = function(state, r)

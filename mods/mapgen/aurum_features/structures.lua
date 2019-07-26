@@ -43,12 +43,23 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	for _,def in pairs(aurum.features.decorations) do
 		if def.biome_map[biome_name] then
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
+				-- Random rotation 0 to 3.
 				local rotation = rng:next() % (3 + 1)
+
+				-- Calculate limit.
 				local limit = vector.subtract(def.schematic.size, 1)
 				if rotation == 1 or rotation == 3 then
 					limit = vector.new(limit.z, limit.y, limit.x)
 				end
-				local rotname = {"0", "90", "180", "270"}
+
+				-- Center offset.
+				local halflimit = vector.apply(vector.divide(limit, 2), function(v)
+					return math.sign(v) * math.floor(math.abs(v))
+				end)
+
+				-- Shift pos by center offset.
+				local real_pos = table.combine(vector.subtract(pos, halflimit), {y = pos.y})
+
 				local function at(offset)
 					local actual = vector.new(0, offset.y, 0)
 					if rotation % 4 == 0 then
@@ -64,10 +75,15 @@ minetest.register_on_generated(function(minp, maxp, seed)
 						actual.z = limit.x - offset.x
 						actual.x = limit.z - offset.z
 					end
-					return vector.add(pos, actual)
+					return vector.add(real_pos, actual)
 				end
+
 				if prob(def.rarity) then
-					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true)
+					-- Place schematic.
+					local rotname = {"0", "90", "180", "270"}
+					minetest.place_schematic(pos, def.schematic, rotname[rotation], {}, true, {place_center_x = true, place_center_z = true})
+
+					-- Run callback.
 					def.on_generated(aurum.box.new(
 							at(vector.new(0, 0, 0)),
 							at(limit)

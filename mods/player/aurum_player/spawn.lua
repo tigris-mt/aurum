@@ -11,16 +11,18 @@ minetest.register_on_respawnplayer(function(player)
 	end
 end)
 
--- If no static spawn is set, respawn in aurum.
+-- If no static spawn is set, respawn in the spawn realm.
+local realm_spawn = minetest.settings:get("aurum.spawn_realm") or "aurum:aurum"
 if not minetest.settings:get("static_spawnpoint") then
 	local function aurum_spawn(player)
 		-- Get default realm spawn.
 		-- Can be overriden by setting for debug purposes.
-		local start = aurum.realms.get_spawn(minetest.settings:get("aurum.spawn_realm") or "aurum:aurum")
+		local start = aurum.realms.get_spawn(realm_spawn)
 		local finish = vector.add(start, vector.new(0, 16, 0))
 		minetest.emerge_area(start, finish, function(_, _, remaining)
 			if remaining <= 0 and not minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
-				aurum.player.teleport(player, start)
+				-- Teleport to recalculated spawn point.
+				aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
 			end
 		end)
 	end

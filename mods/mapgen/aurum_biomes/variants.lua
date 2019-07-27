@@ -4,7 +4,6 @@ function aurum.biomes.v_base(def)
 	}, def)
 end
 
-
 function aurum.biomes.v_ocean(def)
 	return table.combine({
 		node_top = "aurum_base:sand",

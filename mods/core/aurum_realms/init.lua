@@ -120,6 +120,7 @@ function m.register(id, def)
 			node_stone = "aurum_base:stone",
 			node_water = "aurum_base:water_source",
 			node_river_water = "aurum_base:river_water_source",
+			depth_filler = 0,
 			node_riverbed = "aurum_base:sand",
 			depth_riverbed = 2,
 			node_cave_liquid = {"aurum_base:water_source", "aurum_base:lava_source"},

@@ -25,6 +25,10 @@ aurum.realms.register("aurum:loom", {
 	end,
 
 	biome_default = {
+		node_top = "aurum_base:regret",
+		node_filler = "aurum_base:regret",
+		node_riverbed = "aurum_base:regret",
+		node_stone = "aurum_base:regret",
 		node_water = "aurum_base:lava_source",
 		node_river_water = "aurum_base:lava_source",
 		node_cave_liquid = {"aurum_base:lava_source"},

@@ -31,7 +31,7 @@ minetest.register_chatcommand("rteleport", {
 			return false, "No such realm."
 		end
 
-		player:set_pos(aurum.realms.get_spawn(param))
+		aurum.player.teleport(player, aurum.realms.get_spawn(param))
 		return true, "Teleported to " .. minetest.pos_to_string(player:get_pos())
 	end,
 })

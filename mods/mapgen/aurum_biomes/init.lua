@@ -98,3 +98,4 @@ end
 aurum.dofile("variants.lua")
 
 aurum.dofile("biomes/aurum.lua")
+aurum.dofile("biomes/loom.lua")

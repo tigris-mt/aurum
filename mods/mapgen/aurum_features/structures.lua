@@ -138,12 +138,13 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		if def.biome_map[biome_name] then
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
 				local pos = def.on_offset(pos)
+				local schematic = def.schematic or def.make_schematic(pos, math.random)
 
 				-- Random rotation 0 to 270 degrees.
 				local rotation = math.random(0, 3)
 
 				-- Calculate limit.
-				local limit = vector.subtract(def.schematic.size, 1)
+				local limit = vector.subtract(schematic.size, 1)
 				if rotation == 1 or rotation == 3 then
 					limit = vector.new(limit.z, limit.y, limit.x)
 				end
@@ -179,7 +180,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				if prob(def.rarity) then
 					-- Place schematic.
 					local rotname = {"0", "90", "180", "270"}
-					minetest.place_schematic(pos, def.schematic, rotname[rotation + 1], {}, true, {place_center_x = true, place_center_z = true})
+					minetest.place_schematic(pos, schematic, rotname[rotation + 1], {}, true, {place_center_x = true, place_center_z = true})
 
 					-- Run callback.
 					def.on_generated(aurum.features.structure_context(aurum.box.new(

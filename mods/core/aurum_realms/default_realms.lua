@@ -31,5 +31,7 @@ aurum.realms.register("aurum:loom", {
 		node_water = "aurum_base:lava_source",
 		node_river_water = "aurum_base:lava_source",
 		node_cave_liquid = {"aurum_base:lava_source"},
+		node_dungeon = "aurum_base:regret_brick",
+		node_dungeon_stair = "aurum_base:regret_brick",
 	},
 })

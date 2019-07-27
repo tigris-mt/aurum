@@ -11,12 +11,11 @@ aurum.realms.register("aurum:loom", {
 
 	apply_player = function(player)
 		player:set_sky("#110000", "plain", {})
-		player:set_clouds(table.combine(aurum.realms.cloud_defaults, {
-			density = 0.4,
+		player:set_clouds{
 			color = "#550000ff",
 			speed = {x = 0, z = -200},
 			height = 600,
-		}))
+		}
 
 		aurum.realms.check_underground(player, -100, function()
 			player:set_sky(0, "plain", {})

@@ -77,17 +77,6 @@ local function get_position(realm)
 	return store.corner
 end
 
--- Default cloud values.
--- To be used with table.combine in apply_player.
-aurum.realms.cloud_defaults = {
-	density = 0.4,
-	color = "#fff0f0e5",
-	ambient = "#000000",
-	thickness = 16,
-	speed = {x = 0, z = -2},
-	height = tonumber(minetest.settings:get("cloud_height")) or 120,
-}
-
 -- Register a new realm.
 function m.register(id, def)
 	assert(not realms[id], "realm already exists")
@@ -105,9 +94,6 @@ function m.register(id, def)
 
 		-- Apply client-side appearances.
 		apply_player = function(player)
-			player:set_sky({}, "regular", {})
-			player:set_clouds(aurum.realms.cloud_defaults)
-
 			aurum.realms.check_underground(player, -100, function()
 				player:set_sky(0, "plain", {})
 				player:set_clouds{density = 0}

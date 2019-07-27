@@ -63,7 +63,7 @@ function aurum.biomes.get_all_group(group, variants)
 			end
 		end
 		if ok then
-			for _,v in ipairs(variants) do
+			for _,v in ipairs(variants or table.keys(def._variants)) do
 				if def._variants[v] then
 					table.insert(ret, add_suffix(def.name, v))
 				end

@@ -65,6 +65,10 @@ function aurum.box.new_radius(center, radius)
 	return aurum.box.new(vector.sub(center, radius), vector.add(center, radius))
 end
 
+function aurum.box.voxelarea(box)
+	return VoxelArea:new{MinEdge=box.a, MaxEdge=box.b}
+end
+
 function aurum.box.iterate(box)
 	local poses = {}
 	local box = aurum.box.extremes(box)

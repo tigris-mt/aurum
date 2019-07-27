@@ -49,3 +49,15 @@ function aurum.player.teleport(player, pos)
 	player:set_pos(pos)
 	aurum.player.realm_refresh(player)
 end
+
+function aurum.player.teleport_guarantee(player, box, after)
+	local name = player:get_player_name()
+	minetest.emerge_area(box.a, box.b, function(_, _, remaining)
+		if remaining <= 0 then
+			local player = minetest.get_player_by_name(name)
+			if player then
+				after(player)
+			end
+		end
+	end)
+end

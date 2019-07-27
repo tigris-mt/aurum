@@ -15,15 +15,13 @@ end)
 local realm_spawn = minetest.settings:get("aurum.spawn_realm") or "aurum:aurum"
 if not minetest.settings:get("static_spawnpoint") then
 	local function aurum_spawn(player)
-		-- Get default realm spawn.
-		-- Can be overriden by setting for debug purposes.
-		local start = aurum.realms.get_spawn(realm_spawn)
-		local finish = vector.add(start, vector.new(0, 16, 0))
-		minetest.emerge_area(start, finish, function(_, _, remaining)
-			if remaining <= 0 and not minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
-				-- Teleport to recalculated spawn point.
-				aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
-			end
+		-- If the player has a spawn point, do nothing.
+		if minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
+			return
+		end
+
+		aurum.player.teleport_guarantee(player, aurum.box.new_add(aurum.realms.get_spawn(realm_spawn), vector.new(0, 150, 0)), function(player)
+			aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
 		end)
 	end
 

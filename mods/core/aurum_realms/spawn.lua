@@ -3,8 +3,8 @@ function aurum.realms.get_spawn(id)
 	local pos = aurum.gpos(id, vector.new(0, 0, 0))
 	pos = table.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
 
-	for y=0,75 do
-		local t = vector.add(pos, y)
+	for y=0,150 do
+		local t = vector.add(pos, vector.new(0, y, 0))
 		local function above(n)
 			return aurum.force_get_node(vector.add(t, vector.new(0, n, 0))).name
 		end
@@ -31,7 +31,9 @@ minetest.register_chatcommand("rteleport", {
 			return false, "No such realm."
 		end
 
-		aurum.player.teleport(player, aurum.realms.get_spawn(param))
-		return true, "Teleported to " .. minetest.pos_to_string(player:get_pos())
+		aurum.player.teleport_guarantee(player, aurum.box.new_add(aurum.realms.get_spawn(param), vector.new(0, 150, 0)), function(player)
+			aurum.player.teleport(player, aurum.realms.get_spawn(param))
+		end)
+		return true, "Teleporting to " .. param
 	end,
 })

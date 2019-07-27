@@ -50,6 +50,11 @@ function aurum.box.new(a, b)
 	return {a = a, b = b}
 end
 
+-- From addition
+function aurum.box.new_add(a, b)
+	return aurum.box.new(a, vector.add(a, b))
+end
+
 -- From entity collision box.
 function aurum.box.new_cbox(box)
     return aurum.geometry.Box.new(vector.new(box[1], box[2], box[3]), vector.new(box[4], box[5], box[6]))

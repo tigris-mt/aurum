@@ -7,7 +7,7 @@ aurum.realms.register("aurum:aurum", {
 
 aurum.realms.register("aurum:loom", {
 	description = S("The Loom"),
-	size = vector.new(8000, 1600, 8000),
+	size = vector.new(4000, 800, 4000),
 
 	apply_player = function(player)
 		player:set_sky("#110000", "plain", {})

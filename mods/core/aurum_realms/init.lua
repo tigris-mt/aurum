@@ -10,6 +10,7 @@ local function save()
 end
 
 local realms = {}
+m.realms = realms
 
 -- Realm sizes must be aligned
 m.ALIGN = 16

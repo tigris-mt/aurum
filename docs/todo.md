@@ -5,9 +5,6 @@
 	* Hostile
 	* NPC
 * Teleportation
-	* Each block in Aurum and the Horti is connected to a psuedorandom block in the Loom (probably on the same Y level).
-		* By building portals to the Loom or from the Loom to each specific realm, you can travel between them all.
-	* The Aether is connected similiarly to the Loom, but in proportion rather than randomly.
 
 # Extended Gameplay
 * Dye

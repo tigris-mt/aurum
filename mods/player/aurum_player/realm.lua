@@ -50,14 +50,22 @@ function aurum.player.teleport(player, pos)
 	aurum.player.realm_refresh(player)
 end
 
-function aurum.player.teleport_guarantee(player, box, after)
+function aurum.player.teleport_guarantee(player, box, after, cancel)
+	cancel = cancel or function(player) return false end
 	local name = player:get_player_name()
+	local cancelled = false
 	minetest.emerge_area(box.a, box.b, function(_, _, remaining)
-		if remaining <= 0 then
-			local player = minetest.get_player_by_name(name)
-			if player then
-				after(player)
-			end
+		local player = minetest.get_player_by_name(name)
+		if not player then
+			cancelled = true
+		end
+		if cancelled then
+			return
+		end
+		if cancel(player) then
+			cancelled = true
+		elseif remaining <= 0 then
+			after(player)
 		end
 	end)
 end

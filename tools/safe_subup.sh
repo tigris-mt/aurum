@@ -4,6 +4,7 @@ set -e
 # Modules developed alongside aurum. They are safe to update regularly with no chance of breakage.
 SAFE="
 	mods/core/gdamage
+	mods/core/gnode_augment
 	mods/env/fire
 	mods/items/bucket
 	mods/player/gequip

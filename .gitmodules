@@ -55,3 +55,6 @@
 [submodule "mods/treasurer/tsm_agnostic_dungeon"]
 	path = mods/treasurer/tsm_agnostic_dungeon
 	url = https://github.com/tigris-mt/tsm_agnostic_dungeon
+[submodule "mods/core/gnode_augment"]
+	path = mods/core/gnode_augment
+	url = https://github.com/tigris-mt/gnode_augment

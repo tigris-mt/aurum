@@ -1,0 +1,8 @@
+# Shall lava cool into solid material when next to water?
+aurum.base.cool_lava (Enable Lava Cooling) bool true
+
+# Changes the general biome size by proportion.
+aurum.biome_size (Biome Size) float 1
+
+# Controls the base maximum HP for players.
+aurum.player.hp_max (Maximum Player HP) int 100

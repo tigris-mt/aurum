@@ -126,9 +126,11 @@ function m.register(name, def)
 			minetest.remove_node(pos)
 
 			local function remove_force_place(schematic)
-				for _,v in ipairs(schematic.data) do
+				local ret = table.copy(schematic)
+				for _,v in ipairs(ret.data) do
 					v.force_place = nil
 				end
+				return ret
 			end
 
 			minetest.place_schematic(pos, remove_force_place(d.schematic), d.rotation, {}, false, d.flags)

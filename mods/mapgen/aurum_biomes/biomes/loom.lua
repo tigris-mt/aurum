@@ -16,3 +16,20 @@ aurum.biomes.register_all("aurum:loom", {
 		under = aurum.biomes.v_under{},
 	},
 })
+
+minetest.register_decoration{
+	name = "loom_fire",
+	decoration = "fire:permanent_flame",
+	deco_type = "simple",
+	place_on = {"aurum_base:regret"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0,
+		scale = 0.05,
+		spread = vector.new(200, 200, 200),
+		seed = 99,
+		octaves = 3,
+		persist = 0.5,
+	},
+	biomes = aurum.biomes.get_all_group("aurum:loom"),
+}

@@ -7,7 +7,7 @@ aurum.magic.register_spell("extinguish", {
 	apply = function(pointed_thing, level, player)
 		local pos = vector.round(minetest.get_pointed_thing_position(pointed_thing) or player:get_pos())
 
-		for _,pos in ipairs(minetest.find_nodes_in_area(vector.subtract(pos, level), vector.add(pos, level), "fire:basic_flame")) do
+		for _,pos in ipairs(minetest.find_nodes_in_area(vector.subtract(pos, level), vector.add(pos, level), {"fire:basic_flame", "fire:permanent_flame"})) do
 			minetest.remove_node(pos)
 		end
 

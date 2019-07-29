@@ -1,3 +1,4 @@
+local S = minetest.get_translator()
 local m = aurum.trees
 
 m.register("aurum_trees:oak", {
@@ -19,4 +20,9 @@ m.register("aurum_trees:pander", {
 		wide = false,
 		very_tall = true,
 	},
+})
+
+m.register("aurum_trees:drywood", {
+	description = "Drywood",
+	texture_base = "aurum_trees_drywood_%s.png",
 })

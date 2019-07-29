@@ -8,13 +8,33 @@ end
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_barrens",
 	_groups = {"barren"},
-	heat_point = 30,
-	humidity_point = 30,
+	heat_point = 80,
+	humidity_point = 20,
 	_variants = {
 		base = aurum.biomes.v_base{},
 		ocean = v_ocean{},
 		under = aurum.biomes.v_under{},
 	},
+})
+
+aurum.biomes.register_all("aurum:loom", {
+	name = "loom_forest",
+	_groups = {"forest"},
+	heat_point = 50,
+	humidity_point = 50,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:dirt",
+			depth_top = 2,
+		},
+		ocean = v_ocean{},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:drywood",
+	biomes = {"loom_forest"},
 })
 
 minetest.register_decoration{

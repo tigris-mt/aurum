@@ -86,3 +86,19 @@ function table.shuffled(t)
 	end
 	return ret
 end
+
+function aurum.weighted_choice(t)
+	local total = 0
+	for _,v in ipairs(t) do
+		total = total + v[2]
+	end
+
+	local index = math.random() * total
+
+	for _,v in ipairs(t) do
+		index = index - v[2]
+		if index <= 0 then
+			return v[1]
+		end
+	end
+end

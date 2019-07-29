@@ -26,7 +26,7 @@ function m.register(name, def)
 	}, def, {
 		name = name,
 
-		-- What decoration schematics should be included?
+		-- What decoration schematics should be included, and at what weight?
 		decorations = table.combine({
 			simple = 1,
 			wide = 1,
@@ -112,14 +112,20 @@ function m.register(name, def)
 					return false
 				end
 			end
+
 			-- Ensure we're on valid terrain.
 			local below = vector.add(pos, vector.new(0, -1, 0))
 			if #minetest.find_nodes_in_area(below, below, def.terrain) == 0 then
 				return false
 			end
+
 			-- Select and place a random schematic.
-			local dk = table.keys(def.decodefs)
-			local d = def.decodefs[dk[math.random(#dk)]]
+			local dkp = {}
+			for k,v in pairs(def.decorations) do
+				table.insert(dkp, {k, v})
+			end
+			local dk = aurum.weighted_choice(dkp)
+			local d = def.decodefs[dk]
 			minetest.remove_node(pos)
 
 			local function remove_force_place(schematic)
@@ -168,7 +174,7 @@ function m.register(name, def)
 		},
 	})
 
-	for n in pairs(table.map(def.decorations, function(v) return v or nil end)) do
+	for n in pairs(table.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
 		def.decodefs[n] = {
 			schematic = aurum.dofile("decorations/" .. n .. ".lua")(def),
 			rotation = "random",

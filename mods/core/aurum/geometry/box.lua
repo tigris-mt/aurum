@@ -69,7 +69,7 @@ function aurum.box.voxelarea(box)
 	return VoxelArea:new{MinEdge=box.a, MaxEdge=box.b}
 end
 
-function aurum.box.iterate(box)
+function aurum.box.iterate(box, sort_near)
 	local poses = {}
 	local box = aurum.box.extremes(box)
 	for x=box.a.x,box.b.x do
@@ -78,6 +78,11 @@ function aurum.box.iterate(box)
 				table.insert(poses, vector.new(x, y, z))
 			end
 		end
+	end
+	if sort_near then
+		table.sort(poses, function(a, b)
+			return vector.distance(sort_near, a) < vector.distance(sort_near, b)
+		end)
 	end
 	return poses
 end

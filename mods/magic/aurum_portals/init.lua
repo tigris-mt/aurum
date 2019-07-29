@@ -1,6 +1,8 @@
 local S = minetest.get_translator()
 aurum.portals = {}
 
+local RADIUS = vector.new(16, 16, 16)
+
 -- Convert <pos> in realm <from> to the proportional position in realm <to>.
 function aurum.portals.relative_pos(from, to, pos)
 	local from = aurum.realms.get(from)
@@ -77,7 +79,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 	local function landing_point(search)
 		local pos = aurum.portals.relative_pos(from_realm, to_realm, from_pos)
 		if search then
-			local box = aurum.box.new_radius(pos, vector.new(8, 8, 8))
+			local box = aurum.box.new_radius(pos, RADIUS)
 			local poses = minetest.find_nodes_in_area(box.a, box.b, "aurum_portals:portal_" .. from_realm)
 			-- There's an existing portal.
 			if #poses > 0 then
@@ -102,7 +104,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 		return pos
 	end
 
-	aurum.player.teleport_guarantee(player, aurum.box.new_radius(landing_point(), vector.new(8, 8, 8)), function(player)
+	aurum.player.teleport_guarantee(player, aurum.box.new_radius(landing_point(), RADIUS), function(player)
 		local pos = landing_point(true)
 		if pos then
 			aurum.player.teleport(player, vector.add(pos, vector.new(0, 0.5, 0)))

@@ -36,7 +36,7 @@ local function make(size, sign)
 end
 
 aurum.features.register_decoration{
-	place_on = {"aurum_base:regret"},
+	place_on = {"aurum_base:regret", "aurum_base:dirt"},
 	rarity = 0.001,
 	biomes = aurum.biomes.get_all_group("aurum:loom", {"base"}),
 

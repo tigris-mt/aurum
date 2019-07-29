@@ -37,10 +37,13 @@ doc.add_category("rituals", {
 		fs = fs .. doc.widgets.text(table.concat(text, "\n\n"), nil, nil, w / 3)
 
 		x = x + w / 3 + 0.5
-		y = y + 0.5
+		y = y + 0.25
 
 		local total = vector.subtract(def.size.b, def.size.a)
-		local scale = math.min(1, 3 / total.y, 7 / total.x)
+		local scale = {
+			x = math.min(1, 7 / (total.x + 1)),
+			y = math.min(1, 3 / (total.y + 1), 2.5 / (total.z + 1))
+		}
 
 		for _,pos in ipairs(aurum.box.iterate(def.size)) do
 			local rpos = vector.subtract(pos, def.size.a)
@@ -57,9 +60,9 @@ doc.add_category("rituals", {
 			end
 			local image_name = ("%d_%d_%d"):format(pos.x, pos.y, pos.z)
 			if node then
-				fs = fs .. ("item_image_button[%d,%d;%d,%d;%s;%s;%d,%d,%d%s]"):format(
-					x + rpos.x, y + rpos.z + (total.y - rpos.y) * (total.y + scale),
-					scale, scale,
+				fs = fs .. ("item_image_button[%f,%f;%f,%f;%s;%s;%d,%d,%d%s]"):format(
+					x + rpos.x * scale.x, y + (rpos.z + (total.y - rpos.y) * (total.z + 2)) * scale.y,
+					scale.x, scale.y,
 					node,
 					image_name,
 					pos.x, pos.y, pos.z,

@@ -17,7 +17,7 @@ function aurum.magic.register_ritual(name, def)
 		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 0, 1)),
 
 		-- List of {<relative pos>, <node>}. Accepts group:name item strings.
-		-- Altar sits at 0,0,0 with -x going up according to the arrows on the altar and -z going to the left.
+		-- Altar sits at 0,0,0 with -z going up according to the arrows on the altar and -x going to the left.
 		recipe = {},
 
 		-- Apply the ritual.

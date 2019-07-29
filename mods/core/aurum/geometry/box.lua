@@ -62,7 +62,7 @@ end
 
 -- From radius
 function aurum.box.new_radius(center, radius)
-	return aurum.box.new(vector.sub(center, radius), vector.add(center, radius))
+	return aurum.box.new(vector.subtract(center, radius), vector.add(center, radius))
 end
 
 function aurum.box.voxelarea(box)

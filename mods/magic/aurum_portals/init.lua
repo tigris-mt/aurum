@@ -5,12 +5,13 @@ function aurum.portals.relative_pos(from, to, pos)
 	local from = aurum.realms.get(from)
 	local to = aurum.realms.get(to)
 
-	return vector.round(vector.multiply(pos, vector.divide(to.size, from.size)))
+	return aurum.gpos(to.id, vector.round(vector.multiply(aurum.rpos(from.id, pos), vector.divide(to.size, from.size))))
 end
 
 local base_def = {
 	description = S"Portal Base",
-	_doc_items_longdesc = S"A slab of golden power. It is perfectly clean, for dust vanishes upon touching it.",
+	-- The flavor dust vanishes into another realm.
+	_doc_items_longdesc = S"A slab of golden power. It is perfectly clean; dust vanishes upon touching it.",
 	tiles = {"aurum_portals_base.png"},
 
 	drawtype = "nodebox",
@@ -44,6 +45,11 @@ minetest.register_craft{
 local teleporting = {}
 
 function aurum.portals.teleport(player, from_pos, to_realm)
+	local from_realm = aurum.pos_to_realm(from_pos)
+	if not from_realm then
+		minetest.log("warning", ("Invalid portal teleportation attempted at %s to %s by %s."):format(minetest.pos_to_string(from_pos), to_realm, player:get_player_name()))
+		return
+	end
 	local rdef = aurum.realms.get(to_realm)
 
 	local name = player:get_player_name()
@@ -64,8 +70,13 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 	aurum.info_message(player, S("Teleporting to @1...", rdef.description))
 	teleporting[name] = key
 
-	aurum.player.teleport_guarantee(player, aurum.box.new_add(aurum.realms.get_spawn(to_realm), vector.new(0, 150, 0)), function(player)
-		aurum.player.teleport(player, aurum.realms.get_spawn(to_realm))
+	local function landing_point(create)
+		local pos = aurum.portals.relative_pos(from_realm, to_realm, from_pos)
+		return pos
+	end
+
+	aurum.player.teleport_guarantee(player, aurum.box.new_radius(landing_point(), vector.new(32, 32, 32)), function(player)
+		aurum.player.teleport(player, landing_point(true))
 		aurum.info_message(player, S("Teleported to @1.", rdef.description))
 		teleporting[name] = nil
 	end, function(player)

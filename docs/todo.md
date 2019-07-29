@@ -4,7 +4,6 @@
 	* Taming
 	* Hostile
 	* NPC
-* Teleportation
 
 # Extended Gameplay
 * Dye

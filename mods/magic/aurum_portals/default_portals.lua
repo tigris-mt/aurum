@@ -14,7 +14,7 @@ end
 local base_realms = {"aurum:aurum"}
 local hub_realms = {"aurum:loom"}
 
-function aurum.portals.register_ritual(realm, allowed_from, recipe)
+function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 	local rdef = aurum.realms.get(realm)
 
 	local allowed_desc = {}
@@ -37,7 +37,7 @@ function aurum.portals.register_ritual(realm, allowed_from, recipe)
 			end
 
 			for _,v in ipairs(recipe) do
-				minetest.remove_node(at(v[1]))
+				minetest.set_node(at(v[1]), {name = replace})
 			end
 
 			minetest.set_node(at(vector.new(0, 0, -1)), {name = "aurum_portals:portal_" .. realm})
@@ -58,4 +58,16 @@ aurum.portals.register_ritual("aurum:loom", base_realms, {
 	{vector.new(-1, 3, -1), "aurum_base:regret"},
 	{vector.new(0, 3, -1), "aurum_base:regret"},
 	{vector.new(1, 3, -1), "aurum_base:regret"},
-})
+}, "aurum_base:regret")
+
+aurum.portals.register_ritual("aurum:aurum", hub_realms, {
+	{vector.new(-1, 0, -1), "aurum_ore:gold_block"},
+	{vector.new(1, 0, -1), "aurum_ore:gold_block"},
+	{vector.new(-1, 1, -1), "aurum_ore:gold_block"},
+	{vector.new(1, 1, -1), "aurum_ore:gold_block"},
+	{vector.new(-1, 2, -1), "aurum_ore:gold_block"},
+	{vector.new(1, 2, -1), "aurum_ore:gold_block"},
+	{vector.new(-1, 3, -1), "group:soil"},
+	{vector.new(0, 3, -1), "group:soil"},
+	{vector.new(1, 3, -1), "group:soil"},
+}, "aurum_base:stone")

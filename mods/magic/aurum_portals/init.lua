@@ -123,6 +123,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 
 		if teleporting[name] ~= key then
 			aurum.info_message(player, S"Teleportation cancelled.")
+			teleporting[name] = nil
 			return true
 		end
 

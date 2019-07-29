@@ -16,11 +16,12 @@ m.register("aurum_trees:pander", {
 	description = "Pander",
 	texture_base = "aurum_trees_oak_%s.png^[colorize:#001100:160",
 	decorations = {
-		simple = false,
-		wide = false,
-		very_tall = true,
-		huge = true,
-		giant = true,
+		simple = 0,
+		wide = 0,
+		wide = 0,
+		very_tall = 1,
+		huge = 0.25,
+		giant = 0.1,
 	},
 })
 
@@ -28,6 +29,7 @@ m.register("aurum_trees:drywood", {
 	description = "Drywood",
 	texture_base = "aurum_trees_drywood_%s.png",
 	decorations = {
-		huge = true,
+		very_tall = 0.5,
+		huge = 0.15,
 	},
 })

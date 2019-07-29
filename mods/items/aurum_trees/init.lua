@@ -28,17 +28,14 @@ function m.register(name, def)
 
 		-- What decoration schematics should be included?
 		decorations = table.combine({
-			simple = true,
-			wide = true,
-			double = true,
-			tall = true,
+			simple = 1,
+			wide = 1,
+			double = 1,
+			tall = 1,
+			very_tall = 0.1,
+			huge = 0.05,
+			giant = 0.01,
 		}, def.decorations or {}),
-
-		-- Decoration weight multipliers.
-		decoweights = table.combine({
-			huge = 0.25,
-			giant = 0.1,
-		}, def.decoweights or {}),
 
 		decodefs = {},
 	})

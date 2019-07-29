@@ -1,11 +1,18 @@
 local S = minetest.get_translator()
 aurum.portals = {}
 
+-- Get the center of the mapblock <pos> is in.
+local function align_center(pos)
+	local aligned = vector.multiply(vector.apply(vector.divide(pos, 16), math.floor), 16)
+	return vector.add(aligned, 8)
+end
+
+-- Get the relative, center-aligned position in <to> corresponding to <pos> in <from>.
 function aurum.portals.relative_pos(from, to, pos)
 	local from = aurum.realms.get(from)
 	local to = aurum.realms.get(to)
 
-	return aurum.gpos(to.id, vector.round(vector.multiply(aurum.rpos(from.id, pos), vector.divide(to.size, from.size))))
+	return align_center(aurum.gpos(to.id, vector.round(vector.multiply(aurum.rpos(from.id, pos), vector.divide(to.size, from.size)))))
 end
 
 local base_def = {
@@ -45,6 +52,7 @@ minetest.register_craft{
 local teleporting = {}
 
 function aurum.portals.teleport(player, from_pos, to_realm)
+	-- Check which realm we're teleporting from.
 	local from_realm = aurum.pos_to_realm(from_pos)
 	if not from_realm then
 		minetest.log("warning", ("Invalid portal teleportation attempted at %s to %s by %s."):format(minetest.pos_to_string(from_pos), to_realm, player:get_player_name()))
@@ -59,6 +67,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 		to_realm
 	)
 
+	-- If we're already teleporting to the same place, do nothing.
 	if teleporting[name] == key then
 		return
 	end
@@ -70,6 +79,8 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 	aurum.info_message(player, S("Teleporting to @1...", rdef.description))
 	teleporting[name] = key
 
+	-- Find a landing point.
+	-- If create is true, then create one if needed.
 	local function landing_point(create)
 		local pos = aurum.portals.relative_pos(from_realm, to_realm, from_pos)
 		return pos

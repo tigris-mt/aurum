@@ -19,6 +19,8 @@ m.register("aurum_trees:pander", {
 		simple = false,
 		wide = false,
 		very_tall = true,
+		huge = true,
+		giant = true,
 	},
 })
 

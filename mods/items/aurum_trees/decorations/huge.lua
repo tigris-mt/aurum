@@ -1,5 +1,5 @@
 return function(def)
-	local t = def.trunk
+	local t = {name = def.trunk, force_place = true}
 	local l = def.leaves
 	local lp = {name = def.leaves, prob = 127}
 

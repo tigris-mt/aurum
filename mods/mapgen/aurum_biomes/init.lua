@@ -89,7 +89,7 @@ function aurum.biomes.register_tree_decoration(def)
 			deco_type = "schematic",
 			place_on = treedef.terrain,
 			sidelen = 80,
-			fill_ratio = 0.005 * (def.rarity or 1) / #def.schematics,
+			fill_ratio = 0.005 * (def.rarity or 1) * (treedef.decoweights[k] or 1) / #def.schematics,
 			biomes = def.biomes,
 		}, d[k]))
 	end

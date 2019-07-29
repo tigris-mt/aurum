@@ -34,6 +34,12 @@ function m.register(name, def)
 			tall = true,
 		}, def.decorations or {}),
 
+		-- Decoration weight multipliers.
+		decoweights = table.combine({
+			huge = 0.25,
+			giant = 0.1,
+		}, def.decoweights or {}),
+
 		decodefs = {},
 	})
 

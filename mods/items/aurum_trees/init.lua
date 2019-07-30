@@ -14,7 +14,7 @@ m.default_decorations = {
 	giant = 0.01,
 	["cone:3"] = 1,
 	["cone:12"] = 0.005,
-	["cone:14:2"] = 0.001,
+	["cone:14:1.5"] = 0.001,
 }
 
 function m.register(name, def)

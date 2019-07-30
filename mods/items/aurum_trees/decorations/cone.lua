@@ -1,11 +1,12 @@
-return function(def, overall, trunk_ratio)
+return function(def, overall, trunk_ratio, width_ratio)
 	trunk_ratio = trunk_ratio or 1
+	width_ratio = width_ratio or 1.5
 
 	local t = {name = def.trunk, force_place = true}
 	local l = {name = def.leaves}
 	local lp = {name = def.leaves, prob = 127}
 
-	local size = vector.round(vector.new(overall * 1.5, overall * 5 + 3, overall * 1.5))
+	local size = vector.round(vector.new(overall * width_ratio, overall * 5 + 3, overall * width_ratio))
 	local limit = vector.subtract(size, 1)
 	local area = aurum.box.voxelarea(aurum.box.new(vector.new(0, 0, 0), limit))
 	local data = {}

@@ -11,6 +11,9 @@ The previous titan of the world abandoned it and let Primus Hortum and the Loom 
 You are another titan come to reverse the corruption of Aurum. Of the remaining inhabitants, some look for your coming and others hate it.
 You must conquer all realms and overtake the previous titan's power based in the Aether to become the true Titan of Aurum.
 
+## The People
+The people of Aurum (and some in Ultimus Hortum) are skeptical of you. They have seen demigods before, and as you are not yet Titan of Aurum you do not appear so different.
+
 ## Game Goals
 * Variety of environments between the realms.
 * NPCs, villages, discoverable lore.

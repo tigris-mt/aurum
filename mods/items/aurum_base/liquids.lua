@@ -110,6 +110,14 @@ minetest.register_craft{
 	},
 }
 
+minetest.register_craft{
+	output = "aurum_base:bucket_water",
+	recipe = {
+		{"aurum_base:snow"},
+		{"bucket:bucket_empty"},
+	},
+}
+
 aurum.base.register_liquid("aurum_base:river_water", {
 	description = S"River Water",
 	tiles = {

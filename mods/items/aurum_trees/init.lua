@@ -128,7 +128,11 @@ function m.register(name, def)
 			-- Select and place a random schematic.
 			local dkp = {}
 			for k,v in pairs(def.decorations) do
-				table.insert(dkp, {k, v})
+				-- Disable growing the rarest trees from saplings.
+				-- Rare trees can be huge.
+				if v >= 0.1 then
+					table.insert(dkp, {k, v})
+				end
 			end
 			local dk = aurum.weighted_choice(dkp)
 			local d = def.decodefs[dk]

@@ -169,7 +169,10 @@ function m.register(name, def)
 		_doc_items_longdesc = S"A bundle of soft leaves. They will decay when not near a trunk.",
 		sounds = aurum.sounds.leaves(),
 
-		drawtype = "allfaces_optional",
+		walkable = false,
+		climbable = true,
+
+		drawtype = "allfaces",
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,

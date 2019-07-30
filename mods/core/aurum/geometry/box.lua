@@ -69,7 +69,7 @@ function aurum.box.voxelarea(box)
 	return VoxelArea:new{MinEdge=box.a, MaxEdge=box.b}
 end
 
-function aurum.box.iterate(box, sort_near)
+function aurum.box.poses(box, sort_near)
 	local poses = {}
 	local box = aurum.box.extremes(box)
 	for x=box.a.x,box.b.x do

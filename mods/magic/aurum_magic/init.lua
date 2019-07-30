@@ -45,7 +45,7 @@ doc.add_category("rituals", {
 			y = math.min(1, 3 / (total.y + 1), 2.5 / (total.z + 1))
 		}
 
-		for _,pos in ipairs(aurum.box.iterate(def.size)) do
+		for _,pos in ipairs(aurum.box.poses(def.size)) do
 			local rpos = vector.subtract(pos, def.size.a)
 			local hash = minetest.hash_node_position(pos)
 			local node = vector.equals(pos, vector.new(0, 0, 0)) and "aurum_magic:altar" or def.hashed_recipe[hash] or ""

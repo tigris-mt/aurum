@@ -86,7 +86,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 				return poses[math.random(#poses)]
 			-- Create a new portal.
 			else
-				local poses = aurum.box.iterate(box, pos)
+				local poses = aurum.box.poses(box, pos)
 				for _,pos in ipairs(poses) do
 					local node = minetest.get_node(pos)
 					if node.name == "air" or node.name == rdef.biome_default.node_stone then

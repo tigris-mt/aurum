@@ -29,7 +29,7 @@ aurum.magic.register_spell_ritual("extinguish", {
 })
 
 local fertilizer_wall = {}
-for _,pos in ipairs(aurum.box.iterate(aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, -1)))) do
+for _,pos in ipairs(aurum.box.poses(aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, -1)))) do
 	table.insert(fertilizer_wall, {pos, "aurum_farming:fertilizer"})
 end
 aurum.magic.register_spell_ritual("growth", {

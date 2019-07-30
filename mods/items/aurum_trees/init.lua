@@ -3,6 +3,20 @@ local m = {}
 aurum.trees = m
 
 m.types = {}
+
+m.default_decorations = {
+	simple = 1,
+	wide = 1,
+	double = 1,
+	tall = 1,
+	very_tall = 0.1,
+	huge = 0.05,
+	giant = 0.01,
+	["cone:3"] = 1,
+	["cone:12"] = 0.005,
+	["cone:14:2"] = 0.001,
+}
+
 function m.register(name, def)
 	assert(not m.types[name], "tree type already exists")
 
@@ -27,15 +41,7 @@ function m.register(name, def)
 		name = name,
 
 		-- What decoration schematics should be included, and at what weight?
-		decorations = table.combine({
-			simple = 1,
-			wide = 1,
-			double = 1,
-			tall = 1,
-			very_tall = 0.1,
-			huge = 0.05,
-			giant = 0.01,
-		}, def.decorations or {}),
+		decorations = table.combine(m.default_decorations, def.decorations or {}),
 
 		decodefs = {},
 	})
@@ -175,10 +181,21 @@ function m.register(name, def)
 	})
 
 	for n in pairs(table.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
+		local split = n:split(":", true)
+		local name = split[1]
+		local params = {}
+		for i=2,#split do
+			table.insert(params, tonumber(split[i]))
+		end
+
+		local schematic, offset = aurum.dofile("decorations/" .. name .. ".lua")(def, unpack(params))
+		offset = offset or 0
+
 		def.decodefs[n] = {
-			schematic = aurum.dofile("decorations/" .. n .. ".lua")(def),
+			schematic = schematic,
 			rotation = "random",
-			flags = {place_center_x = true, place_center_y = false, place_center_z = true}
+			flags = {place_center_x = true, place_center_y = false, place_center_z = true},
+			place_offset_y = offset,
 		}
 	end
 

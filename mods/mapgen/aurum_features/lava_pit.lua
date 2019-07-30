@@ -25,7 +25,7 @@ local function make(size)
 end
 
 local list = {}
-for _,pos in ipairs(aurum.box.iterate(aurum.box.new(vector.new(1, 2, 1), vector.new(7, 6, 7)))) do
+for _,pos in ipairs(aurum.box.poses(aurum.box.new(vector.new(1, 2, 1), vector.new(7, 6, 7)))) do
 	table.insert(list, make(pos))
 end
 

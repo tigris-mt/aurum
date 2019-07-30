@@ -84,7 +84,7 @@ minetest.register_node("aurum_magic:altar", {
 
 		for k,v in pairs(aurum.magic.rituals) do
 			local function check()
-				for _,noff in ipairs(aurum.box.iterate(v.size)) do
+				for _,noff in ipairs(aurum.box.poses(v.size)) do
 					if v.protected and aurum.is_protected(at(noff), player, true) then
 						return false
 					end

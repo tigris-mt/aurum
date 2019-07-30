@@ -1,3 +1,3 @@
 aurum = {
-	VERSION = "0.18.1",
+	VERSION = "0.18.2",
 }

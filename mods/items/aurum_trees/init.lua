@@ -172,7 +172,8 @@ function m.register(name, def)
 		walkable = false,
 		climbable = true,
 
-		drawtype = "allfaces",
+		drawtype = "plantlike",
+		visual_scale = 1.4,
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,

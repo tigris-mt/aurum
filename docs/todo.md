@@ -21,10 +21,6 @@
 * Add sychophants (some kind of mob) to the jungles.
 
 # Outer Realms - See design/overview.md
-* The Loom
-	* Node-based "worm" "mob" that eats blocks.
-		* Heckweaver, eats nodes and leaves behind Heck.
-	* Always day (override player time and minetest.get_node_light).
 * Ultimus Hortum
 	* Portions of Ultimus are touched by the Loom, portals betweeb the two can be found naturally.
 	* City biome, crumbling buildings and skyscrapers.

@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 local TICK = 15
 local LENGTH = 8
-local RARITY = 30
+local RARITY = 28
 
 minetest.register_node("aurum_heckweaver:heckweaver", {
 	description = S"Heckweaver",

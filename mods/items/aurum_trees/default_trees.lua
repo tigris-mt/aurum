@@ -33,3 +33,20 @@ m.register("aurum_trees:drywood", {
 		huge = 0.15,
 	},
 })
+
+m.register("aurum_trees:pine", {
+	description = "Pine",
+	texture_base = "aurum_trees_pine_%s.png",
+	terrain = {"group:soil", "group:snow"},
+	terrain_desc = S"any dirt, soil, or snow",
+	decorations = table.combine(table.map(m.default_decorations, function(v) return 0 end), {
+		["cone:2"] = 0.1,
+		["cone:3"] = 1,
+		["cone:4"] = 1,
+		["cone:5"] = 1,
+		["cone:8"] = 0.25,
+		["cone:12"] = 0.1,
+		["cone:14:2"] = 0.05,
+		["cone:14:3"] = 0.05,
+	}),
+})

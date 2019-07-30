@@ -44,7 +44,7 @@ Toughless levels range from 0 to 3.
 	* `Flare Box`: 0-10
 * `cook_xmana=x`: This node provides up to x mana when smelted.
 * `cools_lava=1`: This node cools lava to aurum_base:stone.
-	* An alternative node can be specified in `_lava_cool_node` in def.
+	* An alternative node can be specified in `_lava_cool_node` in the lava's def.
 * `dirt_base=1`: This node can be replaced by dirt spreaders.
 * `dirt_smother=1`: This node will be replaced by dirt if an opaque block is on top of it.
 * `dirt_spread=1`: This node will spread to nodes with light.
@@ -67,6 +67,7 @@ Toughless levels range from 0 to 3.
 * `sand=1`: This node is sand.
 * `sapling=1`: This node is a sapling.
 * `scroll=1`: This item is a scroll.
+* `snow=1`: This node is snow.
 * `soil=1`: Things may grow here.
 * `soil_wet=x`: This soil is fertile and crops of level x or lower can grow here.
 	* `This soil will dry out into dirt if not near group:water.`

@@ -108,7 +108,7 @@ function m.register(name, def)
 			type = "fixed",
 			fixed = {-4 / 16, -8 / 16, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
 		},
-		walkable = true,
+		walkable = false,
 		groups = {dig_snap = 3, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
 
 		_on_grow_plant = function(pos, node)

@@ -1,5 +1,4 @@
 -- Barrens
-
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_barrens",
 	_groups = {"barren"},
@@ -21,7 +20,6 @@ aurum.biomes.register_all("aurum:aurum", {
 })
 
 -- Grassland
-
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_grassland",
 	_groups = {"green"},
@@ -52,7 +50,6 @@ aurum.biomes.register_tree_decoration({
 })
 
 -- Forest
-
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
 	_groups = table.icombine(aurum.biomes.biomes.aurum_grassland._groups, {"forest"}),
@@ -72,7 +69,6 @@ aurum.biomes.register_tree_decoration({
 })
 
 -- Jungle
-
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_jungle",
 	_groups = aurum.biomes.biomes.aurum_forest._groups,
@@ -110,4 +106,62 @@ aurum.biomes.register_all("aurum:aurum", {
 		ocean = aurum.biomes.v_ocean{},
 		under = aurum.biomes.v_under{},
 	},
+})
+
+-- Frozen
+local frozen = {
+	node_top = "aurum_base:snow",
+	depth_top = 1,
+	node_filler = "aurum_base:ice",
+	node_water_top = "aurum_base:ice",
+	depth_water_top = 10,
+	node_river_water = "aurum_base:ice",
+	node_cave_liquid = "aurum_base:ice",
+}
+
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_frozen",
+	_groups = {"frozen"},
+	heat_point = 0,
+	humidity_point = 70,
+	_variants = {
+		base = table.combine(frozen, aurum.biomes.v_base{
+			node_stone = "aurum_base:ice",
+			node_dungeon = "aurum_base:snow",
+			node_dungeon_alt = "aurum_base:snow",
+			node_dungeon_stair = "aurum_base:snow",
+		}),
+		ocean = table.combine(frozen, aurum.biomes.v_ocean{}),
+		under = aurum.biomes.v_under{},
+	},
+})
+
+-- Frozen Forest
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_frozen_forest",
+	_groups = {"frozen", "forest"},
+	heat_point = 25,
+	humidity_point = 70,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:snow",
+			depth_top = 1,
+			node_filler = "aurum_base:dirt",
+			depth_filler = 4,
+			node_water_top = "aurum_base:ice",
+			depth_water_top = 2,
+			node_river_water = "aurum_base:ice",
+		},
+		ocean = aurum.biomes.v_ocean{
+			node_river_water = "aurum_base:ice",
+			node_water_top = "aurum_base:ice",
+			depth_water_top = 2,
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:pine",
+	biomes = {"aurum_frozen_forest"},
 })

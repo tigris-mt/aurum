@@ -3,10 +3,10 @@ local HEIGHT = 4
 
 local function grow(pos, node)
 	local base = pos
-	local below
+	local below = pos
 	local bnode
 	while true do
-		below = vector.add(pos, vector.new(0, -1, 0))
+		below = vector.add(below, vector.new(0, -1, 0))
 		bnode = minetest.get_node(below)
 
 		if bnode.name == "aurum_flora:papyrus" then
@@ -24,7 +24,6 @@ local function grow(pos, node)
 		return false
 	end
 
-	local n = 1
 	for n=0,HEIGHT-1 do
 		local at = vector.add(base, vector.new(0, n, 0))
 		local atnode = minetest.get_node(at)
@@ -94,6 +93,6 @@ minetest.register_abm{
 	nodenames = {"aurum_flora:papyrus"},
 	neighbors = {"group:water"},
 	interval = 10,
-	chance = 10,
+	chance = 10 * HEIGHT / 2,
 	action = grow,
 }

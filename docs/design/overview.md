@@ -11,8 +11,24 @@ The previous titan of the world abandoned it and let Primus Hortum and the Loom 
 You are another titan come to reverse the corruption of Aurum. Of the remaining inhabitants, some look for your coming and others hate it.
 You must conquer all realms and overtake the previous titan's power based in the Aether to become the true Titan of Aurum.
 
-## The People
-The people of Aurum (and some in Ultimus Hortum) are skeptical of you. They have seen demigods before, and as you are not yet Titan of Aurum you do not appear so different.
+## Factions
+### The People
+Scattered villages of people, descendants of those who survived the corruption after the previous titan left Aurum.
+They eke out a living, but with only small fragments of the previous magical civilization.
+
+### The Remnant
+As the power of the loom brought new material from Primus Hortum into Aurum, it also pulled the old world out into the great graveyard, Ultimus Hortum.
+Some people were brought with it, and they survive by scavenging and hunting among the ruined realm.
+
+### Servitors
+The old priesthood. Unable to accept their abandonment, they continue to attempt to rule the realms like an ant colony with no queen.
+
+### Demigods
+Each realm has been overrun by an immortal demigod and their servants attempting to conquer the realms for themselves.
+They are lesser than the titans, but with the old titan having abaonded the world, they have run wild.
+
+### Loomspawn
+The natural forces of the Loom, performing their corruption.
 
 ## Game Goals
 * Variety of environments between the realms.

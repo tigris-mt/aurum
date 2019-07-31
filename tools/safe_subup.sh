@@ -7,6 +7,7 @@ SAFE="
 	mods/core/gnode_augment
 	mods/env/fire
 	mods/items/bucket
+	mods/items/dye
 	mods/player/gequip
 	mods/player/xmana
 	mods/treasurer/tsm_agnostic_dungeon

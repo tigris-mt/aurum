@@ -4,5 +4,8 @@ aurum.base.cool_lava (Enable Lava Cooling) bool true
 # Changes the general biome size by proportion.
 aurum.biome_size (Biome Size) float 1
 
+# Disables MTG-compatible dye crafting recipes in favor of dye_source.
+aurum.dye_craft.clear_old (Clear Old Dye Crafts) bool true
+
 # Controls the base maximum HP for players.
 aurum.player.hp_max (Maximum Player HP) int 100

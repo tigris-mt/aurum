@@ -33,6 +33,7 @@ Toughless levels range from 0 to 3.
 
 # Crafting
 * `dye=1`: This item is dye.
+* `dye_source=1`: This item is dye source.
 * `equipment=1`: For equipment.
 * `color_X=1`: This item provides/is color X.
 * `rod=1`: For rods.

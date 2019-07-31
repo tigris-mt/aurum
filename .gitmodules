@@ -55,3 +55,6 @@
 [submodule "mods/core/gnode_augment"]
 	path = mods/core/gnode_augment
 	url = https://github.com/tigris-mt/gnode_augment
+[submodule "mods/items/dye"]
+	path = mods/items/dye
+	url = https://github.com/tigris-mt/dye

@@ -34,6 +34,7 @@ minetest.register_craftitem("aurum_ore:mana_bean", {
 	description = S"Mana Bean",
 	_doc_items_longdesc = S"An impure nugget of mana. It vibrates slightly when touched and is a powerful fuel.",
 	inventory_image = "aurum_ore_mana_bean.png",
+	groups = {dye_source = 1, color_violet = 1},
 })
 
 minetest.register_craft{

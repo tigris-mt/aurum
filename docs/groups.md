@@ -32,10 +32,12 @@ Toughless levels range from 0 to 3.
 * `psyche`: Mental/magic.
 
 # Crafting
-* `equipment`: For equipment.
-* `rod`: For rods.
-* `stick`: For sticks. The doc modpack semi-requires a stick group.
-* `tool`: For tools.
+* `dye=1`: This item is dye.
+* `equipment=1`: For equipment.
+* `color_X=1`: This item provides/is color X.
+* `rod=1`: For rods.
+* `stick=1`: For sticks. The doc modpack semi-requires a stick group.
+* `tool=1`: For tools.
 
 # Interaction
 * `flammable=1`: This node can burn.

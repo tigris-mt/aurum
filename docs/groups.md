@@ -88,5 +88,6 @@ Toughless levels range from 0 to 3.
 * `processed`: Processed items such as ingots.
 * `raw`: Natural, unprocessed items.
 * `scroll`: Scrolls, magic paper.
+	* `enchant_scroll`: Specifically enchantments.
 * `spell`: Spell or bespelled item.
 * `worker`: Such as smelter or enchanting table.

@@ -6,7 +6,7 @@ minetest.register_on_mods_loaded(function()
 		for i=1,v.max_level do
 			total = total + 1
 			table.insert(queue, function()
-				aurum.treasurer.register_itemstack(aurum.enchants.new_scroll(k, i), 1 / i / total, 2 + i, 1, 0, {"enchant", "scroll", "magic"})
+				aurum.treasurer.register_itemstack(aurum.enchants.new_scroll(k, i), 1 / i / total, 2 + i, 1, 0, {"enchant", "scroll", "magic", "enchant_scroll"})
 			end)
 		end
 	end

@@ -1,25 +1,32 @@
+local S = minetest.get_translator()
+
 -- Get the central spawn point for a realm.
 function aurum.realms.get_spawn(id)
+	-- Start out at 0,0,0.
 	local pos = aurum.gpos(id, vector.new(0, 0, 0))
+	-- Try to get the natural spawn level there.
 	pos = table.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
 
+	-- Go up until a free space is found.
 	for y=0,150 do
 		local t = vector.add(pos, vector.new(0, y, 0))
+
+		-- If enough free space, then return here.
 		local function above(n)
 			return aurum.force_get_node(vector.add(t, vector.new(0, n, 0))).name
 		end
-
 		if above(0) == "air" and above(1) == "air" and above(2) == "air" then
 			return t
 		end
 	end
 
+	-- Just fall back to 0,0,0 (or the spawn_level, if it was found).
 	return pos
 end
 
 minetest.register_chatcommand("rteleport", {
-	params = "<realm>",
-	description = "Teleport to a realm's spawn",
+	params = S"<realm>",
+	description = S"Teleport to a realm's spawn",
 	privs = {teleport = true},
 	func = function(name, param)
 		local player = minetest.get_player_by_name(name)
@@ -28,12 +35,12 @@ minetest.register_chatcommand("rteleport", {
 		end
 
 		if not aurum.realms.get(param) then
-			return false, "No such realm."
+			return false, S"No such realm."
 		end
 
 		aurum.player.teleport_guarantee(player, aurum.box.new_add(aurum.realms.get_spawn(param), vector.new(0, 150, 0)), function(player)
 			aurum.player.teleport(player, aurum.realms.get_spawn(param))
 		end)
-		return true, "Teleporting to " .. param
+		return true, S("Teleporting to @1", param)
 	end,
 })

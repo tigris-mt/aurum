@@ -50,6 +50,7 @@ minetest.register_craftitem("aurum_scrolls:scroll_full", {
 	stack_max = 1,
 })
 
+-- Get the def of a scroll (see aurum.scrolls.new()) or nil if it is invalid.
 function aurum.scrolls.get(stack)
 	if stack:get_name() ~= "aurum_scrolls:scroll_full" then
 		return nil

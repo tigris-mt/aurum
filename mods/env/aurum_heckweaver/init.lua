@@ -1,7 +1,10 @@
 local S = minetest.get_translator()
 
+-- How often do heckweavers move?
 local TICK = 15
+-- How long can heckweavers trails get?
 local LENGTH = 8
+-- How rare (<RARITY>^3) are heckweavers in regret?
 local RARITY = 28
 
 minetest.register_node("aurum_heckweaver:heckweaver", {
@@ -22,10 +25,15 @@ minetest.register_node("aurum_heckweaver:heckweaver", {
 
 	on_timer = function(pos)
 		local node = minetest.get_node(pos)
+
+		-- Find a nearby regret.
 		local next = minetest.find_node_near(pos, 1, "aurum_base:regret")
 		if next then
+			-- Move heckweaver there.
 			minetest.set_node(next, node)
+			-- Replace old position with heck.
 			minetest.set_node(pos, {name = "aurum_heckweaver:heck"})
+			-- Set heck timeout.
 			minetest.get_node_timer(pos):start(TICK * LENGTH)
 		else
 			return true
@@ -45,6 +53,7 @@ minetest.register_node("aurum_heckweaver:heck", {
 	groups = {dig_dig = 2, level = 2},
 	sounds = aurum.sounds.dirt(),
 
+	-- Replace with regret on timeout.
 	on_timer = function(pos)
 		minetest.set_node(pos, {name = "aurum_base:regret"})
 	end,
@@ -59,10 +68,12 @@ minetest.register_ore{
 	clust_size = 1,
 }
 
+-- on_construct isn't naturally called for ore-generated nodes, so we must manually call it if the timer hasn't started.
 minetest.register_lbm{
 	label = "Activate New Heckweavers",
 	name = "aurum_heckweaver:activate",
 	nodenames = {"aurum_heckweaver:heckweaver"},
+	-- Apparently it didn't get called when run_at_every_load is false.
 	run_at_every_load = true,
 	action = function(pos, node)
 		if not minetest.get_node_timer(pos):is_started() then

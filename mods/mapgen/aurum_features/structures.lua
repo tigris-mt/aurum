@@ -24,7 +24,7 @@ function aurum.features.register_decoration(def)
 		schematic = nil,
 	}, def)
 
-	def.biome_map = aurum.set.new(def.biomes)
+	def.biome_map = aurum.set(def.biomes)
 
 	idx = idx + 1
 	def.name = def.name or ("aurum_features:deco_" .. idx)

@@ -29,11 +29,6 @@ function aurum.ladders.register(name, def)
 	aurum.ladders.ladders[name] = def
 end
 
-for k,v in pairs(aurum.trees.types) do
-	local subname = k:match("[^:]*:(.*)")
-
-end
-
 aurum.ladders.register("aurum_ladders:wood", {
 	description = S"Wooden Ladder",
 	_texture = minetest.registered_nodes["aurum_trees:oak_planks"].tiles[1],

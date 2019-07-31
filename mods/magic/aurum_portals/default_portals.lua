@@ -32,7 +32,7 @@ function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 3, 0)),
 
 		apply = function(at, player)
-			if not aurum.set.new(allowed_from)[aurum.pos_to_realm(at(vector.new(0, 0, 0)))] then
+			if not aurum.set(allowed_from)[aurum.pos_to_realm(at(vector.new(0, 0, 0)))] then
 				return false
 			end
 

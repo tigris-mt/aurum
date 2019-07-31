@@ -87,6 +87,8 @@ function table.shuffled(t)
 	return ret
 end
 
+-- Select a random, weighted choice.
+-- Input is in the form: {{<value>, <relative weight>}, {<another value>, <its relative weight>}}
 function aurum.weighted_choice(t)
 	local total = 0
 	for _,v in ipairs(t) do

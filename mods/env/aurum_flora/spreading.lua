@@ -1,7 +1,10 @@
 local S = minetest.get_translator()
 
+-- Flora search in a radius to grow.
 local RADIUS = 4
+-- This much light is required for flora to grow.
 local LIGHT = 13
+-- There can only grow LIMIT + 1 flora in an area.
 local LIMIT = 3
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
@@ -39,10 +42,12 @@ function aurum.flora.spread(pos, node)
 		end
 	end
 
+	-- Ensure we won't go over the limit.
 	if #minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), "group:flora") > LIMIT then
 		return false
 	end
 
+	-- Find and place at a suitable target.
 	local targets = minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), spread)
 	for _,target in ipairs(table.shuffled(targets)) do
 		local tabove = vector.add(target, vector.new(0, 1, 0))

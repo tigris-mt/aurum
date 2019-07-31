@@ -25,7 +25,7 @@ minetest.register_on_mods_loaded(function()
 	local total = 0
 	local queue = {}
 	for k,v in pairs(aurum.tools.tools) do
-		local groups = aurum.set.new{"enchantable"}
+		local groups = aurum.set{"enchantable"}
 		if minetest.get_item_group(k, "tool_hammer") > 0 then
 			groups.melee_weapon = true
 		elseif minetest.get_item_group(k, "tool") > 0 then

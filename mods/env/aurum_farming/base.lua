@@ -1,4 +1,6 @@
 local S = minetest.get_translator()
+
+-- How close does water need to be for soil to maintain fertility?
 local RADIUS = 2
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
@@ -22,7 +24,9 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
+-- Handle right-clicking on fertilizier.
 function aurum.farming.fertilizer_rightclick(pos, node, player, item)
+	-- Only shovels can mix fertilizer into soil.
 	if minetest.get_item_group(item:get_name(), "tool_shovel") <= 0 then
 		return
 	end
@@ -30,18 +34,23 @@ function aurum.farming.fertilizer_rightclick(pos, node, player, item)
 	local under = vector.add(pos, vector.new(0, -1, 0))
 	local undernode = minetest.get_node(under)
 
+	-- Ensure soil.
 	if minetest.get_item_group(undernode.name, "soil") <= 0 then
 		return
 	end
 
+	-- Check protection for both the fertilizer and the soil.
 	if aurum.is_protected(pos, player) or aurum.is_protected(under, player) then
 		return
 	end
 
+	-- Fertilize the soil.
 	minetest.set_node(under, {
+		-- Set the node to soil of the appropriate level.
 		name = "aurum_farming:soil_" .. minetest.get_item_group(node.name, "fertilizer"),
 	})
 
+	-- Remove the fertilizer.
 	minetest.remove_node(pos)
 	minetest.check_for_falling(pos)
 
@@ -49,11 +58,14 @@ function aurum.farming.fertilizer_rightclick(pos, node, player, item)
 		pos = under, gain = 0.5,
 	})
 
+	-- Wear down the tool.
 	local wear = aurum.TOOL_WEAR / item:get_tool_capabilities().groupcaps.dig_dig.uses
 	item:add_wear(aurum.in_creative(player) and 0 or wear)
 	return item
 end
 
+-- Fertilizer is a liquid you can get stuck and drown in.
+-- Better bring a shovel!
 minetest.register_node("aurum_farming:fertilizer", {
 	description = S"Fertilizer",
 	_doc_items_longdesc = S"It may not look good or have a nice smell, but fertilizer is vital for your survival. Just don't fall in!",
@@ -86,6 +98,7 @@ minetest.register_craft{
 	burntime = 10,
 }
 
+-- Level 1 wet soil.
 minetest.register_node("aurum_farming:soil_1", {
 	description = S"Wet Soil",
 	groups = {soil = 1, soil_wet = 1, dig_dig = 2},
@@ -107,6 +120,7 @@ minetest.register_abm{
 	end,
 }
 
+-- Fertilizer blob ore around forest biomes.
 local blob = {
 	ore_type = "blob",
 	ore = "aurum_farming:fertilizer",

@@ -1,5 +1,6 @@
 aurum.set = {}
 
+-- Convert an array to a set.
 function aurum.set.new(t)
 	local r = {}
 	for _,v in ipairs(t) do
@@ -8,8 +9,10 @@ function aurum.set.new(t)
 	return r
 end
 
+-- Alias aurum.set() to aurum.set.new().
 setmetatable(aurum.set, {__call = function(t, v) return aurum.set.new(v) end})
 
+-- Get a set with all entries from parameter sets.
 function aurum.set.union(...)
 	local r = {}
 	for _,s in ipairs{...} do
@@ -20,6 +23,7 @@ function aurum.set.union(...)
 	return r
 end
 
+-- Get a set with only the entries that are in every parameter set.
 function aurum.set.intersection(...)
 	local r = {}
 	local p = {...}
@@ -31,6 +35,7 @@ function aurum.set.intersection(...)
 	return table.map(r, function(v) return (v == #p) and v or nil end)
 end
 
+-- Get a set with only the entries that are in a single parameter set.
 function aurum.set.difference(...)
 	local r = {}
 	local p = {...}
@@ -42,8 +47,10 @@ function aurum.set.difference(...)
 	return table.map(r, function(v) return (v == 1) and v or nil end)
 end
 
+-- Convert a set to an array.
 function aurum.set.to_array(set)
 	return table.keys(set)
 end
 
+-- Set iterator, iterates over entries.
 aurum.set.iter = pairs

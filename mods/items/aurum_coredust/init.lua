@@ -12,6 +12,7 @@ for x=-1,1 do
 		table.insert(recipe, {vector.new(x, -1, z), "aurum_base:foundation"})
 	end
 end
+
 aurum.magic.register_ritual("create_coredust", {
 	description = S"Create Coredust",
 	longdesc = S"A brief invocation that binds infinitely small pieces of the world's foundation to bronze.",
@@ -35,6 +36,6 @@ minetest.register_node("aurum_coredust:dusty_bronze", {
 	_doc_items_longdesc = S"Bronze is a natural candidate to be infused with coredust. Once merged, the dusty block of metal gives off an aura of solidity.",
 	tiles = {minetest.registered_items["aurum_ore:bronze_block"].tiles[1] .. "^aurum_coredust_overlay.png"},
 
-	groups = {dig_pick = 1, level = 3, cook_temp = 20},
+	groups = {dig_pick = 1, level = 3},
 	sounds = aurum.sounds.metal(),
 })

@@ -1,7 +1,9 @@
 local S = minetest.get_translator()
+-- How much is the fully mature papyrus?
 local HEIGHT = 4
 
 local function grow(pos, node)
+	-- We start at pos, but must find the real base by searching down.
 	local base = pos
 	local below = pos
 	local bnode
@@ -16,20 +18,25 @@ local function grow(pos, node)
 		end
 	end
 
+	-- Only grow on soil or sand.
 	if minetest.get_item_group(bnode.name, "soil") < 1 and minetest.get_item_group(bnode.name, "sand") < 1 then
 		return false
 	end
 
+	-- And directly by water.
 	if #minetest.find_nodes_in_area(vector.subtract(base, 1), vector.add(base, 1), "group:water") == 0 then
 		return false
 	end
 
+	-- Try to find a place and grow.
 	for n=0,HEIGHT-1 do
 		local at = vector.add(base, vector.new(0, n, 0))
 		local atnode = minetest.get_node(at)
+		-- Air found, place new growth.
 		if atnode.name == "air" then
 			minetest.set_node(at, {name = "aurum_flora:papyrus"})
 			return true
+		-- Something else is in the way, don't go further.
 		elseif atnode.name ~= "aurum_flora:papyrus" then
 			break
 		end

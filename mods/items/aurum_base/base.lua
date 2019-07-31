@@ -75,7 +75,7 @@ minetest.register_node("aurum_base:snow", {
 	tiles = {"aurum_base_snow.png"},
 	is_ground_content = true,
 	sounds = aurum.sounds.snow(),
-	groups = {dig_dig = 3, cools_lava = 1, snow = 1},
+	groups = {dig_dig = 3, cools_lava = 1, snow = 1, fall_damage_add_percent = -50},
 })
 
 minetest.register_node("aurum_base:ice", {

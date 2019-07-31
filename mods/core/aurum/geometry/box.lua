@@ -50,7 +50,7 @@ function aurum.box.new(a, b)
 	return {a = a, b = b}
 end
 
--- From addition
+-- From addition.
 function aurum.box.new_add(a, b)
 	return aurum.box.new(a, vector.add(a, b))
 end
@@ -60,15 +60,18 @@ function aurum.box.new_cbox(box)
     return aurum.geometry.Box.new(vector.new(box[1], box[2], box[3]), vector.new(box[4], box[5], box[6]))
 end
 
--- From radius
+-- From radius.
 function aurum.box.new_radius(center, radius)
 	return aurum.box.new(vector.subtract(center, radius), vector.add(center, radius))
 end
 
+-- Convert box to VoxelArea.
 function aurum.box.voxelarea(box)
 	return VoxelArea:new{MinEdge=box.a, MaxEdge=box.b}
 end
 
+-- Get all positions in the box.
+-- If sort_near is specified, the positions will be sorted in order nearest to sort_near.
 function aurum.box.poses(box, sort_near)
 	local poses = {}
 	local box = aurum.box.extremes(box)
@@ -81,6 +84,7 @@ function aurum.box.poses(box, sort_near)
 	end
 	if sort_near then
 		table.sort(poses, function(a, b)
+			-- TODO: Use faster sorting method.
 			return vector.distance(sort_near, a) < vector.distance(sort_near, b)
 		end)
 	end

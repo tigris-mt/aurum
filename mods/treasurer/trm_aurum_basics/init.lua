@@ -25,7 +25,7 @@ minetest.register_on_mods_loaded(function()
 
 	local num_trees = #table.keys(aurum.trees.types)
 	for k,v in pairs(aurum.trees.types) do
-		treasurer.register_treasure(v.planks, 0.3 / num_trees, 1, {1, 10}, 0, {"building_block"})
+		treasurer.register_treasure(v.planks, 0.3 / num_trees, 1, {1, 10}, 0, {"building_block", "fuel"})
 		treasurer.register_treasure(v.sapling, 0.3 / num_trees, 2, {1, 10}, 0, {"seed"})
 	end
 

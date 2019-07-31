@@ -155,9 +155,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 			-- Calculate limit.
 			local limit = vector.subtract(schematic.size, 1)
-			if rotation == 1 or rotation == 3 then
-				limit = vector.new(limit.z, limit.y, limit.x)
-			end
 
 			-- Center offset.
 			local halflimit = vector.apply(vector.divide(limit, 2), function(v)
@@ -190,7 +187,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			if prob(def.rarity) then
 				-- Place schematic.
 				local rotname = {"0", "90", "180", "270"}
-				minetest.place_schematic(pos, schematic, rotname[rotation + 1], {}, true, {place_center_x = true, place_center_z = true})
+				minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, true)
 
 				-- Run callback.
 				def.on_generated(aurum.features.structure_context(aurum.box.new(

@@ -8,10 +8,10 @@ form = smartfs.create("aurum_enchants:table", function(state)
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
-	state:label(2, 0, "scroll_label", S"Enchantment Scroll")
+	state:label(1.5, 0, "scroll_label", S"Enchantment Scroll")
 	state:inventory(2, 0.5, 1, 1, "scroll"):setLocation(invloc)
 	state:label(6, 0, "tool_label", S"Tool")
-	state:inventory(6, 0.5, 1, 1, "tool"):setLocation(invloc)
+	state:inventory(5, 0.5, 1, 1, "tool"):setLocation(invloc)
 
 	local function get_info(player)
 		local info = {}

@@ -75,24 +75,12 @@ minetest.register_decoration{
 	name = "aurum_flora:papyrus",
 	decoration = "aurum_flora:papyrus",
 	deco_type = "simple",
-	place_on = {"group:soil", "group:sand"},
+	place_on = {"group:sand"},
 	sidelen = 16,
+	fill_ratio = 0.1,
 	height_max = HEIGHT,
-	noise_params = {
-		offset = 0,
-		scale = 0.5,
-		spread = vector.new(200, 200, 200),
-		seed = 11,
-		octaves = 3,
-		persist = 0.5,
-	},
-	y_max = 2,
-	y_min = 0,
-	-- Add to all aurum:aurum deserts.
-	biomes = aurum.set.to_array(aurum.set.intersection(
-		aurum.set(aurum.biomes.get_all_group("desert", {"base"})),
-		aurum.set(aurum.biomes.get_all_group("aurum:aurum", {"base"}))
-	)),
+	num_spawn_by = 1,
+	spawn_by = "group:water",
 }
 
 minetest.register_abm{

@@ -1,8 +1,11 @@
 # Shall lava cool into solid material when next to water?
 aurum.base.cool_lava (Enable Lava Cooling) bool true
 
-# Changes the general biome size by proportion.
-aurum.biome_size (Biome Size) float 1
-
 # Controls the base maximum HP for players.
 aurum.player.hp_max (Maximum Player HP) int 100
+
+# Are leaves climbable?
+aurum.trees.climbable_leaves (Climbable Leaves) bool true
+
+# Are leaves drawn in plantlike style?
+aurum.trees.plantlike_leaves (Plantlike Leaves) bool true

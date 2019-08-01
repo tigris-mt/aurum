@@ -164,16 +164,12 @@ function m.register(name, def)
 		end,
 	})
 
-	subnode("leaves", {
+	subnode("leaves", table.combine({
 		description = S"Leaves",
 		_doc_items_longdesc = S"A bundle of soft leaves. They will decay when not near a trunk.",
 		sounds = aurum.sounds.leaves(),
 
-		walkable = false,
-		climbable = true,
-
-		drawtype = "plantlike",
-		visual_scale = 1.4,
+		drawtype = "allfaces_optional",
 		waving = 2,
 		paramtype = "light",
 		place_param2 = 1,
@@ -186,7 +182,14 @@ function m.register(name, def)
 				{rarity = 1, items = {name .. "_leaves"}},
 			},
 		},
-	})
+	}, minetest.settings:get_bool("aurum.trees.plantlike_leaves", true) and {
+		drawtype = "plantlike",
+		visual_scale = 1.4,
+	} or {},
+	minetest.settings:get_bool("aurum.trees.climbable_leaves", true) and {
+		walkable = false,
+		climbable = true,
+	} or {}))
 
 	for n in pairs(table.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
 		local split = n:split(":", true)

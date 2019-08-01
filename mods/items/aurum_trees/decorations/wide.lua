@@ -4,11 +4,11 @@ return function(def)
 	local lp = {name = def.leaves, prob = 127}
 
 	local trunk = {
-		{"air", "air", "air", "air", "air"},
-		{"air", "air", "air", "air", "air"},
-		{"air", "air", t, "air", "air"},
-		{"air", "air", "air", "air", "air"},
-		{"air", "air", "air", "air", "air"},
+		{"ignore", "ignore", "ignore", "ignore", "ignore"},
+		{"ignore", "ignore", "ignore", "ignore", "ignore"},
+		{"ignore", "ignore", t, "ignore", "ignore"},
+		{"ignore", "ignore", "ignore", "ignore", "ignore"},
+		{"ignore", "ignore", "ignore", "ignore", "ignore"},
 	}
 
 	return aurum.trees.schematic(vector.new(5, 6, 5), {

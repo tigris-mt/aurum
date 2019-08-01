@@ -58,3 +58,6 @@
 [submodule "mods/items/dye"]
 	path = mods/items/dye
 	url = https://github.com/tigris-mt/dye
+[submodule "mods/items/gtextitems"]
+	path = mods/items/gtextitems
+	url = https://github.com/tigris-mt/gtextitems

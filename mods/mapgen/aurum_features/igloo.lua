@@ -297,7 +297,10 @@ for _,def in ipairs(l) do
 			end
 
 			if #c:ph(6) > 0 then
-				minetest.set_node(c:ph(6)[1], {name = "aurum_cook:oven"})
+				minetest.set_node(c:ph(6)[1], {
+					name = "aurum_cook:oven",
+					param2 = minetest.dir_to_facedir(c:dir(vector.new(0, 0, 1))),
+				})
 				c:treasures(c:ph(6)[1], "fuel", 1, {
 					{
 						count = 1,

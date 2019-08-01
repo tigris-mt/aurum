@@ -228,6 +228,7 @@ local basement = {
 local l = {
 	{
 		schematic = aurum.trees.schematic(vector.new(7, #top + #no_basement, 11), table.icombine(top, no_basement)),
+
 		on_offset = function(pos)
 			return vector.add(pos, vector.new(0, -#no_basement + 1, 0))
 		end,

@@ -3,8 +3,8 @@ local S = minetest.get_translator()
 minetest.register_craft{
 	output = "bucket:bucket_empty",
 	recipe = {
-		{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
-		{"", "aurum_ore:iron_ingot", ""},
+		{"aurum_ore:tin_ingot", "", "aurum_ore:tin_ingot"},
+		{"", "aurum_ore:tin_ingot", ""},
 	}
 }
 

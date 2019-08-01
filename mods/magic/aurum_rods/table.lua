@@ -62,6 +62,7 @@ minetest.register_node("aurum_rods:table", {
 	tiles = {"aurum_base_stone.png^aurum_rods_table_top.png", "aurum_base_stone.png"},
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,
+	is_ground_content = false,
 	groups = {dig_pick = 3},
 
 	drawtype = "nodebox",

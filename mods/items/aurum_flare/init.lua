@@ -4,6 +4,8 @@ minetest.register_node("aurum_flare:flare", {
 	description = S"Eternal Flare",
 	_doc_items_longdesc = S"An eternal light source.",
 	_doc_items_hidden = false,
+
+	is_ground_content = false,
 	groups = {dig_handle = 3, flammable = 1, attached_node = 1},
 	sounds = aurum.sounds.wood(),
 

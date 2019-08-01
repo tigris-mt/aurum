@@ -72,6 +72,7 @@ minetest.register_node("aurum_stamp:stamper", {
 	paramtype = "light",
 	sunlight_propagates = true,
 
+	is_ground_content = false,
 	groups = {dig_pick = 2},
 	sounds = aurum.sounds.metal(),
 

@@ -52,6 +52,7 @@ minetest.register_node("aurum_player:hyperion_totem", {
 	paramtype = "light",
 	light_source = 13,
 
+	is_ground_content = false,
 	groups = {dig_chop = 3},
 
 	on_rightclick = function(pos, _, player)

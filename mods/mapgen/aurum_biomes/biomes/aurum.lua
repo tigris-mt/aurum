@@ -142,12 +142,12 @@ aurum.biomes.register_tree_decoration({
 local frozen = {
 	node_top = "aurum_base:snow",
 	depth_top = 1,
-	node_filler = "aurum_base:ice",
+	node_filler = "aurum_base:ground_ice",
 	node_water_top = "aurum_base:ice",
 	depth_water_top = 10,
 	node_river_water = "aurum_base:ice",
 	node_cave_liquid = "aurum_base:ice",
-	node_stone = "aurum_base:cave_ice",
+	node_stone = "aurum_base:ground_ice",
 }
 
 aurum.biomes.register_all("aurum:aurum", {

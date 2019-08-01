@@ -38,6 +38,7 @@ end
 
 for i=1,99 do
 	minetest.register_node("aurum_features:ph_" .. i, {
+		is_ground_content = false,
 		groups = {not_in_creative_inventory = 1},
 		buildable_to = true,
 		drop = "",

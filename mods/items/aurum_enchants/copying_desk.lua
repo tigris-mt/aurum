@@ -125,6 +125,7 @@ minetest.register_node("aurum_enchants:copying_desk", {
 	paramtype = "light",
 	sunlight_propagates = true,
 
+	is_ground_content = false,
 	groups = {dig_chop = 2, flammable = 1},
 	sounds = aurum.sounds.wood(),
 

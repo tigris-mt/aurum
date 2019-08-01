@@ -14,6 +14,7 @@ function aurum.ladders.register(name, def)
 
 		paramtype = "light",
 		sunlight_propagates = true,
+		is_ground_content = false,
 
 		paramtype2 = "wallmounted",
 		walkable = false,

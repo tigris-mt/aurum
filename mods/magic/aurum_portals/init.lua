@@ -29,6 +29,7 @@ local base_def = {
 	light_source = 3,
 	sunlight_propagates = true,
 
+	is_ground_content = false,
 	groups = {dig_pick = 2, level = 2},
 	sounds = aurum.sounds.metal(),
 

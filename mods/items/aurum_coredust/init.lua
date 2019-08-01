@@ -36,6 +36,7 @@ minetest.register_node("aurum_coredust:dusty_bronze", {
 	_doc_items_longdesc = S"Bronze is a natural candidate to be infused with coredust. Once merged, the dusty block of metal gives off an aura of solidity.",
 	tiles = {minetest.registered_items["aurum_ore:bronze_block"].tiles[1] .. "^aurum_coredust_overlay.png"},
 
+	is_ground_content = false,
 	groups = {dig_pick = 1, level = 3},
 	sounds = aurum.sounds.metal(),
 })

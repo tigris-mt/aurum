@@ -59,6 +59,7 @@ minetest.register_node("aurum_magic:altar", {
 	},
 	tiles = {"aurum_magic_altar_top.png", "aurum_base_stone.png"},
 	sounds = aurum.sounds.wood(),
+	is_ground_content = false,
 	groups = {dig_pick = 3},
 	paramtype2 = "facedir",
 	on_place = minetest.rotate_node,

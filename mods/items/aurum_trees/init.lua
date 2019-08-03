@@ -17,6 +17,35 @@ m.default_decorations = {
 	["cone:14:1.5"] = 0.001,
 }
 
+local function remove_force_place(schematic)
+	local ret = table.copy(schematic)
+	for _,v in ipairs(ret.data) do
+		v.force_place = nil
+	end
+	return ret
+end
+
+local modpath = minetest.get_modpath(minetest.get_current_modname())
+
+local function add_decoration(def, n)
+	local split = n:split(":", true)
+	local name = split[1]
+	local params = {}
+	for i=2,#split do
+		table.insert(params, tonumber(split[i]))
+	end
+
+	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(def, unpack(params))
+	offset = offset or 0
+
+	def.decodefs[n] = {
+		schematic = schematic,
+		rotation = "random",
+		flags = {place_center_x = true, place_center_y = false, place_center_z = true},
+		place_offset_y = offset,
+	}
+end
+
 function m.register(name, def)
 	assert(not m.types[name], "tree type already exists")
 
@@ -138,14 +167,6 @@ function m.register(name, def)
 			local d = def.decodefs[dk]
 			minetest.remove_node(pos)
 
-			local function remove_force_place(schematic)
-				local ret = table.copy(schematic)
-				for _,v in ipairs(ret.data) do
-					v.force_place = nil
-				end
-				return ret
-			end
-
 			minetest.place_schematic(pos, remove_force_place(d.schematic), d.rotation, {}, false, d.flags)
 			return true
 		end,
@@ -192,26 +213,48 @@ function m.register(name, def)
 	} or {}))
 
 	for n in pairs(table.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
-		local split = n:split(":", true)
-		local name = split[1]
-		local params = {}
-		for i=2,#split do
-			table.insert(params, tonumber(split[i]))
-		end
-
-		local schematic, offset = aurum.dofile("decorations/" .. name .. ".lua")(def, unpack(params))
-		offset = offset or 0
-
-		def.decodefs[n] = {
-			schematic = schematic,
-			rotation = "random",
-			flags = {place_center_x = true, place_center_y = false, place_center_z = true},
-			place_offset_y = offset,
-		}
+		add_decoration(def, n)
 	end
 
 	m.types[name] = def
 end
+
+minetest.register_chatcommand("growtree", {
+	params = S"<type> <decoration>",
+	description = S"Grows a tree at your location.",
+	privs = {give = true},
+	func = function(name, params)
+		local player = minetest.get_player_by_name(name)
+		if not player then
+			return false, S"No player."
+		end
+
+		local pos = vector.round(player:get_pos())
+
+		if aurum.is_protected(pos, player, true) then
+			return false, S"Position protected."
+		end
+
+		local split = params:split(" ")
+		local type = split[1]
+		local decoration = split[2]
+
+		if not type or not decoration or not m.types[type] then
+			return false, S"Invalid parameters."
+		end
+
+		local err, emsg = pcall(add_decoration, m.types[type], decoration)
+
+		if not err then
+			return false, emsg
+		end
+
+		local d = m.types[type].decodefs[decoration]
+		minetest.place_schematic(pos, remove_force_place(d.schematic), d.rotation, {}, false, d.flags)
+
+		return true, "Tree grown."
+	end,
+})
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	if minetest.get_item_group(itemstring, "sapling") > 0 then

@@ -84,6 +84,8 @@ Toughless levels range from 0 to 3.
 * `equipment`: Equippable items such as armor.
 * `enchant`: Enchanted/enchanting items.
 * `enchantable`: Enchantable tools/equips.
+* `lore`: An item containing lore.
+	* `lorebook`: Specifically in written form.
 * `magic`: All magic items.
 * `processed`: Processed items such as ingots.
 * `raw`: Natural, unprocessed items.

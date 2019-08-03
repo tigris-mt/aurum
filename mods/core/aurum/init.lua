@@ -45,6 +45,9 @@ end
 local has_creative = minetest.get_modpath("creative")
 -- Is a player in creative?
 function aurum.in_creative(player)
+	if not player or not player:is_player() then
+		return false
+	end
 	return has_creative and creative.is_enabled_for(player:get_player_name()) or false
 end
 
@@ -126,6 +129,11 @@ function aurum.metadata_inventory_move_delegate(pos, from_list, from_index, to_l
 		def.allow_metadata_inventory_put and def.allow_metadata_inventory_put(pos, to_list, to_index, actual_stack, player) or count,
 		def.allow_metadata_inventory_take and def.allow_metadata_inventory_take(pos, from_list, from_index, actual_stack, player) or count
 	)
+end
+
+function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
+	local invert_wall = placer and placer:get_player_control().sneak or false
+	return minetest.rotate_and_place(itemstack, placer, pointed_thing, aurum.in_creative(placer), {invert_wall = invert_wall}, false)
 end
 
 aurum.dofile("lua_utils.lua")

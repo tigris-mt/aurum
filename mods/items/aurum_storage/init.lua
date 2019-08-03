@@ -123,12 +123,12 @@ aurum.storage.register("aurum_storage:scroll_hole", {
 		groups = {dig_pick = 2},
 	},
 	valid_item = function(stack)
-		return minetest.get_item_group(stack:get_name(), "scroll") > 0
+		return minetest.get_item_group(stack:get_name(), "scroll") > 0 or minetest.get_item_group(stack:get_name(), "book") > 0
 	end,
 })
 
 minetest.register_craft{
-	output = "aurum_storage:scroll_hole",
+	output = "aurum_storage:scroll_hole 2",
 	recipe = {
 		{"aurum_base:stone_brick", "", "aurum_base:stone_brick"},
 		{"aurum_base:stone_brick", "", "aurum_base:stone_brick"},

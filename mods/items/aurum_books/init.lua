@@ -5,7 +5,7 @@ gtextitems.register("aurum_books:book", {
 		description = S"Book",
 		inventory_image = "default_book.png",
 		groups = {
-			aurum_book = 1,
+			book = 1,
 		},
 	},
 	written = {
@@ -25,7 +25,7 @@ minetest.register_craft{
 
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:aurum_book",
+	recipe = "group:book",
 	burntime = 3,
 }
 

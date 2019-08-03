@@ -1,5 +1,4 @@
 -- A little underground stash of scrolls.
--- TODO: Lorebooks.
 
 local sb = "aurum_base:stone_brick"
 local sh = "aurum_features:ph_1"
@@ -56,7 +55,7 @@ aurum.features.register_decoration{
 				{
 					count = 1,
 					preciousness = {1, 6},
-					groups = {"enchant_scroll"},
+					groups = {"enchant_scroll", "lorebook"},
 				},
 			})
 		end

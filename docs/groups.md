@@ -42,6 +42,7 @@ Toughless levels range from 0 to 3.
 
 # Interaction
 * `flammable=1`: This node can burn.
+* `book=1`: This node is a paper book.
 * `cook_temp=x`: This node can only be cooked in a cooker with a temperature range including x.
 	* `Smelter`: 10-20
 	* `Flare Box`: 0-10

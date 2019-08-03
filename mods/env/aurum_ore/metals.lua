@@ -34,7 +34,7 @@ minetest.register_craft{
 
 aurum.ore.register("aurum_ore:iron", {
 	description = S"Iron",
-	texture = "aurum_ore_white.png^[colorize:#50676b:255^aurum_ore_bumps.png",
+	texture = "aurum_ore_white.png^[colorize:#522617:255^aurum_ore_bumps.png",
 	level = 1, depth = -150,
 	rarity = 11, num = 5, size = 4,
 	growths = {-400, -600},

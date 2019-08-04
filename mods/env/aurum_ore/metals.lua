@@ -10,7 +10,7 @@ aurum.ore.register("aurum_ore:copper", {
 
 aurum.ore.register("aurum_ore:tin", {
 	description = S"Tin",
-	texture = "aurum_ore_white.png^[colorize:#d3d4d5:255^aurum_ore_bumps.png",
+	texture = "aurum_ore_white.png^[colorize:#a3d4f5:255^aurum_ore_bumps.png",
 	level = 1, depth = -100,
 	rarity = 11, num = 6, size = 3,
 	growths = {-300, -600},
@@ -34,7 +34,7 @@ minetest.register_craft{
 
 aurum.ore.register("aurum_ore:iron", {
 	description = S"Iron",
-	texture = "aurum_ore_white.png^[colorize:#522617:255^aurum_ore_bumps.png",
+	texture = "aurum_ore_white.png^[colorize:#cbcdcd:255^aurum_ore_bumps.png",
 	level = 1, depth = -150,
 	rarity = 11, num = 5, size = 4,
 	growths = {-400, -600},

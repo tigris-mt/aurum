@@ -2,6 +2,15 @@ trm_aurum_books = {}
 
 trm_aurum_books.groups = {}
 
+function trm_aurum_books.categories(...)
+	local ret = {}
+	for _,v in ipairs{...} do
+		ret["lore_" .. v] = true
+		ret["lorebook_" .. v] = true
+	end
+	return ret
+end
+
 function trm_aurum_books.register(def)
 	local def = table.combine({
 		weight = 1,
@@ -54,7 +63,7 @@ minetest.register_on_mods_loaded(function()
 				stack:set_name(item)
 			end
 			return gtextitems.set_item(stack, data)
-		end, 0.5 / len, 3, 1, 0, g)
+		end, 0.5 / len, 0, 1, 0, g)
 	end
 end)
 

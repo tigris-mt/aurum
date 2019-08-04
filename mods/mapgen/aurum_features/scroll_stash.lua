@@ -55,7 +55,7 @@ aurum.features.register_decoration{
 				{
 					count = 1,
 					preciousness = {1, 6},
-					groups = {"enchant_scroll", "lorebook"},
+					groups = {"enchant_scroll", "lorebook_general"},
 				},
 			})
 		end

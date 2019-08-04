@@ -1,5 +1,6 @@
 local S = minetest.get_translator()
 local R = trm_aurum_books.register
+local C = trm_aurum_books.categories
 
 R{
 	data = {
@@ -13,8 +14,8 @@ When the life dies, the mana returns to iron surrounding the corpse, bones of th
 
 Gruesome.]],
 	},
+	groups = C("general"),
 }
-
 
 R{
 	data = {
@@ -22,6 +23,7 @@ R{
 		title = S"Siphon Discovered",
 		text = S"I have taken up the Siphon. Darkness has come to haunt me, but the weapon is too strong. I advise all! Do not these ancient instruments of cruelty lest you fall victim to karma.",
 	},
+	groups = C("general"),
 }
 
 R{
@@ -30,4 +32,5 @@ R{
 		title = S"Found Something",
 		text = S"It's a siphon. Good weapon. I feel powerful. There are marks on the hilt from a hand twice as big as mine. I give it an iron out of gold rating.",
 	},
+	groups = C("general"),
 }

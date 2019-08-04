@@ -92,7 +92,7 @@ local metatable = {
 	treasures = function(self, pos, listname, count, loot)
 		local inv = minetest.get_meta(pos):get_inventory()
 
-		local shuffled = self:shuffled(loot)
+		local shuffled = self:shuffled(table.map(loot, function(v) return ((v.count or 1) > 0) and v or nil end))
 		local ti = 0
 		for i=1,count do
 			ti = ti + 1
@@ -102,6 +102,11 @@ local metatable = {
 
 			local search = shuffled[ti]
 			if search then
+				search = table.combine({
+					count = 1,
+					preciousness = {0, 10},
+					groups = nil,
+				}, search)
 				for _,stack in ipairs(treasurer.select_random_treasures(
 					search.count,
 					search.preciousness[1],

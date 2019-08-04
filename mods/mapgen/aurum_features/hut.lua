@@ -51,6 +51,10 @@ aurum.features.register_decoration{
 					preciousness = {0, 2},
 					groups = {"building_block"},
 				},
+				{
+					count = math.random(-2, 1),
+					groups = {"lorebook_aurum", "lorebook_general"},
+				},
 			})
 		end
 	end,

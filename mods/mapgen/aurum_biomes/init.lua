@@ -94,23 +94,8 @@ function aurum.biomes.register_tree_decoration(def)
 			biomes = def.biomes,
 		}, d[k]))
 	end
-
-	for _,log in ipairs(aurum.biomes.log_decorations) do
-		minetest.register_decoration{
-			deco_type = "schematic",
-			place_on = treedef.terrain,
-			place_offset_y = 1,
-			sidelen = 80,
-			fill_ratio = 0.001 * (def.rarity or 1) * (log.rarity or 1) / #aurum.biomes.log_decorations,
-			biomes = def.biomes,
-			schematic = log.schematic(treedef),
-			rotation = "random",
-			flags = {place_center_x = true},
-		}
-	end
 end
 
-aurum.dofile("log_decorations.lua")
 aurum.dofile("variants.lua")
 
 aurum.dofile("biomes/aurum.lua")

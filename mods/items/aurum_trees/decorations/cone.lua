@@ -1,6 +1,7 @@
 return function(def, overall, trunk_ratio, width_ratio)
-	trunk_ratio = trunk_ratio or 1
-	width_ratio = width_ratio or 1.5
+	overall = tonumber(overall) or 1
+	trunk_ratio = tonumber(trunk_ratio) or 1
+	width_ratio = tonumber(width_ratio) or 1.5
 
 	local t = {name = def.trunk, force_place = true}
 	local l = {name = def.leaves}

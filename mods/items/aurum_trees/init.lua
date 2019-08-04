@@ -4,7 +4,7 @@ aurum.trees = m
 
 m.types = {}
 
-m.default_decorations = {
+m.default_tree_decorations = {
 	simple = 1,
 	wide = 1,
 	double = 1,
@@ -12,10 +12,23 @@ m.default_decorations = {
 	very_tall = 0.1,
 	huge = 0.05,
 	giant = 0.01,
-	["cone:3"] = 1,
-	["cone:12"] = 0.005,
-	["cone:14:1.5"] = 0.001,
+
+	["cone,3"] = 1,
+	["cone,12"] = 0.005,
+	["cone,14,1.5"] = 0.001,
 }
+
+m.default_log_decorations = {
+	["log,3"] = 0.2,
+	["log,4"] = 0.2,
+	["log,5"] = 0.2,
+	["log,8,2"] = 0.1,
+	["log,16,4"] = 0.05,
+	["log,16,4,0"] = 0.05,
+	["log,24,7"] = 0.005,
+}
+
+m.default_decorations = table.combine(m.default_tree_decorations, m.default_log_decorations)
 
 local function remove_force_place(schematic)
 	local ret = table.copy(schematic)
@@ -28,11 +41,11 @@ end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
 local function add_decoration(def, n)
-	local split = n:split(":", true)
+	local split = n:split(",", true)
 	local name = split[1]
 	local params = {}
 	for i=2,#split do
-		table.insert(params, tonumber(split[i]))
+		table.insert(params, split[i])
 	end
 
 	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(def, unpack(params))

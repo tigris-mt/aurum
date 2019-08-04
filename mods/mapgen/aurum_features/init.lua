@@ -2,6 +2,7 @@ aurum.features = {}
 
 aurum.dofile("structures.lua")
 
+aurum.dofile("graveyard.lua")
 aurum.dofile("hut.lua")
 aurum.dofile("igloo.lua")
 aurum.dofile("lava_pit.lua")

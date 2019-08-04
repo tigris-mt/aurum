@@ -4,5 +4,5 @@
 -- Create the aurum table.
 aurum = {
 	-- Current version number.
-	VERSION = "0.20.2",
+	VERSION = "0.20.3",
 }

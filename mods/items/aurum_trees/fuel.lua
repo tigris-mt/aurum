@@ -1,23 +1,23 @@
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:tree",
+	recipe = "group:flammable,tree",
 	burntime = 30
 }
 
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:wood",
+	recipe = "group:flammable,wood",
 	burntime = 7,
 }
 
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:leaves",
+	recipe = "group:flammable,leaves",
 	burntime = 3,
 }
 
 minetest.register_craft{
 	type = "fuel",
-	recipe = "group:sapling",
+	recipe = "group:flammable,sapling",
 	burntime = 3,
 }

@@ -87,7 +87,7 @@ for _,c in ipairs{
 			light_source = 11,
 			sunlight_propagates = true,
 			sounds = aurum.sounds.glass(),
-			groups = {flammable = 0, leaves = 0},
+			groups = {flammable = 0, leaves = 0, dye_source = 1, ["color_" .. c.name] = 1},
 		},
 
 		sapling = {

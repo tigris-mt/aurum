@@ -18,6 +18,30 @@ aurum.biomes.register_all("aurum:loom", {
 })
 
 aurum.biomes.register_all("aurum:loom", {
+	name = "loom_crystal_forest",
+	_groups = {},
+	heat_point = 60,
+	humidity_point = 40,
+	_variants = {
+		base = aurum.biomes.v_base{},
+		ocean = v_ocean{},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:red_crystal",
+	biomes = {"loom_crystal_forest"},
+	rarity = 8,
+})
+
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:yellow_crystal",
+	biomes = {"loom_crystal_forest"},
+	rarity = 4,
+})
+
+aurum.biomes.register_all("aurum:loom", {
 	name = "loom_forest",
 	_groups = {"forest"},
 	heat_point = 50,

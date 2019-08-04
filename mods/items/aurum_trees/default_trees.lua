@@ -51,3 +51,52 @@ m.register("aurum_trees:pine", {
 		["cone,14,1.5"] = 0.05,
 	}),
 })
+
+for _,c in ipairs{
+	{
+		name = "red",
+		desc = "Red",
+		texture = "[colorize:#FF0000:127",
+	},
+	{
+		name = "yellow",
+		desc = "Yellow",
+		texture = "[colorize:#FFFF00:127",
+	},
+} do
+	local tb = "aurum_trees_crystal_%s.png^" .. c.texture
+	m.register("aurum_trees:" .. c.name .. "_crystal", {
+		description = c.desc .. " Crystal",
+		texture_base = tb,
+		terrain = {"aurum_base:regret"},
+		terrain_desc = S"regret",
+
+		trunk = {
+			paramtype = "light",
+			drawtype = "glasslike",
+			light_source = 7,
+			sunlight_propagates = true,
+			use_texture_alpha = true,
+			tiles = {tb:format("trunk")},
+			sounds = aurum.sounds.glass(),
+			groups = {dig_chop = 0, dig_pick = 3, flammable = 0},
+		},
+
+		leaves = {
+			paramtype = "light",
+			light_source = 11,
+			sunlight_propagates = true,
+			sounds = aurum.sounds.glass(),
+			groups = {flammable = 0, leaves = 0},
+		},
+
+		sapling = {
+			paramtype = "light",
+			light_source = 7,
+			sounds = aurum.sounds.glass(),
+			groups = {flammable = 0},
+		},
+
+		planks = "",
+	})
+end

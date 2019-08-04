@@ -101,7 +101,9 @@ function m.register(name, def)
 		local spec = table.combine(default, {
 			-- Builds a translatable description according to the tree's S parameter.
 			description = def.S(def.description .. " @1", default.description or ""),
-		}, def[sub] or {})
+		}, def[sub] or {}, {
+			groups = table.combine(default.groups, (def[sub] or {}).groups or {}),
+		})
 
 		-- Create the final part def.
 		local ndef = table.combine({
@@ -119,7 +121,7 @@ function m.register(name, def)
 
 	subnode("trunk", {
 		description = S"Trunk",
-		_doc_items_longdesc = S"The trunk of a tree. It can be cut into planks.",
+		_doc_items_longdesc = S"The trunk of a tree.",
 		sounds = aurum.sounds.wood(),
 		groups = {dig_chop = 3, tree = 1, flammable = 1},
 		tiles = {def.texture_base:format("trunk_top"), def.texture_base:format("trunk_top"), def.texture_base:format("trunk")},
@@ -145,6 +147,7 @@ function m.register(name, def)
 		_doc_items_longdesc = S"A young tree.",
 		sounds = aurum.sounds.leaves(),
 		paramtype = "light",
+		sunlight_propagates = true,
 		drawtype = "plantlike",
 		selection_box = {
 			type = "fixed",
@@ -200,7 +203,7 @@ function m.register(name, def)
 
 	subnode("leaves", table.combine({
 		description = S"Leaves",
-		_doc_items_longdesc = S"A bundle of soft leaves. They will decay when not near a trunk.",
+		_doc_items_longdesc = S"A bundle of leaves.",
 		sounds = aurum.sounds.leaves(),
 
 		drawtype = "allfaces_optional",

@@ -82,6 +82,7 @@ Toughless levels range from 0 to 3.
 * `wood=1`: This node is wood (planks).
 
 # Treasurer
+* `dye`
 * `equipment`: Equippable items such as armor.
 * `enchant`: Enchanted/enchanting items.
 * `enchantable`: Enchantable tools/equips.

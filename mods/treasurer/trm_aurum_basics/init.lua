@@ -50,4 +50,6 @@ minetest.register_on_mods_loaded(function()
 	list({
 		"aurum_farming:carrot_seed",
 	}, 0.5, 2, {1, 5}, 0, {"seed"})
+
+	list(table.map(dye.dyes, function(v) return "dye:" .. v[1] end), 0.25, 1, {1, 20}, 0, {"crafting_component", "dye"})
 end)

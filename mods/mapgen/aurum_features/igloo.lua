@@ -262,7 +262,7 @@ for _,def in ipairs(l) do
 					{
 						count = 1,
 						preciousness = {1, 3},
-						groups = {"building_block", "melee_weapon", "seed", "minetool", "raw"},
+						groups = {"building_block", "melee_weapon", "seed", "minetool", "raw", "crafting_component"},
 					},
 				})
 			end

@@ -49,7 +49,7 @@ aurum.features.register_decoration{
 				{
 					count = math.random(1, 3),
 					preciousness = {0, 2},
-					groups = {"building_block"},
+					groups = {"building_block", "crafting_component"},
 				},
 				{
 					count = math.random(-2, 1),

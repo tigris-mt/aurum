@@ -34,6 +34,7 @@ function aurum.flavor.books.register(def)
 			author = nil,
 			title = nil,
 			text = nil,
+			id = nil,
 		}, def.data or {}),
 	})
 

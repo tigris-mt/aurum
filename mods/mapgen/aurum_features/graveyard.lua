@@ -26,6 +26,8 @@ local function make_headstone(pos)
 				{S"paranoia", 0.25},
 				{S"a magical mishap", 0.25},
 				{S"divine judgement", 0.1},
+				{S"their lack of immortality", 0.1},
+				{S"their great pride", 0.25},
 			},
 			aurum.weighted_choice{
 				{S"quickly", 1},
@@ -42,6 +44,7 @@ local function make_headstone(pos)
 				{S"joyfully", 1},
 				{S"solemnly", 1},
 				{S"gently", 1},
+				{S"as if they were my own child", 0.01},
 			},
 			aurum.weighted_choice{
 				{S"humble", 1},

@@ -11,7 +11,7 @@ local function capitalize(s)
 	return s:sub(1, 1):upper() .. s:sub(2)
 end
 
-function single()
+local function single()
 	return capitalize((choose{
 		function() return choose(syllables) .. "-" .. choose(syllables) end,
 		function() return choose(syllables) .. choose(syllables) end,

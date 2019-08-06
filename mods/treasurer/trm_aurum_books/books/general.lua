@@ -4,7 +4,7 @@ local C = trm_aurum_books.categories
 
 R{
 	data = {
-		author = S"Rauldbien Irenphicht",
+		author = "Rauldbien Irenphicht",
 		title = S"Record of Mana",
 		text = S
 [[The mana moves in a cycle.
@@ -19,7 +19,7 @@ Gruesome.]],
 
 R{
 	data = {
-		author = S"Freas Blonwin",
+		author = "Freas Blonwin",
 		title = S"Siphon Discovered",
 		text = S"I have taken up the Siphon. Darkness has come to haunt me, but the weapon is too strong. I advise all! Do not these ancient instruments of cruelty lest you fall victim to karma.",
 	},
@@ -28,7 +28,7 @@ R{
 
 R{
 	data = {
-		author = S"Niodyasto Vatesai",
+		author = "Niodyasto Vatesai",
 		title = S"Found Something",
 		text = S"It's a siphon. Good weapon. I feel powerful. There are marks on the hilt from a hand twice as big as mine. I give it an iron out of gold rating.",
 	},

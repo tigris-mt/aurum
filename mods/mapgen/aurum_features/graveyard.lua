@@ -79,7 +79,8 @@ local function make_headstone(pos)
 			},
 			name
 		),
-		author = "the Headstoner",
+		author = S"the Headstoner",
+		id = "aurum_features:gravestone",
 	})
 end
 

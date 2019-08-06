@@ -22,6 +22,7 @@ function aurum.flora.register(name, def)
 	}))
 end
 
+aurum.dofile("flowers.lua")
 aurum.dofile("spreading.lua")
 aurum.dofile("papyrus.lua")
 aurum.dofile("weeds.lua")

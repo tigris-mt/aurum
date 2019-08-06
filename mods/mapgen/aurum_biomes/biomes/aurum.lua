@@ -71,7 +71,7 @@ aurum.biomes.register_tree_decoration({
 -- Jungle
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_jungle",
-	_groups = aurum.biomes.biomes.aurum_forest._groups,
+	_groups = table.icombine(aurum.biomes.biomes.aurum_forest._groups, {"dark"}),
 	heat_point = 80,
 	humidity_point = 80,
 	_variants = {

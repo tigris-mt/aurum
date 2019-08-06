@@ -27,6 +27,9 @@ The old priesthood. Unable to accept their abandonment, they continue to attempt
 Each realm has been overrun by an immortal demigod and their servants attempting to conquer the realms for themselves.
 They are lesser than the titans, but with the old titan having abaonded the world, they have run wild.
 
+#### The Headstoner
+Most peaceful of all the demigods, her domain is Aurum. She buries the dead.
+
 ### Loomspawn
 The natural forces of the Loom, performing their corruption.
 

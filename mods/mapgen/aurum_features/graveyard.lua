@@ -12,6 +12,7 @@ local function make_headstone(pos)
 				{S"battle", 1},
 				{S"magical battle", 0.25},
 				{S"a lightning strike", 0.01},
+				{S"a simultaneous lightning strike and cobra bite", 0.001},
 				{S"corruption from the Loom", 1},
 				{S"wild animals", 1},
 				{S"a murderer", 1},

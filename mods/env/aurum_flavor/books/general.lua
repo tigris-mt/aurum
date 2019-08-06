@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
-local R = trm_aurum_books.register
-local C = trm_aurum_books.categories
+local R = aurum.flavor.books.register
+local C = aurum.flavor.books.categories
 
 R{
 	data = {

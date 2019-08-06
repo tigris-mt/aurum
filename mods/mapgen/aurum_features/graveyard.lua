@@ -9,6 +9,9 @@ local function make_headstone(pos)
 			age,
 			aurum.weighted_choice{
 				{(age > 70) and S"old age" or S"sudden disease", 5},
+				{S"battle", 1},
+				{S"magical battle", 0.25},
+				{S"a lightning strike", 0.01},
 				{S"corruption from the Loom", 1},
 				{S"wild animals", 1},
 				{S"a murderer", 1},
@@ -22,6 +25,7 @@ local function make_headstone(pos)
 				{S"a trap", 1},
 				{S"paranoia", 0.25},
 				{S"a magical mishap", 0.25},
+				{S"divine judgement", 0.1},
 			},
 			aurum.weighted_choice{
 				{S"quickly", 1},
@@ -36,6 +40,8 @@ local function make_headstone(pos)
 				{S"at the site of their death", 0.1},
 				{S"sadly", 1},
 				{S"joyfully", 1},
+				{S"solemnly", 1},
+				{S"gently", 1},
 			},
 			aurum.weighted_choice{
 				{S"humble", 1},
@@ -59,6 +65,11 @@ local function make_headstone(pos)
 				{S"a great wizard", 0.1},
 				{S"a holy person, dedicated to me", 0.01},
 				{S"someone I wish was still alive", 0.01},
+				{S"valiant", 1},
+				{S"brave", 1},
+				{S"a true warrior", 1},
+				{S"lazy", 1},
+				{S"a coward", 1},
 			},
 			name
 		),

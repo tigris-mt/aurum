@@ -50,7 +50,7 @@ function aurum.flora.register_grass(base_name, max, def, decodef)
 				end
 			end,
 		}, def, {
-			tiles = {def._texture .. "_" .. i .. ".png"},
+			tiles = {def._texture .. "_" .. i .. ".png" .. (def._texture_append and ("^" .. def._texture_append) or "")},
 		}))
 
 		if i ~= 1 then
@@ -88,6 +88,32 @@ aurum.flora.register_grass("aurum_flora:grass_weed", 5, {
 	},
 	biomes = aurum.biomes.get_all_group("green", {"base"}),
 })
+
+aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
+	description = S"Desert Weed",
+	_texture = "aurum_flora_grass",
+	_texture_append = "[colorize:#5c4030:200",
+	_flora_spread_node = "group:sand",
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			-4 / 16, -8 / 16, -4 / 16,
+			4 / 16, 4 / 16, 4 / 16,
+		},
+	},
+}, {
+	place_on = {"group:sand"},
+	noise_params = {
+		offset = -0.025,
+		scale = 0.1,
+		spread = vector.new(200, 200, 200),
+		seed = 421,
+		octaves = 3,
+		persist = 0.5,
+	},
+	biomes = aurum.biomes.get_all_group("desert", {"base"}),
+})
+
 
 minetest.register_craft{
 	output = "aurum_base:paste 2",

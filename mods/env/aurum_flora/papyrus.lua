@@ -33,7 +33,7 @@ local function grow(pos, node)
 		local at = vector.add(base, vector.new(0, n, 0))
 		local atnode = minetest.get_node(at)
 		-- Air found, place new growth.
-		if atnode.name == "air" then
+		if aurum.is_air(atnode.name) then
 			minetest.set_node(at, {name = "aurum_flora:papyrus"})
 			return true
 		-- Something else is in the way, don't go further.

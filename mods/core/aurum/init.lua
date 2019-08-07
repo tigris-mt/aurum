@@ -21,6 +21,10 @@ aurum.WORLDA = {
 -- Tool wear max.
 aurum.TOOL_WEAR = 65535
 
+function aurum.is_air(name)
+	return name == "air" or minetest.registered_nodes[name].drawtype == "airlike"
+end
+
 -- Drop item with slightly random position and velocity.
 function aurum.drop_item(pos, item)
 	local function r(c)

@@ -90,7 +90,8 @@ minetest.register_node("aurum_magic:altar", {
 						return false
 					end
 					if not vector.equals(noff, vector.new(0, 0, 0)) then
-						if not aurum.match_item(minetest.get_node(at(noff)).name, v.hashed_recipe[minetest.hash_node_position(noff)] or "air") then
+						local nn = minetest.get_node(at(noff)).name
+						if not aurum.is_air(nn) and not aurum.match_item(nn, v.hashed_recipe[minetest.hash_node_position(noff)]) then
 							return false
 						end
 					end

@@ -159,7 +159,7 @@ function m.register(name, def)
 		_on_grow_plant = function(pos, node)
 			-- Ensure there's at least some room above the sapling.
 			for y=1,3 do
-				if minetest.get_node(vector.add(pos, vector.new(0, y, 0))).name ~= "air" then
+				if not aurum.is_air(minetest.get_node(vector.add(pos, vector.new(0, y, 0))).name) then
 					return false
 				end
 			end

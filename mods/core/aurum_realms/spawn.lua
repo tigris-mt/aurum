@@ -15,7 +15,7 @@ function aurum.realms.get_spawn(id)
 		local function above(n)
 			return aurum.force_get_node(vector.add(t, vector.new(0, n, 0))).name
 		end
-		if above(0) == "air" and above(1) == "air" and above(2) == "air" then
+		if aurum.is_air(above(0)) and aurum.is_air(above(1)) and aurum.is_air(above(2)) then
 			return t
 		end
 	end

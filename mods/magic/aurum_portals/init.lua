@@ -90,7 +90,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 				local poses = aurum.box.poses(box, pos)
 				for _,pos in ipairs(poses) do
 					local node = minetest.get_node(pos)
-					if node.name == "air" or node.name == rdef.biome_default.node_stone then
+					if aurum.is_air(node.name) or node.name == rdef.biome_default.node_stone then
 						if not minetest.is_protected(pos, "") then
 							minetest.set_node(pos, {name = "aurum_portals:portal_" .. from_realm})
 							return pos

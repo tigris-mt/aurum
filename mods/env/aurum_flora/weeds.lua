@@ -101,6 +101,7 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 			4 / 16, 4 / 16, 4 / 16,
 		},
 	},
+	groups = {dye_source = 1, color_brown = 1},
 }, {
 	place_on = {"group:sand"},
 	noise_params = {

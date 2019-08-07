@@ -104,8 +104,8 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 }, {
 	place_on = {"group:sand"},
 	noise_params = {
-		offset = -0.025,
-		scale = 0.1,
+		offset = 0.005,
+		scale = 0.01,
 		spread = vector.new(200, 200, 200),
 		seed = 421,
 		octaves = 3,

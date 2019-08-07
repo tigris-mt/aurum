@@ -6,7 +6,7 @@ minetest.register_node("aurum_flora:cactus", {
 	description = S"Cactus",
 	_doc_items_longdesc = S"A prickly plant that grows on sand and soil.",
 	tiles = {"aurum_flora_cactus.png"},
-	groups = {grow_plant = 1, flammable = 1, dig_chop = 2},
+	groups = {grow_plant = 1, flammable = 1, dig_chop = 2, dye_source = 1, color_green = 1},
 	sounds = aurum.sounds.grass(),
 	_on_grow_plant = grow,
 	damage_per_second = 10,

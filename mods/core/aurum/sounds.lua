@@ -4,7 +4,7 @@ aurum.sounds = {}
 -- Will create a function aurum.sounds.<name>([def]) where def can override any sound in the template.
 function aurum.sounds.register(name, defaults)
 	aurum.sounds[name] = function(def)
-		return table.combine({
+		return b.t.combine({
 			footstep = {name = "", gain = 1},
 			dug = {name = "default_dug_node", gain = 1 / 4},
 			place = {name = "default_place_node_hard", gain = 1},

@@ -83,7 +83,7 @@ function m.register(id, def)
 	assert(not realms[id], "realm already exists")
 
 	-- Create realm from defaults and supplied values.
-	local r = table.combine({
+	local r = b.t.combine({
 		-- Human-readable identifier of the realm.
 		description = "?",
 
@@ -103,7 +103,7 @@ function m.register(id, def)
 	}, def, {
 		id = id,
 		-- Default biome setup.
-		biome_default = table.combine({
+		biome_default = b.t.combine({
 			node_stone = "aurum_base:stone",
 			node_water = "aurum_base:water_source",
 			node_river_water = "aurum_base:river_water_source",

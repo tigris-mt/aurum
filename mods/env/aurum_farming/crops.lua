@@ -66,7 +66,7 @@ end
 
 -- Register a crop <base_name> with <def> and optional decoration parameters <decodef>.
 function aurum.farming.register_crop(base_name, def, decodef)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- What level of soil/fertilizer does this plant require?
 		level = 1,
 
@@ -103,7 +103,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		local next_name = (i < def.max) and (base_name .. "_" .. (i + 1))
 
 		-- Register with flora defaults.
-		aurum.flora.register(":" .. name, table.combine({
+		aurum.flora.register(":" .. name, b.t.combine({
 			description = S("@1 Plant", def.description),
 			_doc_items_usagehelp = S("Give this plant at least @1 light and wet, fertilized soil of level @2 or higher for growth and harvest. It grows in @3 stages.", def.light, def.level, def.max),
 			groups = {
@@ -142,7 +142,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 
 	if def.seed then
 		-- Register the seed as a node.
-		minetest.register_node(def.seed_name, table.combine({
+		minetest.register_node(def.seed_name, b.t.combine({
 			_doc_items_usagehelp = S("Plant this seed on wet, fertilized soil of level @1 or higher.", def.level),
 			description = S("@1 Seed", def.description),
 			inventory_image = def.texture .. "_seed.png",
@@ -172,7 +172,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 
 	if def.product then
 		-- Simple product, should be overridden for effects in the def.
-		minetest.register_craftitem(def.product_name, table.combine({
+		minetest.register_craftitem(def.product_name, b.t.combine({
 			description = def.description,
 			inventory_image = def.texture .. "_product.png",
 		}, def.product))
@@ -180,7 +180,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 
 	if decodef then
 		-- Simple decoration of the mature stage.
-		minetest.register_decoration(table.combine({
+		minetest.register_decoration(b.t.combine({
 			name = last_name,
 			decoration = last_name,
 			deco_type = "simple",

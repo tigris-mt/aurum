@@ -143,7 +143,7 @@ local blob = {
 minetest.register_ore(blob)
 
 -- More common in dark grass.
-minetest.register_ore(table.combine(blob, {
+minetest.register_ore(b.t.combine(blob, {
 	wherein = "aurum_base:dark_grass",
 	clust_scarcity = 10 * 10 * 10,
 }))

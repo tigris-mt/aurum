@@ -3,7 +3,7 @@ local S = minetest.get_translator()
 aurum.magic.rituals = {}
 
 function aurum.magic.register_ritual(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Description of the ritual.
 		description = "",
 		longdesc = "",
@@ -177,7 +177,7 @@ function aurum.magic.spell_ritual_inv(pos, listname, spell, standard)
 end
 
 function aurum.magic.register_spell_ritual(spell, def)
-	return aurum.magic.register_ritual("spell_" .. spell, table.combine({
+	return aurum.magic.register_ritual("spell_" .. spell, b.t.combine({
 		description = S("Spell Creation: @1", aurum.magic.spells[spell].description),
 		type = "spell",
 	}, def))

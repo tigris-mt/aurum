@@ -39,7 +39,7 @@ m.register("aurum_trees:pine", {
 	texture_base = "aurum_trees_pine_%s.png",
 	terrain = {"group:soil", "group:snow"},
 	terrain_desc = S"any dirt, soil, or snow",
-	decorations = table.combine(table.map(m.default_tree_decorations, function(v) return 0 end), {
+	decorations = b.t.combine(b.t.map(m.default_tree_decorations, function(v) return 0 end), {
 		["cone,2"] = 0.1,
 		["cone,3"] = 1,
 		["cone,4"] = 1,

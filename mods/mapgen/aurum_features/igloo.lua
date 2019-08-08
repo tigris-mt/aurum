@@ -227,14 +227,14 @@ local basement = {
 
 local l = {
 	{
-		schematic = aurum.trees.schematic(vector.new(7, #top + #no_basement, 11), table.icombine(top, no_basement)),
+		schematic = aurum.trees.schematic(vector.new(7, #top + #no_basement, 11), b.t.icombine(top, no_basement)),
 
 		on_offset = function(pos)
 			return vector.add(pos, vector.new(0, -#no_basement + 1, 0))
 		end,
 	},
 	{
-		schematic = aurum.trees.schematic(vector.new(7, #top + #basement, 11), table.icombine(top, basement)),
+		schematic = aurum.trees.schematic(vector.new(7, #top + #basement, 11), b.t.icombine(top, basement)),
 
 		on_offset = function(pos)
 			return vector.add(pos, vector.new(0, -#basement + 1, 0))
@@ -243,7 +243,7 @@ local l = {
 }
 
 for _,def in ipairs(l) do
-	aurum.features.register_decoration(table.combine({
+	aurum.features.register_decoration(b.t.combine({
 		place_on = {"aurum_base:snow"},
 		rarity = 0.000035,
 		biomes = aurum.biomes.get_all_group("frozen", {"base"}),

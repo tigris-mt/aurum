@@ -10,11 +10,11 @@ aurum.biomes.biomes = {}
 
 -- Register a biome with the position limits defined relative to and limited by a realm's box.
 function aurum.biomes.register(realm, def)
-	local def = table.combine(aurum.realms.get(realm).biome_default, def)
+	local def = b.t.combine(aurum.realms.get(realm).biome_default, def)
 
 	-- Construct original biome box.
-	local min = table.combine(aurum.realms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
-	local max = table.combine(aurum.realms.get(realm).local_box.b, {y = def.y_max}, def.max_pos or {})
+	local min = b.t.combine(aurum.realms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
+	local max = b.t.combine(aurum.realms.get(realm).local_box.b, {y = def.y_max}, def.max_pos or {})
 	local box = aurum.box.translate(aurum.box.new(min, max), aurum.realms.get(realm).global_center)
 
 	-- Set new biome box.
@@ -31,7 +31,7 @@ local function add_suffix(name, suffix)
 end
 
 function aurum.biomes.register_all(realm, def)
-	def = table.combine({
+	def = b.t.combine({
 		_groups = {},
 		_variants = {},
 	}, def)
@@ -41,7 +41,7 @@ function aurum.biomes.register_all(realm, def)
 	aurum.biomes.biomes[def.name] = def
 
 	for suffix,variant in pairs(def._variants) do
-		local vdef = table.combine(def, variant, {
+		local vdef = b.t.combine(def, variant, {
 			name = add_suffix(def.name, suffix)
 		})
 
@@ -63,7 +63,7 @@ function aurum.biomes.get_all_group(group, variants)
 			end
 		end
 		if ok then
-			for _,v in ipairs(variants or table.keys(def._variants)) do
+			for _,v in ipairs(variants or b.t.keys(def._variants)) do
 				if def._variants[v] then
 					table.insert(ret, add_suffix(def.name, v))
 				end
@@ -76,17 +76,17 @@ end
 function aurum.biomes.register_tree_decoration(def)
 	local treedef = aurum.trees.types[def.name]
 	local d = treedef.decodefs
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Relative rarity.
 		rarity = 1,
 		-- Tree types to use.
-		schematics = table.keys(table.map(treedef.decorations, function(v) return (v > 0) and v or nil end)),
+		schematics = b.t.keys(b.t.map(treedef.decorations, function(v) return (v > 0) and v or nil end)),
 		-- Decoration biomes.
 		biomes = nil,
 	}, def)
 
 	for _,k in ipairs(def.schematics) do
-		minetest.register_decoration(table.combine({
+		minetest.register_decoration(b.t.combine({
 			deco_type = "schematic",
 			place_on = treedef.terrain,
 			sidelen = 80,

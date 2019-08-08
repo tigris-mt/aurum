@@ -37,7 +37,7 @@ aurum.magic.register_spell_ritual("growth", {
 
 	size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, 0)),
 
-	recipe = table.icombine(fertilizer_wall, {
+	recipe = b.t.icombine(fertilizer_wall, {
 		{vector.new(0, 1, 0), "aurum_storage:scroll_hole"},
 		{vector.new(-1, 0, 0), "aurum_flare:flare"},
 		{vector.new(1, 0, 0), "aurum_flare:flare"},

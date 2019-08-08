@@ -4,7 +4,7 @@ local idx = 0
 local biome_map = {}
 
 function aurum.features.register_decoration(def)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- What nodes to place on?
 		place_on = {},
 
@@ -24,12 +24,12 @@ function aurum.features.register_decoration(def)
 		schematic = nil,
 	}, def)
 
-	def.biome_map = aurum.set(def.biomes)
+	def.biome_map = b.set(def.biomes)
 
 	idx = idx + 1
 	def.name = def.name or ("aurum_features:deco_" .. idx)
 
-	for k in aurum.set.iter(def.biome_map) do
+	for k in b.set.iter(def.biome_map) do
 		biome_map[k] = biome_map[k] or {}
 		table.insert(biome_map[k], def.name)
 	end
@@ -70,7 +70,7 @@ local metatable = {
 		if self._ph[n] then
 			return self._ph[n]
 		end
-		local poses = table.shuffled(minetest.find_nodes_in_area(self.box.a, self.box.b, "aurum_features:ph_" .. n))
+		local poses = b.t.shuffled(minetest.find_nodes_in_area(self.box.a, self.box.b, "aurum_features:ph_" .. n))
 		self._ph[n] = poses
 		for _,pos in ipairs(poses) do
 			minetest.remove_node(pos)
@@ -85,14 +85,14 @@ local metatable = {
 
 	-- Shuffled function. Could potentially use seed.
 	shuffled = function(self, ...)
-		return table.shuffled(...)
+		return b.t.shuffled(...)
 	end,
 
 	-- Add treasures to list at pos.
 	treasures = function(self, pos, listname, count, loot)
 		local inv = minetest.get_meta(pos):get_inventory()
 
-		local shuffled = self:shuffled(table.map(loot, function(v) return ((v.count or 1) > 0) and v or nil end))
+		local shuffled = self:shuffled(b.t.map(loot, function(v) return ((v.count or 1) > 0) and v or nil end))
 		local ti = 0
 		for i=1,count do
 			ti = ti + 1
@@ -102,7 +102,7 @@ local metatable = {
 
 			local search = shuffled[ti]
 			if search then
-				search = table.combine({
+				search = b.t.combine({
 					count = 1,
 					preciousness = {0, 10},
 					groups = nil,
@@ -168,7 +168,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			end)
 
 			-- Shift pos by center offset.
-			local real_pos = table.combine(vector.subtract(pos, halflimit), {y = pos.y})
+			local real_pos = b.t.combine(vector.subtract(pos, halflimit), {y = pos.y})
 
 			local function at(offset)
 				local actual = vector.new(0, offset.y, 0)

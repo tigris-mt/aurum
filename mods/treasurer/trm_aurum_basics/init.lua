@@ -13,7 +13,7 @@ minetest.register_on_mods_loaded(function()
 		"aurum_base:sand",
 	}, 0.35, 0, {1, 30}, 0, {"raw"})
 
-	local num_ores = #table.keys(aurum.ore.ores)
+	local num_ores = #b.t.keys(aurum.ore.ores)
 	for k,v in pairs(aurum.ore.ores) do
 		if v.ingot then
 			treasurer.register_treasure(v.ingot, 0.3 / num_ores, v.level, {1, 10}, 0, {"processed"})
@@ -23,7 +23,7 @@ minetest.register_on_mods_loaded(function()
 		end
 	end
 
-	local num_trees = #table.keys(aurum.trees.types)
+	local num_trees = #b.t.keys(aurum.trees.types)
 	for k,v in pairs(aurum.trees.types) do
 		treasurer.register_treasure(v.planks, 0.3 / num_trees, 1, {1, 10}, 0, {"building_block", "fuel"})
 		treasurer.register_treasure(v.sapling, 0.3 / num_trees, 2, {1, 10}, 0, {"seed"})
@@ -31,7 +31,7 @@ minetest.register_on_mods_loaded(function()
 
 	treasurer.register_treasure("aurum_flare:flare", 0.5, 1, {1, 10}, 0, {"light"})
 
-	list(table.keys(aurum.ladders.ladders), 0.5, 0, {1, 20}, 0, {"ladder"})
+	list(b.t.keys(aurum.ladders.ladders), 0.5, 0, {1, 20}, 0, {"ladder"})
 
 	list({
 		"aurum_base:stone_brick",
@@ -51,5 +51,5 @@ minetest.register_on_mods_loaded(function()
 		"aurum_farming:carrot_seed",
 	}, 0.5, 2, {1, 5}, 0, {"seed"})
 
-	list(table.map(dye.dyes, function(v) return "dye:" .. v[1] end), 0.25, 1, {1, 20}, 0, {"crafting_component", "dye"})
+	list(b.t.map(dye.dyes, function(v) return "dye:" .. v[1] end), 0.25, 1, {1, 20}, 0, {"crafting_component", "dye"})
 end)

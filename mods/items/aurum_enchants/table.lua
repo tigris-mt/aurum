@@ -68,7 +68,7 @@ form = smartfs.create("aurum_enchants:table", function(state)
 		if info.valid then
 			-- Overwrite tool with new enchantment level.
 			meta:get_inventory():set_list("tool", {
-				aurum.tools.set_item_enchants(ItemStack(info.tool), table.combine(info.tool_info.enchants, {
+				aurum.tools.set_item_enchants(ItemStack(info.tool), b.t.combine(info.tool_info.enchants, {
 					[info.scroll_info.name] = info.scroll_info.level,
 				})),
 			})

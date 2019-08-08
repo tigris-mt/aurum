@@ -12,7 +12,7 @@ function aurum.tools.get_category_enchants(category)
 end
 
 function aurum.tools.register_enchant(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		categories = {},
 
 		description = "?",
@@ -37,7 +37,7 @@ function aurum.tools.register_enchant(name, def)
 		table.insert(docs, def.longdesc)
 	end
 
-	local category_keys = table.keys(table.map(def.categories, function(v) return v or nil end))
+	local category_keys = b.t.keys(b.t.map(def.categories, function(v) return v or nil end))
 	if #category_keys > 0 then
 		table.sort(category_keys)
 		table.insert(docs, S("Enchantment categories: @1", table.concat(category_keys, ", ")))
@@ -59,7 +59,7 @@ function aurum.tools.get_possible_enchants(name)
 
 	local ret = {}
 	for _,index in ipairs(def._enchants) do
-		ret = table.icombine(ret, aurum.tools.get_category_enchants(index) or {})
+		ret = b.t.icombine(ret, aurum.tools.get_category_enchants(index) or {})
 	end
 
 	return ret
@@ -68,7 +68,7 @@ end
 doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
 	local possible = aurum.tools.get_possible_enchants(itemstring)
 	if possible then
-		possible = table.map(possible, function(v) return aurum.tools.enchants[v].description end)
+		possible = b.t.map(possible, function(v) return aurum.tools.enchants[v].description end)
 		table.sort(possible)
 		return S("This tool has a potential enchantment level of @1.", def._enchant_levels) .. ((#possible > 0) and ("\n" .. S("Enchantment types: @1", table.concat(possible, ", "))) or "")
 	end
@@ -108,7 +108,7 @@ end
 aurum.tools.enchant_callbacks = {}
 
 function aurum.tools.register_enchant_callback(def)
-	table.insert(aurum.tools.enchant_callbacks, table.combine({
+	table.insert(aurum.tools.enchant_callbacks, b.t.combine({
 		init = function(state, stack) end,
 		apply = function(state, stack) end,
 	}, def))
@@ -131,7 +131,7 @@ function aurum.tools.refresh_item(stack)
 	local applied = false
 
 	-- Apply all enchantments.
-	for name,level in table.spairs(enchants) do
+	for name,level in b.t.spairs(enchants) do
 		if level > 0 then
 			applied = true
 			table.insert(state.description, S("@1: @2", aurum.tools.enchants[name].description, level))
@@ -146,7 +146,7 @@ function aurum.tools.refresh_item(stack)
 	for _,v in ipairs(aurum.tools.enchant_callbacks) do
 		v.apply(state, stack)
 	end
-	aurum.set_stack_description(stack, table.concat(state.description, "\n"))
+	b.set_stack_description(stack, table.concat(state.description, "\n"))
 
 	return stack
 end

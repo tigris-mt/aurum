@@ -4,7 +4,7 @@ function trm_aurum_tools.register(stack, rarity, preciousness, ...)
 	for i=0,stack:get_definition()._enchant_levels do
 		local function callback(stack)
 			local target = i
-			local possible = table.shuffled(aurum.tools.get_possible_enchants(stack:get_name()))
+			local possible = b.t.shuffled(aurum.tools.get_possible_enchants(stack:get_name()))
 			local enchants = {}
 			for _,e in ipairs(possible) do
 				local edef = aurum.tools.enchants[e]
@@ -25,7 +25,7 @@ minetest.register_on_mods_loaded(function()
 	local total = 0
 	local queue = {}
 	for k,v in pairs(aurum.tools.tools) do
-		local groups = aurum.set{"enchantable"}
+		local groups = b.set{"enchantable"}
 		if minetest.get_item_group(k, "tool_hammer") > 0 then
 			groups.melee_weapon = true
 		elseif minetest.get_item_group(k, "tool") > 0 then
@@ -39,7 +39,7 @@ minetest.register_on_mods_loaded(function()
 			total = total + 1
 			table.insert(queue, function()
 				local stack = ItemStack(k)
-				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.floor(stack:get_definition()._enchant_levels / 2)), 1, {1, aurum.TOOL_WEAR}, aurum.set.to_array(groups))
+				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.floor(stack:get_definition()._enchant_levels / 2)), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))
 			end)
 		end
 	end

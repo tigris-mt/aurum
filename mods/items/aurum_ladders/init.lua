@@ -5,7 +5,7 @@ aurum.ladders.ladders = {}
 
 function aurum.ladders.register(name, def)
 	local tex = def._texture .. "^aurum_ladders_ladder.png^[makealpha:255,0,255"
-	local def = table.combine({
+	local def = b.t.combine({
 		_doc_items_longdesc = S"The classic device for performing vertical movement.",
 		drawtype = "signlike",
 		tiles = {tex},
@@ -21,7 +21,7 @@ function aurum.ladders.register(name, def)
 		climbable = true,
 		selection_box = {type = "wallmounted"},
 	}, def, {
-		groups = table.combine({
+		groups = b.t.combine({
 			ladder = 1,
 		}, def.groups or {})
 	})

@@ -14,8 +14,8 @@ return function(def, length, width, hollow)
 
 	for i in area:iterp(vector.new(0, 0, 0), limit) do
 		local p = area:position(i)
-		if vector.distance(p, table.combine(half, {x = p.x})) < width / 2 then
-			if hollow and vector.distance(p, table.combine(half, {x = p.x})) < width / 2 - 1 then
+		if vector.distance(p, b.t.combine(half, {x = p.x})) < width / 2 then
+			if hollow and vector.distance(p, b.t.combine(half, {x = p.x})) < width / 2 - 1 then
 				data[i] = {name = "air"}
 			else
 				data[i] = t

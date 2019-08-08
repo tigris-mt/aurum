@@ -164,7 +164,7 @@ aurum.features.register_decoration{
 	place_on = {"group:sand", "aurum_base:gravel"},
 	rarity = 0.000035,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
-	schematic = aurum.trees.schematic(vector.new(7, 16, 7), table.icombine(
+	schematic = aurum.trees.schematic(vector.new(7, 16, 7), b.t.icombine(
 		top,
 		center,
 		basement

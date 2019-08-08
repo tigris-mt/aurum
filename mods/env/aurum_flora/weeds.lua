@@ -36,7 +36,7 @@ function aurum.flora.register_grass(base_name, max, def, decodef)
 	for i=1,max do
 		local name = (i == 1) and base_name or (base_name .. "_" .. i)
 		local next_name = (i ~= max) and (base_name .. "_" .. (i + 1))
-		aurum.flora.register(":" .. name, table.combine({
+		aurum.flora.register(":" .. name, b.t.combine({
 			drop = base_name,
 			groups = {not_in_creative_inventory = (i == 1) and 0 or 1},
 			_doc_items_create_entry = (i == 1),
@@ -57,7 +57,7 @@ function aurum.flora.register_grass(base_name, max, def, decodef)
 			doc.add_entry_alias("nodes", base_name, "nodes", name)
 		end
 
-		minetest.register_decoration(table.combine({
+		minetest.register_decoration(b.t.combine({
 			name = name,
 			decoration = name,
 			deco_type = "simple",

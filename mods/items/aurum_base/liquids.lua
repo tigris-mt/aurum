@@ -35,8 +35,8 @@ function aurum.base.register_liquid(name, def, flowing_def)
 		groups = {not_in_creative_inventory = 1},
 		_doc_items_create_entry = false,
 	}
-	minetest.register_node(":" .. name .. "_source", table.combine(defaults, def, {groups = table.combine(defaults.groups or {}, def.groups or {})}))
-	minetest.register_node(":" .. name .. "_flowing", table.combine(defaults, def, flowing_defaults, flowing_def, {groups = table.combine(defaults.groups or {}, def.groups or {}, flowing_defaults.groups or {}, flowing_def.groups or {})}))
+	minetest.register_node(":" .. name .. "_source", b.t.combine(defaults, def, {groups = b.t.combine(defaults.groups or {}, def.groups or {})}))
+	minetest.register_node(":" .. name .. "_flowing", b.t.combine(defaults, def, flowing_defaults, flowing_def, {groups = b.t.combine(defaults.groups or {}, def.groups or {}, flowing_defaults.groups or {}, flowing_def.groups or {})}))
 	doc.add_entry_alias("nodes", name .. "_source", "nodes", name .. "_flowing")
 end
 

@@ -5,7 +5,7 @@ aurum.ore = {}
 aurum.ore.ores = {}
 
 function aurum.ore.register(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		description = "?",
 
 		-- Which realms does this ore spawn in?
@@ -77,7 +77,7 @@ function aurum.ore.register(name, def)
 	end
 
 	if def.ore then
-		minetest.register_node(":" .. def.ore, table.combine({
+		minetest.register_node(":" .. def.ore, b.t.combine({
 			_doc_items_longdesc = S"A mineable block of metal ore.",
 			description = S("@1 Ore", def.description),
 			tiles = {("aurum_base_stone.png^((%s^aurum_ore_ore.png)^[makealpha:255,0,255)"):format(def.texture)},
@@ -97,7 +97,7 @@ function aurum.ore.register(name, def)
 			local realm = aurum.realms.get(realmid)
 			local biomes = assert(aurum.biomes.realms[realmid])
 
-			local combined = table.icombine({def.depth}, def.growths)
+			local combined = b.t.icombine({def.depth}, def.growths)
 			for index,depth in ipairs(combined) do
 
 				local nextdepth = combined[index + 1] or realm.global_box.a.y
@@ -119,7 +119,7 @@ function aurum.ore.register(name, def)
 				else
 					local m = index - 1
 
-					minetest.register_ore(table.combine(d, {
+					minetest.register_ore(b.t.combine(d, {
 						clust_scarcity = math.floor(math.pow(def.rarity / (1 + m / 10), 3) + 0.5),
 						clust_num_ores = math.floor(def.num * (1 + m / 10) + 0.5),
 						clust_size = math.floor(def.size * (1 + m / 10) + 0.5),

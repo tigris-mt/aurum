@@ -64,8 +64,8 @@ local function register(type, name, texture, def)
 
 	local tn = "aurum_tools:" .. name .. "_" .. type
 
-	aurum.tools.register(tn, table.combine(odef, def, {
-		groups = table.combine({["tool_" .. type] = 1, tool = 1}, def.groups or {}),
+	aurum.tools.register(tn, b.t.combine(odef, def, {
+		groups = b.t.combine({["tool_" .. type] = 1, tool = 1}, def.groups or {}),
 	}))
 
 	minetest.register_craft{

@@ -17,7 +17,7 @@ local double = {
 }
 
 function aurum.flora.register_flower(name, seed, def)
-	aurum.flora.register(name, table.combine({
+	aurum.flora.register(name, b.t.combine({
 		selection_box = single,
 	}, def))
 
@@ -35,11 +35,11 @@ function aurum.flora.register_flower(name, seed, def)
 			octaves = 3,
 			persist = 0.5,
 		},
-		biomes = aurum.set.to_array(aurum.set.difference(
-			aurum.set(aurum.biomes.get_all_group("green", {"base"})),
-			aurum.set.intersection(
-				aurum.set(aurum.biomes.get_all_group("green", {"base"})),
-				aurum.set(aurum.biomes.get_all_group("dark", {"base"}))
+		biomes = b.set.to_array(b.set.difference(
+			b.set(aurum.biomes.get_all_group("green", {"base"})),
+			b.set.intersection(
+				b.set(aurum.biomes.get_all_group("green", {"base"})),
+				b.set(aurum.biomes.get_all_group("dark", {"base"}))
 			)
 		)),
 	}

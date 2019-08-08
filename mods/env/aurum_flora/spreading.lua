@@ -49,7 +49,7 @@ function aurum.flora.spread(pos, node)
 
 	-- Find and place at a suitable target.
 	local targets = minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), spread)
-	for _,target in ipairs(table.shuffled(targets)) do
+	for _,target in ipairs(b.t.shuffled(targets)) do
 		local tabove = vector.add(target, vector.new(0, 1, 0))
 		if minetest.get_node_light(tabove) >= LIGHT then
 			minetest.set_node(tabove, {name = spread_node})

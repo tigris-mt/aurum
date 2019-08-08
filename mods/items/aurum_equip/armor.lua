@@ -1,7 +1,7 @@
 local S = minetest.get_translator()
 
 function aurum.equip.register_armor(name, def)
-	def = table.combine({
+	def = b.t.combine({
 		description = "?",
 		texture = "aurum_base_stone.png",
 		enchants = {},
@@ -37,7 +37,7 @@ function aurum.equip.register_armor(name, def)
 end
 
 function aurum.equip.register_armor_set(prefix, def)
-	def = table.combine({
+	def = b.t.combine({
 		description = "?",
 		material = "aurum_base:stone",
 		texture = "aurum_base_stone.png",
@@ -58,9 +58,9 @@ function aurum.equip.register_armor_set(prefix, def)
 	aurum.equip.register_armor(prefix .. "_boots", {
 		description = S("@1 Boots", def.description),
 		texture = ("%s^aurum_equip_boots.png^[makealpha:255,0,255"):format(def.texture),
-		enchants = table.icombine({"armor", "boots"}, def.enchants),
+		enchants = b.t.icombine({"armor", "boots"}, def.enchants),
 		enchant_levels = def.enchant_levels,
-		armor = table.map(def.armor, function(n) return 1 - (1 - n) * 0.75 end),
+		armor = b.t.map(def.armor, function(n) return 1 - (1 - n) * 0.75 end),
 		slot = "feet",
 		durability = def.durability,
 		recipe = {
@@ -72,7 +72,7 @@ function aurum.equip.register_armor_set(prefix, def)
 	aurum.equip.register_armor(prefix .. "_pants", {
 		description = S("@1 Pants", def.description),
 		texture = ("%s^aurum_equip_pants.png^[makealpha:255,0,255"):format(def.texture),
-		enchants = table.icombine({"armor", "pants"}, def.enchants),
+		enchants = b.t.icombine({"armor", "pants"}, def.enchants),
 		enchant_levels = def.enchant_levels,
 		armor = def.armor,
 		slot = "legs",
@@ -87,7 +87,7 @@ function aurum.equip.register_armor_set(prefix, def)
 	aurum.equip.register_armor(prefix .. "_hauberk", {
 		description = S("@1 Hauberk", def.description),
 		texture = ("%s^aurum_equip_hauberk.png^[makealpha:255,0,255"):format(def.texture),
-		enchants = table.icombine({"armor", "hauberk"}, def.enchants),
+		enchants = b.t.icombine({"armor", "hauberk"}, def.enchants),
 		enchant_levels = def.enchant_levels,
 		armor = def.armor,
 		slot = "chest",
@@ -102,9 +102,9 @@ function aurum.equip.register_armor_set(prefix, def)
 	aurum.equip.register_armor(prefix .. "_helmet", {
 		description = S("@1 Helmet", def.description),
 		texture = ("%s^aurum_equip_helmet.png^[makealpha:255,0,255"):format(def.texture),
-		enchants = table.icombine({"armor", "helmet"}, def.enchants),
+		enchants = b.t.icombine({"armor", "helmet"}, def.enchants),
 		enchant_levels = def.enchant_levels,
-		armor = table.map(def.armor, function(n) return 1 - (1 - n) * 0.75 end),
+		armor = b.t.map(def.armor, function(n) return 1 - (1 - n) * 0.75 end),
 		slot = "head",
 		durability = def.durability,
 		recipe = {

@@ -66,7 +66,7 @@ end
 
 function aurum.scrolls.new(def)
 	local stack = ItemStack("aurum_scrolls:scroll_full")
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Type of magic (enchant, spell).
 		type = "",
 		-- Name of magic (durability, growth).
@@ -76,7 +76,7 @@ function aurum.scrolls.new(def)
 	}, def)
 	def.description = def.description or ("Magic Scroll: %s %s %d"):format(def.type, def.name, def.level)
 	stack:get_meta():set_string("contents", minetest.serialize(def))
-	aurum.set_stack_description(stack, def.description)
+	b.set_stack_description(stack, def.description)
 	return stack
 end
 

@@ -1,5 +1,5 @@
 local function v_ocean(def)
-	return table.combine({
+	return b.t.combine({
 		y_max = 0,
 		y_min = -100,
 	}, def)

@@ -26,13 +26,13 @@ function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 		description = S("Create Portal to @1", rdef.description),
 		longdesc = S("This ritual can be performed in @1.", table.concat(allowed_desc, ", ")),
 
-		recipe = table.icombine({
+		recipe = b.t.icombine({
 			{vector.new(0, 0, -1), "aurum_portals:base"},
 		}, recipe),
 		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 3, 0)),
 
 		apply = function(at, player)
-			if not aurum.set(allowed_from)[aurum.pos_to_realm(at(vector.new(0, 0, 0)))] then
+			if not b.set(allowed_from)[aurum.pos_to_realm(at(vector.new(0, 0, 0)))] then
 				return false
 			end
 

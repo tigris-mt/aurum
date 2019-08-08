@@ -5,7 +5,7 @@ function aurum.realms.get_spawn(id)
 	-- Start out at 0,0,0.
 	local pos = aurum.gpos(id, vector.new(0, 0, 0))
 	-- Try to get the natural spawn level there.
-	pos = table.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
+	pos = b.t.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
 
 	-- Go up until a free space is found.
 	for y=0,150 do

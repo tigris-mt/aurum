@@ -11,7 +11,7 @@ function aurum.magic.new_spell_scroll(spell, level)
 end
 
 function aurum.magic.register_spell(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		description = "",
 		longdesc = nil,
 		max_level = 3,

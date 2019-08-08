@@ -2,7 +2,7 @@ aurum.flora = {}
 
 -- Register a flora node. Passes to minetest.register_node() with suitable defaults set.
 function aurum.flora.register(name, def)
-	minetest.register_node(name, table.combine({
+	minetest.register_node(name, b.t.combine({
 		drawtype = "plantlike",
 		waving = 1,
 		sunlight_propagates = true,
@@ -12,7 +12,7 @@ function aurum.flora.register(name, def)
 		sounds = aurum.sounds.grass(),
 		_on_grow_plant = aurum.flora.spread,
 	}, def, {
-		groups = table.combine({
+		groups = b.t.combine({
 			dig_snap = 3,
 			flora = 1,
 			flammable = 1,

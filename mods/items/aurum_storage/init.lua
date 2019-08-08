@@ -9,7 +9,7 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 end)
 
 function aurum.storage.register(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Inventory size.
 		width = 1,
 		height = 1,
@@ -47,7 +47,7 @@ function aurum.storage.register(name, def)
 		]]})
 	end)
 
-	local ndef = table.combine({
+	local ndef = b.t.combine({
 		on_construct = function(pos)
 			minetest.get_meta(pos):get_inventory():set_size("main", def.width * def.height)
 			form:attach_to_node(pos)
@@ -74,7 +74,7 @@ function aurum.storage.register(name, def)
 
 		is_ground_content = false,
 	}, def.node, {
-		groups = table.combine({
+		groups = b.t.combine({
 			storage = def.width * def.height,
 		}, def.node.groups or {}),
 	})

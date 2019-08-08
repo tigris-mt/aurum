@@ -14,7 +14,7 @@ function aurum.base.dirt_spread(pos, node)
 	local rvec = vector.new(RADIUS, RADIUS, RADIUS)
 	local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(pos, rvec), vector.add(pos, rvec), "group:dirt_base")
 	local target = nil
-	for _,tpos in ipairs(table.shuffled(nodes)) do
+	for _,tpos in ipairs(b.t.shuffled(nodes)) do
 		local above = vector.add(tpos, vector.new(0, 1, 0))
 		if minetest.get_node_light(above) >= LIGHT then
 			target = tpos

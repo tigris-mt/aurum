@@ -52,7 +52,7 @@ aurum.biomes.register_tree_decoration({
 -- Forest
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
-	_groups = table.icombine(aurum.biomes.biomes.aurum_grassland._groups, {"forest"}),
+	_groups = b.t.icombine(aurum.biomes.biomes.aurum_grassland._groups, {"forest"}),
 	heat_point = 50,
 	humidity_point = 50,
 	_variants = aurum.biomes.biomes.aurum_grassland._variants,
@@ -71,7 +71,7 @@ aurum.biomes.register_tree_decoration({
 -- Jungle
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_jungle",
-	_groups = table.icombine(aurum.biomes.biomes.aurum_forest._groups, {"dark"}),
+	_groups = b.t.icombine(aurum.biomes.biomes.aurum_forest._groups, {"dark"}),
 	heat_point = 80,
 	humidity_point = 80,
 	_variants = {
@@ -156,12 +156,12 @@ aurum.biomes.register_all("aurum:aurum", {
 	heat_point = 0,
 	humidity_point = 70,
 	_variants = {
-		base = table.combine(frozen, aurum.biomes.v_base{
+		base = b.t.combine(frozen, aurum.biomes.v_base{
 			node_dungeon = "aurum_base:snow",
 			node_dungeon_alt = "aurum_base:snow",
 			node_dungeon_stair = "aurum_base:snow",
 		}),
-		ocean = table.combine(frozen, aurum.biomes.v_ocean{}),
+		ocean = b.t.combine(frozen, aurum.biomes.v_ocean{}),
 		under = aurum.biomes.v_under{},
 	},
 })

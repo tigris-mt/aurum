@@ -139,12 +139,12 @@ end)
 function aurum.portals.register(realm, def)
 	local rdef = aurum.realms.get(realm)
 
-	local def = table.combine({
+	local def = b.t.combine({
 		color = "#FFFFFF",
 		name = "aurum_portals:portal_" .. realm,
 	}, def)
 
-	def.node = table.combine(base_def, {
+	def.node = b.t.combine(base_def, {
 		description = S("Portal to @1", rdef.description),
 		_doc_items_longdesc = S"The gateway to another realm.",
 		_doc_items_usagehelp = S"Stand on the portal to be transported.",

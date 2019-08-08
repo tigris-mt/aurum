@@ -5,7 +5,7 @@ local cook_nodes = {}
 
 -- Register a cooker.
 function aurum.cook.register(name, def)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Range of cooking.
 		range = {0, 10},
 
@@ -74,7 +74,7 @@ function aurum.cook.register(name, def)
 		]]})
 	end)
 
-	def.node = table.combine({
+	def.node = b.t.combine({
 		allow_metadata_inventory_put = allow_metadata_inventory_put,
 		allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 		allow_metadata_inventory_take = allow_metadata_inventory_take,
@@ -212,7 +212,7 @@ function aurum.cook.register(name, def)
 				}
 			end
 
-			minetest.swap_node(pos, table.combine(node, {
+			minetest.swap_node(pos, b.t.combine(node, {
 				name = (mt.burn_time > 0) and def.active_name or def.name,
 			}))
 
@@ -249,11 +249,11 @@ function aurum.cook.register(name, def)
 		is_ground_content = false,
 	}, def.node)
 
-	def.active = table.combine(def.node, {
+	def.active = b.t.combine(def.node, {
 		drop = def.name,
 		light_source = 8,
 		_doc_items_create_entry = false,
-		groups = table.combine(def.node.groups, {
+		groups = b.t.combine(def.node.groups, {
 			not_in_creative_inventory = 1,
 		}),
 	}, def.active)

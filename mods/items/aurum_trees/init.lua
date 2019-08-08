@@ -28,7 +28,7 @@ m.default_log_decorations = {
 	["log,24,7"] = 0.005,
 }
 
-m.default_decorations = table.combine(m.default_tree_decorations, m.default_log_decorations)
+m.default_decorations = b.t.combine(m.default_tree_decorations, m.default_log_decorations)
 
 local function remove_force_place(schematic)
 	local ret = table.copy(schematic)
@@ -62,7 +62,7 @@ end
 function m.register(name, def)
 	assert(not m.types[name], "tree type already exists")
 
-	def = table.combine({
+	def = b.t.combine({
 		-- Basic description of tree type.
 		description = "Generic",
 
@@ -83,7 +83,7 @@ function m.register(name, def)
 		name = name,
 
 		-- What decoration schematics should be included, and at what weight?
-		decorations = table.combine(m.default_decorations, def.decorations or {}),
+		decorations = b.t.combine(m.default_decorations, def.decorations or {}),
 
 		decodefs = {},
 	})
@@ -98,15 +98,15 @@ function m.register(name, def)
 		end
 
 		-- Combine the defs.
-		local spec = table.combine(default, {
+		local spec = b.t.combine(default, {
 			-- Builds a translatable description according to the tree's S parameter.
 			description = def.S(def.description .. " @1", default.description or ""),
 		}, def[sub] or {}, {
-			groups = table.combine(default.groups, (def[sub] or {}).groups or {}),
+			groups = b.t.combine(default.groups, (def[sub] or {}).groups or {}),
 		})
 
 		-- Create the final part def.
-		local ndef = table.combine({
+		local ndef = b.t.combine({
 			name = name .. "_" .. sub,
 			tiles = {def.texture_base:format(sub)},
 			_tree = def,
@@ -201,7 +201,7 @@ function m.register(name, def)
 		end,
 	})
 
-	subnode("leaves", table.combine({
+	subnode("leaves", b.t.combine({
 		description = S"Leaves",
 		_doc_items_longdesc = S"A bundle of leaves.",
 		sounds = aurum.sounds.leaves(),
@@ -228,7 +228,7 @@ function m.register(name, def)
 		climbable = true,
 	} or {}))
 
-	for n in pairs(table.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
+	for n in pairs(b.t.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
 		add_decoration(def, n)
 	end
 

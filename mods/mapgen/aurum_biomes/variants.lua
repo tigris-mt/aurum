@@ -1,11 +1,11 @@
 function aurum.biomes.v_base(def)
-	return table.combine({
+	return b.t.combine({
 		y_min = 1,
 	}, def)
 end
 
 function aurum.biomes.v_ocean(def)
-	return table.combine({
+	return b.t.combine({
 		node_top = "aurum_base:sand",
 		depth_top = 1,
 		node_filler = "aurum_base:sand",
@@ -17,7 +17,7 @@ function aurum.biomes.v_ocean(def)
 end
 
 function aurum.biomes.v_under(def)
-	return table.combine({
+	return b.t.combine({
 		y_max = -100,
 		y_min = aurum.WORLD.min.y,
 	}, def)

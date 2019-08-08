@@ -13,7 +13,7 @@ function aurum.flavor.books.categories(...)
 end
 
 function aurum.flavor.books.register(def)
-	local def = table.combine({
+	local def = b.t.combine({
 		-- Weight of this book in being chosen randomly.
 		weight = 1,
 		-- What items should this book come as?
@@ -24,13 +24,13 @@ function aurum.flavor.books.register(def)
 		end,
 	}, def, {
 		-- Treasure groups set.
-		groups = table.combine({
+		groups = b.t.combine({
 			lore = true,
 			lorebook = true,
 		}, def.groups or {}),
 
 		-- Default gtextitems data.
-		data = table.combine({
+		data = b.t.combine({
 			author = nil,
 			title = nil,
 			text = nil,
@@ -41,7 +41,7 @@ function aurum.flavor.books.register(def)
 	-- Weighted list entry.
 	local entry = {def, def.weight}
 	-- For each treasure group, insert the weighted entry into its list.
-	for g in aurum.set.iter(def.groups) do
+	for g in b.set.iter(def.groups) do
 		aurum.flavor.books.groups[g] = aurum.flavor.books.groups[g] or {}
 		table.insert(aurum.flavor.books.groups[g], entry)
 	end

@@ -1,10 +1,5 @@
 -- Create aurum global.
-dofile((minetest.get_modpath(minetest.get_current_modname()) .. "/aurum_table.lua"))
-
--- Do a file relative to the current mod.
-aurum.dofile = function(path)
-	return dofile(minetest.get_modpath(minetest.get_current_modname()) .. "/" .. path)
-end
+b.dofile("aurum_table.lua")
 
 -- The world size.
 aurum.WORLD = {
@@ -73,14 +68,14 @@ local function get_drops(pos)
 	local ret = {}
 	local inv = minetest.get_meta(pos):get_inventory()
 	for _,items in pairs(inv:get_lists()) do
-		ret = table.icombine(ret, items)
+		ret = b.t.icombine(ret, items)
 	end
 	return ret
 end
 
 -- Default on_blast callback, will drop all inventory and remove+drop self.
 function aurum.drop_all_blast(pos)
-	local drops = table.icombine(get_drops(pos), {name})
+	local drops = b.t.icombine(get_drops(pos), {name})
 	minetest.remove_node(pos)
 	return drops
 end
@@ -93,7 +88,7 @@ function aurum.drop_all(pos)
 end
 
 -- Will replace first line of description with metadata description_override if available.
-function aurum.set_stack_description(stack, description)
+function b.set_stack_description(stack, description)
 	local split = description:split("\n", true)
 	local override = stack:get_meta():get_string("description_override")
 	if #override > 0 then
@@ -139,9 +134,6 @@ function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
 	local invert_wall = placer and placer:get_player_control().sneak or false
 	return minetest.rotate_and_place(itemstack, placer, pointed_thing, aurum.in_creative(placer), {invert_wall = invert_wall}, false)
 end
-
-aurum.dofile("lua_utils.lua")
-aurum.dofile("set.lua")
 
 aurum.dofile("damage.lua")
 

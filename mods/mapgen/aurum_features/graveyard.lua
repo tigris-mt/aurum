@@ -7,7 +7,7 @@ local function make_headstone(pos)
 		title = S("Grave of @1", name),
 		text = S("They lived @1 years before @2 took them. I buried them @3. In life, they were @4. That is all I know.\n\nRequiescat in pace, @5.",
 			age,
-			aurum.weighted_choice{
+			b.t.weighted_choice{
 				{(age > 70) and S"old age" or S"sudden disease", 5},
 				{S"battle", 1},
 				{S"magical battle", 0.25},
@@ -30,7 +30,7 @@ local function make_headstone(pos)
 				{S"their lack of immortality", 0.1},
 				{S"their great pride", 0.25},
 			},
-			aurum.weighted_choice{
+			b.t.weighted_choice{
 				{S"quickly", 1},
 				{S"after some time", 1},
 				{S"respectfully", 1},
@@ -47,7 +47,7 @@ local function make_headstone(pos)
 				{S"gently", 1},
 				{S"as if they were my own child", 0.01},
 			},
-			aurum.weighted_choice{
+			b.t.weighted_choice{
 				{S"humble", 1},
 				{S"filled with pride", 1},
 				{S"kind", 1},

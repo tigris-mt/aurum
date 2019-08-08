@@ -31,7 +31,7 @@ function treasurer.treasure_to_itemstack(treasure)
 	local mapped = map[treasure.name]
 	if mapped then
 		ret:set_name(mapped.stack:get_name())
-		ret:get_meta():from_b.t.mapped.stack:get_meta():to_table())
+		ret:get_meta():from_table(mapped.stack:get_meta():to_table())
 
 		if callbacks[mapped.index] then
 			ret = callbacks[mapped.index](ret)

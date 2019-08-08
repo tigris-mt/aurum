@@ -55,7 +55,7 @@ function aurum.flavor.books.random_book(group)
 		return
 	end
 
-	local choice = aurum.weighted_choice(entries)
+	local choice = b.t.weighted_choice(entries)
 
 	local item = nil
 	if #choice.items > 0 then

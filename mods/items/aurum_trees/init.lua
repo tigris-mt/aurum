@@ -179,7 +179,7 @@ function m.register(name, def)
 					table.insert(dkp, {k, v})
 				end
 			end
-			local dk = aurum.weighted_choice(dkp)
+			local dk = b.t.weighted_choice(dkp)
 			local d = def.decodefs[dk]
 			minetest.remove_node(pos)
 

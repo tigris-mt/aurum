@@ -20,7 +20,7 @@ local function capitalize(s)
 end
 
 local function syllable()
-	return (aurum.weighted_choice{
+	return (b.t.weighted_choice{
 		{function() return choose(syllables) end, 10},
 		{function() return schoose(vowels) end, 1},
 		{function() return schoose(consonants) .. schoose(vowels) end, 1},
@@ -30,7 +30,7 @@ local function syllable()
 end
 
 local function single()
-	return capitalize((aurum.weighted_choice{
+	return capitalize((b.t.weighted_choice{
 		{function() return syllable() .. "-" .. syllable() end, 0.25},
 		{function() return syllable() .. syllable() end, 1},
 		{function() return syllable() .. syllable() .. syllable() end, 1},

@@ -161,4 +161,4 @@ function aurum.portals.register(realm, def)
 	minetest.register_node(":" .. def.name, def.node)
 end
 
-aurum.dofile("default_portals.lua")
+b.dofile("default_portals.lua")

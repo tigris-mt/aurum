@@ -1,19 +1,19 @@
 aurum.base = {}
 
 -- Dirt behaviour.
-aurum.dofile("dirt.lua")
+b.dofile("dirt.lua")
 
 -- Base/ground nodes.
-aurum.dofile("base.lua")
-aurum.dofile("liquids.lua")
+b.dofile("base.lua")
+b.dofile("liquids.lua")
 
 -- Base building blocks, crafted.
-aurum.dofile("building_blocks.lua")
+b.dofile("building_blocks.lua")
 
 -- Sticks.
-aurum.dofile("sticks.lua")
+b.dofile("sticks.lua")
 -- Organic paste.
-aurum.dofile("paste.lua")
+b.dofile("paste.lua")
 
 -- Lava behaviour.
-aurum.dofile("lava_cooling.lua")
+b.dofile("lava_cooling.lua")

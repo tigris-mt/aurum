@@ -55,8 +55,8 @@ doc.add_entry("basics", "enchants", {
 	},
 })
 
-aurum.dofile("enchants.lua")
-aurum.dofile("default_tools.lua")
-aurum.dofile("hammer_break.lua")
+b.dofile("enchants.lua")
+b.dofile("default_tools.lua")
+b.dofile("hammer_break.lua")
 
-aurum.dofile("enchant_command.lua")
+b.dofile("enchant_command.lua")

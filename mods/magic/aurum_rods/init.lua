@@ -116,5 +116,5 @@ aurum.tools.register_enchant("rod_power", {
 	end,
 })
 
-aurum.dofile("command.lua")
-aurum.dofile("table.lua")
+b.dofile("command.lua")
+b.dofile("table.lua")

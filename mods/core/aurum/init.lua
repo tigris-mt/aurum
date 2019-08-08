@@ -135,10 +135,10 @@ function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
 	return minetest.rotate_and_place(itemstack, placer, pointed_thing, aurum.in_creative(placer), {invert_wall = invert_wall}, false)
 end
 
-aurum.dofile("damage.lua")
+b.dofile("damage.lua")
 
 -- Helpful geometric functions.
-aurum.dofile("geometry/box.lua")
+b.dofile("geometry/box.lua")
 
 -- Node sounds.
-aurum.dofile("sounds.lua")
+b.dofile("sounds.lua")

@@ -1,9 +1,9 @@
 aurum.player = {}
 
-aurum.dofile("death.lua")
-aurum.dofile("hp.lua")
-aurum.dofile("realm.lua")
-aurum.dofile("spawn.lua")
+b.dofile("death.lua")
+b.dofile("hp.lua")
+b.dofile("realm.lua")
+b.dofile("spawn.lua")
 
 -- "Void" damage.
 local timer = 0

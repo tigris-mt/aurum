@@ -17,7 +17,7 @@ gequip.register_type("feet", {
 	description = S"Feet",
 })
 
-aurum.dofile("actions.lua")
-aurum.dofile("armor.lua")
-aurum.dofile("doc.lua")
-aurum.dofile("wear.lua")
+b.dofile("actions.lua")
+b.dofile("armor.lua")
+b.dofile("doc.lua")
+b.dofile("wear.lua")

@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 aurum.farming = {}
 
 -- Fertilizer and soil.
-aurum.dofile("base.lua")
+b.dofile("base.lua")
 
 -- Crop registration.
-aurum.dofile("crops.lua")
+b.dofile("crops.lua")

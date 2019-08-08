@@ -1,1 +1,1 @@
-aurum.dofile("inventory.lua")
+b.dofile("inventory.lua")

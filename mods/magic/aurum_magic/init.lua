@@ -88,8 +88,8 @@ doc.add_entry("basics", "rituals", {
 	},
 })
 
-aurum.dofile("rituals.lua")
-aurum.dofile("spells.lua")
+b.dofile("rituals.lua")
+b.dofile("spells.lua")
 
-aurum.dofile("default_spells.lua")
-aurum.dofile("default_rituals.lua")
+b.dofile("default_spells.lua")
+b.dofile("default_rituals.lua")

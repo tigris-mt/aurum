@@ -281,7 +281,7 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
-aurum.dofile("decorations/init.lua")
-aurum.dofile("default_trees.lua")
-aurum.dofile("fuel.lua")
-aurum.dofile("leafdecay.lua")
+b.dofile("decorations/init.lua")
+b.dofile("default_trees.lua")
+b.dofile("fuel.lua")
+b.dofile("leafdecay.lua")

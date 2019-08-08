@@ -22,10 +22,10 @@ function aurum.flora.register(name, def)
 	}))
 end
 
-aurum.dofile("spreading.lua")
-aurum.dofile("stack_grow.lua")
+b.dofile("spreading.lua")
+b.dofile("stack_grow.lua")
 
-aurum.dofile("cactus.lua")
-aurum.dofile("flowers.lua")
-aurum.dofile("papyrus.lua")
-aurum.dofile("weeds.lua")
+b.dofile("cactus.lua")
+b.dofile("flowers.lua")
+b.dofile("papyrus.lua")
+b.dofile("weeds.lua")

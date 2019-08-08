@@ -96,7 +96,7 @@ function aurum.biomes.register_tree_decoration(def)
 	end
 end
 
-aurum.dofile("variants.lua")
+b.dofile("variants.lua")
 
-aurum.dofile("biomes/aurum.lua")
-aurum.dofile("biomes/loom.lua")
+b.dofile("biomes/aurum.lua")
+b.dofile("biomes/loom.lua")

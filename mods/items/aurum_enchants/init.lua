@@ -1,9 +1,9 @@
 local S = minetest.get_translator()
 aurum.enchants = {}
 
-aurum.dofile("armor.lua")
-aurum.dofile("tools.lua")
-aurum.dofile("general.lua")
+b.dofile("armor.lua")
+b.dofile("tools.lua")
+b.dofile("general.lua")
 
 function aurum.enchants.new_scroll(enchant, level)
 	return aurum.scrolls.new{
@@ -14,5 +14,5 @@ function aurum.enchants.new_scroll(enchant, level)
 	}
 end
 
-aurum.dofile("copying_desk.lua")
-aurum.dofile("table.lua")
+b.dofile("copying_desk.lua")
+b.dofile("table.lua")

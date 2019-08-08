@@ -133,5 +133,5 @@ function aurum.ore.register(name, def)
 	aurum.ore.ores[name] = def
 end
 
-aurum.dofile("mana_beans.lua")
-aurum.dofile("metals.lua")
+b.dofile("mana_beans.lua")
+b.dofile("metals.lua")

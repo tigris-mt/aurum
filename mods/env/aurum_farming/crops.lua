@@ -18,7 +18,7 @@ function aurum.farming.grow_plant(i, next_name, def, pos, node)
 	end
 
 	-- And enough light.
-	if minetest.get_node_light(pos) < def.light then
+	if (minetest.get_node_light(pos) or 0) < def.light then
 		return false
 	end
 

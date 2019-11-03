@@ -21,6 +21,7 @@ function trm_aurum_tools.register(stack, rarity, preciousness, ...)
 	end
 end
 
+-- Register all enchantable tools.
 minetest.register_on_mods_loaded(function()
 	local total = 0
 	local queue = {}
@@ -37,6 +38,7 @@ minetest.register_on_mods_loaded(function()
 		end
 		if groups then
 			total = total + 1
+			-- Use queue of functions so we have access to the total number of tools registered to set rarity.
 			table.insert(queue, function()
 				local stack = ItemStack(k)
 				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.floor(stack:get_definition()._enchant_levels / 2)), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))

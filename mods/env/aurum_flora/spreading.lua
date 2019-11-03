@@ -25,7 +25,7 @@ function aurum.flora.spread(pos, node)
 		return false
 	end
 
-	if minetest.get_node_light(pos) < LIGHT then
+	if (minetest.get_node_light(pos) or 0) < LIGHT then
 		return false
 	end
 
@@ -51,7 +51,7 @@ function aurum.flora.spread(pos, node)
 	local targets = minetest.find_nodes_in_area(vector.subtract(pos, RADIUS), vector.add(pos, RADIUS), spread)
 	for _,target in ipairs(b.t.shuffled(targets)) do
 		local tabove = vector.add(target, vector.new(0, 1, 0))
-		if minetest.get_node_light(tabove) >= LIGHT then
+		if (minetest.get_node_light(tabove) or 0) >= LIGHT then
 			minetest.set_node(tabove, {name = spread_node})
 			return true
 		end

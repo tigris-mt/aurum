@@ -112,6 +112,8 @@ function aurum.match_item(item, test)
 	end
 end
 
+-- Send a message to a player object.
+-- The message will be temporarily displayed prominently in some way.
 function aurum.info_message(player, message)
 	cmsg.push_message_player(player, message)
 	minetest.chat_send_player(player:get_player_name(), message)

@@ -20,6 +20,7 @@ end
 -- Callback will be called before treasure is given.
 function aurum.treasurer.register_itemstack_callback(stack, callback, ...)
 	local ret = aurum.treasurer.register_itemstack(stack, ...)
+	-- Use last used index as callback key.
 	callbacks[index] = callback
 	return ret
 end

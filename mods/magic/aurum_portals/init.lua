@@ -1,6 +1,8 @@
 local S = minetest.get_translator()
 aurum.portals = {}
 
+aurum.portals.min_delay = tonumber(minetest.settings:get("aurum.portals.min_delay")) or 5
+
 local RADIUS = vector.new(16, 16, 16)
 
 -- Convert <pos> in realm <from> to the proportional position in realm <to>.
@@ -47,6 +49,7 @@ minetest.register_craft{
 }
 
 local teleporting = {}
+local last_teleport = {}
 
 function aurum.portals.teleport(player, from_pos, to_realm)
 	-- Check which realm we're teleporting from.
@@ -66,6 +69,11 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 
 	-- If we're already teleporting to the same place, do nothing.
 	if teleporting[name] == key then
+		return
+	end
+
+	-- Not enough time since last teleport.
+	if minetest.get_gametime() - (last_teleport[name] or 0) < aurum.portals.min_delay then
 		return
 	end
 
@@ -114,6 +122,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 			aurum.info_message(player, S"No portal could be opened on the other side.")
 		end
 		teleporting[name] = nil
+		last_teleport[name] = minetest.get_gametime()
 	end, function(player)
 		-- Recalculate key.
 		local key = ("%d %d %s"):format(
@@ -134,6 +143,7 @@ end
 
 minetest.register_on_leaveplayer(function(player)
 	teleporting[player:get_player_name()] = nil
+	last_teleport[player:get_player_name()] = nil
 end)
 
 function aurum.portals.register(realm, def)

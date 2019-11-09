@@ -26,9 +26,12 @@ aurum.magic.register_spell("growth", {
 
 	apply = function(pointed_thing, level, player)
 		local pos = minetest.get_pointed_thing_position(pointed_thing)
+		-- Apply grow function multiple times for each spell level.
 		for i=1,level do
 			local node = minetest.get_node(pos)
+			-- Only continue if the node is still growable.
 			if minetest.get_item_group(node.name, "grow_plant") > 0 then
+				-- Try to grow the node; if unsuccessful then stop trying.
 				if not minetest.registered_nodes[node.name]._on_grow_plant(pos, node) then
 					break
 				end

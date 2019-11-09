@@ -18,8 +18,10 @@ function aurum.mobs.register(name, def)
 			hp_max = true,
 
 			visual = "wielditem",
-			visual_size = {x = 1, y = 1},
+			visual_size = {x = 0.6, y = 0.6},
 			textures = {"aurum_base:regret"},
+
+			collisionbox = {-0.4, -0.4, -0.4, 0.4, 0.4, 0.4},
 		},
 
 		_aurum_mob = def,
@@ -41,14 +43,20 @@ function aurum.mobs.register(name, def)
 			-- Update properties from saved data.
 			self.object:set_properties(self._data.properties or {})
 
-			-- Attach and tick gemai state.
+			-- Attach gemai.
 			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
+
+			self._gemai.debug_desc = function(self)
+				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(self.entity.object:get_pos()))
+			end
 
 			-- If the entity is new, fire the init event to start the gemai state.
 			if not self._data.initialized then
-				self.gemai:fire_event("init")
+				self._gemai:fire_event("init")
 			end
-			self.gemai:step(dtime)
+
+			-- Tick state.
+			self._gemai:step(dtime)
 
 			self._data.initialized = true
 		end,
@@ -60,22 +68,22 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_step = function(self, dtime)
-			self.gemai:step(dtime)
+			self._gemai:step(dtime)
 		end,
 
 		on_death = function(self)
-			self.gemai:fire_event("death", {terminate = true})
-			self.gemai:step(0)
+			self._gemai:fire_event("death", {terminate = true})
+			self._gemai:step(0)
 		end,
 
 		on_punch = function(self, puncher)
-			self.gemai:fire_event("punch", {
+			self._gemai:fire_event("punch", {
 				other = gemai.ref_to_table(puncher),
 			})
 		end,
 
 		on_rightclick = function(self, clicker)
-			self.gemai:fire_event("interact", {
+			self._gemai:fire_event("interact", {
 				other = gemai.ref_to_table(clicker),
 			})
 		end,

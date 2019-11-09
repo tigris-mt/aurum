@@ -3,6 +3,9 @@ local S = minetest.get_translator()
 aurum.mobs.register("test", {
 	description = S"Test",
 	gemai = {
+		global_actions = {
+			"aurum_mobs:physics",
+		},
 		states = {
 			init = {
 				events = {
@@ -13,6 +16,10 @@ aurum.mobs.register("test", {
 			roam = {
 				actions = {
 					"aurum_mobs:find_habitat",
+				},
+
+				events = {
+					found = "go_place",
 				},
 			},
 

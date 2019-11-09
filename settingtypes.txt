@@ -4,6 +4,9 @@ aurum.base.cool_lava (Enable Lava Cooling) bool true
 # Controls the base maximum HP for players.
 aurum.player.hp_max (Maximum Player HP) int 100
 
+# Sets the minimum delay in seconds before the player can be teleported by a portal again after a portal teleport.
+aurum.portal.min_delay (Portal Minimum Delay) int 5
+
 # Are leaves climbable?
 aurum.trees.climbable_leaves (Climbable Leaves) bool true
 

@@ -3,6 +3,9 @@ local S = minetest.get_translator()
 local function make_headstone(pos)
 	local name = aurum.flavor.generate_name()
 	local age = math.random(16, 110)
+	if age > 50 then
+		age = age - math.max(0, math.random(-15, 30))
+	end
 	gtextitems.set_node(pos, {
 		title = S("Grave of @1", name),
 		text = S("They lived @1 years before @2 took them. I buried them @3. In life, they were @4. That is all I know.\n\nRequiescat in pace, @5.",

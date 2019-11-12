@@ -1,5 +1,7 @@
 local S = minetest.get_translator()
-aurum.mobs = {}
+aurum.mobs = {
+	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
+}
 
 aurum.mobs.mobs = {}
 
@@ -15,7 +17,7 @@ function aurum.mobs.register(name, def)
 	minetest.register_entity(":" .. name, {
 		initial_properties = {
 			physical = true,
-			hp_max = true,
+			hp_max = 1,
 
 			visual = "wielditem",
 			visual_size = {x = 0.6, y = 0.6},
@@ -42,6 +44,7 @@ function aurum.mobs.register(name, def)
 
 			-- Update properties from saved data.
 			self.object:set_properties(self._data.properties or {})
+			self.object:set_nametag_attributes(self._data.nametag_attributes or {})
 
 			-- Attach gemai.
 			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
@@ -64,10 +67,16 @@ function aurum.mobs.register(name, def)
 		get_staticdata = function(self)
 			-- Save current properties.
 			self._data.properties = self.object:get_properties()
+			self._data.nametag_attributes = self.object:get_nametag_attributes()
+			self._data.gemai = self._gemai.data
 			return minetest.serialize(self._data)
 		end,
 
 		on_step = function(self, dtime)
+			local tag = ("%s %d/%d%s%s"):format(self._aurum_mob.name, self.object:get_hp(), self.object:get_properties().hp_max, minetest.colorize("#ff0000", "♥"),
+				aurum.mobs.DEBUG and (" %s %d(%d)"):format(self._gemai.data.state, self._gemai.data.live_time, self._gemai.data.state_time) or "")
+			self.object:set_properties{infotext = tag}
+			self.object:set_nametag_attributes{text = tag}
 			self._gemai:step(dtime)
 		end,
 

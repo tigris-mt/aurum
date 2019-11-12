@@ -6,6 +6,7 @@ aurum.mobs.register("test", {
 		global_actions = {
 			"aurum_mobs:physics",
 		},
+
 		states = {
 			init = {
 				events = {

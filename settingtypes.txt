@@ -1,6 +1,9 @@
 # Shall lava cool into solid material when next to water?
 aurum.base.cool_lava (Enable Lava Cooling) bool true
 
+# Enables mob debugging tools and information.
+aurum.mobs.debug (Enable Mob Debugging) bool false
+
 # Controls the base maximum HP for players.
 aurum.player.hp_max (Maximum Player HP) int 100
 

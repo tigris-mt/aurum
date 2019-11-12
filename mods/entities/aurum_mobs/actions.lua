@@ -17,7 +17,7 @@ gemai.register_action("aurum_mobs:go_place", function(self)
 	local delta = vector.subtract(target, pos)
 
 	if vector.length(delta) < NEAR then
-		self:fire_event("reached")
+		self:fire_event("reached", {target_pos = self.data.params.target_pos})
 	else
 		local dir = vector.normalize(delta)
 		local vel = vector.multiply(dir, vector.new(3, 0, 3))

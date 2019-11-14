@@ -19,6 +19,18 @@ aurum.biomes.register_all("aurum:aurum", {
 	},
 })
 
+aurum.biomes.register_tree_decoration({
+	name = "aurum_trees:drywood",
+	biomes = {"aurum_barrens"},
+	rarity = 0.1,
+	schematics = {},
+	custom_schematics = {
+		["tree,64,8"] = 1,
+		["tree,48,16"] = 1,
+		["log,32,4,,-1"] = 0.25,
+	},
+})
+
 -- Grassland
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_grassland",

@@ -29,5 +29,5 @@ return function(def, length, width, hollow, yoff)
 	return {
 		size = size,
 		data = data,
-	}, depth
+	}, yoff
 end

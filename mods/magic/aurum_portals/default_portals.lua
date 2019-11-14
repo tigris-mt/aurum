@@ -2,16 +2,19 @@ local S = minetest.get_translator()
 
 for k,v in pairs{
 	["aurum:aurum"] = {
-		color = "#009900",
+		color = "#00aa00",
 	},
 	["aurum:loom"] = {
 		color = "#550000",
+	},
+	["aurum:primus"] = {
+		color = "#004400",
 	},
 } do
 	aurum.portals.register(k, v)
 end
 
-local base_realms = {"aurum:aurum"}
+local base_realms = {"aurum:aurum", "aurum:primus"}
 local hub_realms = {"aurum:loom"}
 
 function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
@@ -71,3 +74,15 @@ aurum.portals.register_ritual("aurum:aurum", hub_realms, {
 	{vector.new(0, 3, -1), "group:soil"},
 	{vector.new(1, 3, -1), "group:soil"},
 }, "aurum_base:stone")
+
+aurum.portals.register_ritual("aurum:primus", hub_realms, {
+	{vector.new(-1, 0, -1), "aurum_farming:fertilizer"},
+	{vector.new(1, 0, -1), "aurum_farming:fertilizer"},
+	{vector.new(-1, 1, -1), "aurum_farming:fertilizer"},
+	{vector.new(1, 1, -1), "aurum_farming:fertilizer"},
+	{vector.new(-1, 2, -1), "aurum_farming:fertilizer"},
+	{vector.new(1, 2, -1), "aurum_farming:fertilizer"},
+	{vector.new(-1, 3, -1), "aurum_trees:pander_trunk"},
+	{vector.new(0, 3, -1), "aurum_trees:pander_trunk"},
+	{vector.new(1, 3, -1), "aurum_trees:pander_trunk"},
+}, "aurum_base:dirt")

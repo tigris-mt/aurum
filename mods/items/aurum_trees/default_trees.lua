@@ -27,6 +27,8 @@ m.register("aurum_trees:pander", {
 m.register("aurum_trees:drywood", {
 	description = "Drywood",
 	texture_base = "aurum_trees_drywood_%s.png",
+	terrain = {"group:soil", "aurum_base:gravel"},
+	terrain_desc = S"any dirt, soil, or gravel",
 	decorations = {
 		very_tall = 0.5,
 		huge = 0.15,

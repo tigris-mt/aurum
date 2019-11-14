@@ -41,6 +41,8 @@ end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
 function aurum.trees.generate_decoration(tree, n)
+	local t_begin = minetest.get_us_time()
+
 	local split = n:split(",", true)
 	local name = split[1]
 	local params = {}
@@ -50,6 +52,12 @@ function aurum.trees.generate_decoration(tree, n)
 
 	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(m.types[tree], unpack(params))
 	offset = offset or 0
+
+	-- Warn if elapsed time was lengthy.
+	local t_sec = (minetest.get_us_time() - t_begin) / 1000000
+	if t_sec > 0.1 then
+		minetest.log("warning", ("Registering tree decoration %s (%s) took %.4f seconds."):format(tree, n, t_sec))
+	end
 
 	return {
 		schematic = schematic,

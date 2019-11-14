@@ -5,7 +5,7 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 	trunk_radius_ratio = tonumber(trunk_radius_ratio) or 0.25
 	leaf_height_ratio = tonumber(leaf_height_ratio) or 0.4
 	local trunk_radius = radius * trunk_radius_ratio
-	leaf_extent = tonumber(leaf_extent) or def.leafdecay or 4
+	leaf_extent = tonumber(leaf_extent) or math.max(1, def.leafdecay)
 	depth = tonumber(depth) or 3
 
 	local t = {name = def.trunk, force_place = true}

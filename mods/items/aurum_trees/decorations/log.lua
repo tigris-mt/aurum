@@ -1,7 +1,8 @@
-return function(def, length, width, hollow)
+return function(def, length, width, hollow, yoff)
 	length = tonumber(length) or 1
 	width = tonumber(width) or 1
 	hollow = (tonumber(hollow) or 1) > 0
+	yoff = tonumber(yoff) or 1
 
 	local t = {name = def.trunk, param2 = 12}
 
@@ -28,5 +29,5 @@ return function(def, length, width, hollow)
 	return {
 		size = size,
 		data = data,
-	}, 1
+	}, depth
 end

@@ -30,6 +30,12 @@ They are lesser than the titans, but with the old titan having abaonded the worl
 #### The Headstoner
 Most peaceful of all the demigods, her domain is Aurum. She buries the dead.
 
+#### Mister Decadence
+A bureaucratic demigod. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.
+
+#### Mors Vivi
+An impersonal demigod. She has an insatiable appetite for the evolved, and prefers fresh "simple" life like plants and insects. She loves oxygen and hates fire.
+
 ### Loomspawn
 The natural forces of the Loom, performing their corruption.
 

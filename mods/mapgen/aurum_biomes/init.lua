@@ -73,6 +73,15 @@ function aurum.biomes.get_all_group(group, variants)
 	return ret
 end
 
+local function sum_rarity(table, keys)
+	local total = 0
+	local keys = keys or b.t.keys(table)
+	for _,k in ipairs(keys) do
+		total = total + (table[k] or 1)
+	end
+	return total
+end
+
 function aurum.biomes.register_tree_decoration(def)
 	local treedef = aurum.trees.types[def.name]
 	local d = treedef.decodefs
@@ -80,19 +89,35 @@ function aurum.biomes.register_tree_decoration(def)
 		-- Relative rarity.
 		rarity = 1,
 		-- Tree types to use.
+		--- Only keys, uses rarity from tree definition.
 		schematics = b.t.keys(b.t.map(treedef.decorations, function(v) return (v > 0) and v or nil end)),
+		--- Keys and values: <tree>: <rarity>
+		custom_schematics = {},
 		-- Decoration biomes.
 		biomes = nil,
+		-- Custom tree types.
 	}, def)
+
+	local total = sum_rarity(def.custom_schematics) + sum_rarity(treedef.decorations, def.schematics)
 
 	for _,k in ipairs(def.schematics) do
 		minetest.register_decoration(b.t.combine({
 			deco_type = "schematic",
 			place_on = treedef.terrain,
 			sidelen = 80,
-			fill_ratio = 0.005 * (def.rarity or 1) * (treedef.decorations[k] or 1) / #def.schematics,
+			fill_ratio = 0.005 * (def.rarity or 1) * (treedef.decorations[k] or 1) / total,
 			biomes = def.biomes,
 		}, d[k]))
+	end
+
+	for schematic_name,rarity in pairs(def.custom_schematics) do
+		minetest.register_decoration(b.t.combine({
+			deco_type = "schematic",
+			place_on = treedef.terrain,
+			sidelen = 80,
+			fill_ratio = 0.005 * (def.rarity or 1) * rarity / total,
+			biomes = def.biomes,
+		}, aurum.trees.generate_decoration(def.name, schematic_name)))
 	end
 end
 
@@ -100,3 +125,4 @@ b.dofile("variants.lua")
 
 b.dofile("biomes/aurum.lua")
 b.dofile("biomes/loom.lua")
+b.dofile("biomes/primus.lua")

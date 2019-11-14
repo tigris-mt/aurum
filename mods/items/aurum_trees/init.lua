@@ -40,7 +40,7 @@ end
 
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
-local function add_decoration(def, n)
+function aurum.trees.generate_decoration(tree, n)
 	local split = n:split(",", true)
 	local name = split[1]
 	local params = {}
@@ -48,15 +48,19 @@ local function add_decoration(def, n)
 		table.insert(params, split[i])
 	end
 
-	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(def, unpack(params))
+	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(m.types[tree], unpack(params))
 	offset = offset or 0
 
-	def.decodefs[n] = {
+	return {
 		schematic = schematic,
 		rotation = "random",
 		flags = {place_center_x = true, place_center_y = false, place_center_z = true},
 		place_offset_y = offset,
 	}
+end
+
+local function add_decoration(tree, n)
+	m.types[tree].decodefs[n] = aurum.trees.generate_decoration(tree, n)
 end
 
 function m.register(name, def)
@@ -228,11 +232,11 @@ function m.register(name, def)
 		climbable = true,
 	} or {}))
 
-	for n in pairs(b.t.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
-		add_decoration(def, n)
-	end
-
 	m.types[name] = def
+
+	for n in pairs(b.t.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
+		add_decoration(name, n)
+	end
 end
 
 minetest.register_chatcommand("growtree", {
@@ -259,7 +263,7 @@ minetest.register_chatcommand("growtree", {
 			return false, S"Invalid parameters."
 		end
 
-		local err, emsg = pcall(add_decoration, m.types[type], decoration)
+		local err, emsg = pcall(add_decoration, type, decoration)
 
 		if not err then
 			return false, emsg

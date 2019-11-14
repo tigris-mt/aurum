@@ -35,3 +35,24 @@ aurum.realms.register("aurum:loom", {
 		node_dungeon_stair = "aurum_base:regret_brick",
 	},
 })
+
+aurum.realms.register("aurum:primus", {
+	description = S"Primus Hortum",
+	size = vector.new(8000, 1600, 8000),
+
+	apply_player = function(player)
+		player:set_sky("#336633", "plain", {})
+		player:set_clouds{
+			color = "#004400bb",
+			speed = {x = 0, z = -4},
+			thickness = 32,
+			density = 0.6,
+			height = 400,
+		}
+
+		aurum.realms.check_underground(player, -100, function()
+			player:set_sky(0, "plain", {})
+			player:set_clouds{density = 0}
+		end)
+	end,
+})

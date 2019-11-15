@@ -33,12 +33,12 @@ m.default_log_decorations = {
 -- Map names to more generic schematics.
 m.translation = {
 	simple = "tree,5,2",
-	wide = "tree,5,3",
+	wide = "tree,6,4,0.3,0.25",
 	tall = "tree,8,2",
-	very_tall = "tree,14,3",
-	huge = "tree,14,4",
-	giant = "tree,24,4",
-	double = "tree,7,3",
+	very_tall = "tree,14,5",
+	huge = "tree,14,7",
+	giant = "tree,26,12",
+	double = "tree,7,5",
 }
 
 -- Default decorations include both trees and logs.

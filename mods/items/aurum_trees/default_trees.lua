@@ -40,17 +40,22 @@ m.register("aurum_trees:pine", {
 	texture_base = "aurum_trees_pine_%s.png",
 	terrain = {"group:soil", "group:snow"},
 	terrain_desc = S"any dirt, soil, or snow",
-	decorations = b.t.combine(b.t.map(m.default_tree_decorations, function(v) return 0 end), {
-		["cone,2"] = 0.1,
-		["cone,3"] = 1,
-		["cone,4"] = 1,
-		["cone,5"] = 1,
-		["cone,8"] = 0.25,
-		["cone,9,0.5,3"] = 0.15,
-		["cone,12"] = 0.1,
-		["cone,14"] = 0.05,
-		["cone,14,1.5"] = 0.05,
-	}),
+	-- Pine trees only use cone schematics.
+	decorations = b.t.combine(
+		-- Map out default decorations.
+		b.t.map(m.default_tree_decorations, function(v) return 0 end),
+		{
+			["cone,2"] = 0.1,
+			["cone,3"] = 1,
+			["cone,4"] = 1,
+			["cone,5"] = 1,
+			["cone,8"] = 0.25,
+			["cone,9,0.5,3"] = 0.15,
+			["cone,12"] = 0.1,
+			["cone,14"] = 0.05,
+			["cone,14,1.5"] = 0.05,
+		}
+	),
 })
 
 for _,c in ipairs{

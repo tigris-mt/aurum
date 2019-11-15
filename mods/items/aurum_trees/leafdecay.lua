@@ -26,19 +26,23 @@ function aurum.trees.leafdecay.register(def)
 	aurum.trees.leafdecay.register_ref(def)
 end
 
+-- Keep references for both leaves and trunk nodes to refer to in callbacks.
 function aurum.trees.leafdecay.register_ref(def)
-	-- Keep references for both leaves and trunk nodes.
 	aurum.trees.leafdecay.types[def.leaves] = def
 	aurum.trees.leafdecay.types[def.trunk] = def
 end
 
+-- When trunk nodes are destroyed, search for leaves that might belong to this trunk and start their check timer.
 function aurum.trees.leafdecay.trunk_after_destruct(pos, oldnode)
 	local def = aurum.trees.leafdecay.types[oldnode.name]
 	local box = aurum.box.new_radius(pos, def.leafdistance)
 
+	-- Search for all nearby leaves.
 	for _,pos in ipairs(minetest.find_nodes_in_area(box.a, box.b, def.leaves)) do
+		-- Only trigger when the node was naturally placed.
 		if minetest.get_node(pos).param2 ~= aurum.trees.leafdecay.PLACE_PARAM then
 			local timer = minetest.get_node_timer(pos)
+			-- Don't restart running timers.
 			if not timer:is_started() then
 				timer:start(math.random() * aurum.trees.leafdecay.MAX_DELAY)
 			end
@@ -46,6 +50,7 @@ function aurum.trees.leafdecay.trunk_after_destruct(pos, oldnode)
 	end
 end
 
+-- When leaf timers trigger, check if there is a supporting trunk nearby.
 function aurum.trees.leafdecay.leaf_on_timer(pos)
 	local node = minetest.get_node(pos)
 	local def = aurum.trees.leafdecay.types[node.name]

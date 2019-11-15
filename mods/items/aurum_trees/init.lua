@@ -1,4 +1,6 @@
 local S = minetest.get_translator()
+-- Schematic parameter delimiter.
+local SCHEMATIC_DELIM = ","
 local m = {}
 aurum.trees = m
 
@@ -28,6 +30,18 @@ m.default_log_decorations = {
 	["log,24,7"] = 0.005,
 }
 
+-- Map names to more generic schematics.
+m.translation = {
+	simple = "tree,5,2",
+	wide = "tree,5,3",
+	tall = "tree,8,2",
+	very_tall = "tree,14,3",
+	huge = "tree,14,4",
+	giant = "tree,24,4",
+	double = "tree,7,3",
+}
+
+-- Default decorations include both trees and logs.
 m.default_decorations = b.t.combine(m.default_tree_decorations, m.default_log_decorations)
 
 local function remove_force_place(schematic)
@@ -40,16 +54,21 @@ end
 
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
+-- Returns a decoration for tree according to decoration schematic n.
 function aurum.trees.generate_decoration(tree, n)
 	local t_begin = minetest.get_us_time()
 
-	local split = n:split(",", true)
+	n = m.translation[n] or n
+
+	-- Split up decoration name by delimiter.
+	local split = n:split(SCHEMATIC_DELIM, true)
 	local name = split[1]
 	local params = {}
 	for i=2,#split do
 		table.insert(params, split[i])
 	end
 
+	-- Execute decoration schematic generator according to def and params.
 	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(m.types[tree], unpack(params))
 	offset = offset or 0
 
@@ -67,6 +86,7 @@ function aurum.trees.generate_decoration(tree, n)
 	}
 end
 
+-- Add decoration schematic n to tree's default.
 local function add_decoration(tree, n)
 	m.types[tree].decodefs[n] = aurum.trees.generate_decoration(tree, n)
 end

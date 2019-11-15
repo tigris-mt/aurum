@@ -33,7 +33,7 @@ return function(def, overall, trunk_ratio, width_ratio)
 				for z=z_start,z_end,1 do
 					local i = area:index(x, y, z)
 					local dist = math.sqrt(math.pow(x - limit.x / 2, 2) + math.pow(z - limit.z / 2, 2))
-					if y >= leaf_stop and dist < ss / 4 * trunk_ratio + def.leafdecay then
+					if y >= leaf_stop and dist < ss / 4 * trunk_ratio + def.leafdistance then
 						data[i] = l
 					end
 					if dist < ss / 4 * trunk_ratio then

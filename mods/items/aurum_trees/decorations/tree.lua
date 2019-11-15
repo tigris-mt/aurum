@@ -5,7 +5,7 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 	trunk_radius_ratio = tonumber(trunk_radius_ratio) or 0.25
 	leaf_height_ratio = tonumber(leaf_height_ratio) or 0.4
 	local trunk_radius = radius * trunk_radius_ratio
-	leaf_extent = tonumber(leaf_extent) or math.max(1, def.leafdecay)
+	leaf_extent = tonumber(leaf_extent) or def.leafdistance
 	depth = tonumber(depth) or 3
 
 	local t = {name = def.trunk, force_place = true}
@@ -28,7 +28,7 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 				local dist = math.sqrt(math.pow(x - limit.x / 2, 2) + math.pow(z - limit.z / 2, 2))
 				if dist < trunk_radius and y < limit.y then
 					data[i] = t
-				elseif y - depth > (height * leaf_height_ratio) and dist < trunk_radius + def.leafdecay and dist < trunk_radius + leaf_extent then
+				elseif y - depth > (height * leaf_height_ratio) and dist < trunk_radius + def.leafdistance and dist < trunk_radius + leaf_extent then
 					data[i] = (dist > trunk_radius + 1) and lp or l
 				end
 			end

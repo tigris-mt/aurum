@@ -84,8 +84,10 @@ function m.register(name, def)
 		-- Translator.
 		S = S,
 
-		-- Leafdecay distance.
-		leafdecay = 4,
+		-- Distance leaves can be from the trunk.
+		leafdistance = 3,
+		-- Shall leaves decay?
+		leafdecay = true,
 
 		-- Growth terrain.
 		terrain = {"group:soil"},
@@ -149,10 +151,12 @@ function m.register(name, def)
 		groups = {dig_chop = 3, wood = 1, flammable = 1},
 	})
 
-	minetest.register_craft{
-		output = def.planks .. " 4",
-		recipe = {{def.trunk}},
-	}
+	if def.planks and def.trunk then
+		minetest.register_craft{
+			output = def.planks .. " 4",
+			recipe = {{def.trunk}},
+		}
+	end
 
 	subnode("sapling", {
 		description = S"Sapling",
@@ -221,8 +225,7 @@ function m.register(name, def)
 		drawtype = "allfaces_optional",
 		waving = 2,
 		paramtype = "light",
-		place_param2 = 1,
-		groups = {dig_snap = 3, leaves = 1, flammable = 1, leafdecay = def.leafdecay},
+		groups = {dig_snap = 3, leaves = 1, flammable = 1},
 
 		drop = {
 			max_items = 1,
@@ -239,6 +242,10 @@ function m.register(name, def)
 		walkable = false,
 		climbable = true,
 	} or {}))
+
+	if def.leafdecay and def.trunk and def.leaves then
+		aurum.trees.leafdecay.register(def)
+	end
 
 	m.types[name] = def
 
@@ -293,7 +300,8 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	return ""
 end)
 
+b.dofile("leafdecay.lua")
+
 b.dofile("decorations/init.lua")
 b.dofile("default_trees.lua")
 b.dofile("fuel.lua")
-b.dofile("leafdecay.lua")

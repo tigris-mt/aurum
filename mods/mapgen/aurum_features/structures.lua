@@ -133,74 +133,76 @@ function aurum.features.structure_context(box, at, rotation)
 	}, {__index = metatable})
 end
 
-minetest.register_on_generated(function(minp, maxp, seed)
-	local center = vector.divide(vector.add(minp, maxp), 2)
-	local biome = minetest.get_biome_data(center)
-	local biome_name = biome and minetest.get_biome_name(biome.biome)
+minetest.register_on_mods_loaded(function()
+	minetest.register_on_generated(function(minp, maxp, seed)
+		local center = vector.divide(vector.add(minp, maxp), 2)
+		local biome = minetest.get_biome_data(center)
+		local biome_name = biome and minetest.get_biome_name(biome.biome)
 
-	if not biome_name then
-		return
-	end
+		if not biome_name then
+			return
+		end
 
-	-- TODO: Use the seed for random structure choices.
-	local function prob(chance)
-		return math.random() <= chance
-	end
+		-- TODO: Use the seed for random structure choices.
+		local function prob(chance)
+			return math.random() <= chance
+		end
 
-	-- For all decorations registered with this biome...
-	for _,name in ipairs(biome_map[biome_name] or {}) do
-		local def = aurum.features.decorations[name]
+		-- For all decorations registered with this biome...
+		for _,name in ipairs(biome_map[biome_name] or {}) do
+			local def = aurum.features.decorations[name]
 
-		-- Look for suitable places.
-		for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
-			local pos = def.on_offset(pos)
-			local schematic = def.schematic or def.make_schematic(pos, math.random)
+			-- Look for suitable places.
+			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
+				local pos = def.on_offset(pos)
+				local schematic = def.schematic or def.make_schematic(pos, math.random)
 
-			-- Random rotation 0 to 270 degrees.
-			local rotation = math.random(0, 3)
+				-- Random rotation 0 to 270 degrees.
+				local rotation = math.random(0, 3)
 
-			-- Calculate limit.
-			local limit = vector.subtract(schematic.size, 1)
+				-- Calculate limit.
+				local limit = vector.subtract(schematic.size, 1)
 
-			-- Center offset.
-			local halflimit = vector.apply(vector.divide(limit, 2), function(v)
-				return math.sign(v) * math.floor(math.abs(v))
-			end)
+				-- Center offset.
+				local halflimit = vector.apply(vector.divide(limit, 2), function(v)
+					return math.sign(v) * math.floor(math.abs(v))
+				end)
 
-			-- Shift pos by center offset.
-			local real_pos = b.t.combine(vector.subtract(pos, halflimit), {y = pos.y})
+				-- Shift pos by center offset.
+				local real_pos = b.t.combine(vector.subtract(pos, halflimit), {y = pos.y})
 
-			local function at(offset)
-				local actual = vector.new(0, offset.y, 0)
-				if rotation == 0 then
-					actual.x = offset.x
-					actual.z = offset.z
-				elseif rotation == 1 then
-					actual.z = limit.x - offset.x
-					actual.x = offset.z
-				elseif rotation == 2 then
-					actual.x = limit.x - offset.x
-					actual.z = limit.z - offset.z
-				elseif rotation == 3 then
-					actual.z = offset.x
-					actual.x = limit.z - offset.z
-				else
-					error("invalid rotation: " .. rotation)
+				local function at(offset)
+					local actual = vector.new(0, offset.y, 0)
+					if rotation == 0 then
+						actual.x = offset.x
+						actual.z = offset.z
+					elseif rotation == 1 then
+						actual.z = limit.x - offset.x
+						actual.x = offset.z
+					elseif rotation == 2 then
+						actual.x = limit.x - offset.x
+						actual.z = limit.z - offset.z
+					elseif rotation == 3 then
+						actual.z = offset.x
+						actual.x = limit.z - offset.z
+					else
+						error("invalid rotation: " .. rotation)
+					end
+					return vector.add(real_pos, actual)
 				end
-				return vector.add(real_pos, actual)
-			end
 
-			if prob(def.rarity) then
-				-- Place schematic.
-				local rotname = {"0", "90", "180", "270"}
-				minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, true)
+				if prob(def.rarity) then
+					-- Place schematic.
+					local rotname = {"0", "90", "180", "270"}
+					minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, true)
 
-				-- Run callback.
-				def.on_generated(aurum.features.structure_context(aurum.box.new(
-					at(vector.new(0, 0, 0)),
-					at(limit)
-				), at, rotation))
+					-- Run callback.
+					def.on_generated(aurum.features.structure_context(aurum.box.new(
+						at(vector.new(0, 0, 0)),
+						at(limit)
+					), at, rotation))
+				end
 			end
 		end
-	end
+	end)
 end)

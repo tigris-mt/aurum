@@ -93,12 +93,15 @@ function aurum.biomes.register_tree_decoration(def)
 		schematics = b.t.keys(b.t.map(treedef.decorations, function(v) return (v > 0) and v or nil end)),
 		--- Keys and values: <tree>: <rarity>
 		custom_schematics = {},
+		--- Will be grown after map generation.
+		--- Same format as <custom_schematics>.
+		post_schematics = {},
 		-- Decoration biomes.
 		biomes = nil,
 		-- Custom tree types.
 	}, def)
 
-	local total = sum_rarity(def.custom_schematics) + sum_rarity(treedef.decorations, def.schematics)
+	local total = sum_rarity(def.custom_schematics) + sum_rarity(treedef.decorations, def.schematics) + sum_rarity(def.post_schematics)
 
 	for _,k in ipairs(def.schematics) do
 		minetest.register_decoration(b.t.combine({
@@ -118,6 +121,19 @@ function aurum.biomes.register_tree_decoration(def)
 			fill_ratio = 0.005 * (def.rarity or 1) * rarity / total,
 			biomes = def.biomes,
 		}, aurum.trees.generate_decoration(def.name, schematic_name)))
+	end
+
+	for schematic_name, rarity in pairs(def.post_schematics) do
+		local deco = aurum.trees.generate_decoration(def.name, schematic_name)
+		aurum.features.register_decoration{
+			place_on = treedef.terrain,
+			rarity = 0.005 * (def.rarity or 1) * rarity / total,
+			biomes = def.biomes,
+			schematic = deco.schematic,
+			on_offset = function(pos)
+				return vector.add(pos, vector.new(0, deco.place_offset_y, 0))
+			end,
+		}
 	end
 end
 

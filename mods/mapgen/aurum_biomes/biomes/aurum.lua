@@ -25,9 +25,11 @@ aurum.biomes.register_tree_decoration({
 	rarity = 0.1,
 	schematics = {},
 	custom_schematics = {
+		["log,32,4,,-1"] = 0.25,
+	},
+	post_schematics = {
 		["tree,64,8"] = 1,
 		["tree,48,16"] = 1,
-		["log,32,4,,-1"] = 0.25,
 	},
 })
 

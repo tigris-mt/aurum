@@ -21,6 +21,7 @@ m.register("aurum_trees:pander", {
 		very_tall = 1,
 		huge = 0.25,
 		giant = 0.1,
+		["tree,48,16"] = 0.01,
 	},
 })
 

@@ -105,7 +105,7 @@ function m.register(name, def)
 		S = S,
 
 		-- Distance leaves can be from the trunk.
-		leafdistance = 3,
+		leafdistance = 4,
 		-- Shall leaves decay?
 		leafdecay = true,
 

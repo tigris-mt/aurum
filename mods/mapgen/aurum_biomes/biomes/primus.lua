@@ -9,8 +9,10 @@ aurum.biomes.register_all("aurum:primus", {
 			depth_top = 1,
 			node_filler = "aurum_base:dirt",
 			depth_filler = 4,
+			-- There is no ocean in Primus Hortum.
+			y_min = -100,
+			node_water = "air",
 		},
-		ocean = aurum.biomes.v_ocean{},
 		under = aurum.biomes.v_under{},
 	},
 })

@@ -13,6 +13,7 @@ function aurum.biomes.v_ocean(def)
 		y_max = 0,
 		y_min = -100,
 		node_cave_liquid = "aurum_base:water_source",
+		vertical_blend = 1,
 	}, def)
 end
 

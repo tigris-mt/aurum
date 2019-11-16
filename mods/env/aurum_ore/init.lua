@@ -40,6 +40,12 @@ function aurum.ore.register(name, def)
 
 		-- Override for the ore node registration def.
 		ore_override = {},
+
+		-- Override for ore generation.
+		oregen_default_override = {},
+
+		-- Oregen override for each realm.
+		oregen_realm_override = {},
 	}, def)
 
 	aurum.ore.ores[name] = def
@@ -96,12 +102,12 @@ function aurum.ore.register(name, def)
 		end
 
 		for _,realmid in ipairs(def.realms) do
-			aurum.ore.register_generation(name, realmid)
+			aurum.ore.register_generation(name, realmid, b.t.combine(def.oregen_default_override, def.oregen_realm_override[realmid] or {}))
 		end
 	end
 end
 
-function aurum.ore.register_generation(name, realmid)
+function aurum.ore.register_generation(name, realmid, override)
 	local def = aurum.ore.ores[name]
 	assert(def.ore)
 
@@ -113,7 +119,7 @@ function aurum.ore.register_generation(name, realmid)
 
 		local nextdepth = combined[index + 1] or realm.global_box.a.y
 
-		local d = {
+		local d = b.t.combine({
 			biomes = biomes,
 			ore_type = "scatter",
 			ore = def.ore,
@@ -123,7 +129,7 @@ function aurum.ore.register_generation(name, realmid)
 			clust_size = math.floor(def.size + 0.5),
 			y_max = depth + realm.y,
 			y_min = nextdepth,
-		}
+		}, override or {})
 
 		if index == 1 then
 			minetest.register_ore(d)

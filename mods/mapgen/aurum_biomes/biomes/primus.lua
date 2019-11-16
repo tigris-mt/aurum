@@ -1,8 +1,8 @@
 local function v_base(def)
 	return aurum.biomes.v_base(b.t.combine({
-		-- There is no ocean in Primus Hortum.
 		y_min = -100,
 		node_water = "air",
+		node_cave_liquid = "air",
 	}, def))
 end
 

@@ -1,18 +1,31 @@
-local function v_ocean(def)
-	return b.t.combine({
-		y_max = 0,
+local function v_base(def)
+	return aurum.biomes.v_base(b.t.combine({
 		y_min = -100,
-	}, def)
+		node_water = "air",
+		node_cave_liquid = "air",
+	}, def))
 end
+
+aurum.biomes.register_all("aurum:loom", {
+	name = "loom_lava",
+	heat_point = 90,
+	humidity_point = 10,
+	_variants = {
+		base = v_base{
+			node_top = "aurum_base:lava_source",
+			depth_top = 5,
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
 
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_barrens",
 	_groups = {"barren"},
-	heat_point = 80,
-	humidity_point = 20,
+	heat_point = 70,
+	humidity_point = 30,
 	_variants = {
-		base = aurum.biomes.v_base{},
-		ocean = v_ocean{},
+		base = v_base{},
 		under = aurum.biomes.v_under{},
 	},
 })
@@ -20,11 +33,10 @@ aurum.biomes.register_all("aurum:loom", {
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_crystal_forest",
 	_groups = {},
-	heat_point = 60,
-	humidity_point = 40,
+	heat_point = 50,
+	humidity_point = 60,
 	_variants = {
-		base = aurum.biomes.v_base{},
-		ocean = v_ocean{},
+		base = v_base{},
 		under = aurum.biomes.v_under{},
 	},
 })
@@ -44,14 +56,13 @@ aurum.biomes.register_tree_decoration({
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_forest",
 	_groups = {"forest"},
-	heat_point = 50,
+	heat_point = 40,
 	humidity_point = 50,
 	_variants = {
-		base = aurum.biomes.v_base{
+		base = v_base{
 			node_top = "aurum_base:dirt",
 			depth_top = 2,
 		},
-		ocean = v_ocean{},
 		under = aurum.biomes.v_under{},
 	},
 })

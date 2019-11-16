@@ -179,3 +179,20 @@ aurum.biomes.register_all("aurum:aurum", {
 		under = aurum.biomes.v_under{},
 	},
 })
+
+-- Volcano
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_volcano",
+	heat_point = 85,
+	humidity_point = 15,
+	_variants = {
+		base = aurum.biomes.v_base{
+			node_top = "aurum_base:lava_source",
+			depth_top = 10,
+			node_filler = "aurum_base:stone",
+			node_water = "air",
+			node_cave_liquid = "air",
+			y_min = 40,
+		},
+	},
+})

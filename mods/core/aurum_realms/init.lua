@@ -30,16 +30,19 @@ local function allocate_position(realm)
 			local corner = vector.new(x, realm.y - realm.size.y / 2, z)
 			local box = aurum.box.new(corner, vector.add(corner, realm.size))
 
-			local ok = true
+			-- Ensure within world.
+			local ok = aurum.box.inside_box(box, aurum.WORLDA.box)
 
-			-- For all stored realms...
-			for _,store in pairs(realm_store) do
-				-- If this potential position collides with the stored realm.
-				local otherbox = aurum.box.new(store.corner, vector.add(store.corner, store.size))
-				if aurum.box.collide_box(box, otherbox) then
-					-- Skip this position.
-					ok = false
-					break
+			if ok then
+				-- For all stored realms...
+				for _,store in pairs(realm_store) do
+					-- If this potential position collides with the stored realm.
+					local otherbox = aurum.box.new(store.corner, vector.add(store.corner, store.size))
+					if aurum.box.collide_box(box, otherbox) then
+						-- Skip this position.
+						ok = false
+						break
+					end
 				end
 			end
 
@@ -126,7 +129,7 @@ function m.register(id, def)
 
 	-- Find a global position and get the actual size of the realm
 	r.global_corner, r.size = get_position(r)
-	assert(r.global_corner, "out of room, cannot add a realm of this size")
+	assert(r.global_corner, "out of room registering " .. r.id .. ", cannot add a realm of this size")
 
 	-- Relative 0,0,0 point.
 	r.center = vector.divide(r.size, 2)

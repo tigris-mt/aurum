@@ -29,6 +29,22 @@ function aurum.box.collide_box(a, b)
     return true
 end
 
+-- Returns true if <inner> is inside <outer>.
+function aurum.box.inside_box(inner, outer)
+	local e = {
+        i = aurum.box.extremes(inner),
+        o = aurum.box.extremes(outer),
+    }
+
+	for _,axis in ipairs({"x", "y", "z"}) do
+		if e.i.a[axis] < e.o.a[axis] or e.i.b[axis] > e.o.b[axis] then
+			return false
+		end
+	end
+
+	return true
+end
+
 -- Check if <point> collides with <box>.
 function aurum.box.collide_point(box, point)
 	return aurum.box.collide_box(box, aurum.box.new(point, point))

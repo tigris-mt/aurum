@@ -1,17 +1,24 @@
 -- Create aurum global.
 b.dofile("aurum_table.lua")
 
+-- Helpful geometric functions.
+b.dofile("geometry/box.lua")
+
 -- The world size.
 aurum.WORLD = {
 	min = vector.new(-31000, -31000, -31000),
 	max = vector.new(31000, 31000, 31000),
 }
 
+aurum.WORLD.box = aurum.box.new(aurum.WORLD.min, aurum.WORLD.max)
+
 -- The world size, aligned to chunks.
 aurum.WORLDA = {
 	min = vector.new(-30000, -30000, -30000),
 	max = vector.new(30000, 30000, 30000),
 }
+
+aurum.WORLDA.box = aurum.box.new(aurum.WORLDA.min, aurum.WORLDA.max)
 
 -- Tool wear max.
 aurum.TOOL_WEAR = 65535
@@ -138,9 +145,6 @@ function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
 end
 
 b.dofile("damage.lua")
-
--- Helpful geometric functions.
-b.dofile("geometry/box.lua")
 
 -- Node sounds.
 b.dofile("sounds.lua")

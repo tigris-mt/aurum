@@ -54,7 +54,7 @@ local function allocate_position(realm)
 	return nil
 end
 
--- Get the corner of an allocated or previous realm region.
+-- Get the corner and size of an allocated or previous realm region.
 local function get_position(realm)
 	-- Table describing the stored realm.
 	local store = realm_store[realm.id] or {
@@ -68,14 +68,17 @@ local function get_position(realm)
 	end
 
 	-- Changing realm sizes could lead to spatial collisions.
-	assert(vector.equals(store.size, realm.size), "realm sizes cannot change once registered")
+	-- Warn if we're using a different stored size.
+	if not vector.equals(store.size, realm.size) then
+		minetest.log("warning", ("Realm %s stored size %s differs from registered size %s; will continue using stored size"):format(realm.id, minetest.pos_to_string(store.size), minetest.pos_to_string(realm.size)))
+	end
 
 	-- Save the realm data.
 	realm_store[realm.id] = store
 	save()
 
-	-- Return the (possibly previously) allocated position.
-	return store.corner
+	-- Return the (possibly previously) allocated position and the realm size (stored size if already generated, otherwise registered size)
+	return store.corner, store.size
 end
 
 -- Register a new realm.
@@ -121,11 +124,13 @@ function m.register(id, def)
 	assert(coord_ok(r.size.y))
 	assert(coord_ok(r.size.z))
 
+	-- Find a global position and get the actual size of the realm
+	r.global_corner, r.size = get_position(r)
+	assert(r.global_corner, "out of room, cannot add a realm of this size")
+
 	-- Relative 0,0,0 point.
 	r.center = vector.divide(r.size, 2)
 
-	-- Find a global position.
-	r.global_corner = assert(get_position(r), "out of room, cannot add a realm of this size")
 	-- Global center.
 	r.global_center = vector.add(r.global_corner, r.center)
 

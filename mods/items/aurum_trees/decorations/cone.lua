@@ -12,8 +12,9 @@ return function(def, overall, trunk_ratio, width_ratio)
 	local area = aurum.box.voxelarea(aurum.box.new(vector.new(0, 0, 0), limit))
 	local data = {}
 
+	local ignore = {name = "ignore"}
 	for i in area:iterp(vector.new(0, 0, 0), limit) do
-		data[i] = {name = "ignore"}
+		data[i] = ignore
 	end
 
 	local leaf_stop = math.floor(3 + overall / 4 + 3)

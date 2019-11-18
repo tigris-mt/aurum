@@ -32,6 +32,7 @@ function aurum.flavor.books.register(def)
 		-- Default gtextitems data.
 		data = b.t.combine({
 			author = nil,
+			author_type = "npc",
 			title = nil,
 			text = nil,
 			id = nil,

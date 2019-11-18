@@ -4,7 +4,7 @@ local function make_headstone(pos)
 	local name = aurum.flavor.generate_name()
 	local age = math.random(16, 110)
 	if age > 50 then
-		age = age - math.max(0, math.random(-15, 30))
+		age = age - math.max(0, math.random(-30, 30))
 	end
 	gtextitems.set_node(pos, {
 		title = S("Grave of @1", name),
@@ -83,6 +83,7 @@ local function make_headstone(pos)
 			name
 		),
 		author = S"the Headstoner",
+		author_type = "npc",
 		id = "aurum_features:gravestone",
 	})
 end

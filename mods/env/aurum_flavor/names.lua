@@ -1,6 +1,7 @@
 local syllables = {
-	"ae", "bo", "ce", "da", "e", "fi", "gu", "ha", "je", "ko", "lu", "me", "ni", "o", "pe", "qu", "ra", "se", "ti", "u", "vo", "xy", "y", "zu",
-	"a", "bel", "cin", "don", "el", "fra", "gle", "hy", "kle", "lia", "mae", "nol", "ori", "prai", "ro", "sve", "tri", "ux", "vim", "xaxa", "zad",
+	"ae", "bo", "ce", "da", "e", "fi", "gu", "ha", "je", "ko", "lu", "me", "ni", "o", "pe", "qu", "ra", "se", "ti", "u", "vo", "wo", "xy", "y", "zu",
+	"a", "bel", "cin", "don", "el", "fra", "gle", "hy", "jes", "kle", "lia", "mae", "nol", "ori", "prai", "ro", "sve", "tri", "ux", "wal", "vim", "xaxa", "zad",
+	"ai", "bre", "ca", "det", "ee", "fix", "ge", "hera", "ja", "kev", "luc", "mal", "neiv", "ora", "pen", "rhy", "ske", "ta", "un", "vei", "wak", "xel", "zun",
 }
 
 local vowels = "aeiouy"

@@ -4,27 +4,29 @@ aurum.mobs = {
 }
 
 aurum.mobs.mobs = {}
+aurum.mobs.shortcuts = {}
 
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
 		description = "?",
+		initial_properties = {},
+		box = {-0.4, -0.4, -0.4, 0.4, 0.4, 0.4},
 	}, def, {
 		name = name,
 	})
 
+	aurum.mobs.shortcuts[name:sub(name:find(":") + 1, #name)] = name
+
 	def.gemai = b.t.combine({}, def.gemai or {})
 
 	minetest.register_entity(":" .. name, {
-		initial_properties = {
+		initial_properties = b.t.combine({
 			physical = true,
 			hp_max = 1,
 
-			visual = "wielditem",
-			visual_size = {x = 0.6, y = 0.6},
-			textures = {"aurum_base:regret"},
-
-			collisionbox = {-0.4, -0.4, -0.4, 0.4, 0.4, 0.4},
-		},
+			collisionbox = def.box,
+			selectionbox = def.box,
+		}, def.initial_properties),
 
 		_aurum_mob = def,
 
@@ -37,6 +39,8 @@ function aurum.mobs.register(name, def)
 				gemai = {},
 			}, minetest.deserialize(staticdata) or {})
 
+			self.object:set_armor_groups(gdamage.armor_defaults())
+
 			-- If the entity is new, run initialization.
 			if not self._data.initialized then
 				self:_mob_init()
@@ -45,12 +49,15 @@ function aurum.mobs.register(name, def)
 			-- Update properties from saved data.
 			self.object:set_properties(self._data.properties or {})
 			self.object:set_nametag_attributes(self._data.nametag_attributes or {})
+			if self._data.armor_groups then
+				self.object:set_armor_groups(self._data.armor_groups)
+			end
 
 			-- Attach gemai.
 			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
 
 			self._gemai.debug_desc = function(self)
-				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(self.entity.object:get_pos()))
+				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(vector.round(self.entity.object:get_pos())))
 			end
 
 			-- If the entity is new, fire the init event to start the gemai state.
@@ -68,6 +75,7 @@ function aurum.mobs.register(name, def)
 			-- Save current properties.
 			self._data.properties = self.object:get_properties()
 			self._data.nametag_attributes = self.object:get_nametag_attributes()
+			self._data.armor_groups = self.object:get_armor_groups()
 			self._data.gemai = self._gemai.data
 			return minetest.serialize(self._data)
 		end,
@@ -119,7 +127,7 @@ minetest.register_chatcommand("mob_spawn", {
 			return false, S"No player."
 		end
 
-		local mob = param
+		local mob = (#param > 0 and aurum.mobs.shortcuts[param]) or param
 
 		if not aurum.mobs.mobs[mob] then
 			return false, S"No such mob."
@@ -134,4 +142,3 @@ minetest.register_chatcommand("mob_spawn", {
 })
 
 b.dofile("actions.lua")
-b.dofile("mobs/test.lua")

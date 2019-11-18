@@ -29,6 +29,7 @@ sfinv.override_page("sfinv:crafting", {
 local form = smartfs.create("aurum_player:equipment", function(state)
     state:size(8, 6)
 
+	-- Build inventory display as raw formspec so that the listrings can be ordered.
 	local inventories = ""
 	local listrings = ""
 	local function i(x, y, n)

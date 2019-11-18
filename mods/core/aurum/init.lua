@@ -20,6 +20,9 @@ aurum.WORLDA = {
 
 aurum.WORLDA.box = aurum.box.new(aurum.WORLDA.min, aurum.WORLDA.max)
 
+-- Gravity acceleration.
+aurum.GRAVITY = vector.new(0, -9.81, 0)
+
 -- Tool wear max.
 aurum.TOOL_WEAR = 65535
 

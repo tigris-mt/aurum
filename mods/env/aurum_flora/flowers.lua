@@ -35,6 +35,7 @@ function aurum.flora.register_flower(name, seed, def)
 			octaves = 3,
 			persist = 0.5,
 		},
+		-- Flowers grow in all green biomes except dark ones.
 		biomes = b.set.to_array(b.set.difference(
 			b.set(aurum.biomes.get_all_group("green", {"base"})),
 			b.set.intersection(

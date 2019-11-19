@@ -42,8 +42,10 @@ doc.sub.items.register_factoid("nodes", "damage", function(itemstring, def)
 end)
 
 minetest.register_on_player_hpchange(function(player, hp_change, reason)
+	-- For fall and drown damage, reduce by the corresponding armor group.
 	if reason.type == "fall" or reason.type == "drown" then
 		return hp_change * aurum.player.hp_max_scaling * player:get_armor_groups()[reason.type] / 100
+	-- For node damage, check for _damage_type in the node definition to use as the armor group, otherwise just use the passed damage.
 	elseif reason.type == "node_damage" then
 		local def = minetest.registered_nodes[reason.node]
 		return def._damage_type and hp_change * player:get_armor_groups()[def._damage_type] / 100 or hp_change

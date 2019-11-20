@@ -2,6 +2,7 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_animals:rat", {
 	description = S"Rat",
+
 	initial_properties = {
 		visual = "sprite",
 		textures = {"aurum_mobs_animals_rat.png"},
@@ -9,6 +10,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 
 		hp_max = 2,
 	},
+
 	gemai = {
 		global_actions = {
 			"aurum_mobs:physics",
@@ -17,7 +19,8 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 		global_events = {
 			stuck = "roam",
 			timeout = "roam",
-			punch = "",
+			punch = "flee",
+			lost = "roam",
 		},
 
 		states = {
@@ -34,11 +37,11 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 				},
 
 				events = {
-					found = "go_place",
+					found = "go",
 				},
 			},
 
-			go_place = {
+			go = {
 				actions = {
 					"aurum_mobs:go",
 				},
@@ -47,7 +50,15 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 					reached = "roam",
 				},
 			},
+
+			flee = {
+				actions = {
+					"aurum_mobs:adrenaline",
+					"aurum_mobs:flee",
+				},
+			},
 		},
 	},
+
 	habitat_nodes = {"group:stone", "aurum_base:stone_brick", "aurum_base:gravel"},
 })

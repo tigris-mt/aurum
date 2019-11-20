@@ -9,6 +9,17 @@ function aurum.mobs.helper_target_pos(self, target)
 	self:assert(target, "invalid target")
 	if target.type == "pos" then
 		return target.pos
+	elseif target.type == "ref_table" then
+		if target.ref_table.type == "player" then
+			local player = minetest.get_player_by_name(target.ref_table.id)
+			return player and player:get_pos()
+		elseif target.ref_table.type == "aurum_mob" then
+			for _,object in ipairs(minetest.get_objects_inside_radius(self.entity.object:get_pos(), SEARCH_RADIUS)) do
+				if object:get_luaentity() and object:get_luaentity()._aurum_mobs_id == target.ref_table.id then
+					return object:get_pos()
+				end
+			end
+		end
 	else
 		self:assert(false, "Invalid target type: " .. target.type)
 	end
@@ -26,41 +37,65 @@ function aurum.mobs.helper_find_nodes(self, nodenames)
 	end
 end
 
-gemai.register_action("aurum_mobs:go", function(self)
-	local pos = self.entity.object:get_pos()
-	local target = vector.add(aurum.mobs.helper_target_pos(self, self.data.params.target), vector.new(0, 1, 0))
-	local delta = vector.subtract(target, pos)
-
-	if vector.length(delta) < NEAR then
-		self:fire_event("reached", {target_pos = self.data.params.target_pos})
-	else
-		local dir = vector.normalize(delta)
-		local vel = vector.multiply(dir, vector.new(3, 0, 3))
-		vel.y = self.entity.object:get_velocity().y
-
-		local function solid(pos)
-			local n = minetest.registered_nodes[minetest.get_node(pos).name]
-			return n.walkable
-		end
-
-		local blocked = solid(vector.add(pos, vector.new(vel.x, 0, vel.z)))
-		if blocked then
-			local fok = not solid(vector.add(pos, vector.new(vel.x, 1, vel.z))) and not solid(vector.add(pos, vector.new(vel.x, 2, vel.z)))
-			local aok = not solid(vector.add(pos, vector.new(0, 1, 0))) and not solid(vector.add(pos, vector.new(0, 2, 0)))
-			if solid(vector.add(pos, vector.new(0, -1, 0))) and fok and aok then
-				vel.y = 6
-			else
-				self:fire_event("stuck")
-				return
-			end
-		end
-
-		self.entity.object:set_velocity(vel)
+function aurum.mobs.helper_mob_speed(self)
+	local speed = self.data.base_speed
+	if self.data.adrenaline >= self.data.live_time then
+		speed = speed * 2
 	end
+	return speed
+end
 
-	if self.data.state_time > TIMEOUT then
-		self:fire_event("timeout")
-		return
+function aurum.mobs.helper_go(invert)
+	return function(self)
+		local pos = self.entity.object:get_pos()
+		local target_pos = aurum.mobs.helper_target_pos(self, self.data.params.target)
+		if not target_pos then
+			self:fire_event("lost")
+			return
+		end
+		local target = vector.add(target_pos, vector.new(0, 1, 0))
+		local delta = vector.subtract(target, pos)
+
+		if vector.length(delta) < NEAR and not invert then
+			self:fire_event("reached", self.data.params)
+		else
+			local dir = vector.multiply(vector.normalize(delta), invert and -1 or 1)
+			local vel = vector.multiply(dir, vector.multiply(vector.new(1, 0, 1), aurum.mobs.helper_mob_speed(self)))
+			vel.y = self.entity.object:get_velocity().y
+
+			local function solid(pos)
+				local n = minetest.registered_nodes[minetest.get_node(pos).name]
+				return n.walkable
+			end
+
+			local blocked = solid(vector.add(pos, vector.new(vel.x, 0, vel.z)))
+			if blocked then
+				local fok = not solid(vector.add(pos, vector.new(vel.x, 1, vel.z))) and not solid(vector.add(pos, vector.new(vel.x, 2, vel.z)))
+				local aok = not solid(vector.add(pos, vector.new(0, 1, 0))) and not solid(vector.add(pos, vector.new(0, 2, 0)))
+				if solid(vector.add(pos, vector.new(0, -1, 0))) and fok and aok then
+					vel.y = 6
+				else
+					self:fire_event("stuck")
+					return
+				end
+			end
+
+			self.entity.object:set_velocity(vel)
+		end
+
+		if self.data.state_time > TIMEOUT then
+			self:fire_event("timeout")
+			return
+		end
+	end
+end
+
+gemai.register_action("aurum_mobs:go", aurum.mobs.helper_go(false))
+gemai.register_action("aurum_mobs:flee", aurum.mobs.helper_go(true))
+
+gemai.register_action("aurum_mobs:adrenaline", function(self)
+	if self.data.adrenaline - self.data.live_time > -20 then
+		self.data.adrenaline = self.data.live_time + 10
 	end
 end)
 

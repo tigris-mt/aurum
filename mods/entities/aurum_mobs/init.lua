@@ -1,4 +1,6 @@
 local S = minetest.get_translator()
+local storage = minetest.get_mod_storage()
+
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
 }
@@ -6,14 +8,23 @@ aurum.mobs = {
 aurum.mobs.mobs = {}
 aurum.mobs.shortcuts = {}
 
+local uids = storage:get_int("uids")
+
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
 		description = "?",
 		initial_properties = {},
-		box = {-0.4, -0.4, -0.4, 0.4, 0.4, 0.4},
+		armor_groups = {},
+		initial_data = {},
+		box = {-0.35, -0.35, -0.35, 0.35, 0.35, 0.35},
 	}, def, {
 		name = name,
 	})
+
+	def.initial_data = b.t.combine({
+		base_speed = 3,
+		adrenaline = 0,
+	}, def.initial_data)
 
 	aurum.mobs.shortcuts[name:sub(name:find(":") + 1, #name)] = name
 
@@ -34,12 +45,18 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_activate = function(self, staticdata, dtime)
+			uids = uids + 1
+			self._aurum_mobs_id = uids
+			storage:set_int("uids", uids)
+
 			self._data = b.t.combine({
 				initialized = false,
 				gemai = {},
 			}, minetest.deserialize(staticdata) or {})
 
-			self.object:set_armor_groups(gdamage.armor_defaults())
+			self._data.gemai = b.t.combine(def.initial_data, self._data.gemai)
+
+			self.object:set_armor_groups(b.t.combine(gdamage.armor_defaults(), def.armor_groups))
 
 			-- If the entity is new, run initialization.
 			if not self._data.initialized then
@@ -96,6 +113,10 @@ function aurum.mobs.register(name, def)
 		on_punch = function(self, puncher)
 			self._gemai:fire_event("punch", {
 				other = gemai.ref_to_table(puncher),
+				target = {
+					type = "ref_table",
+					ref_table = gemai.ref_to_table(puncher),
+				},
 			})
 		end,
 

@@ -10,6 +10,15 @@ aurum.mobs.shortcuts = {}
 
 local uids = storage:get_int("uids")
 
+local old = gemai.ref_to_table
+function gemai.ref_to_table(obj)
+	if obj:get_luaentity() and obj:get_luaentity()._aurum_mobs_id then
+		return {type = "aurum_mob", id = obj:get_luaentity()._aurum_mobs_id}
+	else
+		return old(obj)
+	end
+end
+
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
 		description = "?",

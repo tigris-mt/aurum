@@ -40,6 +40,7 @@ local form = smartfs.create("aurum_player:equipment", function(state)
 	-- Invisible delegate inventory.
 	-- Must be first inventory in the listring.
 	i(-2, -2, gequip.DELEGATE)
+
 	i(3.5, 0, gequip.types["head"].list_name)
 	i(3.5, 1, gequip.types["chest"].list_name)
 	i(3.5, 2, gequip.types["legs"].list_name)
@@ -59,6 +60,9 @@ local form = smartfs.create("aurum_player:equipment", function(state)
 		g("burn"),
 		g("chill"),
 		g("psyche"),
+		"-",
+		g("drown"),
+		g("fall"),
 	}, "\n"))
 end)
 

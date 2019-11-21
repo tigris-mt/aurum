@@ -90,19 +90,24 @@ function aurum.mobs.helper_go(invert)
 	end
 end
 
+-- Travel toward target.
 gemai.register_action("aurum_mobs:go", aurum.mobs.helper_go(false))
+-- Escape from target.
 gemai.register_action("aurum_mobs:flee", aurum.mobs.helper_go(true))
 
+-- For adrenaline-inducing states.
 gemai.register_action("aurum_mobs:adrenaline", function(self)
-	if self.data.adrenaline - self.data.live_time > -20 then
-		self.data.adrenaline = self.data.live_time + 10
+	if self.data.adrenaline - self.data.live_time > -self.data.adrenaline_cooldown then
+		self.data.adrenaline = self.data.live_time + self.data.adrenaline_time
 	end
 end)
 
+-- Find a habitat target node.
 gemai.register_action("aurum_mobs:find_habitat", function(self)
 	aurum.mobs.helper_find_nodes(self, self.entity._aurum_mob.habitat_nodes)
 end)
 
+-- Find a random target node.
 gemai.register_action("aurum_mobs:find_random", function(self)
 	self:fire_event("found", {target = {
 		type = "pos",
@@ -110,6 +115,7 @@ gemai.register_action("aurum_mobs:find_random", function(self)
 	}})
 end)
 
+-- Apply physics.
 gemai.register_action("aurum_mobs:physics", function(self)
 	self.entity.object:set_acceleration(aurum.GRAVITY)
 end)

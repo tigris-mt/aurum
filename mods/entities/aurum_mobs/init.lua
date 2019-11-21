@@ -21,18 +21,29 @@ end
 
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
+		-- Human readable description.
 		description = "?",
+		-- Initial entity properties.
 		initial_properties = {},
+		-- Initial armor groups.
 		armor_groups = {},
+		-- Initial gemai data.
 		initial_data = {},
+		-- Initial collision and selection box.
 		box = {-0.35, -0.35, -0.35, 0.35, 0.35, 0.35},
+		-- Where does this mob like to live?
+		habitat_nodes = {},
 	}, def, {
 		name = name,
 	})
 
 	def.initial_data = b.t.combine({
+		-- aurum.mobs.helper_mob_speed()
 		base_speed = 3,
+		-- aurum:mobs_adrenaline
 		adrenaline = 0,
+		adrenaline_time = 10,
+		adrenaline_cooldown = 20,
 	}, def.initial_data)
 
 	aurum.mobs.shortcuts[name:sub(name:find(":") + 1, #name)] = name
@@ -115,7 +126,7 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_death = function(self)
-			self._gemai:fire_event("death", {terminate = true})
+			self._gemai:fire_event("death")
 			self._gemai:step(0)
 		end,
 
@@ -172,3 +183,4 @@ minetest.register_chatcommand("mob_spawn", {
 })
 
 b.dofile("actions.lua")
+b.dofile("spawning.lua")

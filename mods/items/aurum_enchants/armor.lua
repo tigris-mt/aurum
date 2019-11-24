@@ -15,6 +15,17 @@ aurum.tools.register_enchant_callback{
 	end,
 }
 
+aurum.tools.register_enchant("health_augmentation", {
+	categories = {
+		armor = true,
+	},
+	description = S"Health Augmentation",
+	longdesc = S"Increases the wearer's maximum health.",
+	apply = function(state, level)
+		state.eqdef.hp_max = state.eqdef.hp_max * (1 + (level + 1) / 10)
+	end,
+})
+
 aurum.tools.register_enchant("speed", {
 	categories = {
 		boots = true,

@@ -7,6 +7,7 @@ local default_effects = {
 gequip.register_eqdef_init(function(eqdef)
 	eqdef.armor = b.t.combine(gdamage.armor_defaults(1), eqdef.armor or {})
 	eqdef.durability = eqdef.durability or 1
+	eqdef.hp_max = eqdef.hp_max or 1
 	eqdef.effects = b.t.combine(default_effects, eqdef.effects or {})
 end)
 
@@ -41,8 +42,24 @@ gequip.register_action("aurum_equip:effects", {
 	end,
 
 	apply = function(state, player)
-		player_monoids.gravity:add_change(player, state.effects.gravity, "aurum_equip:gravity")
-		player_monoids.speed:add_change(player, state.effects.speed, "aurum_equip:speed")
-		player_monoids.jump:add_change(player, state.effects.jump, "aurum_equip:jump")
+		player_monoids.gravity:add_change(player, state.effects.gravity, "aurum_equip:effects")
+		player_monoids.speed:add_change(player, state.effects.speed, "aurum_equip:effects")
+		player_monoids.jump:add_change(player, state.effects.jump, "aurum_equip:effects")
+	end,
+})
+
+gequip.register_action("aurum_equip:hp", {
+	init = function(state)
+		state.hp = {
+			max = 1,
+		}
+	end,
+
+	add = function(state, r)
+		state.hp.max = state.hp.max * r.hp_max
+	end,
+
+	apply = function(state, player)
+		aurum.player.hp_max_monoid:add_change(player, state.hp.max, "aurum_equip:hp")
 	end,
 })

@@ -9,7 +9,7 @@ aurum.player.hp_max_monoid = player_monoids.make_monoid{
         return a * b
     end,
     fold = function(tab)
-        local r = c_max
+        local r = aurum.player.default_hp_max
         for _,v in pairs(tab) do
             r = r * v
         end
@@ -17,6 +17,9 @@ aurum.player.hp_max_monoid = player_monoids.make_monoid{
     end,
     identity = aurum.player.default_hp_max,
     apply = function(n, player)
+		if n < player:get_hp() then
+			player:set_hp(n)
+		end
         player:set_properties{hp_max = n}
     end,
     on_change = function() return end,

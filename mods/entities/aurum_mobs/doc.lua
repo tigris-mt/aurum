@@ -25,7 +25,7 @@ function aurum.mobs.add_doc(name)
 
 	a{
 		S("Ordinarily, this mob moves at a base speed of @1 n/s", def.initial_data.base_speed),
-		S("Ordinarily, this mob is worth @1 mana", def.initial_data.xmana),
+		S("Ordinarily, this mob contains @1 mana", def.initial_data.xmana),
 	}
 
 	if def.initial_data.adrenaline_time > 0 then

@@ -104,7 +104,7 @@ end)
 
 -- Find a habitat target node.
 gemai.register_action("aurum_mobs:find_habitat", function(self)
-	aurum.mobs.helper_find_nodes(self, self.entity._aurum_mob.habitat_nodes)
+	aurum.mobs.helper_find_nodes(self, self.data.habitat_nodes)
 end)
 
 -- Find a random target node.

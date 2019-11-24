@@ -61,6 +61,7 @@ function aurum.in_creative(player)
 end
 
 -- Is pos protected against a player?
+-- Player may be name or objectref.
 -- Quiet option may be respected, for times when the player does not need to be aware of protection.
 function aurum.is_protected(pos, player_or_name, quiet)
 	local name = (type(player_or_name) == "string") and player_or_name or player_or_name:get_player_name()

@@ -41,7 +41,7 @@ function aurum.magic.register_ritual(name, def)
 	def.hashed_recipe = hashed
 
 	aurum.magic.rituals[name] = def
-	doc.add_entry("rituals", name, {
+	doc.add_entry("aurum_magic:rituals", name, {
 		name = def.description,
 		data = def,
 	})

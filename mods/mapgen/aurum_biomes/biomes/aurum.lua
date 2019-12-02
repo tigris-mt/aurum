@@ -6,10 +6,11 @@ aurum.biomes.register_all("aurum:aurum", {
 	humidity_point = 30,
 	_variants = {
 		base = aurum.biomes.v_base{
-			node_top = "aurum_base:gravel",
-			depth_top = 1,
-			node_filler = "aurum_base:stone",
-			depth_fillter = 1,
+			node_dust = "aurum_base:gravel",
+			node_top = "aurum_base:stone",
+			depth_top = 2,
+			node_filler = "air",
+			depth_filler = 15,
 		},
 		ocean = aurum.biomes.v_ocean{
 			node_top = "aurum_base:stone",

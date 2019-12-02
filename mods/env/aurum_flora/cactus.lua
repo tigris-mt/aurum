@@ -11,6 +11,13 @@ minetest.register_node("aurum_flora:cactus", {
 	_on_grow_plant = grow,
 	damage_per_second = 10,
 	_damage_type = "pierce",
+	collision_box = {
+		type = "fixed",
+		fixed = {{-0.1, -0.1, -0.1, 0.1, 0.1, 0.1}},
+	},
+	drawtype = "plantlike",
+	paramtype = "light",
+	sunglight_propagates = true,
 })
 
 minetest.register_decoration{

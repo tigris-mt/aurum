@@ -13,6 +13,9 @@
 * Awards
 * Automation/circuits
 
+# Polish
+* Properly lay out biomes.
+
 # Progression, Story, Immersion
 * Titan-worthy default skin.
 * Structures and "lorebooks" referencing the previous titan, the corrupted state of the world, and the hope of the new titan.
@@ -32,6 +35,7 @@
 	* Adds new "karma" armor group, bad karma gives you a vulnerability.
 	* To offset this, bad karma may be a requirement to use some powerful pysche spells or similiar.
 * Add sychophants (some kind of mob) to the jungles.
+* Mutation system.
 
 # Outer Realms - See design/overview.md
 * Ultimus Hortum

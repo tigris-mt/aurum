@@ -1,13 +1,18 @@
 local S = minetest.get_translator()
 
+aurum.realms.register("aurum:aether", {
+	description = S"The Aether",
+	size = vector.new(8000, 800, 8000),
+})
+
 aurum.realms.register("aurum:aurum", {
 	description = S("Aurum"),
-	size = vector.new(8000, 1600, 8000),
+	size = vector.new(16000, 1600, 16000),
 })
 
 aurum.realms.register("aurum:loom", {
 	description = S("The Loom"),
-	size = vector.new(4000, 800, 4000),
+	size = vector.new(8000, 800, 8000),
 
 	apply_player = function(player)
 		player:set_sky("#110000", "plain", {})
@@ -38,7 +43,7 @@ aurum.realms.register("aurum:loom", {
 
 aurum.realms.register("aurum:primus", {
 	description = S"Primus Hortum",
-	size = vector.new(8000, 1600, 8000),
+	size = vector.new(16000, 1600, 16000),
 
 	apply_player = function(player)
 		player:set_sky("#336633", "plain", {})

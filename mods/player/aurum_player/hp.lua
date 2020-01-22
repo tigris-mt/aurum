@@ -51,7 +51,7 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 	-- For node damage, check for _damage_type in the node definition to use as the armor group, otherwise just use the passed damage.
 	elseif reason.type == "node_damage" then
 		local def = minetest.registered_nodes[reason.node]
-		return def._damage_type and hp_change * player:get_armor_groups()[def._damage_type] / 100 or hp_change
+		return hp_change * player:get_armor_groups()[def._damage_type or "generic"] / 100
 	else
 		return hp_change
 	end

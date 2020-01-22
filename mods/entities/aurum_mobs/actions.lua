@@ -119,3 +119,19 @@ end)
 gemai.register_action("aurum_mobs:physics", function(self)
 	self.entity.object:set_acceleration(aurum.GRAVITY)
 end)
+
+-- Apply environment.
+gemai.register_action("aurum_mobs:environment", function(self)
+	if self.data.node_damage_timer < self.data.live_time - 1 then
+		local pos = vector.round(self.entity.object:get_pos())
+		local node = minetest.get_node(pos)
+		local ndef = minetest.registered_nodes[node.name]
+		if (ndef.damage_per_second or 0) > 0 then
+			self.entity.object:punch(self.entity.object, 1, {
+				full_punch_interval = 1.0,
+				damage_groups = {[ndef._damage_type or "generic"] = ndef.damage_per_second},
+			})
+		end
+		self.data.node_damage_timer = self.data.live_time
+	end
+end)

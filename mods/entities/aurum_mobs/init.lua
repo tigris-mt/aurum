@@ -46,6 +46,8 @@ function aurum.mobs.register(name, def)
 		base_speed = 3,
 		-- Items dropped upon death. Tables or strings, not ItemStacks.
 		drops = {},
+		-- aurum:mobs_environment
+		node_damage_timer = 0,
 		-- Where does this mob naturally live?
 		habitat_nodes = {},
 		-- Mana released upon death.

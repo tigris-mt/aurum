@@ -26,13 +26,20 @@ minetest.register_decoration{
 		octaves = 3,
 		persist = 0.5,
 	},
-	biomes = aurum.biomes.get_all_group("green", {"base"}),
+	-- All green biomes except dark.
+	biomes = b.set.to_array(b.set.difference(
+		b.set(aurum.biomes.get_all_group("green", {"base"})),
+		b.set.intersection(
+			b.set(aurum.biomes.get_all_group("green", {"base"})),
+			b.set(aurum.biomes.get_all_group("dark", {"base"}))
+		)
+	)),
 }
 
 -- Register <max> grass nodes from <base_name> to <base_name>_<max>.
 -- <def> is passed to aurum.flora.register() with suitable defaults.
--- <decodef> is passed to minetest.register_decoration() with suitable defaults.
-function aurum.flora.register_grass(base_name, max, def, decodef)
+-- ... is passed to minetest.register_decoration() with suitable defaults.
+function aurum.flora.register_grass(base_name, max, def, ...)
 	for i=1,max do
 		local name = (i == 1) and base_name or (base_name .. "_" .. i)
 		local next_name = (i ~= max) and (base_name .. "_" .. (i + 1))
@@ -57,12 +64,14 @@ function aurum.flora.register_grass(base_name, max, def, decodef)
 			doc.add_entry_alias("nodes", base_name, "nodes", name)
 		end
 
-		minetest.register_decoration(b.t.combine({
-			name = name,
-			decoration = name,
-			deco_type = "simple",
-			sidelen = 16,
-		}, decodef))
+		for _,decodef in ipairs{...} do
+			minetest.register_decoration(b.t.combine({
+				name = name,
+				decoration = name,
+				deco_type = "simple",
+				sidelen = 16,
+			}, decodef))
+		end
 	end
 end
 
@@ -86,7 +95,43 @@ aurum.flora.register_grass("aurum_flora:grass_weed", 5, {
 		octaves = 3,
 		persist = 0.5,
 	},
-	biomes = aurum.biomes.get_all_group("green", {"base"}),
+	-- All green biomes except dark.
+	biomes = b.set.to_array(b.set.difference(
+		b.set(aurum.biomes.get_all_group("green", {"base"})),
+		b.set.intersection(
+			b.set(aurum.biomes.get_all_group("green", {"base"})),
+			b.set(aurum.biomes.get_all_group("dark", {"base"}))
+		)
+	)),
+})
+
+aurum.flora.register_grass("aurum_flora:dark_grass_weed", 5, {
+	description = S"Dark Grass Weed",
+	_texture = "aurum_flora_grass",
+	_texture_append = "[colorize:#000000:127",
+	visual_scale = 1.5,
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			-4 / 16, -8 / 16, -4 / 16,
+			4 / 16, 8 / 16, 4 / 16,
+		},
+	},
+}, {
+	place_on = {"group:soil"},
+	noise_params = {
+		offset = 0,
+		scale = 0.25,
+		spread = vector.new(50, 50, 50),
+		seed = 421,
+		octaves = 3,
+		persist = 0.5,
+	},
+	-- All dark green biomes.
+	biomes = b.set.to_array(b.set.intersection(
+		b.set(aurum.biomes.get_all_group("green", {"base"})),
+		b.set(aurum.biomes.get_all_group("dark", {"base"}))
+	)),
 })
 
 aurum.flora.register_grass("aurum_flora:desert_weed", 3, {

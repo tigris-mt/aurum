@@ -15,7 +15,7 @@ for k,v in pairs{
 end
 
 local base_realms = {"aurum:aurum", "aurum:primus"}
-local hub_realms = {"aurum:loom"}
+local hub_realms = {"aurum:loom", "aurum:aether"}
 
 function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 	local rdef = aurum.realms.get(realm)

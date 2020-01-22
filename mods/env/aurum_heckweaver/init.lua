@@ -1,7 +1,7 @@
 local S = minetest.get_translator()
 
 -- How often do heckweavers move?
-local TICK = 15
+local TICK = 2
 -- How long can heckweavers trails get?
 local LENGTH = 8
 -- How rare (<RARITY>^3) are heckweavers in regret?
@@ -26,8 +26,19 @@ minetest.register_node("aurum_heckweaver:heckweaver", {
 	on_timer = function(pos)
 		local node = minetest.get_node(pos)
 
+		local box = aurum.box.new_radius(pos, 1)
+
+		local list = minetest.find_nodes_in_area(box.a, box.b, {"aurum_base:regret"})
+		local filtered = b.t.imap(list, function(v)
+			return minetest.find_node_near(v, 1, {"air"}) and v or nil
+		end)
+
+		local shuffled = b.t.shuffled(b.t.imap(#filtered > 0 and filtered or list, function(v)
+			return vector.distance(pos, v) <= 1 and v or nil
+		end))
+
 		-- Find a nearby regret.
-		local next = minetest.find_node_near(pos, 1, "aurum_base:regret")
+		local next = (#shuffled > 0) and shuffled[math.random(#shuffled)]
 		if next then
 			-- Move heckweaver there.
 			minetest.set_node(next, node)

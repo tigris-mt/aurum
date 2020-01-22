@@ -20,6 +20,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 	gemai = {
 		global_actions = {
 			"aurum_mobs:physics",
+			"aurum_mobs:environment",
 		},
 
 		global_events = {

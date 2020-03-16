@@ -13,7 +13,7 @@ local v_base = v_n("v_base", {
 
 local v_under = v_n("v_under", {
 	y_max = 3,
-	node_stone = "aurum_base:lava_source",
+	node_stone = "aurum_base:aether_source",
 })
 
 aurum.biomes.register_all("aurum:aether", {

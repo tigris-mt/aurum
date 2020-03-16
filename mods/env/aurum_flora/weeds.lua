@@ -27,12 +27,9 @@ minetest.register_decoration{
 		persist = 0.5,
 	},
 	-- All green biomes except dark.
-	biomes = b.set.to_array(b.set.difference(
+	biomes = b.set.to_array(b.set.subtract(
 		b.set(aurum.biomes.get_all_group("green", {"base"})),
-		b.set.intersection(
-			b.set(aurum.biomes.get_all_group("green", {"base"})),
-			b.set(aurum.biomes.get_all_group("dark", {"base"}))
-		)
+		b.set(aurum.biomes.get_all_group("dark", {"base"}))
 	)),
 }
 
@@ -96,12 +93,9 @@ aurum.flora.register_grass("aurum_flora:grass_weed", 5, {
 		persist = 0.5,
 	},
 	-- All green biomes except dark.
-	biomes = b.set.to_array(b.set.difference(
+	biomes = b.set.to_array(b.set.subtract(
 		b.set(aurum.biomes.get_all_group("green", {"base"})),
-		b.set.intersection(
-			b.set(aurum.biomes.get_all_group("green", {"base"})),
-			b.set(aurum.biomes.get_all_group("dark", {"base"}))
-		)
+		b.set(aurum.biomes.get_all_group("dark", {"base"}))
 	)),
 })
 
@@ -128,7 +122,7 @@ aurum.flora.register_grass("aurum_flora:dark_grass_weed", 5, {
 		persist = 0.5,
 	},
 	-- All dark green biomes.
-	biomes = b.set.to_array(b.set.intersection(
+	biomes = b.set.to_array(b.set._and(
 		b.set(aurum.biomes.get_all_group("green", {"base"})),
 		b.set(aurum.biomes.get_all_group("dark", {"base"}))
 	)),

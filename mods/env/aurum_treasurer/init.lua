@@ -60,6 +60,6 @@ minetest.register_chatcommand("givemetreasure", {
 		for i=1,num do
 			player:get_inventory():add_item("main", treasurer.select_random_treasures(1, pmin, pmax, group)[1] or ItemStack(""))
 		end
-		return true, "Produced treasure."
+		return true, S"Produced treasure."
 	end,
 })

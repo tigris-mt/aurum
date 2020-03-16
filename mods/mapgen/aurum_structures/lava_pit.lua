@@ -36,12 +36,9 @@ for _,d in ipairs(list) do
 		sidelen = 80,
 		fill_ratio = 0.0001 / #list,
 		-- Add to all aurum:aurum biomes except forests.
-		biomes = b.set.to_array(b.set.difference(
+		biomes = b.set.to_array(b.set.subtract(
 			b.set(aurum.biomes.get_all_group("aurum:aurum", {"base"})),
-			b.set.intersection(
-				b.set(aurum.biomes.get_all_group("aurum:aurum", {"base"})),
-				b.set(aurum.biomes.get_all_group("forest", {"base"}))
-			)
+			b.set(aurum.biomes.get_all_group("forest", {"base"}))
 		)),
 		schematic = d.schematic,
 		rotation = "random",
@@ -55,7 +52,7 @@ for _,d in ipairs(list) do
 	minetest.register_decoration(b.t.combine(def, {
 		fill_ratio = 0.0004 / #list,
 		-- Add to all aurum:aurum barrens.
-		biomes = b.set.to_array(b.set.intersection(
+		biomes = b.set.to_array(b.set._and(
 			b.set(aurum.biomes.get_all_group("aurum:aurum", {"base"})),
 			b.set(aurum.biomes.get_all_group("barren", {"base"}))
 		)),

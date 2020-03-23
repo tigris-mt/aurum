@@ -12,10 +12,7 @@ screalms.register("aurum:loom", {
 			height = 600,
 		}
 
-		screalms.check_underground(player, -100, function()
-			player:set_sky(0, "plain", {})
-			player:set_clouds{density = 0}
-		end)
+		screalms.apply_underground(player)
 	end,
 
 	biome_default = {

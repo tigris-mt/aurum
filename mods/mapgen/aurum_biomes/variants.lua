@@ -20,6 +20,6 @@ end
 function aurum.biomes.v_under(def)
 	return b.t.combine({
 		y_max = -100,
-		y_min = aurum.WORLD.min.y,
+		y_min = b.WORLD.min.y,
 	}, def)
 end

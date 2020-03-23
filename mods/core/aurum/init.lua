@@ -1,9 +1,6 @@
 -- Create aurum global.
 b.dofile("aurum_table.lua")
 
--- Helpful geometric functions.
-b.dofile("geometry/box.lua")
-
 -- Gravity acceleration.
 aurum.GRAVITY = vector.new(0, -9.81, 0)
 

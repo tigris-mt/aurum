@@ -19,7 +19,7 @@ aurum.biomes.register_all("aurum:aurum", {
 	},
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:drywood",
 	biomes = {"aurum_barrens"},
 	rarity = 0.1,
@@ -51,13 +51,13 @@ aurum.biomes.register_all("aurum:aurum", {
 	},
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:oak",
 	biomes = {"aurum_grassland"},
 	rarity = 0.01,
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:birch",
 	biomes = {"aurum_grassland"},
 	rarity = 0.01,
@@ -72,12 +72,12 @@ aurum.biomes.register_all("aurum:aurum", {
 	_variants = aurum.biomes.biomes.aurum_grassland._variants,
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:oak",
 	biomes = {"aurum_forest"},
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:birch",
 	biomes = {"aurum_forest"},
 })
@@ -100,7 +100,7 @@ aurum.biomes.register_all("aurum:aurum", {
 	},
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:pander",
 	biomes = {"aurum_jungle"},
 	rarity = 20,
@@ -147,7 +147,7 @@ aurum.biomes.register_all("aurum:aurum", {
 	},
 })
 
-aurum.biomes.register_tree_decoration({
+aurum.biomes.trees.register({
 	name = "aurum_trees:pine",
 	biomes = {"aurum_frozen_forest"},
 })

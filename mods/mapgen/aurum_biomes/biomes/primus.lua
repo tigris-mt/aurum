@@ -1,21 +1,3 @@
-local huge = {
-	custom_schematics = {
-		["tree,32,32"] = 0.01,
-		["tree,48,16"] = 0.1,
-		["tree,16,48"] = 0.001,
-		["cone,16"] = 0.01,
-		["cone,14"] = 0.01,
-		["cone,24"] = 0.001,
-	},
-	post_schematics = {
-		["log,64,8,,-2"] = 0.0025,
-		["tree,64,8"] = 0.025,
-		["tree,72,24"] = 0.01,
-		["tree,144,48"] = 0.001,
-		["log,144,16,,-4"] = 0.001,
-	},
-}
-
 local function v_base(def)
 	return aurum.biomes.v_base(b.t.combine({
 		y_min = -100,
@@ -40,11 +22,11 @@ aurum.biomes.register_all("aurum:primus", {
 	},
 })
 
-aurum.biomes.register_tree_decoration(b.t.combine({
+aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:pander",
 	biomes = {"primus_jungle"},
 	rarity = 40,
-}, huge))
+}, aurum.biomes.trees.HUGE))
 
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_forest",
@@ -65,7 +47,7 @@ aurum.biomes.register_all("aurum:primus", {
 local primus_forest_trees = {"aurum_trees:oak", "aurum_trees:birch"}
 
 for _,tree in ipairs(primus_forest_trees) do
-	aurum.biomes.register_tree_decoration({
+	aurum.biomes.trees.register({
 		name = tree,
 		biomes = {"primus_forest"},
 		rarity = 10 / #primus_forest_trees,
@@ -96,8 +78,8 @@ aurum.biomes.register_all("aurum:primus", {
 	},
 })
 
-aurum.biomes.register_tree_decoration(b.t.combine({
+aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:drywood",
 	biomes = {"primus_dry"},
 	rarity = 5,
-}, huge))
+}, aurum.biomes.trees.HUGE))

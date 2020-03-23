@@ -7,10 +7,10 @@ local RADIUS = vector.new(16, 16, 16)
 
 -- Convert <pos> in realm <from> to the proportional position in realm <to>.
 function aurum.portals.relative_pos(from, to, pos)
-	local from = aurum.realms.get(from)
-	local to = aurum.realms.get(to)
+	local from = screalms.get(from)
+	local to = screalms.get(to)
 
-	return aurum.gpos(to.id, vector.round(vector.multiply(aurum.rpos(from.id, pos), vector.divide(to.size, from.size))))
+	return screalms.gpos(to.id, vector.round(vector.multiply(screalms.rpos(from.id, pos), vector.divide(to.size, from.size))))
 end
 
 local base_def = {
@@ -53,12 +53,12 @@ local last_teleport = {}
 
 function aurum.portals.teleport(player, from_pos, to_realm)
 	-- Check which realm we're teleporting from.
-	local from_realm = aurum.pos_to_realm(from_pos)
+	local from_realm = screalms.pos_to_realm(from_pos)
 	if not from_realm then
 		minetest.log("warning", ("Invalid portal teleportation attempted at %s to %s by %s."):format(minetest.pos_to_string(from_pos), to_realm, player:get_player_name()))
 		return
 	end
-	local rdef = aurum.realms.get(to_realm)
+	local rdef = screalms.get(to_realm)
 
 	local name = player:get_player_name()
 	local key = ("%d %d %s"):format(
@@ -147,7 +147,7 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 function aurum.portals.register(realm, def)
-	local rdef = aurum.realms.get(realm)
+	local rdef = screalms.get(realm)
 
 	local def = b.t.combine({
 		color = "#FFFFFF",

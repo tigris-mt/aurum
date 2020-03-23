@@ -10,12 +10,12 @@ aurum.biomes.biomes = {}
 
 -- Register a biome with the position limits defined relative to and limited by a realm's box.
 function aurum.biomes.register(realm, def)
-	local def = b.t.combine(aurum.realms.get(realm).biome_default, def)
+	local def = b.t.combine(screalms.get(realm).biome_default, def)
 
 	-- Construct original biome box.
-	local min = b.t.combine(aurum.realms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
-	local max = b.t.combine(aurum.realms.get(realm).local_box.b, {y = def.y_max}, def.max_pos or {})
-	local box = b.box.translate(b.box.new(min, max), aurum.realms.get(realm).global_center)
+	local min = b.t.combine(screalms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
+	local max = b.t.combine(screalms.get(realm).local_box.b, {y = def.y_max}, def.max_pos or {})
+	local box = b.box.translate(b.box.new(min, max), screalms.get(realm).global_center)
 
 	-- Set new biome box.
 	def.min_pos = box.a

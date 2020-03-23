@@ -111,7 +111,7 @@ function aurum.ore.register_generation(name, realmid, override)
 	local def = aurum.ore.ores[name]
 	assert(def.ore)
 
-	local realm = aurum.realms.get(realmid)
+	local realm = screalms.get(realmid)
 	local biomes = assert(aurum.biomes.realms[realmid])
 
 	local combined = b.t.icombine({def.depth}, def.growths)

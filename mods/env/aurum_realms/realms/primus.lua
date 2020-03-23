@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-aurum.realms.register("aurum:primus", {
+screalms.register("aurum:primus", {
 	description = S"Primus Hortum",
 	size = vector.new(16000, 1600, 16000),
 
@@ -14,7 +14,7 @@ aurum.realms.register("aurum:primus", {
 			height = 400,
 		}
 
-		aurum.realms.check_underground(player, -100, function()
+		screalms.check_underground(player, -100, function()
 			player:set_sky(0, "plain", {})
 			player:set_clouds{density = 0}
 		end)
@@ -24,7 +24,7 @@ aurum.realms.register("aurum:primus", {
 -- Spreading fire is snuffed out in Primus Hortum.
 local old = fire.on_spread
 function fire.on_spread(pos)
-	if aurum.pos_to_realm(pos) == "aurum:primus" then
+	if screalms.pos_to_realm(pos) == "aurum:primus" then
 		local box = b.box.new_radius(pos, 3)
 		for _,fpos in ipairs(minetest.find_nodes_in_area(box.a, box.b, "fire:basic_flame")) do
 			minetest.remove_node(fpos)

@@ -18,11 +18,11 @@ local base_realms = {"aurum:aurum", "aurum:primus"}
 local hub_realms = {"aurum:loom", "aurum:aether"}
 
 function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
-	local rdef = aurum.realms.get(realm)
+	local rdef = screalms.get(realm)
 
 	local allowed_desc = {}
 	for _,v in ipairs(allowed_from) do
-		table.insert(allowed_desc, aurum.realms.get(v).description)
+		table.insert(allowed_desc, screalms.get(v).description)
 	end
 
 	aurum.magic.register_ritual("aurum_portals:portal_" .. realm, {
@@ -35,7 +35,7 @@ function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 		size = b.box.new(vector.new(-1, 0, -1), vector.new(1, 3, 0)),
 
 		apply = function(at, player)
-			if not b.set(allowed_from)[aurum.pos_to_realm(at(vector.new(0, 0, 0)))] then
+			if not b.set(allowed_from)[screalms.pos_to_realm(at(vector.new(0, 0, 0)))] then
 				return false
 			end
 

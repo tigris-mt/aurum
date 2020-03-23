@@ -13,7 +13,7 @@ function aurum.player.get_realm(player)
 end
 
 function aurum.player.realm_refresh(player)
-	local realm = aurum.pos_to_realm(vector.round(player:get_pos()))
+	local realm = screalms.pos_to_realm(vector.round(player:get_pos()))
 	realms[player:get_player_name()] = realm
 
 	-- Restore default appearances.
@@ -29,7 +29,7 @@ function aurum.player.realm_refresh(player)
 	player:override_day_night_ratio(nil)
 
 	if realm then
-		local r = aurum.realms.get(realm)
+		local r = screalms.get(realm)
 		r.apply_player(player)
 	end
 end

@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-aurum.realms.register("aurum:loom", {
+screalms.register("aurum:loom", {
 	description = S("The Loom"),
 	size = vector.new(8000, 800, 8000),
 
@@ -12,7 +12,7 @@ aurum.realms.register("aurum:loom", {
 			height = 600,
 		}
 
-		aurum.realms.check_underground(player, -100, function()
+		screalms.check_underground(player, -100, function()
 			player:set_sky(0, "plain", {})
 			player:set_clouds{density = 0}
 		end)

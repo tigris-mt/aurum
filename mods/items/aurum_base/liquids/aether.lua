@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-local mod = "^[colorize:#FFFFFF:255"
+local mod = "^[colorize:#FFFFFF:250"
 
 aurum.base.register_liquid("aurum_base:aether", {
 	description = S"Aether",

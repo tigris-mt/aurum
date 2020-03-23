@@ -70,6 +70,8 @@ aurum.sounds.register("grass", {
 
 aurum.sounds.leaves = aurum.sounds.grass
 
+aurum.sounds.flesh = aurum.sounds.grass
+
 aurum.sounds.register("water", {
 	footstep = {name = "default_water_footstep", gain = 1 / 4},
 })

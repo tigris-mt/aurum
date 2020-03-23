@@ -91,6 +91,32 @@ minetest.register_node("aurum_base:ground_ice", {
 
 doc.add_entry_alias("nodes", "aurum_base:ice", "nodes", "aurum_base:ground_ice")
 
+minetest.register_node("aurum_base:aether_shell", {
+	description = S"Aether Shell",
+	_doc_items_longdesc = S"A hard organic material interlaced with old magic.",
+	tiles = {"aurum_base_aether_shell.png"},
+	sounds = aurum.sounds.stone(),
+	groups = {dig_pick = 2, level = 2},
+})
+
+minetest.register_node("aurum_base:aether_skin", {
+	description = S"Aether Skin",
+	_doc_items_longdesc = S"A tough, leathery skin.",
+	tiles = {"aurum_base_aether_skin.png"},
+	sounds = aurum.sounds.flesh(),
+	groups = {dig_dig = 2, dig_chop = 2, level = 2},
+})
+
+minetest.register_node("aurum_base:aether_flesh", {
+	description = S"Aether Flesh",
+	_doc_items_longdesc = S"Strange flesh.",
+	tiles = {"aurum_base_aether_flesh.png"},
+	sounds = aurum.sounds.flesh(),
+	groups = {dig_dig = 2, dig_chop = 2},
+	paramtype = "light",
+	light_source = 2,
+})
+
 minetest.register_node("aurum_base:foundation", {
 	description = S("Foundation"),
 	_doc_items_longdesc = S"Some speak of the 'Foundations of the World'. Here they are.",

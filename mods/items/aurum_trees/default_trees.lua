@@ -85,8 +85,8 @@ for _,c in ipairs{
 	m.register("aurum_trees:" .. c.name .. "_crystal", {
 		description = c.desc .. " Crystal",
 		texture_base = tb,
-		terrain = {"aurum_base:regret"},
-		terrain_desc = S"regret",
+		terrain = {"aurum_base:regret", "aurum_base:aether_shell"},
+		terrain_desc = S"regret and aether shells",
 
 		trunk = {
 			paramtype = "light",

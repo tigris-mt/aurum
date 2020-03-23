@@ -1,6 +1,8 @@
 local realms = {}
+local default_color = {}
 
 minetest.register_on_joinplayer(function(player)
+	default_color = player:get_sky_color()
 	aurum.player.realm_refresh(player)
 end)
 
@@ -17,7 +19,11 @@ function aurum.player.realm_refresh(player)
 	realms[player:get_player_name()] = realm
 
 	-- Restore default appearances.
-	player:set_sky({}, "regular", {})
+	player:set_sky{
+		type = "regular",
+		sky_color = default_color,
+		clouds = true,
+	}
 	player:set_clouds{
 		density = 0.4,
 		color = "#fff0f0e5",

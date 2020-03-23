@@ -10,6 +10,9 @@ for k,v in pairs{
 	["aurum:primus"] = {
 		color = "#004400",
 	},
+	["aurum:aether"] = {
+		color = "#aaaaaa",
+	},
 } do
 	aurum.portals.register(k, v)
 end

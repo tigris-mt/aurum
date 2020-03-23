@@ -197,7 +197,7 @@ minetest.register_on_mods_loaded(function()
 					minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, true)
 
 					-- Run callback.
-					def.on_generated(aurum.features.structure_context(aurum.box.new(
+					def.on_generated(aurum.features.structure_context(b.box.new(
 						at(vector.new(0, 0, 0)),
 						at(limit)
 					), at, rotation))

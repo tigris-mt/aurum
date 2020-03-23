@@ -14,7 +14,7 @@ function aurum.magic.register_ritual(name, def)
 
 		-- Box of the recipe/protection area.
 		-- There must be room for 0,0,0 and the altar.
-		size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 0, 1)),
+		size = b.box.new(vector.new(-1, 0, -1), vector.new(1, 0, 1)),
 
 		-- List of {<relative pos>, <node>}. Accepts group:name item strings.
 		-- Altar sits at 0,0,0 with -z going up according to the arrows on the altar and -x going to the left.
@@ -31,7 +31,7 @@ function aurum.magic.register_ritual(name, def)
 		protected = false,
 	}, def)
 
-	def.size = aurum.box.extremes(def.size)
+	def.size = b.box.extremes(def.size)
 
 	-- Saved hashed node positions for easier recall.
 	local hashed = {}
@@ -85,7 +85,7 @@ minetest.register_node("aurum_magic:altar", {
 
 		for k,v in pairs(aurum.magic.rituals) do
 			local function check()
-				for _,noff in ipairs(aurum.box.poses(v.size)) do
+				for _,noff in ipairs(b.box.poses(v.size)) do
 					if v.protected and aurum.is_protected(at(noff), player, true) then
 						return false
 					end

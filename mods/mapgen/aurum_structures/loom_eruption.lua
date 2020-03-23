@@ -17,7 +17,7 @@ aurum.features.register_decoration{
 
 		if not cache[hash] then
 			local data = {}
-			local area = aurum.box.voxelarea(aurum.box.new_add(vector.new(0, 0, 0), limit))
+			local area = b.box.voxelarea(b.box.new_add(vector.new(0, 0, 0), limit))
 
 			for i in area:iterp(vector.new(0, 0, 0), limit) do
 				data[i] = {name = "aurum_base:regret", prob = 64}

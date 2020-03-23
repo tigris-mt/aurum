@@ -9,7 +9,7 @@ return function(def, overall, trunk_ratio, width_ratio)
 
 	local size = vector.round(vector.new(overall * width_ratio, overall * 5 + 3, overall * width_ratio))
 	local limit = vector.subtract(size, 1)
-	local area = aurum.box.voxelarea(aurum.box.new(vector.new(0, 0, 0), limit))
+	local area = b.box.voxelarea(b.box.new(vector.new(0, 0, 0), limit))
 	local data = {}
 
 	local ignore = {name = "ignore"}

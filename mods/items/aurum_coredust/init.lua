@@ -17,7 +17,7 @@ aurum.magic.register_ritual("create_coredust", {
 	description = S"Create Coredust",
 	longdesc = S"A brief invocation that binds infinitely small pieces of the world's foundation to bronze.",
 
-	size = aurum.box.new(vector.new(-1, -1, -1), vector.new(1, 1, 1)),
+	size = b.box.new(vector.new(-1, -1, -1), vector.new(1, 1, 1)),
 	protected = true,
 
 	recipe = recipe,

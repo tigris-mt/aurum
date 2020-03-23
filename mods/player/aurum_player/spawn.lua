@@ -20,7 +20,7 @@ if not minetest.settings:get("static_spawnpoint") then
 			return
 		end
 
-		aurum.player.teleport_guarantee(player, aurum.box.new_add(aurum.realms.get_spawn(realm_spawn), vector.new(0, 150, 0)), function(player)
+		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn(realm_spawn), vector.new(0, 150, 0)), function(player)
 			aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
 		end)
 	end

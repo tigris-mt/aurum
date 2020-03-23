@@ -67,3 +67,6 @@
 [submodule "mods/core/b"]
 	path = mods/core/b
 	url = https://github.com/tigris-mt/b
+[submodule "mods/env/screalms"]
+	path = mods/env/screalms
+	url = https://github.com/tigris-mt/screalms

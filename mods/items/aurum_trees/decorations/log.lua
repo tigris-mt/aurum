@@ -8,7 +8,7 @@ return function(def, length, width, hollow, yoff)
 
 	local size = vector.new(length, width, width)
 	local limit = vector.subtract(size, 1)
-	local area = aurum.box.voxelarea(aurum.box.new(vector.new(0, 0, 0), limit))
+	local area = b.box.voxelarea(b.box.new(vector.new(0, 0, 0), limit))
 	local data = {}
 
 	local half = vector.divide(limit, 2)

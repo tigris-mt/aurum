@@ -44,6 +44,3 @@
 	* This is the fallen portion of the previous world abandoned by its titan.
 * Aether
 	* Precise teleportation within the Aether possible.
-
-# Development Process
-* Agnostify aurum_realms

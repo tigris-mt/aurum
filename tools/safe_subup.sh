@@ -8,6 +8,7 @@ SAFE="
 	mods/core/gemai
 	mods/core/gnode_augment
 	mods/env/fire
+	mods/env/screalms
 	mods/items/bucket
 	mods/items/dye
 	mods/items/gtextitems

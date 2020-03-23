@@ -3,7 +3,7 @@ local S = minetest.get_translator()
 aurum.magic.register_spell_ritual("extinguish", {
 	longdesc = S"Molds water and lava into the essence of anti-fire.",
 
-	size = aurum.box.new(vector.new(-1, 0, 0), vector.new(1, 1, 0)),
+	size = b.box.new(vector.new(-1, 0, 0), vector.new(1, 1, 0)),
 	protected = true,
 
 	recipe = {
@@ -29,13 +29,13 @@ aurum.magic.register_spell_ritual("extinguish", {
 })
 
 local fertilizer_wall = {}
-for _,pos in ipairs(aurum.box.poses(aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, -1)))) do
+for _,pos in ipairs(b.box.poses(b.box.new(vector.new(-1, 0, -1), vector.new(1, 2, -1)))) do
 	table.insert(fertilizer_wall, {pos, "aurum_farming:fertilizer"})
 end
 aurum.magic.register_spell_ritual("growth", {
 	longdesc = S"Extracts the primal energy of fertilizer and burn it into spell scrolls of growth.",
 
-	size = aurum.box.new(vector.new(-1, 0, -1), vector.new(1, 2, 0)),
+	size = b.box.new(vector.new(-1, 0, -1), vector.new(1, 2, 0)),
 
 	recipe = b.t.icombine(fertilizer_wall, {
 		{vector.new(0, 1, 0), "aurum_storage:scroll_hole"},

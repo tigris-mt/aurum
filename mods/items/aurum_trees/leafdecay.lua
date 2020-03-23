@@ -35,7 +35,7 @@ end
 -- When trunk nodes are destroyed, search for leaves that might belong to this trunk and start their check timer.
 function aurum.trees.leafdecay.trunk_after_destruct(pos, oldnode)
 	local def = aurum.trees.leafdecay.types[oldnode.name]
-	local box = aurum.box.new_radius(pos, def.leafdistance)
+	local box = b.box.new_radius(pos, def.leafdistance)
 
 	-- Search for all nearby leaves.
 	for _,pos in ipairs(minetest.find_nodes_in_area(box.a, box.b, def.leaves)) do

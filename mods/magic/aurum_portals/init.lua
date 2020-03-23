@@ -88,14 +88,14 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 	local function landing_point(search)
 		local pos = aurum.portals.relative_pos(from_realm, to_realm, from_pos)
 		if search then
-			local box = aurum.box.new_radius(pos, RADIUS)
+			local box = b.box.new_radius(pos, RADIUS)
 			local poses = minetest.find_nodes_in_area(box.a, box.b, "aurum_portals:portal_" .. from_realm)
 			-- There's an existing portal.
 			if #poses > 0 then
 				return poses[math.random(#poses)]
 			-- Create a new portal.
 			else
-				local poses = aurum.box.poses(box, pos)
+				local poses = b.box.poses(box, pos)
 				for _,pos in ipairs(poses) do
 					local node = minetest.get_node(pos)
 					if aurum.is_air(node.name) or node.name == rdef.biome_default.node_stone then
@@ -113,7 +113,7 @@ function aurum.portals.teleport(player, from_pos, to_realm)
 		return pos
 	end
 
-	aurum.player.teleport_guarantee(player, aurum.box.new_radius(landing_point(), RADIUS), function(player)
+	aurum.player.teleport_guarantee(player, b.box.new_radius(landing_point(), RADIUS), function(player)
 		local pos = landing_point(true)
 		if pos then
 			aurum.player.teleport(player, vector.add(pos, vector.new(0, 0.5, 0)))

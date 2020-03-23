@@ -27,7 +27,7 @@ end
 
 function aurum.mobs.helper_find_nodes(self, nodenames)
 	local ent = self.entity
-	local box = aurum.box.new_radius(ent.object:get_pos(), SEARCH_RADIUS)
+	local box = b.box.new_radius(ent.object:get_pos(), SEARCH_RADIUS)
 	local nodes = minetest.find_nodes_in_area_under_air(box.a, box.b, nodenames)
 	if #nodes > 0 then
 		self:fire_event("found", {target = {

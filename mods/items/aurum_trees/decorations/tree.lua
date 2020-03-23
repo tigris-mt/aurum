@@ -14,7 +14,7 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 
 	local size = vector.round(vector.new(width, height + depth, width))
 	local limit = vector.subtract(size, 1)
-	local area = aurum.box.voxelarea(aurum.box.new(vector.new(0, 0, 0), limit))
+	local area = b.box.voxelarea(b.box.new(vector.new(0, 0, 0), limit))
 	local data = {}
 
 	local ignore = {name = "ignore"}

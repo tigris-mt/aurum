@@ -26,7 +26,7 @@ minetest.register_node("aurum_heckweaver:heckweaver", {
 	on_timer = function(pos)
 		local node = minetest.get_node(pos)
 
-		local box = aurum.box.new_radius(pos, 1)
+		local box = b.box.new_radius(pos, 1)
 
 		local list = minetest.find_nodes_in_area(box.a, box.b, {"aurum_base:regret"})
 		local filtered = b.t.imap(list, function(v)

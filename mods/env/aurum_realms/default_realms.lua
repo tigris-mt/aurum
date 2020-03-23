@@ -66,7 +66,7 @@ aurum.realms.register("aurum:primus", {
 local old = fire.on_spread
 function fire.on_spread(pos)
 	if aurum.pos_to_realm(pos) == "aurum:primus" then
-		local box = aurum.box.new_radius(pos, 3)
+		local box = b.box.new_radius(pos, 3)
 		for _,fpos in ipairs(minetest.find_nodes_in_area(box.a, box.b, "fire:basic_flame")) do
 			minetest.remove_node(fpos)
 		end

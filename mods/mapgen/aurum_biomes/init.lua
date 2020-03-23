@@ -15,7 +15,7 @@ function aurum.biomes.register(realm, def)
 	-- Construct original biome box.
 	local min = b.t.combine(aurum.realms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
 	local max = b.t.combine(aurum.realms.get(realm).local_box.b, {y = def.y_max}, def.max_pos or {})
-	local box = aurum.box.translate(aurum.box.new(min, max), aurum.realms.get(realm).global_center)
+	local box = b.box.translate(b.box.new(min, max), aurum.realms.get(realm).global_center)
 
 	-- Set new biome box.
 	def.min_pos = box.a

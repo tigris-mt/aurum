@@ -53,7 +53,7 @@ minetest.register_globalstep(function(dtime)
 					def.timer = def.timer - timer
 					if def.timer <= 0 then
 						local spawned = false
-						local box = aurum.box.new_radius(pos, RADIUS)
+						local box = b.box.new_radius(pos, RADIUS)
 						local poses = b.t.shuffled(minetest.find_nodes_in_area_under_air(box.a, box.b, def.nodes))
 						for _,pos in ipairs(poses) do
 							if math.random() < (1 / def.chance) then

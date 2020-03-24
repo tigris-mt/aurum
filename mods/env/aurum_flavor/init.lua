@@ -1,4 +1,4 @@
 aurum.flavor = {}
 
-b.dofile("books/init.lua")
+b.dodir("books")
 b.dofile("names.lua")

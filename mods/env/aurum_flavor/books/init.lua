@@ -65,6 +65,3 @@ function aurum.flavor.books.random_book(group)
 
 	return choice.callback(table.copy(choice.data)), item
 end
-
-b.dofile("books/aurum.lua")
-b.dofile("books/general.lua")

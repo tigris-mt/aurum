@@ -16,6 +16,19 @@ screalms.register("aurum:primus", {
 
 		screalms.apply_underground(player)
 	end,
+
+	aurum_dungeon_loot = function(pos)
+		return {
+			count = math.random(1, 2),
+			list = {
+				{
+					count = math.random(1, 2),
+					preciousness = {0, 5},
+					groups = {"raw_food", "seed", "raw"},
+				},
+			},
+		}
+	end,
 })
 
 -- Spreading fire is snuffed out in Primus Hortum.

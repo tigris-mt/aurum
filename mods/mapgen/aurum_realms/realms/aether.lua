@@ -19,6 +19,19 @@ screalms.register("aurum:aether", {
 		screalms.apply_underground(player)
 	end,
 
+	aurum_dungeon_loot = function(pos)
+		return {
+			count = math.random(1, 2),
+			list = {
+				{
+					count = math.random(1, 2),
+					preciousness = {0, 10},
+					groups = {"magic"},
+				},
+			},
+		}
+	end,
+
 	biome_default = {
 		node_top = "aurum_base:aether_shell",
 		node_filler = "aurum_base:aether_skin",

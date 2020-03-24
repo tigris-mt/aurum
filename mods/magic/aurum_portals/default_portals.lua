@@ -23,6 +23,8 @@ local hub_realms = {"aurum:loom", "aurum:aether"}
 function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
 	local rdef = screalms.get(realm)
 
+	allowed_from = b.t.imap(allowed_from, function(v) return (v ~= realm) and v or nil end)
+
 	local allowed_desc = {}
 	for _,v in ipairs(allowed_from) do
 		table.insert(allowed_desc, screalms.get(v).description)
@@ -89,3 +91,15 @@ aurum.portals.register_ritual("aurum:primus", hub_realms, {
 	{vector.new(0, 3, -1), "aurum_trees:pander_trunk"},
 	{vector.new(1, 3, -1), "aurum_trees:pander_trunk"},
 }, "aurum_base:dirt")
+
+aurum.portals.register_ritual("aurum:aether", hub_realms, {
+	{vector.new(-1, 0, -1), "aurum_base:aether_shell"},
+	{vector.new(1, 0, -1), "aurum_base:aether_shell"},
+	{vector.new(-1, 1, -1), "aurum_base:aether_shell"},
+	{vector.new(1, 1, -1), "aurum_base:aether_shell"},
+	{vector.new(-1, 2, -1), "aurum_base:aether_shell"},
+	{vector.new(1, 2, -1), "aurum_base:aether_shell"},
+	{vector.new(-1, 3, -1), "group:crystal_tree"},
+	{vector.new(0, 3, -1), "group:crystal_tree"},
+	{vector.new(1, 3, -1), "group:crystal_tree"},
+}, "aurum_base:aether_flesh")

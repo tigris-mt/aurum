@@ -18,4 +18,17 @@ screalms.register("aurum:aether", {
 		}
 		screalms.apply_underground(player)
 	end,
+
+	biome_default = {
+		node_top = "aurum_base:aether_shell",
+		node_filler = "aurum_base:aether_skin",
+		node_stone = "aurum_base:aether_flesh",
+		node_riverbed = "aurum_base:ground_ice",
+		node_water = "aurum_base:aether_source",
+		node_river_water = "aurum_base:aether_source",
+		node_cave_liquid = "aurum_base:aether_source",
+		node_dungeon = "aurum_base:aether_shell",
+		node_dungeon_alt = "aurum_base:aether_skin",
+		node_dungeon_stair = "aurum_base:aether_shell",
+	},
 })

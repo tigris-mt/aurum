@@ -9,15 +9,12 @@ end
 
 local v_base = v_n("v_base", {
 	y_min = 4,
-	node_top = "aurum_base:aether_shell",
-		depth_top = 1,
-		node_filler = "aurum_base:aether_skin",
-		depth_filler = 3,
-	node_stone = "aurum_base:aether_flesh",
+	depth_top = 2,
+	depth_filler = 2,
 })
 
 local v_under = v_n("v_under", {
-	y_max = 4,
+	y_max = 3,
 	node_stone = "aurum_base:aether_source",
 })
 

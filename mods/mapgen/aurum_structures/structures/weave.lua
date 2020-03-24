@@ -1,12 +1,6 @@
 -- Long weaves of regret twisting through the loom.
 
-local cache = {}
-local function make(size, sign)
-	local key = ("%d:%d"):format(minetest.hash_node_position(size), sign)
-	if cache[key] then
-		return cache[key]
-	end
-
+local make = b.cache.simple(function(size, sign)
 	local limit = vector.subtract(size, 1)
 	local data = {}
 	local area = VoxelArea:new({MinEdge=vector.new(0, 0, 0), MaxEdge=limit})
@@ -27,13 +21,13 @@ local function make(size, sign)
 		data[area:indexp(vector.new(math.floor(x + 0.5), math.max(0, math.min(y, limit.y)), 0))] = {name = c}
 	end
 
-	local ret = {
+	return {
 		size = size,
 		data = data,
 	}
-	cache[key] = ret
-	return ret
-end
+end, function(size, sign)
+	return ("%d:%d"):format(minetest.hash_node_position(size), sign)
+end)
 
 aurum.features.register_decoration{
 	place_on = {"aurum_base:regret", "aurum_base:dirt"},

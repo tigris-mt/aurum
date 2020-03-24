@@ -1,12 +1,6 @@
 -- An enclosed sphere of aether flesh.
 
-local cache = {}
-local function make(a)
-	local key = a
-	if cache[key] then
-		return cache[key]
-	end
-
+local make = b.cache.simple(function(a)
 	local size = vector.round(vector.multiply(vector.new(a, a, a), 2.5))
 	local limit = vector.subtract(size, 1)
 	local data = {}
@@ -34,13 +28,11 @@ local function make(a)
 	sphere(a - 2, "aurum_base:aether_skin")
 	sphere(a - 3, "aurum_base:aether_flesh")
 
-	local ret = {
+	return {
 		size = size,
 		data = data,
 	}
-	cache[key] = ret
-	return ret
-end
+end, function(a) return a end)
 
 aurum.features.register_decoration{
 	place_on = {"aurum_base:regret", "aurum_base:stone", "aurum_base:gravel"},

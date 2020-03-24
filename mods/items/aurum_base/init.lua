@@ -4,7 +4,7 @@ aurum.base = {}
 b.dofile("dirt.lua")
 
 -- Base/ground nodes.
-b.dofile("base.lua")
+b.dodir("base")
 b.dodir("liquids")
 
 -- Base building blocks, crafted.

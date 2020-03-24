@@ -32,6 +32,13 @@ screalms.register("aurum:aether", {
 		}
 	end,
 
+	aurum_dungeon_chest = function(pos)
+		return {
+			node = "aurum_storage:shell_box",
+			list = "main",
+		}
+	end,
+
 	biome_default = {
 		node_top = "aurum_base:aether_shell",
 		node_filler = "aurum_base:aether_skin",

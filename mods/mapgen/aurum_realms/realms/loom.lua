@@ -15,6 +15,13 @@ screalms.register("aurum:loom", {
 		screalms.apply_underground(player)
 	end,
 
+	aurum_dungeon_chest = function(pos)
+		return {
+			node = b.t.choice{"aurum_storage:box", "aurum_storage:shell_box"},
+			list = "main",
+		}
+	end,
+
 	biome_default = {
 		node_top = "aurum_base:regret",
 		node_filler = "aurum_base:regret",

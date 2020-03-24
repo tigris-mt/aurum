@@ -103,6 +103,26 @@ minetest.register_craft{
 	},
 }
 
+aurum.storage.register("aurum_storage:shell_box", {
+	width = 10,
+	height = 6,
+	node = {
+		description = S"Shell Box",
+		tiles = {"aurum_storage_shell_box.png"},
+		sounds = aurum.sounds.stone(),
+		groups = {dig_pick = 2, level = 2},
+	},
+})
+
+minetest.register_craft{
+	output = "aurum_storage:shell_box",
+	recipe = {
+		{"aurum_base:aether_shell", "aurum_base:aether_skin", "aurum_base:aether_shell"},
+		{"aurum_base:aether_shell", "", "aurum_base:aether_shell"},
+		{"aurum_base:aether_shell", "aurum_base:aether_skin", "aurum_base:aether_shell"},
+	},
+}
+
 aurum.storage.register("aurum_storage:scroll_hole", {
 	width = 2,
 	height = 2,

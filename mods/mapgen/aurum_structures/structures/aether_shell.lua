@@ -1,6 +1,6 @@
 -- An enclosed sphere of aether flesh.
 
-local make = b.cache.simple(function(a)
+local make = b.cache.simple(function(a, dead)
 	local size = vector.round(vector.multiply(vector.new(a, a, a), 2.5))
 	local limit = vector.subtract(size, 1)
 	local data = {}
@@ -25,14 +25,18 @@ local make = b.cache.simple(function(a)
 	end
 
 	sphere(a, "aurum_base:aether_shell")
-	sphere(a - 2, "aurum_base:aether_skin")
-	sphere(a - 3, "aurum_base:aether_flesh")
+	if dead then
+		sphere(a - 2, "air")
+	else
+		sphere(a - 2, "aurum_base:aether_skin")
+		sphere(a - 3, "aurum_base:aether_flesh")
+	end
 
 	return {
 		size = size,
 		data = data,
 	}
-end, function(a) return a end)
+end, function(a, dead) return a + 1000 * (dead and 1 or 0) end)
 
 aurum.features.register_decoration{
 	place_on = {"aurum_base:regret", "aurum_base:stone", "aurum_base:gravel", "aurum_base:aether_shell"},
@@ -47,6 +51,6 @@ aurum.features.register_decoration{
 		-- Offset position.
 		pos.y = pos.y - a
 
-		return make(a)
+		return make(a, random(0, 10) <= 3)
 	end,
 }

@@ -39,11 +39,18 @@ local make = b.cache.simple(function(a, dead)
 end, function(a, dead) return a + 1000 * (dead and 1 or 0) end)
 
 aurum.features.register_decoration{
-	place_on = {"aurum_base:regret", "aurum_base:stone", "aurum_base:gravel", "aurum_base:aether_shell"},
+	place_on = {
+		"aurum_base:regret",
+		"aurum_base:stone",
+		"aurum_base:gravel",
+		"aurum_base:aether_shell",
+		"aurum_base:aether_skin",
+		"aurum_base:aether_flesh",
+	},
 	rarity = 0.0001,
 	biomes = b.set.to_array(b.set._or(
-		b.set(aurum.biomes.get_all_group("barren", {"base"})),
-		b.set(aurum.biomes.get_all_group("aurum:aether", {"base"}))
+		b.set(aurum.biomes.get_all_group("barren")),
+		b.set(aurum.biomes.get_all_group("aurum:aether"))
 	)),
 
 	make_schematic = function(pos, random)

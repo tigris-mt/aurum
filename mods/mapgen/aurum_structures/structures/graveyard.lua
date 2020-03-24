@@ -3,15 +3,17 @@ local S = minetest.get_translator()
 local function make_headstone(pos)
 	local name = aurum.flavor.generate_name()
 	local age = math.random(16, 110)
-	if age > 50 then
-		age = age - math.max(0, math.random(-30, 30))
+	for _=1,4 do
+		if age > 50 then
+			age = age - math.max(0, math.random(-30, 35))
+		end
 	end
 	gtextitems.set_node(pos, {
 		title = S("Grave of @1", name),
 		text = S("They lived @1 years before @2 took them. I buried them @3. In life, they were @4. That is all I know.\n\nRequiescat in pace, @5.",
 			age,
 			b.t.weighted_choice{
-				{(age > 70) and S"old age" or S"sudden disease", 5},
+				{(age > 60) and S"old age" or S"sudden disease", age / 70 * 5},
 				{S"battle", 1},
 				{S"magical battle", 0.25},
 				{S"a lightning strike", 0.01},

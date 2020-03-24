@@ -323,5 +323,5 @@ end)
 b.dofile("leafdecay.lua")
 
 b.dofile("decorations/init.lua")
-b.dofile("default_trees.lua")
+b.dodir("trees")
 b.dofile("fuel.lua")

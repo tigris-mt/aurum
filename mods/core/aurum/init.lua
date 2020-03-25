@@ -80,7 +80,7 @@ function aurum.drop_all(pos)
 end
 
 -- Will replace first line of description with metadata description_override if available.
-function b.set_stack_description(stack, description)
+function aurum.set_stack_description(stack, description)
 	local split = description:split("\n", true)
 	local override = stack:get_meta():get_string("description_override")
 	if #override > 0 then

@@ -9,14 +9,14 @@ local stages = {
 
 minetest.register_node("aurum_farming:green_pumpkin", {
 	description = S"Green Pumpkin",
-	tiles = {"aurum_farming_pumpkin.png^[colorize:#00ff00:127"},
+	tiles = {"aurum_farming_pumpkin_top.png^[colorize:#00ff00:127", "aurum_farming_pumpkin.png^[colorize:#00ff00:127"},
 	sounds = aurum.sounds.wood(),
 	groups = {dig_chop = 3},
 })
 
 minetest.register_node("aurum_farming:ripe_pumpkin", {
 	description = S"Ripe Pumpkin",
-	tiles = {"aurum_farming_pumpkin.png"},
+	tiles = {"aurum_farming_pumpkin_top.png", "aurum_farming_pumpkin.png"},
 	sounds = aurum.sounds.wood(),
 	groups = {dig_chop = 3},
 

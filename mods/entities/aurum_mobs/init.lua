@@ -147,13 +147,15 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_punch = function(self, puncher)
-			self._gemai:fire_event("punch", {
-				other = gemai.ref_to_table(puncher),
-				target = {
-					type = "ref_table",
-					ref_table = gemai.ref_to_table(puncher),
-				},
-			})
+			if puncher ~= self.entity.object then
+				self._gemai:fire_event("punch", {
+					other = gemai.ref_to_table(puncher),
+					target = {
+						type = "ref_table",
+						ref_table = gemai.ref_to_table(puncher),
+					},
+				})
+			end
 		end,
 
 		on_rightclick = function(self, clicker)

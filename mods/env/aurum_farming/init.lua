@@ -4,5 +4,5 @@ aurum.farming = {}
 -- Fertilizer and soil.
 b.dofile("base.lua")
 
--- Crop registration.
-b.dofile("crops.lua")
+-- Crops.
+b.dodir("crops")

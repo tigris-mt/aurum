@@ -188,5 +188,3 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		}, decodef))
 	end
 end
-
-b.dofile("default_crops.lua")

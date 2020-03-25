@@ -48,7 +48,7 @@ aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:white_crystal",
 	biomes = {"aether_white_crystal_forest"},
 	rarity = 1,
-}, aurum.trees.HUGE))
+}, aurum.biomes.trees.HUGE))
 
 aurum.biomes.trees.register({
 	name = "aurum_trees:yellow_crystal",

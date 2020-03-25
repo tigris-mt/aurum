@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 minetest.register_node("aurum_base:aether_shell", {
 	description = S"Aether Shell",
-	_doc_items_longdesc = S"Hard organic material interlaced with old magic. Remarkably similar to fragment of snail shell.",
+	_doc_items_longdesc = S"Hard organic material interlaced with old magic. Remarkably similar to a fragment of snail shell.",
 	tiles = {"aurum_base_aether_shell.png"},
 	sounds = aurum.sounds.stone(),
 	groups = {dig_pick = 2, level = 2},

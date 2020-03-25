@@ -28,7 +28,7 @@ Each realm has been overrun by an immortal archon and their servants attempting 
 They are lesser than the titans, but with the old titan having abandoned the world, they have run wild.
 
 #### The Headstoner
-Most peaceful of all the archons, her domain is Aurum. She buries the dead.
+Most peaceful of all the archons, her domain is Aurum. She buries the dead. She is a giant monkey.
 
 #### Mister Decadence
 A bureaucratic archon. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.

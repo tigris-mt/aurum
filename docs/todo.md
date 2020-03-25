@@ -20,7 +20,7 @@
 * Titan-worthy default skin.
 * Structures and "lorebooks" referencing the previous titan, the corrupted state of the world, and the hope of the new titan.
 * "Boss" encounters for each realm, providing some token of conquering the realm.
-	* Bosses may be corrupted demigod servants of the previous titan.
+	* Bosses may be corrupted archon servants of the previous titan.
 		* They have access to the same immortality as you, explaining their eventual respawn.
 * Final boss encounter in the Aether, only accessible after having conquered the other realms.
 

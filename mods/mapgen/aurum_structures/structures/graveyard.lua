@@ -26,7 +26,7 @@ local function make_headstone(pos)
 				{S"an accident", 1},
 				{S"disease", 1},
 				{S"an injury", 1},
-				{S"a demigod", 0.1},
+				{S"an archon", 0.1},
 				{S"Hyperion", 0.1},
 				{S"inexplicable circumstances", 1},
 				{S"a trap", 1},

@@ -23,18 +23,18 @@ Some people were brought with it, and they survive by scavenging and hunting amo
 ### Servitors
 The old priesthood. Unable to accept their abandonment, they continue to attempt to rule the realms like an ant colony with no queen.
 
-### Demigods
-Each realm has been overrun by an immortal demigod and their servants attempting to conquer the realms for themselves.
+### Archons
+Each realm has been overrun by an immortal archon and their servants attempting to conquer the realms for themselves.
 They are lesser than the titans, but with the old titan having abandoned the world, they have run wild.
 
 #### The Headstoner
-Most peaceful of all the demigods, her domain is Aurum. She buries the dead.
+Most peaceful of all the archons, her domain is Aurum. She buries the dead.
 
 #### Mister Decadence
-A bureaucratic demigod. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.
+A bureaucratic archon. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.
 
 #### Mors Vivi
-An impersonal demigod. She has an insatiable appetite for the evolved, and prefers fresh "simple" life like plants and insects. She loves oxygen and hates fire.
+An impersonal archon. She has an insatiable appetite for the evolved, and prefers fresh "simple" life like plants and insects. She loves oxygen and hates fire.
 
 ### Loomspawn
 The natural forces of the Loom, performing their corruption.

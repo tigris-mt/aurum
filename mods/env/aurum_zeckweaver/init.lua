@@ -1,17 +1,17 @@
 local S = minetest.get_translator()
 
--- How often do heckweavers move?
+-- How often do zeckweavers move?
 local TICK = 2
--- How long can heckweavers trails get?
+-- How long can zeckweavers trails get?
 local LENGTH = 8
--- How rare (<RARITY>^3) are heckweavers in regret?
+-- How rare (<RARITY>^3) are zeckweavers in regret?
 local RARITY = 28
 
-minetest.register_node("aurum_heckweaver:heckweaver", {
-	description = S"Heckweaver",
-	_doc_items_longdesc = S"A native of the Loom, the Heckweaver swims within the regrets and consumes them.",
+minetest.register_node("aurum_zeckweaver:zeckweaver", {
+	description = S"Zeckweaver",
+	_doc_items_longdesc = S"A native of the Loom, the Zeckweaver swims within the regrets and consumes them.",
 
-	tiles = {"aurum_heckweaver_heckweaver.png"},
+	tiles = {"aurum_zeckweaver_zeckweaver.png"},
 
 	light_source = 5,
 	paramtype = "light",
@@ -40,11 +40,11 @@ minetest.register_node("aurum_heckweaver:heckweaver", {
 		-- Find a nearby regret.
 		local next = (#shuffled > 0) and shuffled[math.random(#shuffled)]
 		if next then
-			-- Move heckweaver there.
+			-- Move zeckweaver there.
 			minetest.set_node(next, node)
-			-- Replace old position with heck.
-			minetest.set_node(pos, {name = "aurum_heckweaver:heck"})
-			-- Set heck timeout.
+			-- Replace old position with zeck.
+			minetest.set_node(pos, {name = "aurum_zeckweaver:zeck"})
+			-- Set zeck timeout.
 			minetest.get_node_timer(pos):start(TICK * LENGTH)
 		else
 			return true
@@ -52,11 +52,11 @@ minetest.register_node("aurum_heckweaver:heckweaver", {
 	end,
 })
 
-minetest.register_node("aurum_heckweaver:heck", {
-	description = S"Heck",
-	_doc_items_longdesc = S"The blindingly glowing excrement of the Heckweaver. In its natural state, it will quickly melt away.",
+minetest.register_node("aurum_zeckweaver:zeck", {
+	description = S"Zeck",
+	_doc_items_longdesc = S"The blindingly glowing excrement of the Zeckweaver. In its natural state, it will quickly melt away.",
 
-	tiles = {"aurum_heckweaver_heck.png"},
+	tiles = {"aurum_zeckweaver_zeck.png"},
 
 	light_source = 14,
 	paramtype = "light",
@@ -72,7 +72,7 @@ minetest.register_node("aurum_heckweaver:heck", {
 
 minetest.register_ore{
 	ore_type = "scatter",
-	ore = "aurum_heckweaver:heckweaver",
+	ore = "aurum_zeckweaver:zeckweaver",
 	wherein = "aurum_base:regret",
 	clust_scarcity = math.pow(RARITY, 3),
 	clust_num_ores = 1,
@@ -81,9 +81,9 @@ minetest.register_ore{
 
 -- on_construct isn't naturally called for ore-generated nodes, so we must manually call it if the timer hasn't started.
 minetest.register_lbm{
-	label = "Activate New Heckweavers",
-	name = "aurum_heckweaver:activate",
-	nodenames = {"aurum_heckweaver:heckweaver"},
+	label = "Activate New Zeckweavers",
+	name = "aurum_zeckweaver:activate",
+	nodenames = {"aurum_zeckweaver:zeckweaver"},
 	-- Apparently it didn't get called when run_at_every_load is false.
 	run_at_every_load = true,
 	action = function(pos, node)

@@ -76,7 +76,4 @@ end
 b.dofile("trees.lua")
 b.dofile("variants.lua")
 
-b.dofile("biomes/aether.lua")
-b.dofile("biomes/aurum.lua")
-b.dofile("biomes/loom.lua")
-b.dofile("biomes/primus.lua")
+b.dodir("biomes")

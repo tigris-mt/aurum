@@ -7,6 +7,10 @@ doc.sub.items.register_factoid(nil, "use", function(itemstring, def)
 	return ""
 end)
 
+local function new_uid(pos)
+	minetest.get_meta(pos):set_int("uid", math.random(0x1000000))
+end
+
 -- Grow plant <def> at stage <i> with the next node being <next_name>.
 function aurum.farming.grow_plant(i, next_name, def, pos, node)
 	local below = vector.add(pos, vector.new(0, -1, 0))
@@ -22,13 +26,33 @@ function aurum.farming.grow_plant(i, next_name, def, pos, node)
 		return false
 	end
 
+	-- And we're allowed.
+	if not def.allow_growth(pos, def, i + 1, node) then
+		return false
+	end
+
+	-- Save previous UID.
+	local uid = minetest.get_meta(pos):get_int("uid")
+	-- Warn if there was no UID.
+	if uid == 0 then
+		minetest.log("warning", ("%s has no UID while growing at %s"):format(node.name, minetest.pos_to_string(pos)))
+	end
+
 	-- To the next stage.
 	minetest.set_node(pos, {name = next_name})
 
-	-- If our stage was the second-to-last (so we just went to the last stage), then there's a chance to use up the fertilizer.
+	-- Restore UID if it existed.
+	if uid ~= 0 then
+		minetest.get_meta(pos):set_int("uid", uid)
+	end
+
+	-- Callback.
+	def.on_growth(pos, def, i + 1, node)
+
+	-- If our stage was the second-to-last (so we just went to the last stage), then there's a chance to "final fail", which can be using up the fertilizer or killing the plant.
 	if (i + 1) == def.max then
-		if math.random(4) == 1 then
-			minetest.set_node(below, {name = "aurum_base:dirt"})
+		if math.random() < def.final_fail_chance then
+			def.final_fail(pos, def, node)
 		end
 	end
 
@@ -94,7 +118,20 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		product = nil,
 
 		-- Define drops as function(i) where i is the stage number to return a standard MT node drop table.
-		drops = nil,
+		drops = function(i) end,
+
+		-- Functions called on growth.
+		-- The target stage is passed as `stage`.
+		allow_growth = function(pos, def, stage, node) return true end,
+		on_growth = function(pos, def, stage, node) end,
+
+		-- Function called on initial planting.
+		on_plant = function(pos, def) end,
+
+		final_fail_chance = 0.25,
+		final_fail = function(pos, def, node)
+			minetest.set_node(vector.add(pos, vector.new(0, -1, 0)), {name = "aurum_base:dirt"})
+		end,
 	}, def)
 	local last_name = base_name .. "_" .. def.max
 
@@ -104,6 +141,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 
 		-- Register with flora defaults.
 		aurum.flora.register(":" .. name, b.t.combine({
+			_aurum_farming = def,
 			description = S("@1 Plant", def.description),
 			_doc_items_usagehelp = S("Give this plant at least @1 light and wet, fertilized soil of level @2 or higher for growth and harvest. It grows in @3 stages.", def.light, def.level, def.max),
 			groups = {
@@ -120,6 +158,13 @@ function aurum.farming.register_crop(base_name, def, decodef)
 			end),
 			on_timer = function(...) return aurum.farming.timer(def, ...) end,
 			on_construct = function(pos)
+				-- Ensure that a UID exists.
+				if i == 1 or minetest.get_meta(pos):get_int("uid") == 0 then
+					new_uid(pos)
+				end
+				if i == 1 then
+					def.on_plant(pos, def)
+				end
 				if next_name then
 					minetest.get_node_timer(pos):start(def.time())
 				end

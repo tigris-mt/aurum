@@ -102,12 +102,21 @@ local function make_headstone(pos)
 		),
 		author = S"the Headstoner",
 		author_type = "npc",
-		id = "aurum_features:gravestone",
+		id = "aurum_structures:gravestone",
 	})
 end
 
+aurum.structures.GRAVEYARD_NOISE = {
+	offset = -0.095,
+	scale = 0.1,
+	spread = vector.new(150, 150, 150),
+	seed = 537,
+	octaves = 3,
+	persist = 0.5,
+}
+
 minetest.register_decoration{
-	name = "aurum_features:graveyard",
+	name = "aurum_structures:graveyard",
 	deco_type = "schematic",
 	schematic = aurum.trees.schematic(vector.new(1, 4, 1), {
 		{{"aurum_books:stone_tablet_written"}},
@@ -119,19 +128,11 @@ minetest.register_decoration{
 	flags = {force_placement = true},
 	place_offset_y = -2,
 	place_on = {"group:soil", "aurum_base:gravel", "aurum_base:sand", "aurum_base:snow"},
-	sidelen = 16,
-	noise_params = {
-		offset = -0.095,
-		scale = 0.1,
-		spread = vector.new(150, 150, 150),
-		seed = 537,
-		octaves = 3,
-		persist = 0.5,
-	},
+	noise_params = aurum.structures.GRAVEYARD_NOISE,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
 }
 
-local did = minetest.get_decoration_id("aurum_features:graveyard")
+local did = minetest.get_decoration_id("aurum_structures:graveyard")
 
 minetest.set_gen_notify("decoration", {did})
 minetest.register_on_generated(function()

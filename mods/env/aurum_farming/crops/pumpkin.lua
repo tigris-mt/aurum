@@ -91,43 +91,35 @@ aurum.farming.register_crop("aurum_farming:pumpkin", {
 	end,
 })
 
-minetest.register_node("aurum_farming:pumpkin_dummy", minetest.registered_nodes["aurum_farming:pumpkin_4"])
-
-minetest.register_decoration{
-	deco_type = "simple",
-	decoration = "aurum_farming:pumpkin_dummy",
-	rotation = "random",
-	place_on = {"group:soil"},
-	flags = {force_placement = true},
-	noise_params = {
-		offset = 0,
-		scale = 0.01,
-		spread = vector.new(250, 250, 250),
-		seed = 840,
-		octaves = 3,
-		persist = 0.5,
-	},
-	biomes = aurum.biomes.get_all_group("green", {"base"}),
-}
-
-minetest.register_lbm{
-	label = "Activate Dummy Pumpkins",
-	name = "aurum_farming:pumpkin_activate",
-	nodenames = {"aurum_farming:pumpkin_dummy"},
-	run_at_every_load = true,
-	action = function(pos, node)
-		local spot = find_spot(pos)
-		if spot then
-			if math.random() < 0.25 then
-				minetest.set_node(pos, {name = "aurum_farming:pumpkin_3"})
-				minetest.set_node(spot, {name = "aurum_farming:green_pumpkin"})
-			else
-				minetest.set_node(pos, {name = "aurum_farming:pumpkin_4"})
-				minetest.set_node(spot, {name = "aurum_farming:ripe_pumpkin"})
+for _,decoration in ipairs{
+		{
+			place_on = {"group:soil"},
+			sidelen = 16,
+			fill_ratio = 0.1,
+			biomes = aurum.biomes.get_all_group("green", {"base"}),
+			num_spawn_by = 1,
+			spawn_by = "group:water",
+		},
+		{
+			place_on = {"group:soil"},
+			noise_params = aurum.structures.GRAVEYARD_NOISE,
+			biomes = aurum.biomes.get_all_group("green", {"base"}),
+		},
+	} do
+	aurum.features.register_dynamic_decoration({
+		decoration = decoration,
+		callback = function(pos, random)
+			local spot = find_spot(pos)
+			if spot then
+				if random() < 0.25 then
+					minetest.set_node(pos, {name = "aurum_farming:pumpkin_3"})
+					minetest.set_node(spot, {name = "aurum_farming:green_pumpkin"})
+				else
+					minetest.set_node(pos, {name = "aurum_farming:pumpkin_4"})
+					minetest.set_node(spot, {name = "aurum_farming:ripe_pumpkin"})
+				end
+				minetest.get_meta(spot):set_int("uid", -1)
 			end
-			minetest.get_meta(spot):set_int("uid", -1)
-		else
-			minetest.remove_node(pos)
-		end
-	end,
-}
+		end,
+	})
+end

@@ -22,9 +22,12 @@ aurum.features.register_decoration{
 	rarity = 0.001,
 	biomes = aurum.biomes.get_all_group("barren"),
 
-	make_schematic = function(pos, random)
-		local size = vector.new(random(1, 8), random(4, 18), random(1, 8))
-		pos.y = pos.y - math.floor((size.y - 1) / 2)
-		return make(size)
+	on_offset = function(c)
+		c.eruption_size = vector.new(c.random(1, 8), c.random(4, 18), c.random(1, 8))
+		return vector.apply(vector.subtract(c.pos, vector.new(0, (c.eruption_size.y - 1) / 2, 0)), math.floor)
+	end,
+
+	make_schematic = function(c)
+		return make(c.eruption_size)
 	end,
 }

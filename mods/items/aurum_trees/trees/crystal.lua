@@ -24,7 +24,7 @@ for _,c in ipairs{
 } do
 	local tb = "aurum_trees_crystal_%s.png^" .. c.texture
 	aurum.trees.register("aurum_trees:" .. c.name .. "_crystal", {
-		description = c.desc .. " Crystal",
+		description = S(c.desc .. " Crystal"),
 		texture_base = tb,
 		terrain = {"aurum_base:regret", "aurum_base:aether_shell"},
 		terrain_desc = S"regret and aether shells",

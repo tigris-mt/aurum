@@ -21,7 +21,7 @@ local function make(size)
 		table.insert(nodes, slice)
 	end
 
-	return {schematic = aurum.trees.schematic(size, nodes), size = size}
+	return {schematic = aurum.features.schematic(size, nodes), size = size}
 end
 
 local list = {}

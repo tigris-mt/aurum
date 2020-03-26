@@ -36,6 +36,7 @@ function aurum.biomes.register_all(realm, def)
 		_variants = {},
 	}, def)
 
+	table.insert(def._groups, "all")
 	table.insert(def._groups, realm)
 
 	aurum.biomes.biomes[def.name] = def
@@ -55,14 +56,7 @@ end
 function aurum.biomes.get_all_group(group, variants)
 	local ret = {}
 	for name,def in pairs(aurum.biomes.biomes) do
-		local ok = false
-		for _,bgroup in ipairs(def._groups) do
-			if bgroup == group then
-				ok = true
-				break
-			end
-		end
-		if ok then
+		if b.set(def._groups)[group] then
 			for _,v in ipairs(variants or b.t.keys(def._variants)) do
 				if def._variants[v] then
 					table.insert(ret, add_suffix(def.name, v))

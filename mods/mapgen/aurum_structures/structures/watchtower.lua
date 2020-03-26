@@ -164,14 +164,14 @@ aurum.features.register_decoration{
 	place_on = {"group:sand", "aurum_base:gravel"},
 	rarity = 0.000035,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
-	schematic = aurum.trees.schematic(vector.new(7, 16, 7), b.t.icombine(
+	schematic = aurum.features.schematic(vector.new(7, 16, 7), b.t.icombine(
 		top,
 		center,
 		basement
 	)),
 
-	on_offset = function(pos)
-		return vector.add(pos, vector.new(0, -5, 0))
+	on_offset = function(context)
+		return vector.add(context.pos, vector.new(0, -5, 0))
 	end,
 
 	on_generated = function(c)

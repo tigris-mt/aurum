@@ -1,6 +1,6 @@
 local function v_base(def)
 	return aurum.biomes.v_base(b.t.combine({
-		y_min = -100,
+		y_min = -50,
 		node_water = "air",
 		node_cave_liquid = "air",
 	}, def))

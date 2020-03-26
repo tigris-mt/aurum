@@ -11,11 +11,11 @@ aurum.features.register_decoration{
 	rarity = 1 / (18 * 18 * 18),
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"under"}),
 
-	on_offset = function(pos)
-		return vector.add(pos, vector.new(0, -3, 0))
+	on_offset = function(context)
+		return vector.add(context.pos, vector.new(0, -3, 0))
 	end,
 
-	schematic = aurum.trees.schematic(vector.new(3, 6, 3), {
+	schematic = aurum.features.schematic(vector.new(3, 6, 3), {
 		{
 			{sb, sb, sb},
 			{sb, sb, sb},

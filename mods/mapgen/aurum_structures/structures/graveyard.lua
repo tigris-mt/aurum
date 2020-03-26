@@ -118,7 +118,7 @@ aurum.structures.GRAVEYARD_NOISE = {
 minetest.register_decoration{
 	name = "aurum_structures:graveyard",
 	deco_type = "schematic",
-	schematic = aurum.trees.schematic(vector.new(1, 4, 1), {
+	schematic = aurum.features.schematic(vector.new(1, 4, 1), {
 		{{"aurum_books:stone_tablet_written"}},
 		{{"aurum_base:dirt"}},
 		{{"aurum_farming:fertilizer"}},

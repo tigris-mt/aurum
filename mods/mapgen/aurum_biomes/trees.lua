@@ -75,8 +75,8 @@ function aurum.biomes.trees.register(def)
 			rarity = 0.005 * (def.rarity or 1) * rarity / total,
 			biomes = def.biomes,
 			schematic = deco.schematic,
-			on_offset = function(pos)
-				return vector.add(pos, vector.new(0, deco.place_offset_y, 0))
+			on_offset = function(context)
+				return vector.add(context.pos, vector.new(0, deco.place_offset_y, 0))
 			end,
 		}
 	end

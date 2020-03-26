@@ -53,11 +53,12 @@ aurum.features.register_decoration{
 		b.set(aurum.biomes.get_all_group("aurum:aether"))
 	)),
 
-	make_schematic = function(pos, random)
-		local a = random(2, 5) + math.max(0, random(-100, 10))
-		-- Offset position.
-		pos.y = pos.y - a
+	on_offset = function(c)
+		c.shell_radius = c.random(2, 5) + math.max(0, c.random(-100, 10))
+		return vector.subtract(c.pos, vector.new(0, c.shell_radius, 0))
+	end,
 
-		return make(a, random(0, 10) <= 3)
+	make_schematic = function(c)
+		return make(c.shell_radius, c.random(0, 10) <= 3)
 	end,
 }

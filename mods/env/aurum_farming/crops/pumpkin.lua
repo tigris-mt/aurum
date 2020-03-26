@@ -118,6 +118,7 @@ for _,decoration in ipairs{
 					minetest.set_node(pos, {name = "aurum_farming:pumpkin_4"})
 					minetest.set_node(spot, {name = "aurum_farming:ripe_pumpkin"})
 				end
+				-- Set a dummy UID so that digging still grants mana sparks.
 				minetest.get_meta(spot):set_int("uid", -1)
 			end
 		end,

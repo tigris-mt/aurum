@@ -16,12 +16,12 @@ local double = {
 	},
 }
 
-function aurum.flora.register_flower(name, seed, def)
+function aurum.flora.register_flower(name, seed, def, decodef)
 	aurum.flora.register(name, b.t.combine({
 		selection_box = single,
 	}, def))
 
-	minetest.register_decoration{
+	minetest.register_decoration(b.t.combine({
 		name = name,
 		decoration = name,
 		deco_type = "simple",
@@ -40,7 +40,7 @@ function aurum.flora.register_flower(name, seed, def)
 			b.set(aurum.biomes.get_all_group("green", {"base"})),
 			b.set(aurum.biomes.get_all_group("dark", {"base"}))
 		)),
-	}
+	}, decodef or {}))
 end
 
 aurum.flora.register_flower("aurum_flora:sunflower", 8011, {

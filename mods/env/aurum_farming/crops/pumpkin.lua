@@ -95,10 +95,10 @@ for _,decoration in ipairs{
 		{
 			place_on = {"group:soil"},
 			sidelen = 16,
-			fill_ratio = 0.1,
+			fill_ratio = 0.025,
 			biomes = aurum.biomes.get_all_group("green", {"base"}),
 			num_spawn_by = 1,
-			spawn_by = "group:water",
+			spawn_by = {"group:water", "group:fertilizer"},
 		},
 		{
 			place_on = {"group:soil"},

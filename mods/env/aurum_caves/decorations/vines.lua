@@ -81,6 +81,10 @@ aurum.features.register_decoration{
 	biomes = aurum.biomes.get_all_group("all", {"under"}),
 
 	on_offset = function(c)
+		c.s.biome = b.t.combine({heat = 50, humidity = 50}, minetest.get_biome_data(c.pos) or {})
+		if c.s.biome.humidity < 50 then
+			return nil
+		end
 		for i=1,MAX_SEARCH_HEIGHT do
 			local pos = vector.add(c.pos, vector.new(0, i, 0))
 			local nn = aurum.force_get_node(pos).name
@@ -97,13 +101,12 @@ aurum.features.register_decoration{
 	end,
 
 	make_schematic = function(c)
-		local biome = b.t.combine({heat = 50, humidity = 50}, minetest.get_biome_data(c.pos) or {})
 		local node
-		if biome.heat < 25 then
+		if c.s.biome.heat < 25 then
 			node = "aurum_caves:vine_white"
-		elseif biome.heat < 50 then
+		elseif c.s.biome.heat < 50 then
 			node = "aurum_caves:vine_blue"
-		elseif biome.heat < 75 then
+		elseif c.s.biome.heat < 75 then
 			node = "aurum_caves:vine_yellow"
 		else
 			node = "aurum_caves:vine_red"

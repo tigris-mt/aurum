@@ -88,7 +88,7 @@ aurum.features.register_decoration{
 				if nn == "ignore" then
 					return nil
 				else
-					c.s.height = c.random(i)
+					c.s.height = c.random(i - 1)
 					pos.y = pos.y - c.s.height
 					return pos
 				end

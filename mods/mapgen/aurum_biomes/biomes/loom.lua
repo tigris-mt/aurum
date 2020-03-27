@@ -44,13 +44,13 @@ aurum.biomes.register_all("aurum:loom", {
 aurum.biomes.trees.register({
 	name = "aurum_trees:red_crystal",
 	biomes = {"loom_crystal_forest"},
-	rarity = 8,
+	rarity = 4,
 })
 
 aurum.biomes.trees.register({
 	name = "aurum_trees:yellow_crystal",
 	biomes = {"loom_crystal_forest"},
-	rarity = 4,
+	rarity = 2,
 })
 
 aurum.biomes.register_all("aurum:loom", {

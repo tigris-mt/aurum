@@ -67,6 +67,7 @@ Toughless levels range from 0 to 3.
 * `leafdecay=x`: This node will decay and drop items if it is >x nodes away from a group:tree.
 * `leaves=1`: This node is leaves.
 * `liquid=1`: This node is liquid.
+* `ore_block=1`: This is an ore block.
 * `paper=1`: This item is made of paper and can burn.
 * `sand=1`: This node is sand.
 * `sapling=1`: This node is a sapling.

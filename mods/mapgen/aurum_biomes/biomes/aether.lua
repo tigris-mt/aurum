@@ -48,7 +48,10 @@ aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:white_crystal",
 	biomes = {"aether_white_crystal_forest"},
 	rarity = 1,
-}, aurum.biomes.trees.TALL))
+}, {
+	custom_schematics = aurum.trees.defaults.style.TALL.pre,
+	post_schematics = aurum.trees.defaults.style.TALL.post,
+}))
 
 aurum.biomes.trees.register({
 	name = "aurum_trees:yellow_crystal",

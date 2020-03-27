@@ -6,29 +6,7 @@ aurum.trees = m
 
 m.types = {}
 
-m.default_tree_decorations = {
-	simple = 1,
-	wide = 1,
-	double = 1,
-	tall = 1,
-	very_tall = 0.1,
-	huge = 0.05,
-	giant = 0.01,
-
-	["cone,3"] = 1,
-	["cone,12"] = 0.005,
-	["cone,14,1.5"] = 0.001,
-}
-
-m.default_log_decorations = {
-	["log,3"] = 0.2,
-	["log,4"] = 0.2,
-	["log,5"] = 0.2,
-	["log,8,2"] = 0.1,
-	["log,16,4"] = 0.05,
-	["log,16,4,0"] = 0.05,
-	["log,24,7"] = 0.005,
-}
+b.dofile("defaults.lua")
 
 -- Map names to more generic schematics.
 m.translation = {
@@ -40,9 +18,6 @@ m.translation = {
 	giant = "tree,26,12",
 	double = "tree,7,5",
 }
-
--- Default decorations include both trees and logs.
-m.default_decorations = b.t.combine(m.default_tree_decorations, m.default_log_decorations)
 
 local function remove_force_place(schematic)
 	local ret = table.copy(schematic)
@@ -113,11 +88,11 @@ function m.register(name, def)
 		terrain = {"group:soil"},
 		-- Description of what this tree grows on.
 		terrain_desc = S"any dirt or soil",
-	}, def, {
-		name = name,
 
 		-- What decoration schematics should be included, and at what weight?
-		decorations = b.t.combine(m.default_decorations, def.decorations or {}),
+		decorations = m.defaults.ALL,
+	}, def, {
+		name = name,
 
 		decodefs = {},
 	})

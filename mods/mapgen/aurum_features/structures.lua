@@ -86,7 +86,7 @@ local metatable = {
 
 	-- Random function. Could potentially use seed.
 	random = function(self, ...)
-		return math.random(...)
+		return self.base.random(...)
 	end,
 
 	-- Shuffled function. Could potentially use seed.

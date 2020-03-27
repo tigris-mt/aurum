@@ -73,6 +73,15 @@ aurum.flora.register_flower("aurum_flora:black_rose", 7567, {
 	selection_box = single,
 })
 
+aurum.flora.register_flower("aurum_flora:linkowar", 7567, {
+	description = S"Link O' War",
+	groups = {dye_source = 1, color_pink = 1},
+	tiles = {"aurum_flora_linkowar.png"},
+	selection_box = single,
+}, {
+	biomes = aurum.biomes.get_all_group("green", {"base"}),
+})
+
 local nln = {"group:soil", "group:stone", "group:ore_block", "aurum_base:aether_shell", "aurum_base:aether_flesh"}
 aurum.flora.register_flower("aurum_flora:night_light", 8402, {
 	description = S"Night Light",
@@ -96,10 +105,7 @@ aurum.flora.register_flower("aurum_flora:night_light", 8402, {
 }, {
 	place_on = nln,
 	biomes = b.set.to_array(b.set._or(
-		b.set.subtract(
-			b.set(aurum.biomes.get_all_group("green", {"base"})),
-			b.set(aurum.biomes.get_all_group("dark", {"base"}))
-		),
+		b.set(aurum.biomes.get_all_group("green", {"base"})),
 		b.set(aurum.biomes.get_all_group("aurum:aether", {"base"}))
 	)),
 })

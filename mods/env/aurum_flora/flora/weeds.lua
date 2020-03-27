@@ -126,6 +126,21 @@ aurum.flora.register_grass("aurum_flora:dark_grass_weed", 5, {
 		b.set(aurum.biomes.get_all_group("green", {"base"})),
 		b.set(aurum.biomes.get_all_group("dark", {"base"}))
 	)),
+}, {
+	place_on = {"group:soil"},
+	noise_params = {
+		offset = 0,
+		scale = 0.25,
+		spread = vector.new(50, 50, 50),
+		seed = 422,
+		octaves = 3,
+		persist = 0.5,
+	},
+	-- All dark green biomes.
+	biomes = b.set.to_array(b.set._and(
+		b.set(aurum.biomes.get_all_group("green", {"base"})),
+		b.set(aurum.biomes.get_all_group("dark", {"base"}))
+	)),
 })
 
 aurum.flora.register_grass("aurum_flora:desert_weed", 3, {

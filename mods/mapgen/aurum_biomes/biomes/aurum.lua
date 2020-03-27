@@ -103,7 +103,7 @@ aurum.biomes.register_all("aurum:aurum", {
 aurum.biomes.trees.register({
 	name = "aurum_trees:pander",
 	biomes = {"aurum_jungle"},
-	rarity = 20,
+	rarity = 5,
 })
 
 -- Desert

@@ -25,7 +25,7 @@ aurum.biomes.register_all("aurum:primus", {
 aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:pander",
 	biomes = {"primus_jungle"},
-	rarity = 40,
+	rarity = 15,
 }, {
 	custom_schematics = aurum.trees.defaults.style.HUGE.pre,
 	post_schematics = aurum.trees.defaults.style.HUGE.post,

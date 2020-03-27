@@ -29,9 +29,7 @@ m.LOG = {
 
 m.ALL = b.t.combine(m.TREE, m.LOG)
 
-m.PANDER = {
-	double = 1,
-	tall = 1,
+m.JUNGLE = {
 	very_tall = 1,
 	huge = 0.25,
 	giant = 0.1,

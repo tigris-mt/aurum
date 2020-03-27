@@ -55,7 +55,7 @@ end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
 -- Returns a decoration for tree according to decoration schematic n.
-function aurum.trees.generate_decoration(tree, n)
+aurum.trees.generate_decoration = b.cache.simple(function(tree, n)
 	local t_begin = minetest.get_us_time()
 
 	n = m.translation[n] or n
@@ -84,7 +84,7 @@ function aurum.trees.generate_decoration(tree, n)
 		flags = {place_center_x = true, place_center_y = false, place_center_z = true},
 		place_offset_y = offset,
 	}
-end
+end, function(tree, n) return tree .. " " .. (m.translation[n] or n) end)
 
 -- Add decoration schematic n to tree's default.
 local function add_decoration(tree, n)

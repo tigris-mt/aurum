@@ -26,6 +26,8 @@ function aurum.features.register_decoration(def)
 		-- Schematic function, if table is nil.
 		-- Returns table or nil to cancel placement.
 		make_schematic = function(base_context) end,
+
+		force_placement = true,
 	}, def)
 
 	def.biome_map = b.set(def.biomes)
@@ -202,7 +204,7 @@ minetest.register_on_mods_loaded(function()
 
 							-- Place schematic.
 							local rotname = {"0", "90", "180", "270"}
-							minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, true)
+							minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, def.force_placement)
 
 							-- Run callback.
 							def.on_generated(aurum.features.structure_context(base_context, b.box.new(

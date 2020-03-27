@@ -72,3 +72,34 @@ aurum.flora.register_flower("aurum_flora:black_rose", 7567, {
 	tiles = {"aurum_flora_black_rose.png"},
 	selection_box = single,
 })
+
+local nln = {"group:soil", "group:stone", "aurum_base:aether_shell", "aurum_base:aether_flesh"}
+aurum.flora.register_flower("aurum_flora:night_light", 8402, {
+	description = S"Night Light",
+	_doc_items_longdesc = S"A living candle native to the Aether.",
+	_flora_spread_node = nln,
+	_flora_light = 0,
+	groups = {dye_source = 1, color_white = 1},
+	inventory_image = "[combine:16x16:0,0=aurum_flora_night_light.png",
+	wield_image = "[combine:16x16:0,0=aurum_flora_night_light.png",
+	tiles = {{
+		image = "aurum_flora_night_light.png",
+		animation = {
+			type = "vertical_frames",
+			aspect_w = 16,
+			aspect_h = 16,
+			length = 2,
+		},
+	}},
+	selection_box = single,
+	light_source = 10,
+}, {
+	place_on = nln,
+	biomes = b.set.to_array(b.set._or(
+		b.set.subtract(
+			b.set(aurum.biomes.get_all_group("green", {"base"})),
+			b.set(aurum.biomes.get_all_group("dark", {"base"}))
+		),
+		b.set(aurum.biomes.get_all_group("aurum:aether", {"base"}))
+	)),
+})

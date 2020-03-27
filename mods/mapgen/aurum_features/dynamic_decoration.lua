@@ -6,6 +6,7 @@ minetest.register_node("aurum_features:placeholder", {
 	tiles = {"aurum_base_stone.png"},
 	drawtype = "airlike",
 	groups = {dig_immediate = 3, not_in_creative_inventory = 1},
+	_doc_items_create_entry = false,
 	drop = "",
 	on_timer = function(pos)
 		local id = minetest.get_meta(pos):get_int("aurum_features:id")

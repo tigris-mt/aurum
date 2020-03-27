@@ -26,7 +26,15 @@ for _,c in ipairs{
 	aurum.flora.register("aurum_caves:vine_" .. c.name, {
 		description = S(c.desc .. " Cave Vine"),
 		_doc_items_longdesc = S"A glowing plant that descends from cave ceilings.",
-		tiles = {"aurum_caves_vine.png^" .. c.texture},
+		tiles = {{
+			image = "aurum_caves_vine.png^" .. c.texture,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 1,
+			},
+		}},
 		groups = {flora = 0, attached_node = 0},
 		waving = 0,
 		buildable_to = false,

@@ -18,6 +18,18 @@ aurum.biomes.trees.HUGE = {
 	},
 }
 
+aurum.biomes.trees.TALL = {
+	custom_schematics = {
+		["tree,32,32"] = 0.01,
+		["tree,48,16"] = 0.1,
+		["tree,16,48"] = 0.001,
+	},
+	post_schematics = {
+		["log,64,8,,-2"] = 0.0025,
+		["tree,72,6"] = 0.001,
+	},
+}
+
 local function sum_rarity(table, keys)
 	local total = 0
 	local keys = keys or b.t.keys(table)

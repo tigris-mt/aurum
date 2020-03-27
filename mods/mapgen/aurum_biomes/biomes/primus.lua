@@ -82,4 +82,4 @@ aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:drywood",
 	biomes = {"primus_dry"},
 	rarity = 5,
-}, aurum.biomes.trees.HUGE))
+}, aurum.biomes.trees.TALL))

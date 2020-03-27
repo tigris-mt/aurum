@@ -1,3 +1,6 @@
+-- A deep pit formerly used for mining the loom.
+-- Some tools/materials are left behind.
+
 local make = b.cache.simple(function(size)
 	local limit = vector.subtract(size, 1)
 	local data = {}

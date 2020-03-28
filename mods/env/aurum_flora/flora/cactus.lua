@@ -25,7 +25,6 @@ minetest.register_decoration{
 	decoration = "aurum_flora:cactus",
 	deco_type = "simple",
 	place_on = {"group:sand"},
-	sidelen = 16,
 	noise_params = {
 		offset = 0,
 		scale = 0.01,

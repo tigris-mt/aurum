@@ -65,6 +65,12 @@ end
 
 function aurum.mobs.helper_go(invert)
 	return function(self)
+		-- TODO: Implement fleeing.
+		if invert then
+			self:fire_event("lost")
+			return
+		end
+
 		local pos = vector.round(self.entity.object:get_pos())
 		local target_pos = aurum.mobs.helper_target_pos(self, self.data.params.target)
 		if not target_pos then

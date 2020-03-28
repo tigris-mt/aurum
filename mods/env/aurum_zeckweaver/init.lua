@@ -74,7 +74,7 @@ minetest.register_ore{
 	ore_type = "scatter",
 	ore = "aurum_zeckweaver:zeckweaver",
 	wherein = "aurum_base:regret",
-	clust_scarcity = math.pow(RARITY, 3),
+	clust_scarcity = RARITY ^ 3,
 	clust_num_ores = 1,
 	clust_size = 1,
 }

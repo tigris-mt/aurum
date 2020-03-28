@@ -14,7 +14,7 @@ local make = b.cache.simple(function(size, sign)
 	local r = math.min(size.x / 2, size.y / 2)
 	for x=0,limit.x,0.1 do
 		-- Use half-circle equation to get y.
-		local y = math.floor(math.sqrt(math.pow(r, 2) - math.pow(x - r, 2)) + 0.5)
+		local y = math.floor(math.sqrt((r ^ 2) - ((x - r) ^ 2)) + 0.5)
 		if sign == -1 then
 			y = math.floor((limit.y / 2) - y + 0.5)
 		end

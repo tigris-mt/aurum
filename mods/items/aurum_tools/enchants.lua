@@ -22,7 +22,7 @@ function aurum.tools.register_enchant(name, def)
 
 		-- Required mana level threshold to apply this enchantment.
 		mana_level = function(level)
-			return math.pow(level + 1, 2)
+			return (level + 1) ^ 2
 		end,
 
 		-- How high can naturally generated enchantments of this kind go?

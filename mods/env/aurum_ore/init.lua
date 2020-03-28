@@ -124,7 +124,7 @@ function aurum.ore.register_generation(name, realmid, override)
 			ore_type = "scatter",
 			ore = def.ore,
 			wherein = realm.biome_default.node_stone,
-			clust_scarcity = math.floor(math.pow(def.rarity, 3) + 0.5),
+			clust_scarcity = math.floor((def.rarity ^ 3) + 0.5),
 			clust_num_ores = def.num,
 			clust_size = math.floor(def.size + 0.5),
 			y_max = depth + realm.y,
@@ -137,7 +137,7 @@ function aurum.ore.register_generation(name, realmid, override)
 			local m = index - 1
 
 			minetest.register_ore(b.t.combine(d, {
-				clust_scarcity = math.floor(math.pow(def.rarity / (1 + m / 10), 3) + 0.5),
+				clust_scarcity = math.floor(((def.rarity / (1 + m / 10)) ^ 3) + 0.5),
 				clust_num_ores = math.floor(def.num * (1 + m / 10) + 0.5),
 				clust_size = math.floor(def.size * (1 + m / 10) + 0.5),
 				y_max = depth + realm.y,

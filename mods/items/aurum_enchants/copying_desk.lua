@@ -34,7 +34,7 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 
 	local function mana_cost(add)
 		local scroll = aurum.scrolls.get(get("src"))
-		return math.ceil(math.pow(add + 4, 2) * get_count() * (1 + (scroll and scroll.level or 1) / 5))
+		return math.ceil(((add + 4) ^ 2) * get_count() * (1 + (scroll and scroll.level or 1) / 5))
 	end
 
 	local function can_add(add)

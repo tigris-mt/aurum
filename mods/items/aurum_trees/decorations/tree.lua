@@ -23,9 +23,9 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 	end
 
 	for x=0,limit.x do
-		local dist_x = math.pow(x - limit.x / 2, 2)
+		local dist_x = (x - limit.x / 2) ^  2
 		for z=0,limit.z do
-			local dist = math.sqrt(dist_x + math.pow(z - limit.z / 2, 2))
+			local dist = math.sqrt(dist_x + ((z - limit.z / 2) ^  2))
 			for y=0,limit.y do
 				local i = area:index(x, y, z)
 				if dist < trunk_radius and y < limit.y then

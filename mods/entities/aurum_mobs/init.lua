@@ -20,6 +20,9 @@ function gemai.ref_to_table(obj)
 end
 
 aurum.mobs.DEFAULT_PATHFINDER = {
+	method = b.pathfinder.get_pathfinder(b.set{
+		"specify_vertical",
+	}),
 	search_distance = 48,
 	jump_height = 2,
 	drop_height = 3,

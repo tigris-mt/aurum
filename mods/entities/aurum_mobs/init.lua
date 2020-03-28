@@ -43,11 +43,18 @@ function aurum.mobs.register(name, def)
 		adrenaline_time = 10,
 		adrenaline_cooldown = 20,
 		-- aurum.mobs.helper_mob_speed()
-		base_speed = 3,
+		base_speed = 1,
+		-- aurum.mobs.helper_move()
+		moves = 0,
+		go = {},
+		pathfinder_drop = 4,
+		pathfinder_jump = 2,
 		-- Items dropped upon death. Tables or strings, not ItemStacks.
 		drops = {},
 		-- aurum:mobs_environment
 		node_damage_timer = 0,
+		-- aurum:mobs_physics
+		gravity_moves = 0,
 		-- Where does this mob naturally live?
 		habitat_nodes = {},
 		-- Mana released upon death.
@@ -60,8 +67,8 @@ function aurum.mobs.register(name, def)
 
 	minetest.register_entity(":" .. name, {
 		initial_properties = b.t.combine({
-			physical = true,
 			hp_max = 1,
+			physical = 1,
 
 			collisionbox = def.box,
 			selectionbox = def.box,
@@ -147,7 +154,7 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_punch = function(self, puncher)
-			if puncher ~= self.entity.object then
+			if puncher ~= self.object then
 				self._gemai:fire_event("punch", {
 					other = gemai.ref_to_table(puncher),
 					target = {
@@ -192,7 +199,7 @@ minetest.register_chatcommand("mob_spawn", {
 		if not aurum.mobs.mobs[mob] then
 			return false, S"No such mob."
 		end
-		local obj = aurum.mobs.spawn(player:get_pos(), mob)
+		local obj = aurum.mobs.spawn(vector.add(vector.round(player:get_pos()), vector.new(0, 1, 0)), mob)
 		if obj then
 			return true, S("Spawned @1 (@2).", mob, aurum.mobs.mobs[mob].description)
 		else

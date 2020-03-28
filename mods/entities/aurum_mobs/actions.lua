@@ -1,5 +1,8 @@
+local GRAVITY = math.abs(aurum.GRAVITY.y)
 -- When should a mob be considered "at" its objective?
 local NEAR = 1.5
+-- How far should the pathfinder search from endpoints?
+local PATH_SEARCH = 48
 -- How far should mobs search for objectives?
 local SEARCH_RADIUS = 12
 -- State timeout.
@@ -45,42 +48,55 @@ function aurum.mobs.helper_mob_speed(self)
 	return speed
 end
 
+function aurum.mobs.helper_move(self)
+	self.data.moves = self.data.moves + self.data.step_time * aurum.mobs.helper_mob_speed(self)
+
+	local whole = math.floor(self.data.moves)
+	self.data.moves = self.data.moves - whole
+	return whole
+end
+
+function aurum.mobs.helper_set_pos(self, pos, keep_path)
+	if not keep_path then
+		self.data.go.path = false
+	end
+	self.entity.object:set_pos(pos)
+end
+
 function aurum.mobs.helper_go(invert)
 	return function(self)
-		local pos = self.entity.object:get_pos()
+		local pos = vector.round(self.entity.object:get_pos())
 		local target_pos = aurum.mobs.helper_target_pos(self, self.data.params.target)
 		if not target_pos then
 			self:fire_event("lost")
 			return
 		end
-		local target = vector.add(target_pos, vector.new(0, 1, 0))
+		local target = vector.round(vector.add(target_pos, vector.new(0, 1, 0)))
+		local target_hash = minetest.hash_node_position(target)
 		local delta = vector.subtract(target, pos)
 
 		if vector.length(delta) < NEAR and not invert then
 			self:fire_event("reached", self.data.params)
 		else
-			local dir = vector.multiply(vector.normalize(delta), invert and -1 or 1)
-			local vel = vector.multiply(dir, vector.multiply(vector.new(1, 0, 1), aurum.mobs.helper_mob_speed(self)))
-			vel.y = self.entity.object:get_velocity().y
-
-			local function solid(pos)
-				local n = minetest.registered_nodes[minetest.get_node(pos).name]
-				return n.walkable
+			if not self.data.go.path or (self.data.state_time - self.data.go.time) > 3 or self.data.go.target ~= target_hash then
+				self.data.go.target = target_hash
+				self.data.go.path = minetest.find_path(pos, target, PATH_SEARCH, self.data.pathfinder_jump, self.data.pathfinder_drop)
+				self.data.go.time = self.data.state_time
+				self.data.go.index = 1
 			end
 
-			local blocked = solid(vector.add(pos, vector.new(vel.x, 0, vel.z)))
-			if blocked then
-				local fok = not solid(vector.add(pos, vector.new(vel.x, 1, vel.z))) and not solid(vector.add(pos, vector.new(vel.x, 2, vel.z)))
-				local aok = not solid(vector.add(pos, vector.new(0, 1, 0))) and not solid(vector.add(pos, vector.new(0, 2, 0)))
-				if solid(vector.add(pos, vector.new(0, -1, 0))) and fok and aok then
-					vel.y = 6
-				else
-					self:fire_event("stuck")
-					return
+			if not self.data.go.path then
+				self:fire_event("stuck")
+				return
+			end
+
+			local next = self.data.go.index + aurum.mobs.helper_move(self)
+			for i=math.max(1, self.data.go.index),math.min(next, #self.data.go.path) do
+				if i > self.data.go.index then
+					aurum.mobs.helper_set_pos(self, self.data.go.path[i], true)
 				end
 			end
-
-			self.entity.object:set_velocity(vel)
+			self.data.go.index = next
 		end
 
 		if self.data.state_time > TIMEOUT then
@@ -115,9 +131,29 @@ gemai.register_action("aurum_mobs:find_random", function(self)
 	}})
 end)
 
+function aurum.mobs.helper_gravity_move(self)
+	self.data.gravity_moves = self.data.gravity_moves + self.data.step_time * GRAVITY
+
+	local whole = math.floor(self.data.gravity_moves)
+	self.data.gravity_moves = self.data.gravity_moves - whole
+	return whole
+end
+
 -- Apply physics.
 gemai.register_action("aurum_mobs:physics", function(self)
-	self.entity.object:set_acceleration(aurum.GRAVITY)
+	local pos = vector.round(self.entity.object:get_pos())
+	local node = minetest.get_node(vector.add(pos, vector.new(0, -1, 0)))
+	if not minetest.registered_nodes[node.name].walkable then
+		for i=1,aurum.mobs.helper_gravity_move(self) do
+			local below = vector.add(pos, vector.new(0, -i, 0))
+			local node = minetest.get_node(below)
+			if minetest.registered_nodes[node.name].walkable then
+				return
+			else
+				aurum.mobs.helper_set_pos(self, below)
+			end
+		end
+	end
 end)
 
 -- Apply environment.

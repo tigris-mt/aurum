@@ -14,6 +14,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 
 	initial_data = {
 		habitat_nodes = {"group:stone", "aurum_base:stone_brick", "aurum_base:gravel"},
+		drops = {"aurum_animals:raw_meat", "aurum_animals:bone"},
 	},
 
 	gemai = {

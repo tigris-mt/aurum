@@ -1,1 +1,1 @@
-b.dofile("rat.lua")
+b.dodir("mobs")

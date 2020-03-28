@@ -166,7 +166,7 @@ local frozen = {
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_frozen",
-	_groups = {"frozen"},
+	_groups = {"frozen", "barren"},
 	heat_point = 0,
 	humidity_point = 70,
 	_variants = {

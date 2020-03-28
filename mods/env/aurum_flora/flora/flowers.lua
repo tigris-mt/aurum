@@ -73,13 +73,31 @@ aurum.flora.register_flower("aurum_flora:black_rose", 7567, {
 	selection_box = single,
 })
 
-aurum.flora.register_flower("aurum_flora:linkowar", 7567, {
+aurum.flora.register_flower("aurum_flora:linkowar", 3944, {
 	description = S"Link O' War",
 	groups = {dye_source = 1, color_pink = 1},
 	tiles = {"aurum_flora_linkowar.png"},
 	selection_box = single,
 }, {
 	biomes = aurum.biomes.get_all_group("green", {"base"}),
+})
+
+local sdn = {"group:soil", "group:snow"}
+aurum.flora.register_flower("aurum_flora:snow_blood", 8402, {
+	description = S"Snow Blood",
+	groups = {dye_source = 1, color_red = 1},
+	tiles = {"aurum_flora_snow_blood.png"},
+	selection_box = single,
+	_flora_spread_node = sdn,
+}, {
+	place_on = sdn,
+	biomes = b.set.to_array(b.set._or(
+		b.set.subtract(
+			b.set(aurum.biomes.get_all_group("frozen", {"base"})),
+			b.set(aurum.biomes.get_all_group("barren", {"base"}))
+		),
+		b.set(aurum.biomes.get_all_group("green", {"base"}))
+	)),
 })
 
 local nln = {"group:soil", "group:stone", "group:ore_block", "aurum_base:aether_shell", "aurum_base:aether_flesh"}

@@ -19,6 +19,12 @@ function gemai.ref_to_table(obj)
 	end
 end
 
+aurum.mobs.DEFAULT_PATHFINDER = {
+	search_distance = 48,
+	jump_height = 2,
+	drop_height = 3,
+}
+
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
 		-- Human readable description.
@@ -47,8 +53,7 @@ function aurum.mobs.register(name, def)
 		-- aurum.mobs.helper_move()
 		moves = 0,
 		go = {},
-		pathfinder_drop = 4,
-		pathfinder_jump = 2,
+		pathfinder = aurum.mobs.DEFAULT_PATHFINDER,
 		-- Items dropped upon death. Tables or strings, not ItemStacks.
 		drops = {},
 		-- aurum:mobs_environment
@@ -92,7 +97,7 @@ function aurum.mobs.register(name, def)
 				gemai = {},
 			}, minetest.deserialize(staticdata) or {})
 
-			self._data.gemai = b.t.combine(def.initial_data, self._data.gemai)
+			self._data.gemai = b.t.combine(b.t.deep_copy(def.initial_data), self._data.gemai)
 
 			self.object:set_armor_groups(b.t.combine(gdamage.armor_defaults(), def.armor_groups))
 

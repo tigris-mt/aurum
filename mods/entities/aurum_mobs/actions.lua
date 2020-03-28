@@ -1,8 +1,6 @@
 local GRAVITY = math.abs(aurum.GRAVITY.y)
 -- When should a mob be considered "at" its objective?
 local NEAR = 1.5
--- How far should the pathfinder search from endpoints?
-local PATH_SEARCH = 48
 -- How far should mobs search for objectives?
 local SEARCH_RADIUS = 12
 -- State timeout.
@@ -86,7 +84,7 @@ function aurum.mobs.helper_go(invert)
 		else
 			if not self.data.go.path or (self.data.state_time - self.data.go.time) > 3 or self.data.go.target ~= target_hash then
 				self.data.go.target = target_hash
-				self.data.go.path = minetest.find_path(pos, target, PATH_SEARCH, self.data.pathfinder_jump, self.data.pathfinder_drop)
+				self.data.go.path = b.pathfinder.path(b.t.combine(self.data.pathfinder, {from = pos, to = target}))
 				self.data.go.time = self.data.state_time
 				self.data.go.index = 1
 			end

@@ -19,6 +19,9 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
 			jump_height = 3,
 		}),
+		attack = b.t.combine(aurum.mobs.initial_data.attack, {
+			damage = {pierce = 3, impact = 3},
+		}),
 	},
 
 	gemai = {
@@ -92,6 +95,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 					"aurum_mobs:go",
 				},
 				events = {
+					interact = "",
 					reached = "fight",
 				},
 			},

@@ -1,5 +1,5 @@
 -- When should a mob be considered "at" its objective?
-local NEAR = 1.5
+local NEAR = 2
 -- State timeout.
 local TIMEOUT = 15
 

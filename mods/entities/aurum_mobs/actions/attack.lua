@@ -2,7 +2,6 @@ aurum.mobs.initial_data.attack = {
 	damage = {blade = 2},
 	moves = 0,
 	speed = 1,
-	time = 0,
 	distance = 2,
 }
 
@@ -18,8 +17,7 @@ gemai.register_action("aurum_mobs:attack", function(self)
 		return
 	end
 
-	self.data.attack.moves = ((self.data.state_time - self.data.attack.time > 5) and 0 or self.data.attack.moves) + self.data.step_time * self.data.attack.speed
-	self.data.attack.time = self.data.state_time
+	self.data.attack.moves = self.data.attack.moves + self.data.step_time * self.data.attack.speed
 
 	local whole = math.floor(self.data.attack.moves)
 	self.data.attack.moves = self.data.attack.moves - whole

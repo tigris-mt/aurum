@@ -31,7 +31,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 		global_events = {
 			stuck = "roam",
 			timeout = "roam",
-			punch = "flee",
+			punch = "fight",
 			lost = "roam",
 			interact = "milk",
 		},
@@ -64,13 +64,14 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				},
 			},
 
-			flee = {
+			fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
-					"aurum_mobs:flee",
+					"aurum_mobs:attack",
 				},
 				events = {
 					interact = "",
+					noreach = "advance",
 				},
 			},
 
@@ -82,6 +83,16 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 					milked = "roam",
 					nomilked = "roam",
 					dropmilked = "roam",
+				},
+			},
+
+			advance = {
+				actions = {
+					"aurum_mobs:adrenaline",
+					"aurum_mobs:go",
+				},
+				events = {
+					reached = "fight",
 				},
 			},
 		},

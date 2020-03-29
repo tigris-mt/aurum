@@ -62,7 +62,7 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 	description = S"Desert Weed",
 	_texture = "aurum_flora_grass",
 	_texture_append = "[colorize:#5c4030:200",
-	_flora_spread_node = "group:sand",
+	_flora_spread_node = {"group:sand", "group:clay"},
 	selection_box = {
 		type = "fixed",
 		fixed = {
@@ -72,7 +72,7 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 	},
 	groups = {dye_source = 1, color_brown = 1},
 }, {
-	place_on = {"group:sand"},
+	place_on = {"group:sand", "group:clay"},
 	noise_params = {
 		offset = 0.005,
 		scale = 0.01,
@@ -81,5 +81,5 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 		octaves = 3,
 		persist = 0.5,
 	},
-	biomes = aurum.biomes.get_all_group("desert", {"base"}),
+	biomes = aurum.biomes.get_all_group("desert"),
 })

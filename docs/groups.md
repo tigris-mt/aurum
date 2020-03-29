@@ -19,6 +19,8 @@ Toughless levels range from 0 to 3.
 * `aurum:aurum`: The biome's realm will be added as a group.
 * `barren`: Devoid of life.
 * `green`: Living, green. Plant life.
+* `desert`: This is a desert biome.
+* `clay`: This is a clay biome.
 
 # Damage
 ## Physical
@@ -33,6 +35,7 @@ Toughless levels range from 0 to 3.
 
 # Crafting
 * `bone=1`: This item is a type of bone/skeleton.
+* `clay=1`: This item is clay.
 * `color_X=1`: This item provides/is color X.
 * `dye=1`: This item is dye.
 * `dye_source=1`: This item is dye source.

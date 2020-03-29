@@ -6,7 +6,7 @@ for _,row in ipairs(dye.dyes) do
 	minetest.register_node("aurum_clay:" .. dye.name, {
 		description = S("@1 Clay", dye.desc),
 		tiles = {"aurum_clay_clay.png^[colorize:" .. dye.colorspec .. ":200"},
-		groups = {dig_dig = 2},
+		groups = {dig_dig = 3, clay = 1},
 		sounds = aurum.sounds.dirt(),
 	})
 

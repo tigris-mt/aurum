@@ -2,8 +2,8 @@
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_barrens",
 	_groups = {"barren"},
-	heat_point = 30,
-	humidity_point = 30,
+	heat_point = 20,
+	humidity_point = 20,
 	_variants = {
 		base = aurum.biomes.v_base{
 			node_top = "aurum_base:gravel",
@@ -175,7 +175,50 @@ aurum.biomes.register_all("aurum:aurum", {
 			node_dungeon_alt = "aurum_base:snow",
 			node_dungeon_stair = "aurum_base:snow",
 		}),
-		ocean = b.t.combine(frozen, aurum.biomes.v_ocean{}),
+		ocean = aurum.biomes.v_ocean(frozen),
 		under = aurum.biomes.v_under{},
 	},
+})
+
+local function clay(color, def)
+	return b.t.combine({
+		depth_top = 1,
+		depth_filler = 1,
+		node_riverbed = "aurum_clay:" .. color,
+		node_top = "aurum_clay:" .. color,
+		node_filler = "aurum_clay:" .. color,
+		node_stone = "aurum_clay:" .. color,
+	}, def or {})
+end
+
+local function clays()
+	local ret = {}
+	local at = 1
+	local function add(color, depth)
+		table.insert(ret, clay(color, {
+			y_min = at,
+			y_max = at + depth,
+		}))
+		at = at + depth
+	end
+	for _=1,3 do
+		add("orange", 30)
+		add("brown", 3)
+		add("yellow", 10)
+		add("brown", 3)
+	end
+	add("orange", 1)
+	ret[#ret].y_max = nil
+	return ret
+end
+
+aurum.biomes.register_all("aurum:aurum", {
+	name = "aurum_clay",
+	_groups = {},
+	heat_point = 60,
+	humidity_point = 20,
+	_variants = b.t.combine({
+		ocean = aurum.biomes.v_ocean(clay("white")),
+		under = aurum.biomes.v_under{},
+	}, clays()),
 })

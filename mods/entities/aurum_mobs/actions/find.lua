@@ -1,3 +1,5 @@
+-- TODO: Find only pathable nodes.
+
 -- Find a habitat target node.
 gemai.register_action("aurum_mobs:find_habitat", function(self)
 	aurum.mobs.helper_find_nodes(self, "found_habitat", self.data.habitat_nodes)

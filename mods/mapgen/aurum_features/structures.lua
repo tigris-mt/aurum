@@ -8,8 +8,11 @@ function aurum.features.register_decoration(def)
 		-- What nodes to place on?
 		place_on = {},
 
-		-- Rarity per node.
-		rarity = 0.01,
+		-- Rarity per node, conflicts with noise.
+		rarity = nil,
+
+		-- Noise parameters, conflicts with rarity.
+		noise_params = nil,
 
 		-- Biomes to generate in.
 		biomes = {},
@@ -29,6 +32,8 @@ function aurum.features.register_decoration(def)
 
 		force_placement = true,
 	}, def)
+
+	assert(def.rarity or def.noise_params, "decoration must specify noise parameters or rarity per node")
 
 	def.biome_map = b.set(def.biomes)
 
@@ -142,7 +147,7 @@ end
 
 minetest.register_on_mods_loaded(function()
 	minetest.register_on_generated(function(minp, maxp, seed)
-		local center = vector.divide(vector.add(minp, maxp), 2)
+		local center = vector.round(vector.divide(vector.add(minp, maxp), 2))
 		local biome = minetest.get_biome_data(center)
 		local biome_name = biome and minetest.get_biome_name(biome.biome)
 
@@ -153,6 +158,8 @@ minetest.register_on_mods_loaded(function()
 		-- For all decorations registered with this biome...
 		for _,name in ipairs(biome_map[biome_name] or {}) do
 			local def = aurum.features.decorations[name]
+			local perlin = def.noise_params and minetest.get_perlin(def.noise_params)
+			local rarity = def.noise_params and perlin:get_3d(center) or def.rarity
 
 			-- Look for suitable places.
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
@@ -163,7 +170,7 @@ minetest.register_on_mods_loaded(function()
 					-- For individual structure use.
 					s = {},
 				}
-				if base_context.random() < def.rarity then
+				if base_context.random() < rarity then
 					base_context.pos = def.on_offset(base_context)
 					if base_context.pos then
 						local schematic = def.schematic or def.make_schematic(base_context)

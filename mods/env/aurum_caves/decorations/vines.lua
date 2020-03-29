@@ -90,9 +90,6 @@ aurum.features.register_decoration{
 
 	on_offset = function(c)
 		c.s.biome = b.t.combine({heat = 50, humidity = 50}, minetest.get_biome_data(c.pos) or {})
-		if c.s.biome.humidity < 50 then
-			return nil
-		end
 		for i=1,MAX_SEARCH_HEIGHT do
 			local pos = vector.add(c.pos, vector.new(0, i, 0))
 			local nn = aurum.force_get_node(pos).name

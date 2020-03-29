@@ -34,6 +34,8 @@ function aurum.biomes.register_all(realm, def)
 	def = b.t.combine({
 		_groups = {},
 		_variants = {},
+		_complex_variants = false,
+		_realm = realm,
 	}, def)
 
 	table.insert(def._groups, "all")

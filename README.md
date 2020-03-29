@@ -23,6 +23,8 @@ Unless otherwise noted (such as 3rd party content described in a section below):
 ## 3rd Party Content and Licenses
 Such content is included as submodules and symlinked if necessary.
 In the development repository, you can view each submodule for its specifics.
+
+### Compiled Repository
 In the compiled repository, certain submodules are removed for the sake of space, linked here:
 * [minetest_game](https://github.com/minetest/minetest_game)
 

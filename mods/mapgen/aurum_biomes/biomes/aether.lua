@@ -22,6 +22,7 @@ aurum.biomes.register_all("aurum:aether", {
 	name = "aether_living",
 	heat_point = 30,
 	humidity_point = 50,
+	_color = b.color.convert"pink",
 	_variants = {
 		base = v_base{},
 		under = v_under{},
@@ -38,6 +39,7 @@ aurum.biomes.register_all("aurum:aether", {
 	name = "aether_white_crystal_forest",
 	heat_point = 70,
 	humidity_point = 30,
+	_color = b.color.convert"white",
 	_variants = {
 		base = v_base{},
 		under = v_under{},
@@ -63,6 +65,7 @@ aurum.biomes.register_all("aurum:aether", {
 	name = "aether_yellow_crystal_forest",
 	heat_point = 70,
 	humidity_point = 70,
+	_color = b.color.convert"yellow",
 	_variants = {
 		base = v_base{},
 		under = v_under{},

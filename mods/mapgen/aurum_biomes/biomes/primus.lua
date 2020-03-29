@@ -9,6 +9,7 @@ end
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_jungle",
 	_groups = {"green", "forest", "dark"},
+	_color = b.color.convert"darkgreen",
 	heat_point = 50,
 	humidity_point = 50,
 	_variants = {
@@ -34,6 +35,7 @@ aurum.biomes.trees.register(b.t.combine({
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_forest",
 	_groups = {"green", "forest"},
+	_color = b.color.convert"green",
 	heat_point = 40,
 	humidity_point = 40,
 	_variants = {
@@ -68,6 +70,7 @@ end
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_dry",
 	_groups = {"forest"},
+	_color = b.color.convert"orange",
 	heat_point = 95,
 	humidity_point = 5,
 	_variants = {

@@ -2,6 +2,7 @@
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_barrens",
 	_groups = {"barren"},
+	_color = b.color.convert"grey",
 	heat_point = 20,
 	humidity_point = 20,
 	_variants = {
@@ -37,6 +38,7 @@ aurum.biomes.trees.register({
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_grassland",
 	_groups = {"green"},
+	_color = b.color.convert"lightgreen",
 	heat_point = 40,
 	humidity_point = 40,
 	_variants = {
@@ -67,6 +69,7 @@ aurum.biomes.trees.register({
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
 	_groups = b.t.icombine(aurum.biomes.biomes.aurum_grassland._groups, {"forest"}),
+	_color = b.color.convert"green",
 	heat_point = 50,
 	humidity_point = 50,
 	_variants = aurum.biomes.biomes.aurum_grassland._variants,
@@ -86,6 +89,7 @@ aurum.biomes.trees.register({
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_jungle",
 	_groups = b.t.icombine(aurum.biomes.biomes.aurum_forest._groups, {"dark"}),
+	_color = b.color.convert"darkgreen",
 	heat_point = 80,
 	humidity_point = 80,
 	_variants = {
@@ -110,6 +114,7 @@ aurum.biomes.trees.register({
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_desert",
 	_groups = {"desert"},
+	_color = b.color.convert"yellow",
 	heat_point = 80,
 	humidity_point = 10,
 	_variants = {
@@ -126,6 +131,7 @@ aurum.biomes.register_all("aurum:aurum", {
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_frozen_forest",
 	_groups = {"frozen", "forest"},
+	_color = b.color.convert"skyblue",
 	heat_point = 25,
 	humidity_point = 70,
 	_variants = {
@@ -167,6 +173,7 @@ local frozen = {
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_frozen",
 	_groups = {"frozen", "barren"},
+	_color = b.color.convert"white",
 	heat_point = 0,
 	humidity_point = 70,
 	_variants = {
@@ -216,6 +223,7 @@ end
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_clay",
 	_groups = {"clay", "desert"},
+	_color = b.color.convert"red",
 	heat_point = 60,
 	humidity_point = 20,
 	_complex_variants = true,

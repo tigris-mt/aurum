@@ -36,6 +36,7 @@ function aurum.biomes.register_all(realm, def)
 		_variants = {},
 		_complex_variants = false,
 		_realm = realm,
+		_color = {r = math.random(0, 255), g = math.random(0, 255), b = math.random(0, 255)},
 	}, def)
 
 	table.insert(def._groups, "all")

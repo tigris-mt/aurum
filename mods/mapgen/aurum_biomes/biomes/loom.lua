@@ -10,6 +10,7 @@ aurum.biomes.register_all("aurum:loom", {
 	name = "loom_lava",
 	heat_point = 90,
 	humidity_point = 10,
+	_color = b.color.convert"red",
 	_variants = {
 		base = v_base{
 			node_top = "aurum_base:lava_source",
@@ -22,6 +23,7 @@ aurum.biomes.register_all("aurum:loom", {
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_barrens",
 	_groups = {"barren"},
+	_color = b.color.convert"grey",
 	heat_point = 70,
 	humidity_point = 30,
 	_variants = {
@@ -32,6 +34,7 @@ aurum.biomes.register_all("aurum:loom", {
 
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_crystal_forest",
+	_color = b.color.convert"yellow",
 	_groups = {},
 	heat_point = 50,
 	humidity_point = 60,
@@ -56,6 +59,7 @@ aurum.biomes.trees.register({
 aurum.biomes.register_all("aurum:loom", {
 	name = "loom_forest",
 	_groups = {"forest"},
+	_color = b.color.convert"orange",
 	heat_point = 40,
 	humidity_point = 50,
 	_variants = {

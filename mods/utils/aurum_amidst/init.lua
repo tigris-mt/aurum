@@ -15,7 +15,7 @@ if I then
 				if def._realm == realm then
 					table.insert(out.biomeList, {
 						name = name,
-						color = {r = math.random(0, 255), g = math.random(0, 255), b = math.random(0, 255)},
+						color = def._color,
 						y_min = -1024,
 						y_max = 1024,
 						heat_point = def.heat_point,

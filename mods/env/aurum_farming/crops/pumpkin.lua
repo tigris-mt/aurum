@@ -12,6 +12,13 @@ minetest.register_node("aurum_farming:green_pumpkin", {
 	tiles = {"aurum_farming_pumpkin_top.png^[colorize:#00ff00:127", "aurum_farming_pumpkin.png^[colorize:#00ff00:127"},
 	sounds = aurum.sounds.wood(),
 	groups = {dig_chop = 3},
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.35, -0.5, -0.35, 0.35, 0.2, 0.35},
+		},
+	},
 })
 
 minetest.register_node("aurum_farming:ripe_pumpkin", {

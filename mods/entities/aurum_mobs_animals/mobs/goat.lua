@@ -13,6 +13,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 	},
 
 	initial_data = {
+		food = {"group:flora"},
 		habitat_nodes = {"group:soil"},
 		drops = {"aurum_animals:raw_meat 5", "aurum_animals:bone 6"},
 		xmana = 4,
@@ -48,21 +49,37 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 
 			roam = {
 				actions = {
+					"aurum_mobs:find_food",
 					"aurum_mobs:find_habitat",
 					"aurum_mobs:find_random",
 				},
 
 				events = {
-					found = "go",
+					found_food = "go_food",
+					found_habitat = "go",
+					found_random = "go",
+				},
+			},
+
+			go_food = {
+				actions = {
+					"aurum_mobs:check_target_food",
+					"aurum_mobs:go",
+				},
+				events = {
+					reached = "roam",
+					lost_food = "roam",
 				},
 			},
 
 			go = {
 				actions = {
+					"aurum_mobs:find_food",
 					"aurum_mobs:go",
 				},
 
 				events = {
+					found_food = "go_food",
 					reached = "roam",
 				},
 			},

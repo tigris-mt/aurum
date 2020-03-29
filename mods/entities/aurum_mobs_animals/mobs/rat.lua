@@ -45,7 +45,8 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 				},
 
 				events = {
-					found = "go",
+					found_habitat = "go",
+					found_random = "go",
 				},
 			},
 

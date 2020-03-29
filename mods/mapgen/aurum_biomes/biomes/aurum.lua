@@ -214,7 +214,7 @@ end
 
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_clay",
-	_groups = {},
+	_groups = {"clay"},
 	heat_point = 60,
 	humidity_point = 20,
 	_variants = b.t.combine({

@@ -81,5 +81,5 @@ aurum.flora.register_grass("aurum_flora:desert_weed", 3, {
 		octaves = 3,
 		persist = 0.5,
 	},
-	biomes = aurum.biomes.get_all_group("desert"),
+	biomes = aurum.biomes.get_all_group("desert", {"base"}),
 })

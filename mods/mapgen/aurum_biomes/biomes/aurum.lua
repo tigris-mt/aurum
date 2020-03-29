@@ -196,6 +196,7 @@ local function clays()
 	local at = 1
 	local function add(color, depth)
 		table.insert(ret, clay(color, {
+			_master_variant = "base",
 			y_min = at,
 			y_max = at + depth,
 		}))
@@ -217,6 +218,7 @@ aurum.biomes.register_all("aurum:aurum", {
 	_groups = {"clay", "desert"},
 	heat_point = 60,
 	humidity_point = 20,
+	_complex_variants = true,
 	_variants = b.t.combine({
 		ocean = aurum.biomes.v_ocean(clay("white")),
 		under = aurum.biomes.v_under{},

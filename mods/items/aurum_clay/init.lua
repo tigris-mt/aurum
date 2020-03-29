@@ -10,11 +10,9 @@ for _,row in ipairs(dye.dyes) do
 		sounds = aurum.sounds.dirt(),
 	})
 
-	if dye.name ~= "white" then
-		minetest.register_craft{
-			output = "aurum_clay:" .. dye.name,
-			type = "shapeless",
-			recipe = {"aurum_clay:white", "group:color_" .. dye.name},
-		}
-	end
+	minetest.register_craft{
+		output = "aurum_clay:" .. dye.name,
+		type = "shapeless",
+		recipe = {"group:clay", "group:color_" .. dye.name},
+	}
 end

@@ -25,6 +25,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_mobs:regen_milk",
 		},
 
 		global_events = {
@@ -32,6 +33,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			timeout = "roam",
 			punch = "flee",
 			lost = "roam",
+			interact = "milk",
 		},
 
 		states = {
@@ -66,6 +68,20 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				actions = {
 					"aurum_mobs:adrenaline",
 					"aurum_mobs:flee",
+				},
+				events = {
+					interact = "",
+				},
+			},
+
+			milk = {
+				actions = {
+					"aurum_mobs:milk",
+				},
+				events = {
+					milked = "roam",
+					nomilked = "roam",
+					dropmilked = "roam",
 				},
 			},
 		},

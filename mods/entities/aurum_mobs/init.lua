@@ -7,6 +7,14 @@ aurum.mobs = {
 
 aurum.mobs.mobs = {}
 aurum.mobs.shortcuts = {}
+aurum.mobs.initial_data = {
+	-- Items dropped upon death. Tables or strings, not ItemStacks.
+	drops = {},
+	-- Where does this mob naturally live?
+	habitat_nodes = {},
+	-- Mana released upon death.
+	xmana = 1,
+}
 
 local uids = storage:get_int("uids")
 
@@ -49,29 +57,6 @@ function aurum.mobs.register(name, def)
 		name = name,
 	})
 
-	def.initial_data = b.t.combine({
-		-- aurum:mobs_adrenaline
-		adrenaline = 0,
-		adrenaline_time = 10,
-		adrenaline_cooldown = 20,
-		-- aurum.mobs.helper_mob_speed()
-		base_speed = 1,
-		-- aurum.mobs.helper_move()
-		moves = 0,
-		go = {},
-		pathfinder = aurum.mobs.DEFAULT_PATHFINDER,
-		-- Items dropped upon death. Tables or strings, not ItemStacks.
-		drops = {},
-		-- aurum:mobs_environment
-		node_damage_timer = 0,
-		-- aurum:mobs_physics
-		gravity_moves = 0,
-		-- Where does this mob naturally live?
-		habitat_nodes = {},
-		-- Mana released upon death.
-		xmana = 1,
-	}, def.initial_data)
-
 	aurum.mobs.shortcuts[name:sub(name:find(":") + 1, #name)] = name
 
 	def.gemai = b.t.combine({}, def.gemai or {})
@@ -103,7 +88,7 @@ function aurum.mobs.register(name, def)
 				gemai = {},
 			}, minetest.deserialize(staticdata) or {})
 
-			self._data.gemai = b.t.combine(b.t.deep_copy(def.initial_data), self._data.gemai)
+			self._data.gemai = b.t.combine(b.t.deep_copy(b.t.combine(aurum.mobs.initial_data, def.initial_data)), self._data.gemai)
 
 			self.object:set_armor_groups(b.t.combine(gdamage.armor_defaults(), def.armor_groups))
 
@@ -219,6 +204,6 @@ minetest.register_chatcommand("mob_spawn", {
 	end,
 })
 
-b.dofile("actions.lua")
+b.dodir("actions")
 b.dofile("doc.lua")
 b.dofile("spawning.lua")

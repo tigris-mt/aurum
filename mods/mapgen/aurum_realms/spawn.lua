@@ -8,7 +8,7 @@ function aurum.realms.get_spawn(id)
 	pos = b.t.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
 
 	-- Go up until a free space is found.
-	for y=0,150 do
+	for y=0,250 do
 		local t = vector.add(pos, vector.new(0, y, 0))
 
 		-- If enough free space, then return here.

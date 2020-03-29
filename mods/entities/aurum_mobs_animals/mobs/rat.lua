@@ -28,6 +28,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 			timeout = "roam",
 			punch = "flee",
 			lost = "roam",
+			interact = "",
 		},
 
 		states = {

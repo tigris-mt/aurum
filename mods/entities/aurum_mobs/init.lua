@@ -164,7 +164,7 @@ function aurum.mobs.register(name, def)
 		on_rightclick = function(self, clicker)
 			self._gemai:fire_event("interact", {
 				other = gemai.ref_to_table(clicker),
-			})
+			}, {clear = true})
 		end,
 	})
 
@@ -195,6 +195,7 @@ minetest.register_chatcommand("mob_spawn", {
 		if not aurum.mobs.mobs[mob] then
 			return false, S"No such mob."
 		end
+
 		local obj = aurum.mobs.spawn(vector.add(vector.round(player:get_pos()), vector.new(0, 1, 0)), mob)
 		if obj then
 			return true, S("Spawned @1 (@2).", mob, aurum.mobs.mobs[mob].description)

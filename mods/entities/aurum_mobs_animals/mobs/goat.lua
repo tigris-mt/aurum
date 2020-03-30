@@ -30,6 +30,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
 			"aurum_mobs:regen_milk",
+			"aurum_mobs:reduce_satiation",
 		},
 
 		global_events = {
@@ -37,7 +38,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			timeout = "roam",
 			punch = "fight",
 			lost = "roam",
-			interact = "milk",
+			interact = "interact",
 		},
 
 		states = {
@@ -49,16 +50,41 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 
 			roam = {
 				actions = {
+					"aurum_mobs:find_mate",
 					"aurum_mobs:find_food",
 					"aurum_mobs:find_habitat",
 					"aurum_mobs:find_random",
 				},
 
 				events = {
+					found_mate = "go_mate",
 					found_food = "go_food",
 					found_habitat = "go",
 					found_random = "go",
 				},
+			},
+
+			mate = {
+				actions = {
+					"aurum_mobs:check_mate",
+					"aurum_mobs:mate"
+				},
+				events = {
+					lost_mate = "roam",
+					done_mate = "roam",
+				},
+			},
+
+			go_mate = {
+				actions = {
+					"aurum_mobs:check_mate",
+					"aurum_mobs:adrenaline",
+					"aurum_mobs:go",
+				},
+				events = {
+					reached = "mate",
+					lost_mate = "roam",
+				}
 			},
 
 			go_food = {
@@ -91,22 +117,24 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				},
 				events = {
 					interact = "",
-					noreach = "advance",
+					noreach = "go_fight",
 				},
 			},
 
-			milk = {
+			interact = {
 				actions = {
+					"aurum_mobs:eat_hand",
 					"aurum_mobs:milk",
+					"gemai:always",
 				},
 				events = {
+					ate = "roam",
 					milked = "roam",
-					nomilked = "roam",
-					dropmilked = "roam",
+					always = "roam",
 				},
 			},
 
-			advance = {
+			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
 					"aurum_mobs:go",

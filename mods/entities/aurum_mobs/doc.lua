@@ -34,6 +34,10 @@ function aurum.mobs.add_doc(name)
 		a(S("Ordinarily, this mob has @1 seconds of adrenaline with a @2 second cooldown", data.adrenaline.time, data.adrenaline.cooldown))
 	end
 
+	if #data.food > 0 then
+		a(S("Ordinarily, this mob will eat @1", table.concat(data.food, ", ")))
+	end
+
 	doc.add_entry("aurum_mobs:mobs", name, {
 		name = def.description,
 		data = table.concat(docs, "\n"),

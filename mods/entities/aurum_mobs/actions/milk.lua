@@ -22,14 +22,8 @@ gemai.register_action("aurum_mobs:milk", function(self)
 
 					self.data.milk.value = 0
 					self:fire_event("milked")
-				elseif aurum.is_air(minetest.get_node(pos).name) then
-					minetest.set_node(pos, {name = "aurum_animals:milk_flowing", param2 = 4})
-
-					self.data.milk.value = 0
-					self:fire_event("dropmilked")
 				end
 			end
 		end
 	end
-	self:fire_event("nomilked")
 end)

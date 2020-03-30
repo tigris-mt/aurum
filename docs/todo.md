@@ -1,7 +1,5 @@
 # Base Gameplay
 * Mobs
-	* Farming
-	* Taming
 	* Hostile
 	* NPC
 

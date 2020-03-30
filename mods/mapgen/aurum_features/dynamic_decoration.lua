@@ -9,16 +9,14 @@ minetest.register_node("aurum_features:placeholder", {
 	_doc_items_create_entry = false,
 	drop = "",
 	on_timer = function(pos)
-		minetest.after(0, function()
-			local id = minetest.get_meta(pos):get_int("aurum_features:id")
-			-- TODO: Use the seed for the random function.
-			if callbacks[id] then
-				callbacks[id](pos, math.random)
-			end
-			if minetest.get_node(pos).name == "aurum_features:placeholder" then
-				minetest.remove_node(pos)
-			end
-		end)
+		local id = minetest.get_meta(pos):get_int("aurum_features:id")
+		-- TODO: Use the seed for the random function.
+		if callbacks[id] then
+			callbacks[id](pos, math.random)
+		end
+		if minetest.get_node(pos).name == "aurum_features:placeholder" then
+			minetest.remove_node(pos)
+		end
 	end,
 })
 
@@ -45,7 +43,11 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			for _,pos in ipairs(gn[key]) do
 				local above = vector.add(pos, vector.new(0, 1, 0))
 				minetest.get_meta(above):set_int("aurum_features:id", id)
-				minetest.get_node_timer(above):start(0)
+				minetest.after(0, function()
+					if minetest.get_node(above).name == "aurum_features:placeholder" then
+						minetest.get_node_timer(above):start(0)
+					end
+				end)
 			end
 		end
 	end

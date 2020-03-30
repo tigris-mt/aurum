@@ -62,7 +62,7 @@ function aurum.mobs.helper_go(invert)
 			for i=math.max(1, self.data.go.index),math.min(next, #self.data.go.path) do
 				if i > self.data.go.index then
 					if aurum.mobs.helper_acceptable_node(self.data.go.path[i]) then
-						aurum.mobs.helper_set_pos(self, vector.add(self.data.go.path[i], vector.new(roff(), roff(), roff())), true)
+						aurum.mobs.helper_set_pos(self, vector.add(self.data.go.path[i], vector.new(roff(), 0, roff())), true)
 					else
 						break
 					end

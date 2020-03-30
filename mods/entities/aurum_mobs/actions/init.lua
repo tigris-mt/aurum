@@ -33,16 +33,8 @@ function aurum.mobs.helper_target_pos(self, target)
 	end
 end
 
-function aurum.mobs.helper_find_nodes(self, event, nodenames)
-	local ent = self.entity
-	local box = b.box.new_radius(ent.object:get_pos(), aurum.mobs.SEARCH_RADIUS)
-	local nodes = minetest.find_nodes_in_area_under_air(box.a, box.b, nodenames)
-	if #nodes > 0 then
-		self:fire_event(event, {target = {
-			type = "pos",
-			pos = nodes[math.random(#nodes)],
-		}})
-	end
+function aurum.mobs.helper_can_see(self, object)
+	return minetest.line_of_sight(self.entity.object:get_pos(), object:get_pos()) or minetest.line_of_sight(self.entity.object:get_pos(), vector.add(object:get_pos(), vector.new(0, 1, 0)))
 end
 
 aurum.mobs.initial_data.base_speed = 1

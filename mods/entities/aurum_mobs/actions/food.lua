@@ -18,7 +18,7 @@ end
 gemai.register_action("aurum_mobs:find_food", function(self)
 	if self.data.eat.satiation < self.data.eat.max_satiation then
 		for _,obj in ipairs(minetest.get_objects_inside_radius(self.entity.object:get_pos(), aurum.mobs.SEARCH_RADIUS)) do
-			if obj:is_player() then
+			if obj:is_player() and aurum.mobs.helper_can_see(self, obj) then
 				if has_food(obj, self) then
 					self:fire_event("found_food", {
 						target = {

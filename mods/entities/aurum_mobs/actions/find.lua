@@ -1,4 +1,15 @@
 -- TODO: Find only pathable nodes.
+function aurum.mobs.helper_find_nodes(self, event, nodenames)
+	local ent = self.entity
+	local box = b.box.new_radius(ent.object:get_pos(), aurum.mobs.SEARCH_RADIUS)
+	local nodes = minetest.find_nodes_in_area_under_air(box.a, box.b, nodenames)
+	if #nodes > 0 then
+		self:fire_event(event, {target = {
+			type = "pos",
+			pos = nodes[math.random(#nodes)],
+		}})
+	end
+end
 
 -- Find a habitat target node.
 gemai.register_action("aurum_mobs:find_habitat", function(self)

@@ -67,6 +67,10 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 					"aurum_mobs:find_prey",
 					"aurum_mobs:timeout",
 				},
+
+				events = {
+					found_prey = "go_fight",
+				},
 			},
 
 			go = {

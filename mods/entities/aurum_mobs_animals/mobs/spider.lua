@@ -25,6 +25,8 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 		base_speed = 2.5,
 	},
 
+	armor_groups = {pierce = 80, blade = 80, fall = 0, psyche = 50, burn = 80},
+
 	gemai = {
 		global_actions = {
 			"aurum_mobs:physics",

@@ -2,7 +2,6 @@ local I = minetest.request_insecure_environment()
 if I then
 	local dir = minetest.get_worldpath() .. "/aurum_amidst"
 	assert(minetest.mkdir(dir), "could not create directory: " .. dir)
-	local json = b.dofile("json.lua/json.lua")
 	minetest.register_on_mods_loaded(function()
 		minetest.log("action", "[aurum_amidst] dumping biome data for each realm")
 		for realm,rdef in pairs(screalms.realms) do
@@ -24,7 +23,7 @@ if I then
 				end
 			end
 			local f = assert(I.io.open(fn, "w"), "could not open: " .. fn)
-			f:write(json.encode(out))
+			f:write(minetest.write_json(out, true))
 			f:close()
 		end
 	end)

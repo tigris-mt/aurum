@@ -50,13 +50,20 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 				},
 			},
 
+			stand = {
+				actions = {
+					"aurum_mobs:timeout",
+				},
+			},
+
 			go = {
 				actions = {
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 
 				events = {
-					reached = "roam",
+					reached = "stand",
 				},
 			},
 

@@ -62,13 +62,21 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 				},
 			},
 
+			stand = {
+				actions = {
+					"aurum_mobs:find_prey",
+					"aurum_mobs:timeout",
+				},
+			},
+
 			go = {
 				actions = {
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 
 				events = {
-					reached = "roam",
+					reached = "stand",
 				},
 			},
 
@@ -76,6 +84,7 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 				actions = {
 					"aurum_mobs:adrenaline",
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 				events = {
 					reached = "fight",

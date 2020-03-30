@@ -1,7 +1,5 @@
 -- When should a mob be considered "at" its objective?
 local NEAR = 2
--- State timeout.
-local TIMEOUT = 15
 
 b.t.merge(aurum.mobs.initial_data, {
 	moves = 0,
@@ -69,11 +67,6 @@ function aurum.mobs.helper_go(invert)
 				end
 			end
 			self.data.go.index = next
-		end
-
-		if self.data.state_time > TIMEOUT then
-			self:fire_event("timeout")
-			return
 		end
 	end
 end

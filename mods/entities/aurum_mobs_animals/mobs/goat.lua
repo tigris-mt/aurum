@@ -64,6 +64,16 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				},
 			},
 
+			stand = {
+				actions = {
+					"aurum_mobs:find_food",
+					"aurum_mobs:timeout",
+				},
+				events = {
+					found_food = "go_food",
+				},
+			},
+
 			mate = {
 				actions = {
 					"aurum_mobs:check_mate",
@@ -80,6 +90,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 					"aurum_mobs:check_mate",
 					"aurum_mobs:adrenaline",
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 				events = {
 					reached = "mate",
@@ -91,6 +102,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				actions = {
 					"aurum_mobs:check_target_food",
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 				events = {
 					reached = "roam",
@@ -100,13 +112,12 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 
 			go = {
 				actions = {
-					"aurum_mobs:find_food",
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 
 				events = {
-					found_food = "go_food",
-					reached = "roam",
+					reached = "stand",
 				},
 			},
 
@@ -138,6 +149,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 				actions = {
 					"aurum_mobs:adrenaline",
 					"aurum_mobs:go",
+					"aurum_mobs:timeout",
 				},
 				events = {
 					interact = "",

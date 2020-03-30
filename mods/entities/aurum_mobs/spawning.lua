@@ -21,6 +21,9 @@ function aurum.mobs.register_spawn(def)
 		nodes = nil,
 		-- Table of biomes to spawn in.
 		biomes = nil,
+		-- Light range.
+		light_min = 0,
+		light_max = minetest.LIGHT_MAX,
 	}, def)
 
 	-- Establish initial timeout.
@@ -56,8 +59,9 @@ minetest.register_globalstep(function(dtime)
 						local box = b.box.new_radius(pos, RADIUS)
 						local poses = b.t.shuffled(minetest.find_nodes_in_area_under_air(box.a, box.b, def.nodes))
 						for _,pos in ipairs(poses) do
-							if math.random() < (1 / def.chance) then
-								local spawn_pos = vector.add(pos, vector.new(0, 1, 0))
+							local spawn_pos = vector.add(pos, vector.new(0, 1, 0))
+							local light = minetest.get_node_light(spawn_pos)
+							if light >= def.light_min and light <= def.light_max and math.random() < (1 / def.chance) then
 								if aurum.mobs.spawn(spawn_pos, def.mob) then
 									spawned = true
 									minetest.log("action", ("Spawned mob %s at %s near %s"):format(def.mob, minetest.pos_to_string(spawn_pos), player:get_player_name()))

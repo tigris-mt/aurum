@@ -1,6 +1,5 @@
 # Base Gameplay
 * Mobs
-	* Hostile
 	* NPC
 
 # Extended Gameplay

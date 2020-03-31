@@ -43,12 +43,19 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			for _,pos in ipairs(gn[key]) do
 				local above = vector.add(pos, vector.new(0, 1, 0))
 				minetest.get_meta(above):set_int("aurum_features:id", id)
-				minetest.after(0, function()
-					if minetest.get_node(above).name == "aurum_features:placeholder" then
-						minetest.get_node_timer(above):start(0)
-					end
-				end)
 			end
 		end
 	end
 end)
+
+minetest.register_lbm{
+	label = "Activate New Placeholders",
+	name = "aurum_features:dynamic_decoration",
+	nodenames = {"aurum_features:placeholder"},
+	run_at_every_load = true,
+	action = function(pos, node)
+		if not minetest.get_node_timer(pos):is_started() then
+			minetest.get_node_timer(pos):start(0)
+		end
+	end,
+}

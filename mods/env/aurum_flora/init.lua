@@ -23,6 +23,12 @@ function aurum.flora.register(name, def)
 end
 
 minetest.register_craft{
+	type = "fuel",
+	recipe = "group:flammable,flora",
+	burntime = 3,
+}
+
+minetest.register_craft{
 	output = "aurum_base:paste 2",
 	recipe = {
 		{"group:flora", "group:flora", "group:flora"},

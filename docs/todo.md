@@ -1,7 +1,6 @@
 # Base Gameplay
 * Mobs
 	* NPC
-* Status effects
 
 # Extended Gameplay
 * Moreblocks or similiar

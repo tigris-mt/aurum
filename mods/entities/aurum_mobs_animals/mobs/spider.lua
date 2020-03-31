@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_animals:spider", {
 	description = S"Spider",
-	longdesc = S"A warped arthropod emerging from the unholy machinations of the loom.",
+	longdesc = S"A warped arthropod emerging from the strange machinations of the loom.",
 
 	initial_properties = {
 		visual = "sprite",

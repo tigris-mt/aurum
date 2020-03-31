@@ -109,7 +109,7 @@ function m.register(name, def)
 		-- Combine the defs.
 		local spec = b.t.combine(default, {
 			-- Builds a translatable description according to the tree's S parameter.
-			description = def.S(def.description .. " @1", default.description or ""),
+			description = def.S("@1 @2", def.description, default.description or ""),
 		}, def[sub] or {}, {
 			groups = b.t.combine(default.groups, (def[sub] or {}).groups or {}),
 		})

@@ -73,6 +73,15 @@ aurum.flora.register_flower("aurum_flora:black_rose", 7567, {
 	selection_box = single,
 })
 
+aurum.flora.register_flower("aurum_flora:awaken_jonathan", 3944, {
+	description = S"Awaken Jonathan",
+	groups = {dye_source = 1, color_violet = 1},
+	tiles = {"aurum_flora_awaken_jonathan.png"},
+	selection_box = single,
+}, {
+	biomes = aurum.biomes.get_all_group("green", {"base"}),
+})
+
 aurum.flora.register_flower("aurum_flora:linkowar", 3944, {
 	description = S"Link O' War",
 	groups = {dye_source = 1, color_pink = 1},

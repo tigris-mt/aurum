@@ -21,6 +21,15 @@ function aurum.effects.remove(player, name)
 	playereffects.cancel_effect_group(name, player:get_player_name())
 end
 
+function aurum.effects.has(player, name)
+	for level=1,aurum.effects.effects[name].maxlevel do
+		if playereffects.has_effect_type(player:get_player_name(), name .. "_" .. level) then
+			return leve
+		end
+	end
+	return false
+end
+
 function aurum.effects.register(name, def)
 	local def = b.t.combine({
 		max_level = 1,

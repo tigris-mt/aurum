@@ -154,11 +154,11 @@ function aurum.mobs.register(name, def)
 			local remove = {}
 			for name,state in pairs(self._gemai.data.status_effects) do
 				state.duration = state.duration - dtime
-				if state.next then
+				if state.duration < 0 then
+					table.insert(remove, name)
+				elseif state.next then
 					state.next = state.next - dtime
-					if state.duration < 0 then
-						table.insert(remove, name)
-					elseif state.next < 0 then
+					if state.next < 0 then
 						aurum.effects.effects[name].apply(self.object, state.level)
 						state.next = aurum.effects.effects[name].repeat_interval
 					end

@@ -57,7 +57,7 @@ end
 
 function aurum.mobs.helper_set_pos(self, pos, keep_path)
 	if not keep_path then
-		self.data.go.path = false
+		self.entity._go.path = nil
 	end
 	self.entity.object:set_pos(pos)
 end

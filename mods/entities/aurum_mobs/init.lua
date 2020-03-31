@@ -3,6 +3,7 @@ local storage = minetest.get_mod_storage()
 
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
+	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", true),
 }
 
 aurum.mobs.mobs = {}
@@ -41,8 +42,12 @@ function gemai.ref_to_table(obj)
 end
 
 -- For mobs that walk simply.
-aurum.mobs.PATHMETHOD_WALK = b.pathfinder.get_pathfinder(b.set{
+aurum.mobs.PATHMETHOD_WALK = b.pathfinder.require_pathfinder(b.set{
+	aurum.mobs.CHEAP and "cheap" or "any",
 	"specify_vertical",
+	"node_functions_walkable",
+	"node_functions_passable",
+	"clearance_height",
 })
 
 aurum.mobs.DEFAULT_PATHFINDER = {
@@ -104,6 +109,9 @@ function aurum.mobs.register(name, def)
 			self._data.gemai = b.t.combine(b.t.deep_copy(b.t.combine(aurum.mobs.initial_data, def.initial_data)), self._data.gemai)
 
 			self.object:set_armor_groups(b.t.combine(gdamage.armor_defaults(), def.armor_groups))
+
+			-- Create temporary data to hold pathing.
+			self._go = {}
 
 			-- If the entity is new, run initialization.
 			if not self._data.initialized then

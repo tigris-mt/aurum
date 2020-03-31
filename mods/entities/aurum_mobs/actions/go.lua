@@ -3,7 +3,6 @@ local NEAR = 2
 
 b.t.merge(aurum.mobs.initial_data, {
 	moves = 0,
-	go = {},
 	pathfinder = aurum.mobs.DEFAULT_PATHFINDER,
 })
 
@@ -35,38 +34,41 @@ function aurum.mobs.helper_go(invert)
 		-- Try to move to the node above the target.
 		local target = vector.round(vector.add(target_pos, vector.new(0, 1, 0)))
 		local target_hash = minetest.hash_node_position(target)
-		local delta = vector.subtract(target, pos)
+
+		local function reached()
+			return vector.length(vector.subtract(target, pos)) < NEAR
+		end
 
 		-- If we're close enough and not fleeing, fire reached.
-		if vector.length(delta) < NEAR and not invert then
+		if reached() and not invert then
 			self:fire_event("reached", self.data.params)
 		else
-			-- Rebuild the path if there was no path, 3 seconds have passed since last rebuild, or the target changed.
-			if not self.data.go.path or (self.data.state_time - self.data.go.time) > 3 or self.data.go.target ~= target_hash then
-				self.data.go.target = target_hash
-				self.data.go.path = b.pathfinder.path(b.t.combine(self.data.pathfinder, {from = pos, to = target}))
-				self.data.go.time = self.data.state_time
-				self.data.go.index = 1
+			local go = self.entity._go
+			-- Rebuild the path if there was no path or the target changed.
+			if not go.path or go.target ~= target_hash then
+				go.target = target_hash
+				go.path = b.pathfinder.path(b.t.combine(self.data.pathfinder, {from = pos, to = target}))
 			end
 
 			-- If no path was found, we're stuck.
-			if not self.data.go.path then
+			if not go.path then
 				self:fire_event("stuck")
 				return
 			end
 
 			-- Use our move points to move through the path.
-			local next = self.data.go.index + aurum.mobs.helper_move(self)
-			for i=math.max(1, self.data.go.index),math.min(next, #self.data.go.path) do
-				if i > self.data.go.index then
-					if aurum.mobs.helper_acceptable_node(self.data.go.path[i]) then
-						aurum.mobs.helper_set_pos(self, vector.add(self.data.go.path[i], vector.new(roff(), 0, roff())), true)
-					else
-						break
-					end
+			for _=1,aurum.mobs.helper_move(self) do
+				local next_pos = go.path:next()
+				if next_pos and aurum.mobs.helper_acceptable_node(next_pos)then
+					aurum.mobs.helper_set_pos(self, vector.add(next_pos, vector.new(roff(), 0, roff())), true)
+				elseif reached() then
+					go.path = nil
+					break
+				else
+					self:fire_event("stuck")
+					return
 				end
 			end
-			self.data.go.index = next
 		end
 	end
 end

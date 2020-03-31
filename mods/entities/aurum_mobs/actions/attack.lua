@@ -26,5 +26,9 @@ gemai.register_action("aurum_mobs:attack", function(self)
 			full_punch_interval = 1.0,
 			damage_groups = self.data.attack.damage,
 		})
+
+		if self.data.attack.poison then
+			aurum.effects.add(target, "aurum_effects:poison", self.data.attack.poison.level, self.data.attack.poison.duration)
+		end
 	end
 end)

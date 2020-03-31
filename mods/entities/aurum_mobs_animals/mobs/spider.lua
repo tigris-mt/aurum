@@ -20,7 +20,8 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 			jump_height = 3,
 		}),
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
-			damage = {pierce = 3, blade = 3},
+			damage = {pierce = 2, blade = 2},
+			poison = {level = 1, duration = 2},
 		}),
 		base_speed = 2.5,
 	},

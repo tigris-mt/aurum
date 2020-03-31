@@ -14,7 +14,20 @@ aurum.mobs.initial_data = {
 	habitat_nodes = {},
 	-- Mana released upon death.
 	xmana = 1,
+
+	status_effects = {},
 }
+
+-- Returns:
+--- nil
+-- or
+--- gemai ref, name, id
+function aurum.mobs.get_mob(object)
+	local l = object:get_luaentity()
+	if l and l._aurum_mobs_id then
+		return l._gemai, l.name, l._aurum_mobs_id
+	end
+end
 
 local uids = storage:get_int("uids")
 
@@ -137,6 +150,24 @@ function aurum.mobs.register(name, def)
 			self.object:set_properties{infotext = tag}
 			self.object:set_nametag_attributes{text = tag}
 			self._gemai:step(dtime)
+
+			local remove = {}
+			for name,state in pairs(self._gemai.data.status_effects) do
+				state.duration = state.duration - dtime
+				if state.next then
+					state.next = state.next - dtime
+					if state.duration < 0 then
+						table.insert(remove, name)
+					elseif state.next < 0 then
+						aurum.effects.effects[name].apply(self.object, state.level)
+						state.next = aurum.effects.effects[name].repeat_interval
+					end
+				end
+			end
+
+			for _,name in ipairs(remove) do
+				self._gemai.data.status_effects[name] = nil
+			end
 		end,
 
 		on_death = function(self, killer)

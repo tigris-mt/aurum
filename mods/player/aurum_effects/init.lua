@@ -39,8 +39,8 @@ function aurum.effects.register(name, def)
 		hidden = false,
 		cancel_on_death = true,
 		repeat_interval = nil,
-		apply = function(player, level) end,
-		cancel = function(player) end,
+		apply = function(object, level) end,
+		cancel = function(object) end,
 	}, def)
 
 	for level=1,def.max_level do

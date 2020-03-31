@@ -4,8 +4,8 @@ aurum.effects.register("aurum_effects:poison", {
 	max_level = 3,
 	description = S"Poison",
 	repeat_interval = 1,
-	apply = function(player, level)
-		player:punch(player, 1, {
+	apply = function(object, level)
+		object:punch(object, 1, {
 			full_punch_interval = 1.0,
 			damage_groups = {poison = level * 2},
 		})

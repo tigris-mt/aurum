@@ -39,6 +39,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			punch = "fight",
 			lost = "roam",
 			interact = "interact",
+			herd_alerted = "go_fight",
 		},
 
 		states = {
@@ -124,11 +125,13 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
+					"aurum_mobs:alert_herd",
 					"aurum_mobs:attack",
 				},
 				events = {
 					interact = "",
 					noreach = "go_fight",
+					herd_alerted = "",
 				},
 			},
 
@@ -148,12 +151,14 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
+					"aurum_mobs:alert_herd",
 					"aurum_mobs:go",
 					"aurum_mobs:timeout",
 				},
 				events = {
 					interact = "",
 					reached = "fight",
+					herd_alerted = "",
 				},
 			},
 		},

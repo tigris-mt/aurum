@@ -157,7 +157,7 @@ function aurum.mobs.register(name, def)
 						type = "ref_table",
 						ref_table = gemai.ref_to_table(puncher),
 					},
-				})
+				}, {clear = true})
 			end
 		end,
 

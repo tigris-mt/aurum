@@ -15,6 +15,9 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 	initial_data = {
 		habitat_nodes = {"group:stone", "aurum_base:stone_brick", "aurum_base:gravel"},
 		drops = {"aurum_animals:raw_meat", "aurum_animals:bone"},
+		attack = b.t.combine(aurum.mobs.initial_data.attack, {
+			damage = {pierce = 1},
+		}),
 	},
 
 	gemai = {
@@ -26,7 +29,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 		global_events = {
 			stuck = "roam",
 			timeout = "roam",
-			punch = "flee",
+			punch = "fight",
 			lost = "roam",
 			interact = "",
 		},
@@ -67,10 +70,24 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 				},
 			},
 
-			flee = {
+			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
-					"aurum_mobs:flee",
+					"aurum_mobs:go",
+					"aurum_mobs:timeout",
+				},
+				events = {
+					reached = "fight",
+				},
+			},
+
+			fight = {
+				actions = {
+					"aurum_mobs:adrenaline",
+					"aurum_mobs:attack",
+				},
+				events = {
+					noreach = "go_fight",
 				},
 			},
 		},

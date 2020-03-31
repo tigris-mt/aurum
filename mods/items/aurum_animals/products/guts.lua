@@ -31,4 +31,5 @@ minetest.register_craft{
 	type = "cooking",
 	output = "aurum_animals:cooked_meat",
 	recipe = "aurum_animals:raw_meat",
+	cooktime = 10,
 }

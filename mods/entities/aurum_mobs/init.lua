@@ -163,6 +163,7 @@ function aurum.mobs.register(name, def)
 			for name,state in pairs(self._gemai.data.status_effects) do
 				state.duration = state.duration - dtime
 				if state.duration < 0 then
+					aurum.effects.effects[name].cancel(self.object, state.level)
 					table.insert(remove, name)
 				elseif state.next then
 					state.next = state.next - dtime

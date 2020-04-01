@@ -77,7 +77,7 @@ function aurum.effects.register(name, def)
 		hidden = false,
 		cancel_on_death = true,
 		repeat_interval = nil,
-		enchant_categories = b.set{"tool"},
+		enchant = b.set{"tool"},
 		tool_duration = function(level)
 			return 5
 		end,
@@ -95,14 +95,17 @@ function aurum.effects.register(name, def)
 			end, def.hidden, def.cancel_on_death, def.repeat_interval)
 	end
 
-	aurum.tools.register_enchant("effect_" .. name, {
-		categories = def.enchant_categories,
-		description = S("@1 Essence", def.description),
-		longdesc = S("Applies the @1 effect on a hit.", def.description),
-	})
+	if def.enchant then
+		aurum.tools.register_enchant("effect_" .. name, {
+			categories = def.enchant,
+			max_level = def.max_level,
+			description = S("@1 Essence", def.description),
+			longdesc = S("Applies the @1 effect on a hit.", def.description),
+		})
+		aurum.effects.enchants["effect_" .. name] = def
+	end
 
 	aurum.effects.effects[name] = def
-	aurum.effects.enchants["effect_" .. name] = def
 end
 
 function aurum.effects.apply_tool_effects(stack, object)

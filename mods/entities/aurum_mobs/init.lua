@@ -191,6 +191,9 @@ function aurum.mobs.register(name, def)
 
 		on_punch = function(self, puncher)
 			if puncher ~= self.object then
+				if puncher:is_player() then
+					aurum.effects.apply_tool_effects(puncher:get_wielded_item(), self.object)
+				end
 				self._gemai:fire_event("punch", {
 					other = gemai.ref_to_table(puncher),
 					target = {

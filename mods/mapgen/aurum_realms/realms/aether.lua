@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 playereffects.register_effect_type("aurum_realms:aether", S"Aether", nil, {"aurum_realms"},
 	function(player)
-		player_monoids.gravity:add_change(player, 2, "aurum_realms:aether")
+		player_monoids.gravity:add_change(player, 1.5, "aurum_realms:aether")
 		player_monoids.jump:add_change(player, 2, "aurum_realms:aether")
 		player_monoids.speed:add_change(player, 2, "aurum_realms:aether")
 	end,

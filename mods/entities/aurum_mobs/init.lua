@@ -124,6 +124,7 @@ function aurum.mobs.register(name, def)
 			if self._data.armor_groups then
 				self.object:set_armor_groups(self._data.armor_groups)
 			end
+			self.object:set_hp(self._data.hp or self.object:get_hp())
 
 			-- Attach gemai.
 			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
@@ -145,6 +146,7 @@ function aurum.mobs.register(name, def)
 
 		get_staticdata = function(self)
 			-- Save current properties.
+			self._data.hp = self.object:get_hp()
 			self._data.properties = self.object:get_properties()
 			self._data.nametag_attributes = self.object:get_nametag_attributes()
 			self._data.armor_groups = self.object:get_armor_groups()

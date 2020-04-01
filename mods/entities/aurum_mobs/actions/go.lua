@@ -61,9 +61,11 @@ function aurum.mobs.helper_go(invert)
 				local next_pos = go.path:next()
 				if next_pos and aurum.mobs.helper_acceptable_node(next_pos)then
 					aurum.mobs.helper_set_pos(self, vector.add(next_pos, vector.new(roff(), 0, roff())), true)
+				-- No next position, but we've reached our destination...
 				elseif reached() then
 					go.path = nil
-					break
+					self:fire_event("reached", self.data.params)
+					return
 				else
 					self:fire_event("stuck")
 					return

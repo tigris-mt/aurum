@@ -70,18 +70,27 @@ end
 
 function aurum.effects.register(name, def)
 	local def = b.t.combine({
+		-- Maximum effect level.
 		max_level = 1,
+		-- Human readable description.
 		description = "?",
+		-- Optional icon for display in the HUD or elsewhere.
 		icon = nil,
+		-- If set, this effect will apply repeatedly every interval.
 		repeat_interval = nil,
+		-- Shall this effect be hidden from the player?
 		hidden = false,
+		-- Cancel the effect on the target's death?
 		cancel_on_death = true,
-		repeat_interval = nil,
+		-- If set, create an enchantment for this effect that can be placed on the specified groups.
 		enchant = b.set{"tool"},
+		-- What should the duration of this effect be for a specific enchantment level?
 		tool_duration = function(level)
 			return 5
 		end,
+		-- Apply this level of effect to an object.
 		apply = function(object, level) end,
+		-- Cancel this level of effect to an object.
 		cancel = function(object, level) end,
 	}, def, {name = name})
 

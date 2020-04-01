@@ -2,7 +2,7 @@
 aurum.base.cool_lava (Enable Lava Cooling) bool true
 
 # Greatly reduces the processing cost of mob pathfinding, at the cost of path accuracy.
-aurum.mobs.cheap_pathfinding (Cheap Mob Pathfinding) bool true
+aurum.mobs.cheap_pathfinding (Cheap Mob Pathfinding) bool false
 
 # Enables mob debugging tools and information.
 aurum.mobs.debug (Enable Mob Debugging) bool false

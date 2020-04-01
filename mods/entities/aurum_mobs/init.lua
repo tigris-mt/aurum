@@ -3,7 +3,7 @@ local storage = minetest.get_mod_storage()
 
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
-	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", true),
+	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", false),
 }
 
 aurum.mobs.mobs = {}

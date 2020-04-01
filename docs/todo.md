@@ -9,6 +9,7 @@
 * Hand swapping
 * Awards
 * Automation/circuits
+* Range weapons
 
 # Polish
 * Properly lay out biomes.

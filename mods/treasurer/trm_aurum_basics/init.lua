@@ -14,7 +14,7 @@ minetest.register_on_mods_loaded(function()
 		"aurum_base:stone",
 		"aurum_base:dirt",
 		"aurum_base:sand",
-		"aurum_clay:white",
+		"aurum_clay:white_clay",
 	}, 0.35, 0, {1, 30}, 0, {"raw"})
 
 	-- Ore products.

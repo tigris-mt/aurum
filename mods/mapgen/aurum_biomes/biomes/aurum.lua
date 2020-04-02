@@ -188,13 +188,14 @@ aurum.biomes.register_all("aurum:aurum", {
 })
 
 local function clay(color, def)
+	local c = "aurum_clay:" .. color .. "_clay"
 	return b.t.combine({
 		depth_top = 1,
 		depth_filler = 1,
-		node_riverbed = "aurum_clay:" .. color,
-		node_top = "aurum_clay:" .. color,
-		node_filler = "aurum_clay:" .. color,
-		node_stone = "aurum_clay:" .. color,
+		node_riverbed = c,
+		node_top = c,
+		node_filler = c,
+		node_stone = c,
 	}, def or {})
 end
 

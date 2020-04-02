@@ -3,6 +3,7 @@ aurum.mobs.initial_data.attack = {
 	moves = 0,
 	speed = 1,
 	distance = 2,
+	effects = {},
 }
 
 gemai.register_action("aurum_mobs:attack", function(self)
@@ -27,8 +28,8 @@ gemai.register_action("aurum_mobs:attack", function(self)
 			damage_groups = self.data.attack.damage,
 		})
 
-		if self.data.attack.poison then
-			aurum.effects.add(target, "aurum_effects:poison", self.data.attack.poison.level, self.data.attack.poison.duration)
+		for name,def in pairs(self.data.attack.effects) do
+			aurum.effects.add(target, name, def.level, def.duration)
 		end
 	end
 end)

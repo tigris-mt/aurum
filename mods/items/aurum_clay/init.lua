@@ -23,6 +23,7 @@ for _,row in ipairs(dye.dyes) do
 		tiles = {"aurum_clay_brick.png^[colorize:" .. b.color.tostring(dye.colorspec) .. ":200"},
 		groups = {dig_pick = 2},
 		sounds = aurum.sounds.stone(),
+		is_ground_content = false,
 	})
 
 	minetest.register_craft{

@@ -26,16 +26,21 @@ function aurum.mobs.add_doc(name)
 	local data = b.t.combine(aurum.mobs.initial_data, def.initial_data)
 
 	a{
-		S("Ordinarily, this mob moves at a base speed of @1 n/s", data.base_speed),
-		S("Ordinarily, this mob contains @1 mana", data.xmana),
+		S("--- Ordinary Data ---") .. "\n",
+		S("This mob moves at a base speed of @1 n/s", data.base_speed),
+		S("This mob contains @1 mana", data.xmana),
 	}
 
 	if data.adrenaline.time > 0 then
-		a(S("Ordinarily, this mob has @1 seconds of adrenaline with a @2 second cooldown", data.adrenaline.time, data.adrenaline.cooldown))
+		a(S("This mob has @1 seconds of adrenaline with a @2 second cooldown", data.adrenaline.time, data.adrenaline.cooldown))
 	end
 
 	if #data.food > 0 then
-		a(S("Ordinarily, this mob will eat @1", table.concat(data.food, ", ")))
+		a(S("This mob will eat @1", table.concat(data.food, ", ")))
+	end
+
+	for name,def in b.t.spairs(data.attack.effects) do
+		a(S("This mob's attacks result in @1 @2 for @3 seconds", aurum.effects.effects[name].description, def.level, def.duration))
 	end
 
 	doc.add_entry("aurum_mobs:mobs", name, {

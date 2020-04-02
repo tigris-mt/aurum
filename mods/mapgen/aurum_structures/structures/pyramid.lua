@@ -1,7 +1,7 @@
 function aurum.structures.register_pyramid(def)
 	local def = b.t.combine({
-		wall_node = "aurum_base:stone_brick",
-		base_node = "aurum_base:stone",
+		wall_node = "aurum_clay:orange_brick",
+		base_node = "aurum_clay:orange_clay",
 		liquid_node = "aurum_base:lava_source",
 
 		decoration = {},
@@ -28,7 +28,7 @@ function aurum.structures.register_pyramid(def)
 			local zoff = (y < ground) and 0 or math.min(limit.z - 1, off)
 			for x=xoff,limit.x-xoff do
 				for z=zoff,limit.z-zoff do
-					if x == xoff or x == limit.x - xoff or z == zoff or z == limit.z - zoff or y == 0 then
+					if x == xoff or x == limit.x - xoff or z == zoff or z == limit.z - zoff or y == 0 or y == ground then
 						data[area:index(x, y, z)] = wn
 					elseif y < ground / 2 then
 						data[area:index(x, y, z)] = ln
@@ -60,7 +60,7 @@ end
 aurum.structures.register_pyramid{
 	decoration = {
 		rarity = 0.0001,
-		place_on = {"group:sand"},
+		place_on = {"group:sand", "group:clay"},
 		biomes = aurum.biomes.get_all_group("desert", {"base"}),
 	},
 }

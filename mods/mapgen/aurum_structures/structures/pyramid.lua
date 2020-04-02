@@ -47,7 +47,9 @@ function aurum.structures.register_pyramid(def)
 
 	aurum.features.register_decoration(b.t.combine({
 		on_offset = function(c)
-			c.s.size = vector.multiply(vector.new(c.random(15, 20), c.random(10, 15) * 2, c.random(15, 20)), 2)
+			local s = c.random(7, 10) * 4 - 1
+			local h = c.random(10, 15) * 4 - 1
+			c.s.size = vector.new(s, h, s)
 			return vector.subtract(c.pos, vector.new(0, math.ceil(c.s.size.y / 4), 0))
 		end,
 

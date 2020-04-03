@@ -1,6 +1,6 @@
 # Aurum
 Aurum is an adventure/survival/building/crafting voxel game built on the Minetest Engine.
-Aurum brings core gameplay by default with great extensibility. This game is not only a modding base, though it provides many useful tools for modders.
+Aurum brings core gameplay by default with great extensibility. This game is much more than a modding base, though it provides many useful tools for modders.
 Aurum is currently in its rapid development stage, working toward a fully-featured 1.0 release. Contributions are very welcome.
 
 ## Notable Features
@@ -8,15 +8,16 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Item enchanting system.
 * Flexible armor and equipment.
 * Magic system with scrolls, rods, and rituals.
+* World story and lore.
 * Multiple realms/dimensions using normal mapgen; wild and dangerous landscapes accessible via portal.
 * Broad, applicable structure and treasure generation.
 * Wide variety of biomes.
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
-The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.45.3, developed for Minetest 5.2.0 and later.
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.45.4, developed for Minetest 5.2.0 and later.
 
-* Direct download: [Stable 0.45.3](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+* Direct download: [Stable 0.45.4](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 * Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
 * Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)

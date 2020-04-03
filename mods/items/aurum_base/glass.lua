@@ -24,6 +24,6 @@ end
 
 minetest.register_craft{
 	type = "cooking",
-	output = "aurum_base:glass_white",
+	output = "aurum_base:white_glass",
 	recipe = "aurum_base:sand",
 }

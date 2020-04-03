@@ -50,7 +50,7 @@ function aurum.structures.register_pyramid(def)
 			for x=xoff,limit.x-xoff do
 				for z=zoff,limit.z-zoff do
 					local delta = math.sqrt(((x - limit.x / 2) ^ 2) + ((z - limit.z / 2) ^ 2))
-					if x == xoff or x == limit.x - xoff or z == zoff or z == limit.z - zoff or y == 0 then
+					if x == xoff or x == limit.x - xoff or z == zoff or z == limit.z - zoff or y == 0 or y == limit.y then
 						data[area:index(x, y, z)] = wn
 					elseif delta <= 0.5 then
 						data[area:index(x, y, z)] = {name = aurum.features.ph(PH.TREASURE)}

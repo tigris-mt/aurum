@@ -15,9 +15,9 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
-The latest stable version of Aurum is 0.45.1, developed for Minetest 5.2.0 and later.
+The latest stable version of Aurum is $(version), developed for Minetest $(mtversion) and later.
 * Direct Downloads (Zipped)
-	* [Stable 0.45.1](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+	* [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 	* [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Source Repositories
 	* [Compiled](https://github.com/tigris-mt/aurum-compiled)

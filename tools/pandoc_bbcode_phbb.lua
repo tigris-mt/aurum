@@ -1,0 +1,1 @@
+../submodules/2bbcode/bbcode_phpbb.lua

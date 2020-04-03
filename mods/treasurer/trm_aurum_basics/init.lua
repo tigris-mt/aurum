@@ -44,6 +44,8 @@ minetest.register_on_mods_loaded(function()
 	-- Building blocks.
 	list({
 		"aurum_base:stone_brick",
+		"aurum_base:white_glass",
+		"aurum_clay:white_brick",
 	}, 0.5, 1, {1, 30}, 0, {"building_block"})
 
 	-- Utility blocks.

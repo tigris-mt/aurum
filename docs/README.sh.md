@@ -14,12 +14,12 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
-The latest stable version of Aurum is $(version), developed for Minetest $(mtversion) and later.
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is $(version), developed for Minetest $(mtversion) and later.
 
 * Direct download: [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 * Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
-* Source repository: [Development](https://github.com/tigris-mt/aurum)
-* Source repository (automatically generated): [Compiled](https://github.com/tigris-mt/aurum-compiled)
+* Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
+* Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.

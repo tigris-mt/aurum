@@ -47,8 +47,12 @@ function aurum.features.register_decoration(def)
 	aurum.features.decorations[def.name] = def
 end
 
+function aurum.features.ph(n)
+	return "aurum_features:ph_" .. n
+end
+
 for i=1,99 do
-	minetest.register_node("aurum_features:ph_" .. i, {
+	minetest.register_node(aurum.features.ph(i), {
 		is_ground_content = false,
 		groups = {not_in_creative_inventory = 1},
 		buildable_to = true,

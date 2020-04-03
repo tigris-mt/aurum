@@ -33,7 +33,7 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 
 ## License
 Unless otherwise noted (such as 3rd party content described in a section below):
-* Code is under the [ISC license](LICENSE.md).
+* Code is under the [ISC license](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/LICENSE.md).
 * Media is under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ### 3rd Party Content and Licenses
@@ -45,4 +45,4 @@ In the compiled repository, certain submodules are removed for the sake of space
 * [2bbcode](https://github.com/lilydjwg/2bbcode)
 * [minetest_game](https://github.com/minetest/minetest_game)
 
-You can view the assets and code that originate from such submodules in [symlink_report.txt](symlink_report.txt)
+You can view the assets and code that originate from such submodules in [symlink_report.txt](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/symlink_report.txt)

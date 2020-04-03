@@ -7,6 +7,9 @@ aurum.mobs.cheap_pathfinding (Cheap Mob Pathfinding) bool false
 # Enables mob debugging tools and information.
 aurum.mobs.debug (Enable Mob Debugging) bool false
 
+# Maximum number of mobs around a player before spawning is limited. Set to 0 to disable spawning or set negative to disable checking.
+aurum.mobs.spawn_limit (Mob Spawn Limit) int 6
+
 # Controls the base maximum HP for players.
 aurum.player.hp_max (Maximum Player HP) int 100
 

@@ -8,6 +8,7 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Item enchanting system.
 * Flexible armor and equipment.
 * Magic system with scrolls, rods, and rituals.
+* World story and lore.
 * Multiple realms/dimensions using normal mapgen; wild and dangerous landscapes accessible via portal.
 * Broad, applicable structure and treasure generation.
 * Wide variety of biomes.

@@ -15,7 +15,7 @@ for _,row in ipairs(dye.dyes) do
 	minetest.register_craft{
 		output = clay_name,
 		type = "shapeless",
-		recipe = {"group:clay", "group:color_" .. dye.name},
+		recipe = {"group:clay", "group:dye,color_" .. dye.name},
 	}
 
 	minetest.register_node(brick_name, {

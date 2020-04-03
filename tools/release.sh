@@ -1,13 +1,7 @@
 #!/bin/bash
 set -e
 
-version() {
-	lua -e 'dofile("mods/core/aurum/aurum_table.lua"); print(aurum.VERSION)'
-}
-
-mtversion() {
-	lua -e 'dofile("mods/core/aurum/aurum_table.lua"); print(aurum.MT_VERSION)'
-}
+. tools/config.sh
 
 if ! [ "$(git rev-parse --abbrev-ref HEAD)" == "master" ]; then
 	echo "Checkout not the master branch, cannot procede."
@@ -20,8 +14,7 @@ if ! git diff-index --quiet HEAD --; then
 fi
 
 echo "Updating..."
-eval "echo \"$(cat docs/README.sh.md)\"" > README.md
-pandoc -f markdown_github -t tools/pandoc_bbcode_phbb.lua -o README.bbcode README.md
+tools/make_readme.sh
 git add .
 git commit -m "Release update: $(version)"
 

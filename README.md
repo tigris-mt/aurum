@@ -14,12 +14,12 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
-The latest stable version of Aurum is 0.45.2, developed for Minetest 5.2.0 and later.
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.45.2, developed for Minetest 5.2.0 and later.
 
 * Direct download: [Stable 0.45.2](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 * Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
-* Source repository: [Development](https://github.com/tigris-mt/aurum)
-* Source repository (automatically generated): [Compiled](https://github.com/tigris-mt/aurum-compiled)
+* Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
+* Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.
@@ -33,7 +33,7 @@ In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p3057
 
 ## License
 Unless otherwise noted (such as 3rd party content described in a section below):
-* Code is under the [ISC license](LICENSE.md).
+* Code is under the [ISC license](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/LICENSE.md).
 * Media is under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ### 3rd Party Content and Licenses
@@ -45,4 +45,4 @@ In the compiled repository, certain submodules are removed for the sake of space
 * [2bbcode](https://github.com/lilydjwg/2bbcode)
 * [minetest_game](https://github.com/minetest/minetest_game)
 
-You can view the assets and code that originate from such submodules in [symlink_report.txt](symlink_report.txt)
+You can view the assets and code that originate from such submodules in [symlink_report.txt](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/symlink_report.txt)

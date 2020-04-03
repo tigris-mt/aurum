@@ -65,6 +65,12 @@ aurum.biomes.trees.register({
 	rarity = 0.01,
 })
 
+aurum.biomes.trees.register({
+	name = "aurum_trees:apple",
+	biomes = {"aurum_grassland"},
+	rarity = 0.05,
+})
+
 -- Forest
 aurum.biomes.register_all("aurum:aurum", {
 	name = "aurum_forest",
@@ -78,11 +84,18 @@ aurum.biomes.register_all("aurum:aurum", {
 aurum.biomes.trees.register({
 	name = "aurum_trees:oak",
 	biomes = {"aurum_forest"},
+	rarity = 0.75
 })
 
 aurum.biomes.trees.register({
 	name = "aurum_trees:birch",
 	biomes = {"aurum_forest"},
+})
+
+aurum.biomes.trees.register({
+	name = "aurum_trees:apple",
+	biomes = {"aurum_forest"},
+	rarity = 0.25,
 })
 
 -- Jungle

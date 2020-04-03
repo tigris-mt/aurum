@@ -1,4 +1,4 @@
-return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf_extent, depth)
+return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf_extent, depth, fruit)
 	height = tonumber(height) or 6
 	radius = tonumber(radius) or 2
 	local width = 1 + (radius - 1) * 2
@@ -31,7 +31,7 @@ return function(def, height, radius, trunk_radius_ratio, leaf_height_ratio, leaf
 				if dist < trunk_radius and y < limit.y then
 					data[i] = t
 				elseif y - depth > (height * leaf_height_ratio) and dist < trunk_radius + def.leafdistance and dist < trunk_radius + leaf_extent then
-					data[i] = (dist > trunk_radius + 1) and lp or l
+					data[i] = (dist > trunk_radius + 1) and (fruit and b.t.weighted_choice{{{name = fruit}, 0.05}, {lp, 1}} or lp) or l
 				end
 			end
 		end

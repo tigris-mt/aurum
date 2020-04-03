@@ -67,6 +67,12 @@ for _,tree in ipairs(primus_forest_trees) do
 	})
 end
 
+aurum.biomes.trees.register{
+	name = "aurum_trees:banana",
+	biomes = {"primus_forest"},
+	rarity = 1,
+}
+
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_dry",
 	_groups = {"forest"},

@@ -8,20 +8,18 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Item enchanting system.
 * Flexible armor and equipment.
 * Magic system with scrolls, rods, and rituals.
-* Multiple realms/dimensions using normal mapgen, accessible via portal.
-	* Includes the tremendous forests of Primus Hortum and the red, corrupting wasteland of the Loom.
+* Multiple realms/dimensions using normal mapgen; wild and dangerous landscapes accessible via portal.
 * Broad, applicable structure and treasure generation.
 * Wide variety of biomes.
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
 The latest stable version of Aurum is $(version), developed for Minetest $(mtversion) and later.
-* Direct Downloads (Zipped)
-	* [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
-	* [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
-* Source Repositories
-	* [Compiled](https://github.com/tigris-mt/aurum-compiled)
-	* [Development](https://github.com/tigris-mt/aurum)
+
+* Direct download: [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+* Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
+* Source repository: [Development](https://github.com/tigris-mt/aurum)
+* Source repository (automatically generated): [Compiled](https://github.com/tigris-mt/aurum-compiled)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.

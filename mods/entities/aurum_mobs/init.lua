@@ -160,7 +160,7 @@ function aurum.mobs.register(name, def)
 			local tag = ("%s %d/%d%s%s"):format(self._aurum_mob.name, self.object:get_hp(), self.object:get_properties().hp_max, minetest.colorize("#ff0000", "♥"),
 				aurum.mobs.DEBUG and (" %s %d(%d)"):format(self._gemai.data.state, self._gemai.data.live_time, self._gemai.data.state_time) or "")
 			self.object:set_properties{infotext = tag}
-			self.object:set_nametag_attributes{text = tag}
+			-- self.object:set_nametag_attributes{text = tag}
 			self._gemai:step(dtime)
 
 			local remove = {}

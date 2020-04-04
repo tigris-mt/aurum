@@ -23,7 +23,7 @@ aurum.flora.register("aurum_flora:papyrus", {
 		local above = vector.add(pos, vector.new(0, 1, 0))
 		local anode = minetest.get_node(above)
 		if anode.name == node.name then
-			minetest.dig_node(above, anode, digger)
+			minetest.dig_node(above)
 		end
 	end,
 })

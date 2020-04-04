@@ -55,7 +55,7 @@ for _,c in ipairs{
 			local below = vector.subtract(pos, vector.new(0, 1, 0))
 			local bnode = minetest.get_node(below)
 			if bnode.name == node.name or bnode.name == "aurum_caves:vine_fruit" then
-				minetest.dig_node(below, bnode, digger)
+				minetest.dig_node(below)
 			end
 		end,
 	})

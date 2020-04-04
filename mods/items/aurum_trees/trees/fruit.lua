@@ -28,8 +28,8 @@ minetest.register_node("aurum_trees:apple", {
 	is_ground_content = false,
 
 	sounds = aurum.sounds.leaves(),
-	on_use = minetest.item_eat(3),
-	groups = {dig_immediate = 2, flammable = 1, dig_snap = 3},
+	on_use = minetest.item_eat(10),
+	groups = {dig_immediate = 2, flammable = 1, dig_snap = 3, edible = 10},
 })
 
 aurum.trees.leafdecay.register{
@@ -78,8 +78,8 @@ minetest.register_node("aurum_trees:banana", {
 	is_ground_content = false,
 
 	sounds = aurum.sounds.leaves(),
-	on_use = minetest.item_eat(3),
-	groups = {dig_immediate = 2, flammable = 1, dig_snap = 3, dye_source = 1, color_brown = 1},
+	on_use = minetest.item_eat(10),
+	groups = {dig_immediate = 2, flammable = 1, dig_snap = 3, dye_source = 1, color_brown = 1, edible = 10},
 })
 
 aurum.trees.leafdecay.register{

@@ -63,6 +63,6 @@ bucket.register_liquid(
 )
 
 minetest.override_item("aurum_animals:bucket_milk", {
-	groups = b.t.combine(minetest.registered_items["aurum_animals:bucket_milk"].groups, {edible = 5}),
-	on_use = minetest.item_eat(5, "bucket:bucket_empty"),
+	groups = b.t.combine(minetest.registered_items["aurum_animals:bucket_milk"].groups, {edible = 15}),
+	on_use = minetest.item_eat(15, "bucket:bucket_empty"),
 })

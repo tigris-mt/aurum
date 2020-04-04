@@ -23,8 +23,8 @@ minetest.register_craftitem("aurum_animals:raw_meat", {
 minetest.register_craftitem("aurum_animals:cooked_meat", {
 	description = S"Cooked Meat",
 	inventory_image = "aurum_animals_cooked_meat.png",
-	on_use = minetest.item_eat(8),
-	groups = {edible = 8},
+	on_use = minetest.item_eat(25),
+	groups = {edible = 25},
 })
 
 minetest.register_craft{

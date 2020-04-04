@@ -47,3 +47,6 @@ In the compiled repository, certain submodules are removed for the sake of space
 * [minetest_game](https://github.com/minetest/minetest_game)
 
 You can view the assets and code that originate from such submodules in [symlink_report.txt](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/symlink_report.txt)
+
+## Screenshot
+![Screenshot of a forest graveyard](https://raw.githubusercontent.com/tigris-mt/aurum/master/screenshots/aurum_graveyard.0.23.2.png)

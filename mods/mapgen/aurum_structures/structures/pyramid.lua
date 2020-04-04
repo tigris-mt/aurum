@@ -2,6 +2,7 @@ local PH = {
 	MESS = 1,
 	TREASURE = 2,
 	FLOOR = 3,
+	SPAWNER = 4,
 }
 
 function aurum.structures.register_pyramid(def)
@@ -53,7 +54,7 @@ function aurum.structures.register_pyramid(def)
 					if x == xoff or x == limit.x - xoff or z == zoff or z == limit.z - zoff or y == 0 or y == limit.y then
 						data[area:index(x, y, z)] = wn
 					elseif delta <= 0.5 then
-						data[area:index(x, y, z)] = {name = aurum.features.ph(PH.TREASURE)}
+						data[area:index(x, y, z)] = {name = aurum.features.ph((y == ground) and PH.SPAWNER or PH.TREASURE)}
 					elseif delta <= 1.5 then
 						data[area:index(x, y, z)] = wn
 					elseif y < ground * 0.75 then
@@ -109,6 +110,11 @@ function aurum.structures.register_pyramid(def)
 
 			for _,pos in ipairs(c:ph(PH.FLOOR)) do
 				minetest.set_node(pos, {name = b.t.weighted_choice(def.floor_nodes)})
+			end
+
+			for _,pos in ipairs(c:ph(PH.SPAWNER)) do
+				minetest.set_node(pos, {name = "aurum_mobs:spawner"})
+				aurum.mobs.set_spawner(pos, "aurum_mobs_animals:spider")
 			end
 		end,
 	}, def.decoration))

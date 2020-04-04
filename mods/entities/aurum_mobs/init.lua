@@ -4,6 +4,8 @@ local storage = minetest.get_mod_storage()
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
 	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", false),
+	SPAWN_LIMIT = tonumber(minetest.settings:get("aurum.mobs.spawn_limit")) or 4,
+	SPAWN_RADIUS = 40,
 }
 
 aurum.mobs.mobs = {}
@@ -251,3 +253,4 @@ minetest.register_chatcommand("mob_spawn", {
 b.dodir("actions")
 b.dofile("doc.lua")
 b.dofile("spawning.lua")
+b.dofile("spawner.lua")

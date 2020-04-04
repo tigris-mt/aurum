@@ -73,3 +73,6 @@
 [submodule "submodules/2bbcode"]
 	path = submodules/2bbcode
 	url = https://github.com/lilydjwg/2bbcode
+[submodule "mods/player/awards"]
+	path = mods/player/awards
+	url = https://gitlab.com/rubenwardy/awards.git

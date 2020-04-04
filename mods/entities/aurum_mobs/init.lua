@@ -59,6 +59,16 @@ aurum.mobs.DEFAULT_PATHFINDER = {
 	drop_height = 3,
 }
 
+awards.register_trigger("mob_kill", {
+	type = "counted_key",
+	progress = "@1/@2 killed",
+	auto_description = { "Kill: @2", "Kill: @1×@2" },
+	auto_description_total = { "Kill @1 mob.", "Kill @1 mobs." },
+	get_key = function(self, def)
+		return def.trigger.mob
+	end,
+})
+
 function aurum.mobs.register(name, def)
 	local def = b.t.combine({
 		-- Human readable description.
@@ -186,6 +196,7 @@ function aurum.mobs.register(name, def)
 		on_death = function(self, killer)
 			self:_mob_death(killer)
 			if killer and killer:is_player() then
+				awards.notify_mob_kill(killer, self.name)
 				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, killer:get_player_name())
 			end
 			for _,drop in ipairs(self._gemai.data.drops) do

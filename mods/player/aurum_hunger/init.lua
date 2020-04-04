@@ -1,12 +1,30 @@
 local S = minetest.get_translator()
 
+local function monoid(identity)
+	return player_monoids.make_monoid{
+		combine = function(a, b)
+			return a * b
+		end,
+		fold = function(tab)
+			local r = identity
+			for _,v in pairs(tab) do
+				r = r * v
+			end
+			return r
+		end,
+		identity = identity,
+		apply = function(n, player) end,
+		on_change = function() return end,
+	}
+end
+
 aurum.hunger = {
-	STARVE_HP = 1,
-	REGEN_LIMIT = 75,
-	REGEN_HP = 2,
-	MAX = 100,
-	LOSS = 1 / 30, -- 50 minutes to empty.
-	REGEN_TIMES = 10,
+	STARVE_HP = monoid(1),
+	REGEN_LIMIT = monoid(75),
+	REGEN_HP = monoid(2),
+	MAX = monoid(100),
+	LOSS = monoid(1 / 30), -- 50 minutes to empty.
+	REGEN_LOSS = monoid(1 / 3),
 	TICK = 2,
 }
 
@@ -16,25 +34,25 @@ function aurum.hunger.hunger(player, set, relative)
 		-- Actual amount set when relative is true is current + set.
 		local set = relative and (set + old) or set
 		-- Clamp to reasonable values.
-		set = math.max(0, math.min(set, aurum.hunger.MAX))
+		set = math.max(0, math.min(set, aurum.hunger.MAX:value(player)))
 
 		player:get_meta():set_float("aurum_hunger:hunger", set)
-		hb.change_hudbar(player, "aurum_hunger", math.floor(set + 0.5), aurum.hunger.MAX)
+		hb.change_hudbar(player, "aurum_hunger", math.floor(set + 0.5), aurum.hunger.MAX:value(player))
 	else
 		return player:get_meta():get_float("aurum_hunger:hunger", set)
 	end
 end
 
 minetest.register_on_respawnplayer(function(player)
-	aurum.hunger.hunger(player, aurum.hunger.MAX)
+	aurum.hunger.hunger(player, aurum.hunger.MAX:value(player))
 end)
 
 minetest.register_on_joinplayer(function(player)
 	if player:get_meta():get_int("aurum_hunger:has") ~= 1 then
-		player:get_meta():set_float("aurum_hunger:hunger", aurum.hunger.MAX)
+		player:get_meta():set_float("aurum_hunger:hunger", aurum.hunger.MAX:value(player))
 		player:get_meta():set_int("aurum_hunger:has", 1)
 	end
-	hb.init_hudbar(player, "aurum_hunger", math.floor(aurum.hunger.hunger(player) + 0.5), aurum.hunger.MAX)
+	hb.init_hudbar(player, "aurum_hunger", math.floor(aurum.hunger.hunger(player) + 0.5), aurum.hunger.MAX:value(player))
 end)
 
 hb.register_hudbar("aurum_hunger", 0xFFFFFF, S"Satiation", {
@@ -72,17 +90,19 @@ minetest.register_globalstep(function(dtime)
 	timer = timer + dtime
 	if timer > aurum.hunger.TICK then
 		for _,player in ipairs(minetest.get_connected_players()) do
-			aurum.hunger.hunger(player, -aurum.hunger.LOSS * timer, true)
-			local h = aurum.hunger.hunger(player)
-			if h <= 0 then
-				player:punch(player, 1, {
-					full_punch_interval = 1.0,
-					damage_groups = {starve = aurum.hunger.STARVE_HP * timer},
-				})
-			elseif h >= aurum.hunger.REGEN_LIMIT then
-				if player:get_hp() < player:get_properties().hp_max then
-					aurum.hunger.hunger(player, -aurum.hunger.LOSS * aurum.hunger.REGEN_TIMES * timer, true)
-					player:set_hp(player:get_hp() + aurum.hunger.REGEN_HP * timer)
+			if player:get_hp() > 0 then
+				aurum.hunger.hunger(player, -aurum.hunger.LOSS:value(player) * timer, true)
+				local h = aurum.hunger.hunger(player)
+				if h <= 0 then
+					player:punch(player, 1, {
+						full_punch_interval = 1.0,
+						damage_groups = {starve = aurum.hunger.STARVE_HP:value(player) * timer},
+					})
+				elseif h >= aurum.hunger.REGEN_LIMIT:value(player) then
+					if player:get_hp() < player:get_properties().hp_max then
+						aurum.hunger.hunger(player, -aurum.hunger.REGEN_LOSS:value(player) * timer, true)
+						player:set_hp(player:get_hp() + aurum.hunger.REGEN_HP:value(player) * timer)
+					end
 				end
 			end
 		end

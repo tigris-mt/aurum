@@ -10,8 +10,8 @@ aurum.biomes.register_all("aurum:primus", {
 	name = "primus_jungle",
 	_groups = {"green", "forest", "dark"},
 	_color = b.color.convert"darkgreen",
-	heat_point = 50,
-	humidity_point = 50,
+	heat_point = 60,
+	humidity_point = 60,
 	_variants = {
 		base = v_base{
 			node_top = "aurum_base:dark_grass",
@@ -72,6 +72,32 @@ aurum.biomes.trees.register{
 	biomes = {"primus_forest"},
 	rarity = 1,
 }
+
+aurum.biomes.register_all("aurum:primus", {
+	name = "primus_cold",
+	_groups = {"green", "forest"},
+	_color = b.color.convert"lime",
+	heat_point = 10,
+	humidity_point = 10,
+	_variants = {
+		base = v_base{
+			node_top = "aurum_base:grass",
+			depth_top = 1,
+			node_filler = "aurum_base:dirt",
+			depth_filler = 4,
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.trees.register(b.t.combine({
+	name = "aurum_trees:pine",
+	biomes = {"primus_cold"},
+	rarity = 5,
+}, {
+	custom_schematics = aurum.trees.defaults.style.HUGE_CONE.pre,
+	post_schematics = aurum.trees.defaults.style.HUGE_CONE.post,
+}))
 
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_dry",

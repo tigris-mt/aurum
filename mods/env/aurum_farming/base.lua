@@ -65,12 +65,12 @@ function aurum.farming.fertilizer_rightclick(pos, node, player, item)
 end
 
 -- Fertilizer is a liquid you can get stuck and drown in.
--- Better bring a shovel!
+-- Better bring a shovel or have the energy to claw your way out!
 minetest.register_node("aurum_farming:fertilizer", {
 	description = S"Fertilizer",
 	_doc_items_longdesc = S"It may not look good or have a nice smell, but fertilizer is vital for your survival. Just don't fall in!",
 	_doc_items_hidden = false,
-	groups = {fertilizer = 1, liquid = 1, disable_jump = 1, dig_dig = 2, flammable = 1},
+	groups = {fertilizer = 1, liquid = 1, disable_jump = 1, dig_dig = 2, flammable = 1, dig_long_handle = 1},
 	sounds = aurum.sounds.dirt(),
 
 	tiles = {"aurum_farming_fertilizer.png"},

@@ -22,6 +22,15 @@ local handdef = aurum.tools.register("aurum_tools:hand", {
 				uses = 0,
 				maxlevel = 3,
 			},
+			dig_long_handle = {
+				times = {
+					[1] = 15,
+					[2] = 10,
+					[3] = 5,
+				},
+				uses = 0,
+				maxlevel = 3,
+			},
 			-- The hand can dig the lowest levels of all other groups, but slowly.
 			dig_pick = handdig(6),
 			dig_chop = handdig(3),

@@ -12,7 +12,7 @@ function aurum.mobs.register_spawn(def)
 		-- (1/chance) chance to spawn per node.
 		chance = 1000,
 		-- Spawning time range.
-		time = {0, 180},
+		time = {0, 120},
 		-- Name of the mob.
 		mob = nil,
 		-- Table of nodes to spawn on.

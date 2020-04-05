@@ -4,25 +4,21 @@ for _,c in ipairs{
 	{
 		name = "red",
 		desc = "Red",
-		texture = "[colorize:#FF0000:127",
 	},
 	{
 		name = "yellow",
 		desc = "Yellow",
-		texture = "[colorize:#FFFF00:127",
 	},
 	{
 		name = "white",
 		desc = "White",
-		texture = "[colorize:#FFFFFF:127",
 	},
 	{
 		name = "blue",
 		desc = "Blue",
-		texture = "[colorize:#0000FF:127",
 	},
 } do
-	local tb = "aurum_trees_crystal_%s.png^" .. c.texture
+	local tb = "aurum_trees_crystal_%s.png^[colorize:" .. b.color.tostring(c.name) .. ":127"
 	aurum.trees.register("aurum_trees:" .. c.name .. "_crystal", {
 		description = S(c.desc .. " Crystal"),
 		texture_base = tb,

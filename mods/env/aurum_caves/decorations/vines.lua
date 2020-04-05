@@ -5,29 +5,25 @@ for _,c in ipairs{
 	{
 		name = "red",
 		desc = "Red",
-		texture = "[colorize:#FF0000:127",
 	},
 	{
 		name = "yellow",
 		desc = "Yellow",
-		texture = "[colorize:#FFFF00:127",
 	},
 	{
 		name = "white",
 		desc = "White",
-		texture = "[colorize:#FFFFFF:127",
 	},
 	{
 		name = "blue",
 		desc = "Blue",
-		texture = "[colorize:#0000FF:127",
 	},
 } do
 	aurum.flora.register("aurum_caves:vine_" .. c.name, {
 		description = S(c.desc .. " Cave Vine"),
 		_doc_items_longdesc = S"A glowing plant that descends from cave ceilings.",
 		tiles = {{
-			image = "aurum_caves_vine.png^" .. c.texture,
+			image = "aurum_caves_vine.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -45,6 +41,8 @@ for _,c in ipairs{
 				0.35, 0.5, 0.35,
 			},
 		},
+
+		color = b.color.tostring(c.name),
 
 		climbable = true,
 

@@ -14,7 +14,7 @@ minetest.register_on_mods_loaded(function()
 		"aurum_base:stone",
 		"aurum_base:dirt",
 		"aurum_base:sand",
-		"aurum_clay:white_clay",
+		"aurum_clay:clay_white",
 	}, 0.35, 0, {1, 30}, 0, {"raw"})
 
 	-- Ore products.
@@ -44,8 +44,8 @@ minetest.register_on_mods_loaded(function()
 	-- Building blocks.
 	list({
 		"aurum_base:stone_brick",
-		"aurum_base:white_glass",
-		"aurum_clay:white_brick",
+		"aurum_base:glass_white",
+		"aurum_clay:brick_white",
 	}, 0.5, 1, {1, 30}, 0, {"building_block"})
 
 	-- Utility blocks.

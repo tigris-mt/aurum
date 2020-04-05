@@ -7,14 +7,14 @@ local PH = {
 
 function aurum.structures.register_pyramid(def)
 	local def = b.t.combine({
-		wall_node = "aurum_clay:orange_brick",
-		base_node = "aurum_clay:orange_clay",
+		wall_node = "aurum_clay:brick_orange",
+		base_node = "aurum_clay:clay_orange",
 		liquid_node = "aurum_base:lava_source",
 		trap_node = "aurum_base:sand",
 
 		mess_nodes = {
-			{"aurum_clay:black_brick", 1},
-			{"aurum_clay:green_brick", 1},
+			{"aurum_clay:brick_black", 1},
+			{"aurum_clay:brick_green", 1},
 			{"aurum_flora:reed", 4},
 			{"aurum_flora:cactus", 4},
 			{"air", 4},
@@ -23,8 +23,8 @@ function aurum.structures.register_pyramid(def)
 		floor_nodes = {
 			{"aurum_base:sand", 0.5},
 			{"air", 0.5},
-			{"aurum_clay:orange_brick", 1},
-			{"aurum_clay:red_brick", 1},
+			{"aurum_clay:brick_orange", 1},
+			{"aurum_clay:brick_red", 1},
 		},
 
 		decoration = {},

@@ -38,6 +38,7 @@ Toughless levels range from 0 to 3.
 * `bone=1`: This item is a type of bone/skeleton.
 * `clay=1`: This item is clay.
 * `color_X=1`: This item provides/is color X.
+* `dough=1`: This item is a generic dough.
 * `dye=1`: This item is dye.
 * `dye_source=1`: This item is dye source.
 * `equipment=1`: For equipment.

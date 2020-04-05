@@ -15,7 +15,7 @@ function aurum.structures.register_pyramid(def)
 		mess_nodes = {
 			{"aurum_clay:black_brick", 1},
 			{"aurum_clay:green_brick", 1},
-			{"aurum_flora:papyrus", 4},
+			{"aurum_flora:reed", 4},
 			{"aurum_flora:cactus", 4},
 			{"air", 4},
 		},

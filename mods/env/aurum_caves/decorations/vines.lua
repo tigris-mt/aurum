@@ -76,7 +76,7 @@ minetest.register_node("aurum_caves:vine_fruit", {
 			0.35, 0.5, 0.35,
 		},
 	},
-	groups = {dig_chop = 3, edible = 12},
+	groups = {dig_chop = 3, edible = 12, edible_morale = 1},
 	on_use = minetest.item_eat(12),
 })
 

@@ -4,7 +4,7 @@
 -- Create the aurum table and populate it with metadata.
 aurum = {
 	-- Current version number.
-	VERSION = "0.45.8",
+	VERSION = "0.46.0",
 	-- Expected Minetest Engine version (>=).
 	MT_VERSION = "5.2.0",
 }

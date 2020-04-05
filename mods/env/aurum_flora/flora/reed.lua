@@ -2,10 +2,10 @@ local S = minetest.get_translator()
 local HEIGHT = 4
 local grow = aurum.flora.stack_grow({"group:soil", "group:sand"}, HEIGHT, "group:water")
 
-aurum.flora.register("aurum_flora:papyrus", {
-	description = S"Papyrus",
+aurum.flora.register("aurum_flora:reed", {
+	description = S"Tubal Reed",
 	_doc_items_longdesc = S"A useful reed that grows on soil and sand by water.",
-	tiles = {"aurum_flora_papyrus.png"},
+	tiles = {"aurum_flora_reed.png"},
 	groups = {flora = 0, attached_node = 0},
 	_on_grow_plant = grow,
 	waving = 0,
@@ -29,8 +29,8 @@ aurum.flora.register("aurum_flora:papyrus", {
 })
 
 minetest.register_decoration{
-	name = "aurum_flora:papyrus",
-	decoration = "aurum_flora:papyrus",
+	name = "aurum_flora:reed",
+	decoration = "aurum_flora:reed",
 	deco_type = "simple",
 	place_on = {"group:sand"},
 	sidelen = 16,
@@ -41,8 +41,8 @@ minetest.register_decoration{
 }
 
 minetest.register_abm{
-	label = "Papyrus Growth",
-	nodenames = {"aurum_flora:papyrus"},
+	label = "Tubal Reed Growth",
+	nodenames = {"aurum_flora:reed"},
 	neighbors = {"group:water"},
 	interval = 10,
 	chance = 10 * HEIGHT / 2,

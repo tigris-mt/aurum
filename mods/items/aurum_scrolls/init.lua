@@ -9,7 +9,7 @@ minetest.register_craftitem("aurum_scrolls:paper", {
 
 minetest.register_craft{
 	output = "aurum_scrolls:paper",
-	recipe = {{"aurum_flora:papyrus", "aurum_flora:papyrus", "aurum_flora:papyrus"}},
+	recipe = {{"aurum_flora:reed", "aurum_flora:reed", "aurum_flora:reed"}},
 }
 
 minetest.register_craft{

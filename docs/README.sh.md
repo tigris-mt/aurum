@@ -41,6 +41,13 @@ Unless otherwise noted (such as 3rd party content described in a section below):
 3rd party content is included as submodules and symlinked if necessary.
 In the development repository, you can view each submodule for its specific details.
 
+#### Textures
+* character.png
+	* Modified from the original by Jordach (CC BY-SA 3.0):
+* wieldhand.png
+	* Modified from the version by paramat (CC BY-SA 3.0)
+		* Copied from character.png by Jordach (CC BY-SA 3.0)
+
 #### Compiled Repository
 In the compiled repository, certain submodules are removed for the sake of space, linked here:
 * [2bbcode](https://github.com/lilydjwg/2bbcode)
@@ -48,5 +55,5 @@ In the compiled repository, certain submodules are removed for the sake of space
 
 You can view the assets and code that originate from such submodules in [symlink_report.txt](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/symlink_report.txt)
 
-## Screenshot
-![Screenshot of a forest graveyard](https://raw.githubusercontent.com/tigris-mt/aurum/master/screenshots/aurum_graveyard.0.23.2.png)
+## Screenshots
+![Screenshot of the player](https://raw.githubusercontent.com/tigris-mt/aurum/master/screenshots/player.0.46.0.png)

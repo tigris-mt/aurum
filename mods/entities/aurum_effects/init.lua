@@ -4,6 +4,11 @@ aurum.effects = {
 	enchants = {},
 }
 
+doc.add_category("aurum_effects:effects", {
+	name = S"Effects",
+	build_formspec = doc.entry_builders.text,
+})
+
 -- Add the effect <name> at <level> to <object> for <duration>.
 -- Will do nothing if <object> already has <name> at a higher level, otherwise will replace any current <name> effect.
 function aurum.effects.add(object, name, level, duration)
@@ -78,6 +83,8 @@ function aurum.effects.register(name, def)
 		max_level = 1,
 		-- Human readable description.
 		description = "?",
+		-- Long description for docs.
+		longdesc = nil,
 		-- Optional icon for display in the HUD or elsewhere.
 		icon = nil,
 		-- If set, this effect will apply repeatedly every interval.
@@ -116,6 +123,27 @@ function aurum.effects.register(name, def)
 			longdesc = S("Applies the @1 effect on a hit.", def.description),
 		})
 		aurum.effects.enchants["effect_" .. name] = def
+	end
+
+	if not def.hidden then
+		local docs = {}
+
+		if def.longdesc then
+			table.insert(docs, def.longdesc)
+		end
+
+		table.insert(docs, S("Maximum level: @1", def.max_level))
+
+		if def.enchant then
+			local k = b.set.to_array(def.enchant)
+			table.sort(k)
+			table.insert(docs, S("Can enchant: @1", table.concat(k, ", ")))
+		end
+
+		doc.add_entry("aurum_effects:effects", name, {
+			name = def.description,
+			data = table.concat(docs, "\n\n"),
+		})
 	end
 
 	aurum.effects.effects[name] = def

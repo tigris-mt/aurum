@@ -15,9 +15,9 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Heavily extensible functionality for modding or contributing.
 
 # Getting Aurum
-The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.45.8, developed for Minetest 5.2.0 and later.
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.46.0, developed for Minetest 5.2.0 and later.
 
-* Direct download: [Stable 0.45.8](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+* Direct download: [Stable 0.46.0](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 * Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
 * Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
@@ -40,13 +40,6 @@ Unless otherwise noted (such as 3rd party content described in a section below):
 ### 3rd Party Content and Licenses
 3rd party content is included as submodules and symlinked if necessary.
 In the development repository, you can view each submodule for its specific details.
-
-#### Textures
-* character.png
-	* Modified from the original by Jordach (CC BY-SA 3.0):
-* wieldhand.png
-	* Modified from the version by paramat (CC BY-SA 3.0)
-		* Copied from character.png by Jordach (CC BY-SA 3.0)
 
 #### Compiled Repository
 In the compiled repository, certain submodules are removed for the sake of space, linked here:

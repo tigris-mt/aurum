@@ -1,5 +1,5 @@
 # Aurum
-Aurum is an adventure/survival/building/crafting voxel game built on the Minetest Engine.
+Aurum is an adventure/survival/building/crafting voxel game built on the [Minetest Engine](https://www.minetest.net).
 Aurum brings core gameplay by default with great extensibility. This game is much more than a modding base, though it provides many useful tools for modders.
 Aurum is currently in its rapid development stage, working toward a fully-featured 1.0 release. Contributions are very welcome.
 

@@ -4,6 +4,14 @@ aurum.effects.register("aurum_effects:morale", {
 	max_level = 3,
 	description = S"Morale",
 	enchants = false,
-	apply = function(object, level) end,
-	cancel = function() end,
+	apply = function(object, level)
+		if object:is_player() then
+			armor_monoid.monoid:add_change(object, {poison = 1 - level / 5, psyche = 1 - level / 5}, "aurum_effects:morale")
+		end
+	end,
+	cancel = function(object)
+		if object:is_player() then
+			armor_monoid.monoid:del_change(object, "aurum_effects:morale")
+		end
+	end,
 })

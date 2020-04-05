@@ -13,7 +13,7 @@ function aurum.structures.register_pyramid(def)
 		trap_node = "aurum_base:sand",
 
 		mess_nodes = {
-			{"aurum_clay:brick_black", 1},
+			{"aurum_clay:brick_grey", 1},
 			{"aurum_clay:brick_green", 1},
 			{"aurum_flora:reed", 4},
 			{"aurum_flora:cactus", 4},

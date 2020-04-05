@@ -4,6 +4,8 @@ aurum.effects = {
 	enchants = {},
 }
 
+-- Add the effect <name> at <level> to <object> for <duration>.
+-- Will do nothing if <object> already has <name> at a higher level, otherwise will replace any current <name> effect.
 function aurum.effects.add(object, name, level, duration)
 	local def = aurum.effects.effects[name]
 
@@ -36,6 +38,7 @@ function aurum.effects.add(object, name, level, duration)
 	return false
 end
 
+-- Remove the effect <name> from <object> if that effect is active.
 function aurum.effects.remove(object, name)
 	if object:is_player() then
 		playereffects.cancel_effect_group(name, object:get_player_name())
@@ -50,6 +53,7 @@ function aurum.effects.remove(object, name)
 	end
 end
 
+-- Get the level of effect <name> on <object> or false if it does not have that effect.
 function aurum.effects.has(object, name)
 	if object:is_player() then
 		for level=1,aurum.effects.effects[name].maxlevel do
@@ -82,7 +86,7 @@ function aurum.effects.register(name, def)
 		hidden = false,
 		-- Cancel the effect on the target's death?
 		cancel_on_death = true,
-		-- If set, create an enchantment for this effect that can be placed on the specified groups.
+		-- If not false, create an enchantment for this effect that can be placed on the specified groups.
 		enchant = b.set{"tool"},
 		-- What should the duration of this effect be for a specific enchantment level?
 		tool_duration = function(level)

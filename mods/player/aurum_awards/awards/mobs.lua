@@ -28,3 +28,12 @@ awards.register_award("aurum_awards:reaper", {
 		target = 1000,
 	},
 })
+
+awards.register_award("aurum_awards:milker", {
+	title = S"Titan, or Cyclops?",
+	description = S"Milk 50 mobs.",
+	trigger = {
+		type = "mob_milk",
+		target = 50,
+	},
+})

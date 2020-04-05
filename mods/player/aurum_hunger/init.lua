@@ -110,8 +110,41 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+doc.sub.items.register_factoid(nil, "use", function(itemstring, def)
+	if minetest.get_item_group(itemstring, "edible") > 0 then
+		return S("This item provides @1 satiation when eaten.", minetest.get_item_group(itemstring, "edible"))
+	end
+	return ""
+end)
+
+doc.sub.items.register_factoid(nil, "use", function(itemstring, def)
+	if minetest.get_item_group(itemstring, "edible_morale") > 0 then
+		return S("This item provides @1 morale when eaten.", minetest.get_item_group(itemstring, "edible_morale"))
+	end
+	return ""
+end)
+
 minetest.register_on_item_eat(function(change, replace, itemstack, player)
+	local def = itemstack:get_definition()
+
+	-- Apply/remove morale buff.
+	local morale = minetest.get_item_group(itemstack:get_name(), "edible_morale")
+	if morale > 0 then
+		aurum.effects.add(player, "aurum_effects:morale", morale, 10 * 60)
+	else
+		aurum.effects.remove(player, "aurum_effects:morale")
+	end
+
+	-- Play appropriate sound.
+	minetest.sound_play((def and def.sound and def.sound.eat) or {name = "aurum_hunger_eat", gain = 1}, {
+		object = player,
+		max_hear_distance = 16,
+	})
+
+	-- Modify hunger.
 	aurum.hunger.hunger(player, change, true)
+
+	-- Take item and possibly replace.
 	itemstack:take_item()
 	if replace then
 		aurum.drop_item(player:get_pos(), player:get_inventory():add_item("main", itemstack:add_item(replace)))

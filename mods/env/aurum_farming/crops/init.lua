@@ -1,12 +1,5 @@
 local S = minetest.get_translator()
 
-doc.sub.items.register_factoid(nil, "use", function(itemstring, def)
-	if minetest.get_item_group(itemstring, "edible") > 0 then
-		return S("This item provides @1 satiation when eaten.", minetest.get_item_group(itemstring, "edible"))
-	end
-	return ""
-end)
-
 local function new_uid(pos)
 	minetest.get_meta(pos):set_int("uid", math.random(0x1000000))
 end

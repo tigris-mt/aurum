@@ -42,8 +42,11 @@ Unless otherwise noted (such as 3rd party content described in a section below):
 In the development repository, you can view each submodule for its specific details.
 
 #### Textures
-* character.png -- Modified from the original by Jordach (CC BY-SA 3.0)
-* wieldhand.png -- Modified from the version by paramat (CC BY-SA 3.0) -- Copied from character.png by Jordach (CC BY-SA 3.0)
+* textures/character.png -- Modified from the original by Jordach (CC BY-SA 3.0)
+* textures/wieldhand.png -- Modified from the version by paramat (CC BY-SA 3.0) -- Copied from character.png by Jordach (CC BY-SA 3.0)
+
+#### Sounds
+* mods/player/aurum_hunger/sounds/aurum_hunger_eat.ogg -- hunger_eat.ogg by BlockMen (CC-BY 3.0)
 
 #### Compiled Repository
 In the compiled repository, certain submodules are removed for the sake of space, linked here:

@@ -21,6 +21,11 @@ minetest.register_node("aurum_farming:green_pumpkin", {
 	},
 })
 
+minetest.register_craft{
+	output = "aurum_farming:pumpkin_seed 4",
+	recipe = {{"aurum_farming:green_pumpkin"}},
+}
+
 minetest.register_node("aurum_farming:ripe_pumpkin", {
 	description = S"Ripe Pumpkin",
 	tiles = {"aurum_farming_pumpkin_top.png", "aurum_farming_pumpkin.png"},
@@ -34,8 +39,20 @@ minetest.register_node("aurum_farming:ripe_pumpkin", {
 	end,
 })
 
+minetest.register_craftitem("aurum_farming:pumpkin_chunk", {
+	description = S"Pumpkin Chunk",
+	inventory_image = "aurum_farming_pumpkin_chunk.png",
+	groups = {edible = 1},
+	on_use = minetest.item_eat(1),
+})
+
 minetest.register_craft{
-	output = "aurum_farming:pumpkin_seed 9",
+	output = "aurum_farming:pumpkin_seed",
+	recipe = {{"aurum_farming:pumpkin_chunk"}},
+}
+
+minetest.register_craft{
+	output = "aurum_farming:pumpkin_chunk 9",
 	recipe = {{"aurum_farming:ripe_pumpkin"}},
 }
 

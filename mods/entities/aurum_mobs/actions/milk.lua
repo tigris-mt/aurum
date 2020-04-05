@@ -7,6 +7,16 @@ gemai.register_action("aurum_mobs:regen_milk", function(self)
 	self.data.milk.value = self.data.milk.value + self.data.step_time * self.data.milk.speed
 end)
 
+awards.register_trigger("mob_milk", {
+	type = "counted_key",
+	progress = "@1/@2 milked",
+	auto_description = { "Milk: @2", "Milk: @1×@2" },
+	auto_description_total = { "Milk @1 mob.", "Milk @1 mobs." },
+	get_key = function(self, def)
+		return def.trigger.mob
+	end,
+})
+
 gemai.register_action("aurum_mobs:milk", function(self)
 	if self.data.milk.value >= 1 then
 		local other = self.data.params.other
@@ -22,6 +32,8 @@ gemai.register_action("aurum_mobs:milk", function(self)
 
 					self.data.milk.value = 0
 					self:fire_event("milked")
+
+					awards.notify_mob_milk(player, self.entity.name)
 				end
 			end
 		end

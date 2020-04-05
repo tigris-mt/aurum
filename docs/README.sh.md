@@ -3,6 +3,16 @@ Aurum is an adventure/survival/building/crafting voxel game built on the Minetes
 Aurum brings core gameplay by default with great extensibility. This game is much more than a modding base, though it provides many useful tools for modders.
 Aurum is currently in its rapid development stage, working toward a fully-featured 1.0 release. Contributions are very welcome.
 
+[Github Repository](https://github.com/tigris-mt/aurum)
+
+# Getting Aurum
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is $(version), developed for Minetest $(mtversion) and later.
+
+* Direct download: [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+* Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
+* Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
+* Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
+
 ## Notable Features
 * In-game help system and crafting guide.
 * Item enchanting system.
@@ -14,13 +24,8 @@ Aurum is currently in its rapid development stage, working toward a fully-featur
 * Wide variety of biomes.
 * Heavily extensible functionality for modding or contributing.
 
-# Getting Aurum
-The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is $(version), developed for Minetest $(mtversion) and later.
-
-* Direct download: [Stable $(version)](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
-* Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
-* Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
-* Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
+## Screenshots
+![Screenshot of the player](https://raw.githubusercontent.com/tigris-mt/aurum/master/screenshots/player.0.46.0.png)
 
 ## General Goals
 In their [forum post](https://forum.minetest.net/viewtopic.php?f=5&t=19023#p305711), Wuzzy outlined a few interesting goals to achieve for general games to be included in minetest.
@@ -54,6 +59,3 @@ In the compiled repository, certain submodules are removed for the sake of space
 * [minetest_game](https://github.com/minetest/minetest_game)
 
 You can view the assets and code that originate from such submodules in [symlink_report.txt](https://raw.githubusercontent.com/tigris-mt/aurum-compiled/master/symlink_report.txt)
-
-## Screenshots
-![Screenshot of the player](https://raw.githubusercontent.com/tigris-mt/aurum/master/screenshots/player.0.46.0.png)

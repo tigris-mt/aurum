@@ -2,7 +2,7 @@ aurum.mobs.initial_data.attack = {
 	damage = {blade = 2},
 	moves = 0,
 	speed = 1,
-	distance = 2,
+	distance = 2.5,
 	effects = {},
 }
 

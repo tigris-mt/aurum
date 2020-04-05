@@ -18,6 +18,10 @@ aurum.mobs.initial_data = {
 	-- Mana released upon death.
 	xmana = 1,
 
+	-- Generic movement type.
+	--- Can be: walk, fly, swim
+	movement = "walk",
+
 	status_effects = {},
 }
 
@@ -43,22 +47,6 @@ function gemai.ref_to_table(obj)
 	end
 end
 
--- For mobs that walk simply.
-aurum.mobs.PATHMETHOD_WALK = b.pathfinder.require_pathfinder(b.set{
-	aurum.mobs.CHEAP and "cheap" or "any",
-	"specify_vertical",
-	"node_functions_walkable",
-	"node_functions_passable",
-	"clearance_height",
-})
-
-aurum.mobs.DEFAULT_PATHFINDER = {
-	method = aurum.mobs.PATHMETHOD_WALK,
-	search_distance = 48,
-	jump_height = 2,
-	drop_height = 3,
-}
-
 awards.register_trigger("mob_kill", {
 	type = "counted_key",
 	progress = "@1/@2 killed",
@@ -83,6 +71,8 @@ function aurum.mobs.register(name, def)
 		initial_data = {},
 		-- Initial collision and selection box.
 		box = {-0.35, -0.35, -0.35, 0.35, 0.35, 0.35},
+		-- Entity def overrides.
+		entity_def = {},
 	}, def, {
 		name = name,
 	})
@@ -91,7 +81,7 @@ function aurum.mobs.register(name, def)
 
 	def.gemai = b.t.combine({}, def.gemai or {})
 
-	minetest.register_entity(":" .. name, {
+	minetest.register_entity(":" .. name, b.t.combine({
 		initial_properties = b.t.combine({
 			hp_max = 1,
 			physical = 1,
@@ -222,7 +212,7 @@ function aurum.mobs.register(name, def)
 				other = gemai.ref_to_table(clicker),
 			}, {clear = true})
 		end,
-	})
+	}, def.entity_def))
 
 	aurum.mobs.mobs[name] = def
 	aurum.mobs.add_doc(name)
@@ -260,6 +250,8 @@ minetest.register_chatcommand("mob_spawn", {
 		end
 	end,
 })
+
+b.dofile("pathfinder.lua")
 
 b.dodir("actions")
 b.dofile("doc.lua")

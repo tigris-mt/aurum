@@ -104,6 +104,16 @@ function aurum.match_item(item, test)
 	end
 end
 
+-- Test if <item> matches any itemstring/groupstring in <test_list>.
+function aurum.match_item_list(item, test_list)
+	for _,test in ipairs(test_list) do
+		if aurum.match_item(item, test) then
+			return true
+		end
+	end
+	return false
+end
+
 -- Send a message to a player object.
 -- The message will be temporarily displayed prominently in some way.
 function aurum.info_message(player, message)

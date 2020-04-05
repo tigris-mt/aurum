@@ -34,7 +34,11 @@ function aurum.mobs.helper_target_pos(self, target)
 end
 
 function aurum.mobs.helper_can_see(self, object)
-	return minetest.line_of_sight(self.entity.object:get_pos(), object:get_pos()) or minetest.line_of_sight(self.entity.object:get_pos(), vector.add(object:get_pos(), vector.new(0, 1, 0)))
+	if self.data.movement == "swim" then
+		return true
+	else
+		return minetest.line_of_sight(self.entity.object:get_pos(), object:get_pos()) or minetest.line_of_sight(self.entity.object:get_pos(), vector.add(object:get_pos(), vector.new(0, 1, 0)))
+	end
 end
 
 aurum.mobs.initial_data.base_speed = 1

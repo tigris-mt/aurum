@@ -39,8 +39,28 @@ function aurum.mobs.add_doc(name)
 		a(S("This mob will eat @1", table.concat(data.food, ", ")))
 	end
 
+	a("")
+
+	local damage = {}
+	for name,rating in b.t.spairs(data.attack.damage) do
+		table.insert(damage, ("%s: %d"):format(name, rating))
+	end
+	if #damage > 0 then
+		a(S("Attack damage: @1", table.concat(damage, "; ")))
+	end
+
 	for name,def in b.t.spairs(data.attack.effects) do
-		a(S("This mob's attacks result in @1 @2 for @3 seconds", aurum.effects.effects[name].description, def.level, def.duration))
+		a(S("Attack effect: @1 @2 for @3 seconds", aurum.effects.effects[name].description, def.level, def.duration))
+	end
+
+	local armor = {}
+	for name,rating in b.t.spairs(b.t.combine(gdamage.armor_defaults(), def.armor_groups)) do
+		if rating ~= 100 then
+			table.insert(armor, ("%s: %d%%"):format(name, 100 - rating))
+		end
+	end
+	if #armor > 0 then
+		a(S("Damage reduction: @1", table.concat(armor, "; ")))
 	end
 
 	doc.add_entry("aurum_mobs:mobs", name, {

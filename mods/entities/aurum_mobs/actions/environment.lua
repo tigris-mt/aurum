@@ -11,16 +11,35 @@ end
 
 -- Apply physics.
 gemai.register_action("aurum_mobs:physics", function(self)
-	local pos = vector.round(self.entity.object:get_pos())
-	local node = minetest.get_node(vector.add(pos, vector.new(0, -1, 0)))
-	if not minetest.registered_nodes[node.name].walkable then
-		for i=1,aurum.mobs.helper_gravity_move(self) do
-			local below = vector.add(pos, vector.new(0, -i, 0))
-			local node = minetest.get_node(below)
-			if minetest.registered_nodes[node.name].walkable then
-				return
-			else
-				aurum.mobs.helper_set_pos(self, below)
+	if self.data.movement == "walk" then
+		local pos = vector.round(self.entity.object:get_pos())
+		local node = minetest.get_node(vector.add(pos, vector.new(0, -1, 0)))
+		if not minetest.registered_nodes[node.name].walkable then
+			for i=1,aurum.mobs.helper_gravity_move(self) do
+				local below = vector.add(pos, vector.new(0, -i, 0))
+				local node = minetest.get_node(below)
+				if minetest.registered_nodes[node.name].walkable then
+					return
+				else
+					aurum.mobs.helper_set_pos(self, below)
+				end
+			end
+		end
+	elseif self.data.movement == "swim" then
+		local pos = vector.round(self.entity.object:get_pos())
+		local node = minetest.get_node(pos)
+		if (minetest.registered_nodes[node.name].liquidtype or "none") == "none" then
+			for i=1,aurum.mobs.helper_gravity_move(self) do
+				local below = vector.add(pos, vector.new(0, -i, 0))
+				local node = minetest.get_node(below)
+				if not minetest.registered_nodes[node.name].walkable then
+					if (minetest.registered_nodes[node.name].liquidtype or "none") ~= "none" then
+						aurum.mobs.helper_set_pos(self, below)
+						return
+					else
+						aurum.mobs.helper_set_pos(self, below)
+					end
+				end
 			end
 		end
 	end
@@ -38,6 +57,12 @@ gemai.register_action("aurum_mobs:environment", function(self)
 			self.entity.object:punch(self.entity.object, 1, {
 				full_punch_interval = 1.0,
 				damage_groups = {[ndef._damage_type or "generic"] = ndef.damage_per_second},
+			})
+		end
+		if self.data.movement == "swim" and not aurum.match_item_list(node.name, self.data.habitat_nodes) then
+			self.entity.object:punch(self.entity.object, 1, {
+				full_punch_interval = 1.0,
+				damage_groups = {drown = 5},
 			})
 		end
 		self.data.node_damage_timer = self.data.live_time

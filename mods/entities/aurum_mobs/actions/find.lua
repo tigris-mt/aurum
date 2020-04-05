@@ -18,8 +18,12 @@ end)
 
 -- Find a random target node.
 gemai.register_action("aurum_mobs:find_random", function(self)
+	local y = 0
+	if self.data.movement ~= "walk" then
+		y = math.random(-aurum.mobs.SEARCH_RADIUS, aurum.mobs.SEARCH_RADIUS)
+	end
 	self:fire_event("found_random", {target = {
 		type = "pos",
-		pos = vector.add(self.entity.object:get_pos(), vector.new(math.random(-aurum.mobs.SEARCH_RADIUS, aurum.mobs.SEARCH_RADIUS), 0, math.random(-aurum.mobs.SEARCH_RADIUS, aurum.mobs.SEARCH_RADIUS))),
+		pos = vector.add(self.entity.object:get_pos(), vector.new(math.random(-aurum.mobs.SEARCH_RADIUS, aurum.mobs.SEARCH_RADIUS), y, math.random(-aurum.mobs.SEARCH_RADIUS, aurum.mobs.SEARCH_RADIUS))),
 	}})
 end)

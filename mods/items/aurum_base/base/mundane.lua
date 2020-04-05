@@ -68,7 +68,7 @@ minetest.register_node("aurum_base:ice", {
 	paramtype = "light",
 	is_ground_content = false,
 	sounds = aurum.sounds.glass(),
-	groups = {dig_pick = 3, cools_lava = 1, slippery = 3, shapable = 1},
+	groups = {dig_pick = 3, ice = 1, cools_lava = 1, slippery = 3, shapable = 1},
 })
 
 minetest.register_node("aurum_base:ground_ice", {
@@ -77,7 +77,7 @@ minetest.register_node("aurum_base:ground_ice", {
 	tiles = {"aurum_base_ice.png"},
 	paramtype = "light",
 	sounds = aurum.sounds.glass(),
-	groups = {dig_pick = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1},
+	groups = {dig_pick = 3, ice = 1, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1},
 	drop = "aurum_base:ice",
 })
 

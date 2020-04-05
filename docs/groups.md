@@ -20,6 +20,7 @@ Toughless levels range from 0 to 3.
 * `aurum:aurum`: The biome's realm will be added as a group.
 * `barren`: Devoid of life.
 * `green`: Living, green. Plant life.
+* `forest`: Lots of leafy trees.
 * `desert`: This is a desert biome.
 * `clay`: This is a clay biome.
 
@@ -71,6 +72,7 @@ Toughless levels range from 0 to 3.
 * `grass_soil=1`: This node is grassy soil.
 * `grow_plant=1`: This node has an `_on_grow_plant(pos, node)` function defined.
 	* `_on_grow_plant` returns true if the plant grew and false if it did not.
+* `ice=1`: This node is ice.
 * `igniter=1`: This node ignites fire.
 * `item_burn=1`: This node destroys items that fall inside.
 * `ladder=1`: This node is a ladder.

@@ -63,6 +63,6 @@ screalms.register("aurum:aether", {
 		node_cave_liquid = "aurum_base:aether_source",
 		node_dungeon = "aurum_base:aether_shell",
 		node_dungeon_alt = "aurum_base:aether_skin",
-		node_dungeon_stair = "aurum_base:aether_shell",
+		node_dungeon_stair = "aurum_base:aether_shell_sh_stairs",
 	},
 })

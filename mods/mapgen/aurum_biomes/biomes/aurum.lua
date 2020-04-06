@@ -136,12 +136,12 @@ aurum.biomes.register_all("aurum:aurum", {
 			depth_top = 8,
 			node_dungeon = "aurum_clay:brick_orange",
 			node_dungeon_alt = "aurum_clay:clay_orange",
-			node_dungeon_stair = "aurum_clay:brick_orange",
+			node_dungeon_stair = "aurum_clay:brick_orange_sh_stairs",
 		},
 		ocean = aurum.biomes.v_ocean{
 			node_dungeon = "aurum_clay:brick_orange",
 			node_dungeon_alt = "aurum_clay:clay_orange",
-			node_dungeon_stair = "aurum_clay:brick_orange",
+			node_dungeon_stair = "aurum_clay:brick_orange_sh_stairs",
 		},
 		under = aurum.biomes.v_under{},
 	},
@@ -200,7 +200,7 @@ aurum.biomes.register_all("aurum:aurum", {
 		base = b.t.combine(frozen, aurum.biomes.v_base{
 			node_dungeon = "aurum_base:snow",
 			node_dungeon_alt = "aurum_base:snow",
-			node_dungeon_stair = "aurum_base:snow",
+			node_dungeon_stair = "aurum_base:snow_sh_stairs",
 		}),
 		ocean = aurum.biomes.v_ocean(frozen),
 		under = aurum.biomes.v_under{},
@@ -219,7 +219,7 @@ local function clay(color, def)
 		node_stone = c,
 		node_dungeon = brick,
 		node_dungeon_alt = c,
-		node_dungeon_stair = brick,
+		node_dungeon_stair = brick .. "_sh_stairs",
 	}, def or {})
 end
 

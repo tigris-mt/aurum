@@ -5,7 +5,7 @@ minetest.register_node("aurum_base:stone_brick", {
 	tiles = {"aurum_base_stone_brick.png"},
 	sounds = aurum.sounds.stone(),
 	is_ground_content = false,
-	groups = {dig_pick = 2},
+	groups = {dig_pick = 2, shapable = 1},
 })
 
 minetest.register_craft{
@@ -20,7 +20,7 @@ minetest.register_node("aurum_base:regret_brick", {
 	tiles = {"aurum_base_stone_brick.png^[colorize:#440000:127"},
 	is_ground_content = false,
 	sounds = aurum.sounds.stone(),
-	groups = {dig_pick = 2, level = 2},
+	groups = {dig_pick = 2, level = 2, shapable = 1},
 })
 
 minetest.register_craft{

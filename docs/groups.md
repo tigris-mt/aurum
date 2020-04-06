@@ -46,6 +46,7 @@ Toughless levels range from 0 to 3.
 * `glass=1`: This item is glass.
 * `raw_meat=1`: Some type of raw flesh.
 * `rod=1`: For rods.
+* `shapable=1`: This node can be cut into different shapes.
 * `stick=1`: For sticks. The doc modpack semi-requires a stick group.
 * `tool=1`: For tools.
 

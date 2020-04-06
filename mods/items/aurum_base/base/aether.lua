@@ -5,7 +5,7 @@ minetest.register_node("aurum_base:aether_shell", {
 	_doc_items_longdesc = S"Hard organic material interlaced with old magic. Remarkably similar to a fragment of snail shell.",
 	tiles = {"aurum_base_aether_shell.png"},
 	sounds = aurum.sounds.stone(),
-	groups = {dig_pick = 2, level = 2},
+	groups = {dig_pick = 2, level = 2, shapable = 1},
 	paramtype = "light",
 	light_source = 1,
 })
@@ -15,7 +15,7 @@ minetest.register_node("aurum_base:aether_skin", {
 	_doc_items_longdesc = S"Tough, leathery skin.",
 	tiles = {"aurum_base_aether_skin.png"},
 	sounds = aurum.sounds.flesh(),
-	groups = {dig_dig = 2, dig_chop = 2, level = 2, bouncy = 80, fall_damage_add_percent = -30},
+	groups = {dig_dig = 2, dig_chop = 2, level = 2, bouncy = 80, fall_damage_add_percent = -30, shapable = 1},
 	paramtype = "light",
 	light_source = 2,
 })

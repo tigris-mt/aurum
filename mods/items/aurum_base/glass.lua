@@ -6,7 +6,7 @@ aurum.dye.register_node("aurum_base:glass", {
 		"aurum_base_glass.png",
 		"aurum_base_glass_detail.png",
 	},
-	groups = {dig_dig = 3, dig_handle = 2, glass = 1},
+	groups = {dig_dig = 3, dig_handle = 2, glass = 1, shapable = 1},
 	sounds = aurum.sounds.glass(),
 	paramtype = "light",
 	drawtype = "glasslike_framed_optional",

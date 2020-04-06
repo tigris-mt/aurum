@@ -6,7 +6,7 @@ minetest.register_node("aurum_base:stone", {
 	_doc_items_hidden = false,
 	tiles = {"aurum_base_stone.png"},
 	sounds = aurum.sounds.stone(),
-	groups = {dig_pick = 3, dig_hammer = 3, stone = 1, cook_temp = 10},
+	groups = {dig_pick = 3, dig_hammer = 3, stone = 1, cook_temp = 10, shapable = 1},
 	_hammer_drop = "aurum_base:gravel",
 })
 
@@ -59,7 +59,7 @@ minetest.register_node("aurum_base:snow", {
 	description = S"Snow",
 	tiles = {"aurum_base_snow.png"},
 	sounds = aurum.sounds.snow(),
-	groups = {dig_dig = 3, cools_lava = 1, snow = 1, fall_damage_add_percent = -50},
+	groups = {dig_dig = 3, cools_lava = 1, snow = 1, fall_damage_add_percent = -50, shapable = 1},
 })
 
 minetest.register_node("aurum_base:ice", {
@@ -68,7 +68,7 @@ minetest.register_node("aurum_base:ice", {
 	paramtype = "light",
 	is_ground_content = false,
 	sounds = aurum.sounds.glass(),
-	groups = {dig_pick = 3, cools_lava = 1, slippery = 3},
+	groups = {dig_pick = 3, cools_lava = 1, slippery = 3, shapable = 1},
 })
 
 minetest.register_node("aurum_base:ground_ice", {

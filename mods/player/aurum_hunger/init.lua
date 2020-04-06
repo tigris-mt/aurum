@@ -21,7 +21,7 @@ end
 aurum.hunger = {
 	STARVE_HP = monoid(1),
 	REGEN_LIMIT = monoid(75),
-	REGEN_HP = monoid(2),
+	REGEN_HP = monoid(1),
 	MAX = monoid(100),
 	LOSS = monoid(1 / 30), -- 50 minutes to empty.
 	REGEN_LOSS = monoid(1 / 3),
@@ -96,12 +96,12 @@ minetest.register_globalstep(function(dtime)
 				if h <= 0 then
 					player:punch(player, 1, {
 						full_punch_interval = 1.0,
-						damage_groups = {starve = aurum.hunger.STARVE_HP:value(player) * timer},
+						damage_groups = {starve = b.random_whole(aurum.hunger.STARVE_HP:value(player) * timer)},
 					})
 				elseif h >= aurum.hunger.REGEN_LIMIT:value(player) then
 					if player:get_hp() < player:get_properties().hp_max then
 						aurum.hunger.hunger(player, -aurum.hunger.REGEN_LOSS:value(player) * timer, true)
-						player:set_hp(player:get_hp() + aurum.hunger.REGEN_HP:value(player) * timer)
+						player:set_hp(player:get_hp() + b.random_whole(aurum.hunger.REGEN_HP:value(player) * timer))
 					end
 				end
 			end

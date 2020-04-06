@@ -9,6 +9,7 @@ SAFE="
 	mods/core/gnode_augment
 	mods/env/fire
 	mods/items/bucket
+	mods/items/doors
 	mods/items/dye
 	mods/items/gtextitems
 	mods/mapgen/screalms

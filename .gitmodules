@@ -76,3 +76,6 @@
 [submodule "mods/player/awards"]
 	path = mods/player/awards
 	url = https://gitlab.com/rubenwardy/awards.git
+[submodule "mods/items/doors"]
+	path = mods/items/doors
+	url = https://github.com/tigris-mt/doors.git

@@ -1,12 +1,12 @@
 local S = minetest.get_translator()
 
-aurum.shape = {
+aurum_shape = {
 	shaped = {},
 }
 
 -- Enable shaping for a node.
-function aurum.shape.enable(name)
-	aurum.shape.shaped[name] = {}
+function aurum_shape.enable(name)
+	aurum_shape.shaped[name] = {}
 
 	local shape = {
 		cost = 1,
@@ -16,11 +16,11 @@ function aurum.shape.enable(name)
 	minetest.override_item(name, {
 		_aurum_shape_shape = shape,
 	})
-	aurum.shape.shaped[name][""] = shape
+	aurum_shape.shaped[name][""] = shape
 end
 
 -- Register a specific shape for a node.
-function aurum.shape.register_shape(name, shape)
+function aurum_shape.register_shape(name, shape)
 	shape = b.t.combine({
 		-- Suffix name.
 		name = nil,
@@ -61,7 +61,7 @@ function aurum.shape.register_shape(name, shape)
 
 	minetest.register_node(":" .. shape.node_name, def)
 	doc.add_entry_alias("nodes", name, "nodes", shape.node_name)
-	aurum.shape.shaped[name][shape.name] = shape
+	aurum_shape.shaped[name][shape.name] = shape
 
 	if shape.recipe then
 		minetest.register_craft{
@@ -72,10 +72,10 @@ function aurum.shape.register_shape(name, shape)
 end
 
 -- Enable shaping and register all shapes for a node.
-function aurum.shape.register(name)
-	aurum.shape.enable(name)
+function aurum_shape.register(name)
+	aurum_shape.enable(name)
 
-	aurum.shape.register_shape(name, {
+	aurum_shape.register_shape(name, {
 		name = "stairs",
 		description = S"Stairs",
 		cost = 3 / 4,
@@ -93,7 +93,7 @@ function aurum.shape.register(name)
 		},
 	})
 
-	aurum.shape.register_shape(name, {
+	aurum_shape.register_shape(name, {
 		name = "slab",
 		description = S"Slab",
 		cost = 1 / 2,
@@ -111,13 +111,13 @@ function aurum.shape.register(name)
 end
 
 -- Automatically register all shapable.
-minetest.register_on_mods_loaded(function()
-	for _,name in ipairs(b.t.keys(minetest.registered_nodes)) do
-		if minetest.get_item_group(name, "shapable") > 0 then
-			aurum.shape.register(name)
-		end
+local old = minetest.register_node
+function minetest.register_node(name, def)
+	local ret = old(name, def)
+	if minetest.get_item_group(def.name, "shapable") > 0 then
+		aurum_shape.register(def.name)
 	end
-end)
+end
 
 minetest.register_craftitem("aurum_shape:chisel", {
 	description = S"Shaping Chisel",

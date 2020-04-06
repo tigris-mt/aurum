@@ -133,3 +133,6 @@ b.dofile("damage.lua")
 
 -- Node sounds.
 b.dofile("sounds.lua")
+
+-- Assign shape table in namespace.
+aurum.shape = aurum_shape

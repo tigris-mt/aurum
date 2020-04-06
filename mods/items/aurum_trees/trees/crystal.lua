@@ -33,7 +33,7 @@ for _,c in ipairs{
 			use_texture_alpha = true,
 			tiles = {tb:format("trunk")},
 			sounds = aurum.sounds.glass(),
-			groups = {dig_chop = 0, dig_pick = 3, flammable = 0, crystal_tree = 1},
+			groups = {dig_chop = 0, dig_pick = 3, flammable = 0, crystal_tree = 1, shapable = 0},
 		},
 
 		leaves = {

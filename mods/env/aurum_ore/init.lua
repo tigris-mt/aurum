@@ -63,7 +63,7 @@ function aurum.ore.register(name, def)
 			_doc_items_longdesc = S"A solid chunk of metal.",
 			description = S("@1 Block", def.description),
 			tiles = {("%s^aurum_ore_block.png"):format(def.texture)},
-			groups = {dig_pick = math.max(1, 3 - def.level), level = math.min(3, def.level + 1)},
+			groups = {dig_pick = math.max(1, 3 - def.level), level = math.min(3, def.level + 1), shapable = 1},
 			sounds = aurum.sounds.metal(),
 		})
 

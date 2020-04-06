@@ -56,8 +56,6 @@ function aurum.shape.register_shape(name, shape)
 	def.description = S("@1 @2", def.description or "?", shape.description)
 
 	def.groups = b.t.combine(def.groups, {
-		not_in_craft_guide = 1,
-		not_in_creative_inventory = 1,
 		shapable = 0,
 	})
 

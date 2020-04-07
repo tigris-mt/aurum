@@ -57,6 +57,12 @@ for _,c in ipairs{
 			end
 		end,
 	})
+
+	minetest.register_craft{
+		type = "fuel",
+		recipe = "aurum_caves:vine_" .. c.name,
+		burntime = 3,
+	}
 end
 
 minetest.register_node("aurum_caves:vine_fruit", {

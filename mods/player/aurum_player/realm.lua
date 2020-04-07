@@ -34,7 +34,8 @@ function aurum.player.realm_refresh(player)
 		speed = {x = 0, z = -2},
 		height = tonumber(minetest.settings:get("cloud_height")) or 120,
 	}
-	player:override_day_night_ratio(nil)
+
+	bright_night.apply(player)
 
 	if realm then
 		local r = screalms.get(realm)

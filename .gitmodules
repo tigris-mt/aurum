@@ -79,3 +79,6 @@
 [submodule "mods/items/doors"]
 	path = mods/items/doors
 	url = https://github.com/tigris-mt/doors.git
+[submodule "mods/env/bright_night"]
+	path = mods/env/bright_night
+	url = https://github.com/tigris-mt/bright_night.git

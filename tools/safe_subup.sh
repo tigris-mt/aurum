@@ -7,6 +7,7 @@ SAFE="
 	mods/core/gdamage
 	mods/core/gemai
 	mods/core/gnode_augment
+	mods/env/bright_night
 	mods/env/fire
 	mods/items/bucket
 	mods/items/doors

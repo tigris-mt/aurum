@@ -18,28 +18,20 @@ minetest.register_node("aurum_flare:flare", {
 	wield_image = "aurum_flare_inventory.png",
 
 	light_source = 12,
-	tiles = {{
-		image = "aurum_flare_flare.png",
-		animation = {
-			type = "vertical_frames",
-			aspect_w = 16,
-			aspect_h = 16,
-			length = 1,
-		},
-	}},
+	tiles = {"aurum_flare_flare.png"},
 
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.025, -0.5, -0.025, 0.025, 0, 0.025},
-			{-0.05, 0, -0.05, 0.05, 0.5, 0.05},
+			{-0.025, -0.5, -0.025, 0.025, -0.25, 0.025},
+			{-0.05, -0.25, -0.05, 0.05, 0, 0.05},
 		},
 	},
 })
 
 minetest.register_craft{
-	output = "aurum_flare:flare 2",
+	output = "aurum_flare:flare 4",
 	recipe = {
 		{"aurum_ore:mana_bean"},
 		{"aurum_base:sticky_stick"},

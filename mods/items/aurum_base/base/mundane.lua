@@ -15,7 +15,7 @@ minetest.register_node("aurum_base:sand", {
 	_doc_items_longdesc = S"Soft and unstable grains.",
 	tiles = {"aurum_base_sand.png"},
 	sounds = aurum.sounds.sand(),
-	groups = {dig_dig = 3, falling_node = 1, sand = 1},
+	groups = {dig_dig = 3, falling_node = 1, sand = 1, cook_temp = 10},
 })
 
 minetest.register_node("aurum_base:gravel", {

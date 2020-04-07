@@ -188,9 +188,9 @@ function aurum.mobs.register(name, def)
 			if killer and killer:is_player() then
 				awards.notify_mob_kill(killer, self.name)
 				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, killer:get_player_name())
-			end
-			for _,drop in ipairs(self._gemai.data.drops) do
-				aurum.drop_item(self.object:get_pos(), ItemStack(drop))
+				for _,drop in ipairs(self._gemai.data.drops) do
+					aurum.drop_item(self.object:get_pos(), ItemStack(drop))
+				end
 			end
 		end,
 

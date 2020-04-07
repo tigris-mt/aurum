@@ -53,9 +53,24 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+awards.register_trigger("realm_change", {
+	type = "counted_key",
+	progress = "@1/@2 realms entered",
+	auto_description = { "Enter: @2", "Enter: @1×@2" },
+	auto_description_total = { "Enter @1 realm.", "Enter @1 realm." },
+	get_key = function(self, def)
+		return def.trigger.realm
+	end,
+})
+
 function aurum.player.teleport(player, pos)
+	local old_realm = aurum.player.get_realm(player)
 	player:set_pos(pos)
 	aurum.player.realm_refresh(player)
+	local new_realm = aurum.player.get_realm(player)
+	if old_realm ~= new_realm then
+		awards.notify_realm_change(player, new_realm)
+	end
 end
 
 function aurum.player.teleport_guarantee(player, box, after, cancel)

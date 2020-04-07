@@ -37,7 +37,7 @@ minetest.register_craft{
 minetest.register_craft{
 	output = "aurum_base:paste 2",
 	recipe = {
-		{"aurum_flora:reed", "aurum_flora:reed", "aurum_flora:reed"},
+		{"aurum_flora:reed", "aurum_flora:reed"},
 	},
 }
 

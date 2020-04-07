@@ -6,6 +6,7 @@ aurum.tools.register_enchant("durability", {
 		armor = true,
 	},
 	description = S"Durability",
+	max_level = 4,
 	longdesc = S"Improves the durability (maximum uses) of tools and armor.",
 	apply = function(state, level, stack)
 		-- Tool durability.

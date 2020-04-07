@@ -24,3 +24,22 @@ aurum.tools.register_enchant("smash", {
 		state.tool_capabilities.damage_groups.impact = state.tool_capabilities.damage_groups.impact + level
 	end,
 })
+
+aurum.tools.register_enchant("dig", {
+	categories = {
+		tool = true,
+	},
+	description = S"Dig",
+	max_level = 5,
+	longdesc = S"Improves the digging/mining power of any tool. Also slightly increases damage at high levels.",
+	apply = function(state, level, stack)
+		for k,v in pairs(state.tool_capabilities.damage_groups or {}) do
+			state.tool_capabilities.damage_groups[k] = v + math.floor(level / 3)
+		end
+		for _,g in pairs(state.tool_capabilities.groupcaps or {}) do
+			g.times = b.t.map(g.times, function(v)
+				return v * (1 - level / 5)
+			end)
+		end
+	end,
+})

@@ -3,6 +3,7 @@ local S = minetest.get_translator()
 awards.register_award("aurum_awards:eat", {
 	title = S"Partaking of the Land",
 	description = S"Eat any food.",
+	difficulty = 1,
 	trigger = {
 		type = "eat",
 		target = 1,
@@ -12,6 +13,7 @@ awards.register_award("aurum_awards:eat", {
 awards.register_award("aurum_awards:eat_good", {
 	title = S"Bring Only the Best",
 	description = S"Eat 10 morale-boosting foods.",
+	difficulty = 5,
 	requires = {"aurum_awards:eat"},
 	trigger = {
 		type = "eat",

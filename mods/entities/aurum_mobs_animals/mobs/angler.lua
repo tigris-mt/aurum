@@ -1,8 +1,81 @@
 local S = minetest.get_translator()
 
+local neutral = {
+	global_actions = {
+		"aurum_mobs:physics",
+		"aurum_mobs:environment",
+	},
+
+	global_events = {
+		stuck = "roam",
+		timeout = "roam",
+		punch = "fight",
+		lost = "roam",
+		interact = "",
+	},
+
+	states = {
+		init = {
+			events = {
+				init = "roam",
+			},
+		},
+
+		roam = {
+			actions = {
+				"aurum_mobs:find_habitat",
+				"aurum_mobs:find_random",
+			},
+
+			events = {
+				found_habitat = "go",
+				found_random = "go",
+			},
+		},
+
+		stand = {
+			actions = {
+				"aurum_mobs:timeout",
+			},
+		},
+
+		go = {
+			actions = {
+				"aurum_mobs:go",
+				"aurum_mobs:timeout",
+			},
+
+			events = {
+				reached = "stand",
+			},
+		},
+
+		go_fight = {
+			actions = {
+				"aurum_mobs:adrenaline",
+				"aurum_mobs:go",
+				"aurum_mobs:timeout",
+			},
+			events = {
+				reached = "fight",
+			},
+		},
+
+		fight = {
+			actions = {
+				"aurum_mobs:adrenaline",
+				"aurum_mobs:attack",
+			},
+			events = {
+				noreach = "go_fight",
+			},
+		},
+	},
+}
+
 aurum.mobs.register("aurum_mobs_animals:angler", {
 	description = S"Angler",
-	longdesc = S"A uniquely Aurum creature, this hostile fish inhabits all waters.\nSpecimens that live underground are uniquely powerful.",
+	longdesc = S"A uniquely Aurum creature, this fish inhabits all waters in that realm.\nSpecimens that live underground are uniquely powerful and hostile.",
 
 	initial_properties = {
 		visual = "sprite",
@@ -35,89 +108,19 @@ aurum.mobs.register("aurum_mobs_animals:angler", {
 				self._data.gemai.attack = b.t.combine(aurum.mobs.initial_data.attack, {
 					damage = {pierce = 16},
 				})
+
+				self._gemai_def = (function()
+					local def = table.copy(neutral)
+					table.insert(def.states.roam.actions, 1, "aurum_mobs:find_prey")
+					table.insert(def.states.stand.actions, 1, "aurum_mobs:find_prey")
+					def.global_events.found_prey = "go_fight"
+					return def
+				end)()
 			end
 		end,
 	},
 
-	gemai = {
-		global_actions = {
-			"aurum_mobs:physics",
-			"aurum_mobs:environment",
-		},
-
-		global_events = {
-			stuck = "roam",
-			timeout = "roam",
-			punch = "fight",
-			lost = "roam",
-			interact = "",
-		},
-
-		states = {
-			init = {
-				events = {
-					init = "roam",
-				},
-			},
-
-			roam = {
-				actions = {
-					"aurum_mobs:find_prey",
-					"aurum_mobs:find_habitat",
-					"aurum_mobs:find_random",
-				},
-
-				events = {
-					found_prey = "go_fight",
-					found_habitat = "go",
-					found_random = "go",
-				},
-			},
-
-			stand = {
-				actions = {
-					"aurum_mobs:find_prey",
-					"aurum_mobs:timeout",
-				},
-
-				events = {
-					found_prey = "go_fight",
-				},
-			},
-
-			go = {
-				actions = {
-					"aurum_mobs:go",
-					"aurum_mobs:timeout",
-				},
-
-				events = {
-					reached = "stand",
-				},
-			},
-
-			go_fight = {
-				actions = {
-					"aurum_mobs:adrenaline",
-					"aurum_mobs:go",
-					"aurum_mobs:timeout",
-				},
-				events = {
-					reached = "fight",
-				},
-			},
-
-			fight = {
-				actions = {
-					"aurum_mobs:adrenaline",
-					"aurum_mobs:attack",
-				},
-				events = {
-					noreach = "go_fight",
-				},
-			},
-		},
-	},
+	gemai = neutral,
 })
 
 aurum.mobs.register_spawn{

@@ -115,6 +115,9 @@ function aurum.mobs.register(name, def)
 			-- Create temporary data to hold pathing.
 			self._go = {}
 
+			-- Variable to hold the gemai def.
+			self._gemai_def = def.gemai
+
 			-- If the entity is new, run initialization.
 			if not self._data.initialized then
 				self:_mob_init()
@@ -129,7 +132,7 @@ function aurum.mobs.register(name, def)
 			self.object:set_hp(self._data.hp or self.object:get_hp())
 
 			-- Attach gemai.
-			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
+			gemai.attach_to_entity(self, self._gemai_def, self._data.gemai)
 
 			self._gemai.debug_desc = function(self)
 				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(vector.round(self.entity.object:get_pos())))

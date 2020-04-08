@@ -93,7 +93,7 @@ end
 -- Does the <item> itemstring match <test> itemstring?
 -- Test can be a group:groupname itemstring.
 function aurum.match_item(item, test)
-	local mod, name = test:match("([^:]*):(.*)")
+	local mod, name = (test or ""):match("([^:]*):(.*)")
 	mod = mod or ""
 	name = name or ""
 

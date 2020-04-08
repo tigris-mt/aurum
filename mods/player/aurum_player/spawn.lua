@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-minetest.register_on_respawnplayer(function(player)
+function aurum.player.spawn_totem(player)
 	local pos = minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint"))
 	if pos then
 		minetest.after(0, function()
@@ -8,25 +8,33 @@ minetest.register_on_respawnplayer(function(player)
 				aurum.player.teleport(player, pos)
 			end
 		end)
+		return true
 	end
-end)
+	return false
+end
+
+minetest.register_on_respawnplayer(aurum.player.spawn_totem)
 
 -- If no static spawn is set, respawn in the spawn realm.
 local realm_spawn = minetest.settings:get("aurum.spawn_realm") or "aurum:aurum"
-if not minetest.settings:get("static_spawnpoint") then
-	local function aurum_spawn(player)
-		-- If the player has a spawn point, do nothing.
-		if minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
-			return
-		end
-
+function aurum.player.spawn_realm(player)
+	-- If the player has a spawn point, do nothing.
+	if minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint")) then
+		return false
+	elseif minetest.string_to_pos(minetest.settings:get("static_spawnpoint")) then
+		player:set_pos(minetest.string_to_pos(minetest.settings:get("static_spawnpoint")))
+		return true
+	else
 		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn(realm_spawn), vector.new(0, 150, 0)), function(player)
 			aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
 		end)
+		return true
 	end
+end
 
-	minetest.register_on_newplayer(aurum_spawn)
-	minetest.register_on_respawnplayer(aurum_spawn)
+if not minetest.settings:get("static_spawnpoint") then
+	minetest.register_on_newplayer(aurum.player.spawn_realm)
+	minetest.register_on_respawnplayer(aurum.player.spawn_realm)
 end
 
 local box = {

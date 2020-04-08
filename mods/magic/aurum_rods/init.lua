@@ -1,7 +1,7 @@
 local S = minetest.get_translator()
 aurum.rods = {}
 
-aurum.tools.register("aurum_rods:rod", {
+local rod_def = {
 	description = S"Rod",
 	_doc_items_longdesc = "A bronze rod with a gold tip, intended for holding spells. It can be bespelled in a Rod Bespelling Table.",
 	_doc_items_usage = "Punch something (or nothing) to use the spell held within the rod. The rod will wear out faster with higher-level spells.",
@@ -44,7 +44,17 @@ aurum.tools.register("aurum_rods:rod", {
 			return stack
 		end
 	end,
-})
+}
+
+aurum.tools.register("aurum_rods:rod", rod_def)
+
+function aurum.rods.register(name, def)
+	def = b.t.combine(rod_def, def or {})
+	def.groups = b.t.combine(def.groups or {}, {not_in_creative_inventory = 1})
+	def._doc_items_create_entry = false
+	aurum.tools.register(name, def)
+	doc.add_entry_alias("tools", "aurum_rods:rod", "tools", name)
+end
 
 minetest.register_craft{
 	output = "aurum_rods:rod",
@@ -65,6 +75,12 @@ end
 function aurum.rods.set_item(stack, data)
 	stack:get_meta():set_string("spell", data.spell)
 	stack:get_meta():set_int("spell_level", data.level)
+	local spell = aurum.magic.spells[data.spell]
+	if spell then
+		stack:set_name(spell.rod(math.min(spell.max_level, data.level or 1)))
+	else
+		stack:set_name("aurum_rods:rod")
+	end
 	return aurum.tools.refresh_item(stack)
 end
 

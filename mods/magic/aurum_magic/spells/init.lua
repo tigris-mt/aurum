@@ -16,6 +16,9 @@ function aurum.magic.register_spell(name, def)
 		longdesc = nil,
 		max_level = 3,
 
+		-- Name of rod this spell uses according to level.
+		rod = function(level) return "aurum_rods:rod" end,
+
 		-- Attempt to apply spell requirements. Return true if all is ok.
 		apply_requirements = function(pointed_thing, level, owner)
 			return true

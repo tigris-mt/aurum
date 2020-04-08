@@ -46,7 +46,7 @@ aurum.magic.register_spell_ritual("growth", {
 
 	apply = function(at)
 		if not aurum.magic.spell_ritual_inv(at(vector.new(0, 1, 0)), "main", "growth", 9) then
-			return false
+			return false, S"There was nothing to bind the spell to."
 		end
 
 		for _,n in ipairs(fertilizer_wall) do

@@ -29,7 +29,7 @@ aurum.magic.register_spell_ritual("extinguish", {
 
 	apply = function(at)
 		if not aurum.magic.spell_ritual_inv(at(vector.new(0, 1, 0)), "main", "extinguish", 3) then
-			return false
+			return false, S"There was nothing to bind the spell to."
 		end
 
 		for _,pos in ipairs{

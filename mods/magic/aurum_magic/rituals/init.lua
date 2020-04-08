@@ -83,30 +83,37 @@ minetest.register_node("aurum_magic:altar", {
 			return vector.add(pos, actual)
 		end
 
+		local hit = false
+
 		for k,v in pairs(aurum.magic.rituals) do
-			local function check()
+			if (function()
 				for _,noff in ipairs(b.box.poses(v.size)) do
 					if v.protected and aurum.is_protected(at(noff), player, true) then
 						return false
 					end
 					if not vector.equals(noff, vector.new(0, 0, 0)) then
 						local nn = minetest.get_node(at(noff)).name
-						local need =  v.hashed_recipe[minetest.hash_node_position(noff)]
+						local need = v.hashed_recipe[minetest.hash_node_position(noff)]
 						if need and not aurum.match_item(nn, need) then
 							return false
 						end
 					end
 				end
 				return true
-			end
-
-			if check() then
-				if v.apply(at, player) then
+			end)() then
+				hit = true
+				local applied, message = v.apply(at, player)
+				if applied then
 					return
 				else
+					aurum.info_message(player, S("The ritual puffs up in smoke. @1", message or S"You could not identify the cause."))
 					break
 				end
 			end
+		end
+
+		if not hit then
+			aurum.info_message(player, S("You can't find any ritual to perform."))
 		end
 
 		-- Smoke effect on failure.

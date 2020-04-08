@@ -22,8 +22,8 @@ aurum.magic.register_ritual("aurum_rituals:home", {
 	apply = function(at, player)
 		-- Require Aurum.
 		if screalms.pos_to_realm(at(vector.new(0, 0, 0))) ~= "aurum:aurum" then
-			return false
+			return false, S"Only the energies of Aurum could support this ritual."
 		end
-		return aurum.player.spawn_totem(player) or aurum.player.spawn_realm(player)
+		return (aurum.player.spawn_totem(player) or aurum.player.spawn_realm(player)), S"There is nowhere for you to go."
 	end,
 })

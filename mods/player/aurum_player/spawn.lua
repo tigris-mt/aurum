@@ -15,7 +15,6 @@ end
 
 minetest.register_on_respawnplayer(aurum.player.spawn_totem)
 
--- If no static spawn is set, respawn in the spawn realm.
 local realm_spawn = minetest.settings:get("aurum.spawn_realm") or "aurum:aurum"
 function aurum.player.spawn_realm(player)
 	-- If the player has a spawn point, do nothing.
@@ -32,6 +31,7 @@ function aurum.player.spawn_realm(player)
 	end
 end
 
+-- If no static spawn is set, respawn in the spawn realm.
 if not minetest.settings:get("static_spawnpoint") then
 	minetest.register_on_newplayer(aurum.player.spawn_realm)
 	minetest.register_on_respawnplayer(aurum.player.spawn_realm)

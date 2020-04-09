@@ -82,3 +82,6 @@
 [submodule "mods/env/bright_night"]
 	path = mods/env/bright_night
 	url = https://github.com/tigris-mt/bright_night.git
+[submodule "mods/core/creative"]
+	path = mods/player/creative
+	url = https://github.com/tigris-mt/creative.git

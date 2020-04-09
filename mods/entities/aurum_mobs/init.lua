@@ -84,7 +84,7 @@ function aurum.mobs.register(name, def)
 	minetest.register_entity(":" .. name, b.t.combine({
 		initial_properties = b.t.combine({
 			hp_max = 1,
-			physical = 1,
+			physical = false,
 
 			collisionbox = def.box,
 			selectionbox = def.box,

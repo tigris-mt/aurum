@@ -7,7 +7,7 @@ aurum.magic.register_spell("teleport", {
 
 	rod = function(level) return "aurum_magic:teleport_rod_" .. level end,
 
-	apply_requirements = function(pointed_thing, _, player)
+	apply_requirements = function(pointed_thing)
 		return pointed_thing.type == "node"
 	end,
 

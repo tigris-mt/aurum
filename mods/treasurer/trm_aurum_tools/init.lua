@@ -41,7 +41,7 @@ minetest.register_on_mods_loaded(function()
 			-- Use queue of functions so we have access to the total number of tools registered to set rarity.
 			table.insert(queue, function()
 				local stack = ItemStack(k)
-				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.floor(stack:get_definition()._enchant_levels / 2)), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))
+				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.max(minetest.get_item_group(stack:get_name(), "trm_aurum_tools_preciousness"), math.floor(stack:get_definition()._enchant_levels / 2))), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))
 			end)
 		end
 	end

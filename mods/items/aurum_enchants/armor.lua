@@ -29,6 +29,7 @@ aurum.tools.register_enchant("health_augmentation", {
 aurum.tools.register_enchant("speed", {
 	categories = {
 		boots = true,
+		wings = true,
 	},
 	description = S"Speed",
 	longdesc = S"Increases the wearer's movement speed.",

@@ -2,6 +2,9 @@ local S = minetest.get_translator()
 
 local BASE_FLIGHT_SPEED = 7.5
 
+local entities = {}
+local timers = {}
+
 minetest.register_entity("aurum_wings:active_wings", {
 	initial_properties = {
 		physical = true,
@@ -51,6 +54,8 @@ minetest.register_entity("aurum_wings:active_wings", {
 				end
 				if damage > 0 or hy then
 					self.object:remove()
+					entities[player:get_player_name()] = nil
+					timers[player:get_player_name()] = 0
 				end
 			end
 			self.old_vel = v
@@ -58,24 +63,29 @@ minetest.register_entity("aurum_wings:active_wings", {
 	end,
 })
 
-local entities = {}
-local timers = {}
+local function get_on_ground(pos)
+	local def = minetest.registered_nodes[minetest.get_node(pos).name]
+	return def and ((def.walkable or (def.liquidtype or "none") ~= "none") or def.climbable)
+end
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
-		local standing = minetest.registered_nodes[gnode_augment.players[name].nodes.stand.name]
-		local on_ground = (standing.walkable or (standing.liquidtype or "none") ~= "none") or standing.climbable
-		if player:get_meta():get_int("aurum_wings:wings") == 1 and not on_ground and not player:get_attach() then
+		local has_wings = player:get_meta():get_int("aurum_wings:wings") == 1
+		local rpos = vector.round(player:get_pos())
+		local on_ground = get_on_ground(rpos)
+		local block_start = on_ground or get_on_ground(vector.subtract(rpos, vector.new(0, 1, 0)))
+		if has_wings and not block_start and not player:get_attach() then
 			timers[name] = (timers[name] or 0) + dtime
 			if timers[name] >= 1 then
 				entities[name] = minetest.add_entity(player:get_pos(), "aurum_wings:active_wings", name)
 				if entities[name] then
 					player:set_attach(entities[name], "", vector.new(), vector.new())
+					entities[name]:set_velocity(vector.multiply(player:get_player_velocity(), vector.new(1, 0.25, 1)))
 					timers[name] = 0
 				end
 			end
-		elseif on_ground or player:get_meta():get_int("aurum_wings:wings") ~= 1 then
+		elseif on_ground or not has_wings then
 			timers[name] = 0
 			if entities[name] then
 				entities[name]:remove()

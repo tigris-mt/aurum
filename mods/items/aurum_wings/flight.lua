@@ -1,5 +1,7 @@
 local S = minetest.get_translator()
 
+local BASE_FLIGHT_SPEED = 7.5
+
 minetest.register_entity("aurum_wings:active_wings", {
 	initial_properties = {
 		physical = true,
@@ -26,7 +28,7 @@ minetest.register_entity("aurum_wings:active_wings", {
 			self.object:remove()
 		else
 			local o = player:get_physics_override()
-			self.object:set_acceleration(vector.add(vector.add(vector.multiply(player:get_look_dir(), 5 * o.speed), vector.multiply(aurum.GRAVITY, 0.1 * o.gravity)), vector.multiply(self.object:get_velocity(), -0.25)))
+			self.object:set_acceleration(vector.add(vector.add(vector.multiply(player:get_look_dir(), BASE_FLIGHT_SPEED * o.speed), vector.multiply(aurum.GRAVITY, 0.1 * o.gravity)), vector.multiply(self.object:get_velocity(), -0.25)))
 
 			local v = self.object:get_velocity()
 			if v and self.old_vel then

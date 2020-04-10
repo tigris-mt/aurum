@@ -91,6 +91,8 @@ minetest.register_globalstep(function(dtime)
 				entities[name]:remove()
 				entities[name] = nil
 			end
+		elseif block_start then
+			timers[name] = 0
 		end
 	end
 end)

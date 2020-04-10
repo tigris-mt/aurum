@@ -10,6 +10,7 @@ aurum.tools.register("aurum_wings:wings", {
 	_enchants = {"armor", "wings"},
 	_enchant_levels = 9,
 	_eqtype = "chest",
+	on_use = gequip.on_use,
 	_eqdef = {
 		armor = {
 			burn = 0.75,

@@ -20,6 +20,7 @@ function aurum.equip.register_armor(name, def)
 		_enchants = def.enchants,
 		_enchant_levels = def.enchant_levels,
 		_eqtype = def.slot,
+		on_use = gequip.on_use,
 		_eqdef = {
 			armor = def.armor,
 			durability = def.durability,

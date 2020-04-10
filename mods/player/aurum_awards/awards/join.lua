@@ -3,6 +3,7 @@ local S = minetest.get_translator()
 awards.register_award("aurum_awards:join", {
 	title = S"The Titan is Here",
 	description = S"Arrive in the world of Aurum.",
+	icon = minetest.registered_items["aurum_scrolls:scroll_full"].inventory_image,
 	sound = false,
 })
 

@@ -19,6 +19,7 @@ minetest.register_entity("aurum_wings:active_wings", {
 		pointable = false,
 		visual = "wielditem",
 		wield_item = "aurum_wings:wings",
+		static_save = false,
 	},
 
 	groups = {immortal = 1},

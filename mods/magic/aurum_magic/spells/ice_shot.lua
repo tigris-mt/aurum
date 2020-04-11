@@ -39,7 +39,7 @@ aurum.magic.register_spell("ice_shot", {
 			gravity = aurum.GRAVITY,
 			pos = vector.add(player:get_pos(), vector.new(0, player:get_properties().eye_height, 0)),
 			velocity = vector.multiply(player:get_look_dir(), 15 + level * 5),
-			leave_origin = true,
+			skip_first = player,
 			data = {
 				level = level,
 			},

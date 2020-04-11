@@ -41,6 +41,10 @@ function aurum.mobs.add_doc(name)
 
 	a("")
 
+	if data.attack.fire_projectile then
+		a(S("This mob attacks at range."))
+	end
+
 	local damage = {}
 	for name,rating in b.t.spairs(data.attack.damage) do
 		table.insert(damage, ("%s: %d"):format(name, rating))

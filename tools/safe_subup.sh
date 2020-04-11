@@ -9,6 +9,7 @@ SAFE="
 	mods/core/gnode_augment
 	mods/env/bright_night
 	mods/env/fire
+	mods/entities/gprojectiles
 	mods/items/bucket
 	mods/items/doors
 	mods/items/dye

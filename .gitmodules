@@ -85,3 +85,6 @@
 [submodule "mods/core/creative"]
 	path = mods/player/creative
 	url = https://github.com/tigris-mt/creative.git
+[submodule "mods/entities/gprojectiles"]
+	path = mods/entities/gprojectiles
+	url = git@github.com:tigris-mt/gprojectiles.git

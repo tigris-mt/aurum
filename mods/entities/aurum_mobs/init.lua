@@ -185,9 +185,10 @@ function aurum.mobs.register(name, def)
 
 		on_death = function(self, killer)
 			self:_mob_death(killer)
-			if killer and killer:is_player() then
-				awards.notify_mob_kill(killer, self.name)
-				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, killer:get_player_name())
+			local player = aurum.get_player_blame(killer)
+			if player then
+				awards.notify_mob_kill(player, self.name)
+				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, player:get_player_name())
 				for _,drop in ipairs(self._gemai.data.drops) do
 					aurum.drop_item(self.object:get_pos(), ItemStack(drop))
 				end
@@ -197,13 +198,16 @@ function aurum.mobs.register(name, def)
 		on_punch = function(self, puncher)
 			if puncher ~= self.object then
 				aurum.effects.apply_tool_effects(puncher:get_wielded_item(), self.object)
-				self._gemai:fire_event("punch", {
-					other = gemai.ref_to_table(puncher),
-					target = {
-						type = "ref_table",
-						ref_table = gemai.ref_to_table(puncher),
-					},
-				}, {clear = true})
+				local ref_table = gemai.ref_to_table(aurum.get_player_blame(puncher) or puncher)
+				if ref_table then
+					self._gemai:fire_event("punch", {
+						other = ref_table,
+						target = {
+							type = "ref_table",
+							ref_table = ref_table,
+						},
+					}, {clear = true})
+				end
 			end
 		end,
 

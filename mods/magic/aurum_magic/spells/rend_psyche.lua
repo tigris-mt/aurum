@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.magic.register_spell("rend_psyche", {
 	description = S"Rend Psyche",
-	longdesc = S"Deals a tremendous amount of pure psychic damage to a target",
+	longdesc = S"Deals a tremendous amount of pure psychic damage to a target.",
 	max_level = 3,
 
 	apply_requirements = function(pointed_thing)

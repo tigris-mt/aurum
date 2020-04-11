@@ -139,6 +139,14 @@ function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
 	return minetest.rotate_and_place(itemstack, placer, pointed_thing, aurum.in_creative(placer), {invert_wall = invert_wall}, false)
 end
 
+function aurum.get_player_blame(object)
+	if object:is_player() then
+		return object
+	elseif object:get_luaentity() and object:get_luaentity()._player_blame then
+		return minetest.get_player_by_name(object:get_luaentity()._player_blame)
+	end
+end
+
 b.dofile("damage.lua")
 
 -- Node sounds.

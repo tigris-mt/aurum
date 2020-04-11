@@ -112,7 +112,6 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 aurum.mobs.register_spawn{
 	mob = "aurum_mobs_monsters:wose",
 	chance = 17 ^ 3,
-	biomes = aurum.biomes.get_all_group("forest"),
+	biomes = b.set.to_array(b.set._and(b.set(aurum.biomes.get_all_group("forest")), b.set(aurum.biomes.get_all_group("dark")))),
 	light_max = 9,
 }
-

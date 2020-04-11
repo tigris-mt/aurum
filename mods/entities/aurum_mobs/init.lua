@@ -140,6 +140,8 @@ function aurum.mobs.register(name, def)
 				self._gemai:fire_event("init")
 			end
 
+			self._last_pos = self.object:get_pos()
+
 			-- Tick state.
 			self._gemai:step(dtime)
 

@@ -19,7 +19,6 @@ minetest.register_entity("aurum_wings:active_wings", {
 		pointable = false,
 		visual = "wielditem",
 		wield_item = "aurum_wings:wings",
-		visual_size = vector.new(0.5, 0.5, 0.5),
 	},
 
 	groups = {immortal = 1},
@@ -38,6 +37,8 @@ minetest.register_entity("aurum_wings:active_wings", {
 		else
 			local o = player:get_physics_override()
 			self.object:set_acceleration(vector.add(vector.add(vector.add(vector.multiply(player:get_look_dir(), BASE_FLIGHT_SPEED * o.speed), vector.multiply(aurum.GRAVITY, 0.1 * o.gravity)), vector.multiply(self.object:get_velocity(), -0.25)), vector.new(math.random() - 0.5, math.random() - 0.5, math.random() - 0.5)))
+
+			self.object:set_rotation(vector.new(-player:get_look_vertical() - math.pi / 2, player:get_look_horizontal(), 0))
 
 			local v = self.object:get_velocity()
 			if v and self.old_vel then

@@ -1,4 +1,4 @@
-return function(def, overall, trunk_ratio, width_ratio)
+return function(def, overall, trunk_ratio, width_ratio, fruit)
 	overall = tonumber(overall) or 1
 	trunk_ratio = tonumber(trunk_ratio) or 1
 	width_ratio = tonumber(width_ratio) or 1.5
@@ -35,8 +35,9 @@ return function(def, overall, trunk_ratio, width_ratio)
 				for z=z_start,z_end,1 do
 					local i = area:index(x, y, z)
 					local dist = math.sqrt(dist_x + ((z - limit.z / 2) ^  2))
-					if y >= leaf_stop and dist < ss / 4 * trunk_ratio + def.leafdistance then
-						data[i] = l
+					local trs = ss / 4 * trunk_ratio
+					if y >= leaf_stop and dist < trs + def.leafdistance then
+						data[i] = (dist > trs + def.leafdistance / 2) and (fruit and b.t.weighted_choice{{{name = fruit}, 0.2}, {lp, 1}} or lp) or l
 					end
 					if dist < ss / 4 * trunk_ratio then
 						data[i] = t

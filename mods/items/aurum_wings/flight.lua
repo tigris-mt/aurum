@@ -26,6 +26,7 @@ minetest.register_entity("aurum_wings:active_wings", {
 
 	driver = nil,
 	player_damage = 0,
+	wear_timer = 0,
 
 	on_activate = function(self, staticdata)
 		self.driver = staticdata
@@ -41,6 +42,12 @@ minetest.register_entity("aurum_wings:active_wings", {
 			self.object:set_acceleration(vector.add(vector.add(vector.add(vector.multiply(player:get_look_dir(), BASE_FLIGHT_SPEED * o.speed), vector.multiply(aurum.GRAVITY, 0.1 * o.gravity)), vector.multiply(self.object:get_velocity(), -0.25)), vector.new(math.random() - 0.5, math.random() - 0.5, math.random() - 0.5)))
 
 			self.object:set_rotation(vector.new(-player:get_look_vertical() - math.pi / 2, player:get_look_horizontal(), 0))
+
+			self.wear_timer = self.wear_timer + dtime
+			if self.wear_timer > 5 then
+				aurum.wings.apply_wear(player, self.wear_timer)
+				self.wear_timer = 0
+			end
 
 			local v = self.object:get_velocity()
 			if v and self.old_vel then

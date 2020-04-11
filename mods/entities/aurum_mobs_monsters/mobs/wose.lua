@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_monsters:wose", {
 	description = S"Wose",
-	longdesc = S"Born in the depths of Primus Hortum, this creature desires only to reclaim dust to dust and mud to mud.",
+	longdesc = S"Born in the depths of Primus Hortum, this creature desires only to reclaim dust to dust and mud to mud. It is not aggressive in the sunlight.",
 
 	initial_properties = {
 		visual = "sprite",
@@ -51,6 +51,28 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 
 			roam = {
 				actions = {
+					"aurum_mobs:light_switch",
+				},
+
+				events = {
+					light_day = "passive_roam",
+					light_night = "hostile_roam",
+				},
+			},
+
+			stand = {
+				actions = {
+					"aurum_mobs:light_switch",
+				},
+
+				events = {
+					light_day = "passive_stand",
+					light_night = "hostile_stand",
+				},
+			},
+
+			hostile_roam = {
+				actions = {
 					"aurum_mobs:find_prey",
 					"aurum_mobs:find_habitat",
 					"aurum_mobs:find_random",
@@ -63,7 +85,7 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 				},
 			},
 
-			stand = {
+			hostile_stand = {
 				actions = {
 					"aurum_mobs:find_prey",
 					"aurum_mobs:timeout",
@@ -71,6 +93,24 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 
 				events = {
 					found_prey = "go_fight",
+				},
+			},
+
+			passive_roam = {
+				actions = {
+					"aurum_mobs:find_habitat",
+					"aurum_mobs:find_random",
+				},
+
+				events = {
+					found_habitat = "go",
+					found_random = "go",
+				},
+			},
+
+			passive_stand = {
+				actions = {
+					"aurum_mobs:timeout",
 				},
 			},
 

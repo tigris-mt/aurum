@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_monsters:ice_elemental", {
 	description = S"Ice Elemental",
-	longdesc = S"Stray energies wrapped into a frozen, shambling being.",
+	longdesc = S"Stray energies wrapped into a frozen, shambling being. It dissolves in sunlight.",
 
 	initial_properties = {
 		visual = "sprite",
@@ -31,6 +31,7 @@ aurum.mobs.register("aurum_mobs_monsters:ice_elemental", {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_mobs:sunlight_damage",
 		},
 
 		global_events = {

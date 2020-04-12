@@ -13,6 +13,10 @@ The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/
 * Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
 * Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)
 
+## Legacy Versions
+Aurum is currently in rapid development and thus has no need for legacy support yet.
+Only the latest major version of Aurum will be in development, but any older major versions will remain available.
+
 ## Notable Features
 * In-game help system and crafting guide.
 * Item enchanting system.

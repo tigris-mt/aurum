@@ -21,7 +21,7 @@ R{
 	data = {
 		author = "Freas Blonwin",
 		title = S"Siphon Discovered",
-		text = S"I have taken up the Siphon. Darkness has come to haunt me, but the weapon is too strong. I advise all! Do not these ancient instruments of cruelty lest you fall victim to karma.",
+		text = S"I have taken up the Siphon. Darkness has come to haunt me, but the weapon is too strong. I advise all! Do not use these ancient instruments of cruelty lest you fall victim to karma.",
 	},
 	groups = C("general"),
 }
@@ -31,6 +31,15 @@ R{
 		author = "Niodyasto Vatesai",
 		title = S"Found Something",
 		text = S"It's a siphon. Good weapon. I feel powerful. There are marks on the hilt from a hand twice as big as mine. I give it an iron out of gold rating.",
+	},
+	groups = C("general"),
+}
+
+R{
+	data = {
+		author = "Pell Morin",
+		title = S"Magical Flight",
+		text = S"There exists a class of powerful magical items, known to the learned as Wings. To obtain them is said to be the pinnacle of an enchanters career.",
 	},
 	groups = C("general"),
 }

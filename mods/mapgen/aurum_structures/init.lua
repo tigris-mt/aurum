@@ -1,3 +1,3 @@
 aurum.structures = {}
 
-b.dodir("structures")
+b.dodir("structures", true)

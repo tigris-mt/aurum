@@ -23,11 +23,11 @@ function aurum.features.register_decoration(def)
 		-- Called on offsetting, return new pos or nil to cancel placement.
 		on_offset = function(base_context) return base_context.pos end,
 
-		-- Schematic table.
+		-- Schematic specifier.
 		schematic = nil,
 
 		-- Schematic function, if table is nil.
-		-- Returns table or nil to cancel placement.
+		-- Returns specifier or nil to cancel placement.
 		make_schematic = function(base_context) end,
 
 		force_placement = true,
@@ -51,10 +51,26 @@ function aurum.features.ph(n)
 	return "aurum_features:ph_" .. n
 end
 
+-- Special node, will be replaced with ignore before placed when reading schematics from a file.
+minetest.register_node("aurum_features:null", {
+	is_ground_content = false,
+	tiles = {"aurum_base_stone.png"},
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
+	},
+	paramtype = "light",
+	sunlight_propagates = true,
+	groups = {not_in_creative_inventory = 1, dig_handle = 3},
+	walkable = false,
+	drop = "",
+})
+
 for i=1,99 do
 	minetest.register_node(aurum.features.ph(i), {
 		is_ground_content = false,
-		groups = {not_in_creative_inventory = 1},
+		groups = {not_in_creative_inventory = 1, dig_immediate = 3},
 		buildable_to = true,
 		drop = "",
 	})
@@ -179,6 +195,15 @@ minetest.register_on_mods_loaded(function()
 					if base_context.pos then
 						local schematic = def.schematic or def.make_schematic(base_context)
 						if schematic then
+							if type(schematic) == "string" then
+								schematic = minetest.read_schematic(schematic, {})
+								for _,v in ipairs(schematic.data) do
+									if v.name == "aurum_features:null" then
+										v.name = "ignore"
+									end
+								end
+							end
+
 							-- Random rotation 0 to 270 degrees.
 							local rotation = math.random(0, 3)
 

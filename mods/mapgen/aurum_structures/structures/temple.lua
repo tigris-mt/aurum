@@ -1,16 +1,9 @@
-local M = {}
-aurum.structures.temples = M
-
 local PH_SCROLL = 1
 local PH_ZECKWEAVER = 2
 
-local function f(path)
-	return minetest.get_modpath(minetest.get_current_modname()) .. "/schematics/" .. path
-end
-
 local defs = {
 	{
-		schematic = f"temple_1.mts",
+		schematic = aurum.structures.f"temple_1.mts",
 		offset = -3,
 	},
 }

@@ -49,6 +49,7 @@ function aurum_shape.register_shape(name, shape)
 			type = "fixed",
 			fixed = shape.fixed,
 		},
+		paramtype = "light",
 		_doc_items_create_entry = false,
 		_aurum_shape_shape = shape,
 	}, shape.def)

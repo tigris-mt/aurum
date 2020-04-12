@@ -101,7 +101,7 @@ aurum.biomes.trees.register(b.t.combine({
 
 aurum.biomes.register_all("aurum:primus", {
 	name = "primus_dry",
-	_groups = {"forest"},
+	_groups = {"forest", "barren"},
 	_color = b.color.convert"orange",
 	heat_point = 95,
 	humidity_point = 5,

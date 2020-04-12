@@ -40,6 +40,7 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {burn = 10},
 			distance = 32,
+			speed = 1 / 2.5,
 			fire_projectile = "aurum_mobs_monsters:loom_flare_shot",
 		}),
 	},

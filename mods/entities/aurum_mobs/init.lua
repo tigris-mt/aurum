@@ -12,6 +12,7 @@ aurum.mobs.mobs = {}
 aurum.mobs.shortcuts = {}
 aurum.mobs.initial_data = {
 	-- Items dropped upon death. Tables or strings, not ItemStacks.
+	-- Can be complex, see drops.lua
 	drops = {},
 	-- Where does this mob naturally live?
 	habitat_nodes = {},
@@ -194,8 +195,8 @@ function aurum.mobs.register(name, def)
 			if player then
 				awards.notify_mob_kill(player, self.name)
 				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, player:get_player_name())
-				for _,drop in ipairs(self._gemai.data.drops) do
-					aurum.drop_item(self.object:get_pos(), ItemStack(drop))
+				for _,drop in ipairs(aurum.mobs.helper_get_drops(self._gemai.data.drops, killer)) do
+					aurum.drop_item(self.object:get_pos(), drop)
 				end
 			end
 		end,
@@ -260,6 +261,7 @@ minetest.register_chatcommand("mob_spawn", {
 	end,
 })
 
+b.dofile("drops.lua")
 b.dofile("pathfinder.lua")
 
 b.dodir("actions")

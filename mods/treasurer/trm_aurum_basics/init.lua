@@ -63,7 +63,20 @@ minetest.register_on_mods_loaded(function()
 	-- Farming.
 	list({
 		"aurum_farming:carrot_seed",
+		"aurum_farming:pumpkin_seed",
+		"aurum_trees:pine_nuts",
 	}, 0.5, 2, {1, 5}, 0, {"seed"})
+
+	-- Food.
+	list({
+		"aurum_chef:flatbread",
+		"aurum_trees:pine_nuts",
+	}, 0.5, 2, {1, 5}, 0, {"food"})
+
+	-- Raw food.
+	list({
+		"aurum_chef:reed_dough",
+	}, 0.5, 2, {1, 5}, 0, {"raw_food"})
 
 	-- Dyes.
 	list(b.t.map(dye.dyes, function(v) return "dye:" .. v[1] end), 0.25, 1, {1, 20}, 0, {"crafting_component", "dye"})

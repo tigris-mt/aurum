@@ -7,6 +7,10 @@ local defs = {
 		schematic = aurum.structures.f"mine_2.mts",
 		offset = -7,
 	},
+	{
+		schematic = aurum.structures.f"mine_3.mts",
+		offset = -1,
+	},
 }
 
 for _,def in ipairs(defs) do

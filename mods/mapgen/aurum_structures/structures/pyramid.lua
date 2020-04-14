@@ -114,7 +114,9 @@ function aurum.structures.register_pyramid(def)
 
 			for _,pos in ipairs(c:ph(PH.SPAWNER)) do
 				minetest.set_node(pos, {name = "aurum_mobs:spawner"})
-				aurum.mobs.set_spawner(pos, "aurum_mobs_animals:spider")
+				aurum.mobs.set_spawner(pos, {
+					mob = "aurum_mobs_animals:spider",
+				})
 			end
 		end,
 	}, def.decoration))

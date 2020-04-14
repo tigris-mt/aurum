@@ -111,3 +111,8 @@ Toughless levels range from 0 to 3.
 	* `enchant_scroll`: Specifically enchantments.
 * `spell`: Spell or bespelled item.
 * `worker`: Such as smelter or enchanting table.
+
+# Mob Herds
+* `aurum:elemental`: Elemental forces.
+* `aurum:loom`: The loomspawn.
+* `aurum:people`: The people remaining in Aurum.

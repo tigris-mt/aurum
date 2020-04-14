@@ -2,8 +2,10 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_monsters:ice_elemental", {
 	description = S"Ice Elemental",
+	herd = "aurum:elemental",
 	longdesc = S"Stray energies wrapped into a frozen, shambling being. It dissolves in sunlight.",
 
+	box = {-0.35, -0.35, -0.35, 0.35, 0.85, 0.35},
 	initial_properties = {
 		visual = "sprite",
 		textures = {"aurum_mobs_monsters_ice_elemental.png"},
@@ -40,6 +42,7 @@ aurum.mobs.register("aurum_mobs_monsters:ice_elemental", {
 			punch = "fight",
 			lost = "roam",
 			interact = "",
+			herd_alerted = "",
 		},
 
 		states = {

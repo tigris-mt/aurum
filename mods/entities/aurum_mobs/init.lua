@@ -39,8 +39,8 @@ end
 
 local uids = storage:get_int("uids")
 
-local old = gemai.ref_to_table
-function gemai.ref_to_table(obj)
+local old = b.ref_to_table
+function b.ref_to_table(obj)
 	if obj:get_luaentity() and obj:get_luaentity()._aurum_mobs_id then
 		return {type = "aurum_mob", id = obj:get_luaentity()._aurum_mobs_id}
 	else
@@ -74,6 +74,8 @@ function aurum.mobs.register(name, def)
 		box = {-0.35, -0.35, -0.35, 0.35, 0.35, 0.35},
 		-- Entity def overrides.
 		entity_def = {},
+		-- Herd identifier. Used to determine who not to hunt and who to help.
+		herd = name,
 	}, def, {
 		name = name,
 	})
@@ -102,6 +104,7 @@ function aurum.mobs.register(name, def)
 		on_activate = function(self, staticdata, dtime)
 			uids = uids + 1
 			self._aurum_mobs_id = uids
+			self._aurum_mobs_def = def
 			storage:set_int("uids", uids)
 
 			self._data = b.t.combine({
@@ -191,7 +194,8 @@ function aurum.mobs.register(name, def)
 
 		on_death = function(self, killer)
 			self:_mob_death(killer)
-			local player = aurum.get_player_blame(killer)
+			local blame = aurum.get_blame(killer)
+			local player = (blame.type == "player") and minetest.get_player_by_name(blame.id)
 			if player then
 				awards.notify_mob_kill(player, self.name)
 				xmana.sparks(self.object:get_pos(), self._gemai.data.xmana, player:get_player_name())
@@ -204,7 +208,7 @@ function aurum.mobs.register(name, def)
 		on_punch = function(self, puncher)
 			if puncher ~= self.object then
 				aurum.effects.apply_tool_effects(puncher:get_wielded_item(), self.object)
-				local ref_table = gemai.ref_to_table(aurum.get_player_blame(puncher) or puncher)
+				local ref_table = aurum.get_blame(puncher) or b.ref_to_table(puncher)
 				if ref_table then
 					self._gemai:fire_event("punch", {
 						other = ref_table,
@@ -219,7 +223,7 @@ function aurum.mobs.register(name, def)
 
 		on_rightclick = function(self, clicker)
 			self._gemai:fire_event("interact", {
-				other = gemai.ref_to_table(clicker),
+				other = b.ref_to_table(clicker),
 			}, {clear = true})
 		end,
 	}, def.entity_def))

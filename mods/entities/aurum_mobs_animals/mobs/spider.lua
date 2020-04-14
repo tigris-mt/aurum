@@ -2,6 +2,7 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_animals:spider", {
 	description = S"Spider",
+	herd = "aurum:loom",
 	longdesc = S"A warped arthropod emerging from the strange machinations of the loom.",
 
 	initial_properties = {
@@ -42,6 +43,7 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 			punch = "fight",
 			lost = "roam",
 			interact = "",
+			herd_alerted = "",
 		},
 
 		states = {

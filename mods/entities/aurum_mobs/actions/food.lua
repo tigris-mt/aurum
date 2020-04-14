@@ -23,7 +23,7 @@ gemai.register_action("aurum_mobs:find_food", function(self)
 					self:fire_event("found_food", {
 						target = {
 							type = "ref_table",
-							ref_table = gemai.ref_to_table(obj),
+							ref_table = b.ref_to_table(obj),
 						},
 					})
 					return

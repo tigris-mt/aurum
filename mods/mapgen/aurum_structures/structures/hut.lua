@@ -33,7 +33,7 @@ aurum.features.register_decoration{
 		{
 			{op, op, op, op, op},
 			{op, op, op, op, op},
-			{op, op, op, op, op},
+			{op, op, "aurum_features:ph_2", op, op},
 			{op, op, op, op, op},
 			{op, op, op, op, op},
 			{op, op, op, op, op},
@@ -55,6 +55,15 @@ aurum.features.register_decoration{
 					count = math.random(-2, 1),
 					groups = {"lorebook_aurum", "lorebook_general"},
 				},
+			})
+		end
+
+		for _,pos in ipairs(c:ph(2)) do
+			minetest.set_node(pos, {name = "aurum_mobs:spawner"})
+			aurum.mobs.set_spawner(pos, {
+				mob = "aurum_npcs:nomad_hermit",
+				limit = -1,
+				replace = {name = op},
 			})
 		end
 	end,

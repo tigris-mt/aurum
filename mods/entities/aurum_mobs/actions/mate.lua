@@ -16,7 +16,7 @@ gemai.register_action("aurum_mobs:find_mate", function(self)
 					self:fire_event("found_mate", {
 						target = {
 							type = "ref_table",
-							ref_table = gemai.ref_to_table(object),
+							ref_table = b.ref_to_table(object),
 						},
 					})
 					return

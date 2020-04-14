@@ -24,6 +24,7 @@ gprojectiles.register("aurum_mobs_monsters:loom_flare_shot", {
 
 aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 	description = S"Loom Flare",
+	herd = "aurum:loom",
 	longdesc = S"An eruption of regret taken the form of an archer.",
 
 	initial_properties = {
@@ -45,7 +46,7 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 		}),
 	},
 
-	armor_groups = {burn = 50, chill = 120, psyche = 50},
+	armor_groups = {burn = 50, chill = 120, psyche = 80},
 
 	gemai = {
 		global_actions = {
@@ -56,6 +57,7 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 		global_events = {
 			punch = "fight",
 			interact = "",
+			herd_alerted = "fight",
 		},
 
 		states = {
@@ -82,6 +84,7 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 				events = {
 					lost_sight = "roam",
 					lost = "roam",
+					herd_alerted = "",
 				},
 			},
 		},

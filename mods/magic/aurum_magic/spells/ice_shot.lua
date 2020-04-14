@@ -17,10 +17,10 @@ gprojectiles.register("aurum_magic:ice_shot", {
 			local nn = minetest.get_node(thing.under).name
 			local def = minetest.registered_items[nn]
 			if def then
-				if def.walkable then
-					self:cancel()
-				elseif minetest.get_item_group(nn, "water") > 0 then
+				if minetest.get_item_group(nn, "water") > 0 then
 					minetest.set_node(thing.under, {name = "aurum_base:ice"})
+					self:cancel()
+				elseif def.walkable or (def._liquidtype or "none") ~= "none" then
 					self:cancel()
 				end
 			end
@@ -35,7 +35,7 @@ aurum.magic.register_spell("ice_shot", {
 
 	apply = function(_, level, player)
 		gprojectiles.spawn("aurum_magic:ice_shot", {
-			blame_player = player:get_player_name(),
+			blame = b.ref_to_table(player),
 			gravity = aurum.GRAVITY,
 			pos = vector.add(player:get_pos(), vector.new(0, player:get_properties().eye_height, 0)),
 			velocity = vector.multiply(player:get_look_dir(), 15 + level * 5),

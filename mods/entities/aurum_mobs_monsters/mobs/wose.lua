@@ -2,8 +2,10 @@ local S = minetest.get_translator()
 
 aurum.mobs.register("aurum_mobs_monsters:wose", {
 	description = S"Wose",
+	herd = "aurum:elemental",
 	longdesc = S"Born in the depths of Primus Hortum, this creature desires only to reclaim dust to dust and mud to mud. It is not aggressive in the sunlight.",
 
+	box = {-0.35, -0.35, -0.35, 0.35, 0.85, 0.35},
 	initial_properties = {
 		visual = "sprite",
 		textures = {"aurum_mobs_monsters_wose.png"},
@@ -40,6 +42,7 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 			punch = "fight",
 			lost = "roam",
 			interact = "",
+			herd_alerted = "",
 		},
 
 		states = {

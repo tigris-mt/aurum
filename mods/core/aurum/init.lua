@@ -139,11 +139,21 @@ function aurum.rotate_node_and_after(itemstack, placer, pointed_thing)
 	return minetest.rotate_and_place(itemstack, placer, pointed_thing, aurum.in_creative(placer), {invert_wall = invert_wall}, false)
 end
 
-function aurum.get_player_blame(object)
+-- Get a b ref table for who to blame for object.
+-- Returns nil if no ref table could be determined.
+-- Override in mods.
+function aurum.get_blame(object)
 	if object:is_player() then
-		return object
-	elseif object:get_luaentity() and object:get_luaentity()._player_blame then
-		return minetest.get_player_by_name(object:get_luaentity()._player_blame)
+		return b.ref_to_table(object)
+	else
+		local e = object:get_luaentity()
+		if e then
+			if e._aurum_mobs_id then
+				return b.ref_to_table(object)
+			elseif e._gprojectile then
+				return e._blame
+			end
+		end
 	end
 end
 

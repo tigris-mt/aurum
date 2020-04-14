@@ -14,7 +14,7 @@ playereffects.register_effect_type("aurum_realms:aether", S"Aether", nil, {"auru
 
 screalms.register("aurum:aether", {
 	description = S"The Aether",
-	size = vector.new(8000, 800, 8000),
+	size = vector.new(8000, 1024, 8000),
 
 	apply_player = function(player)
 		local x = math.floor((math.sin(minetest.get_gametime() / 100) + 1) / 2 * 127) + 127

@@ -2,7 +2,7 @@ local S = minetest.get_translator()
 
 screalms.register("aurum:loom", {
 	description = S("The Loom"),
-	size = vector.new(8000, 800, 8000),
+	size = vector.new(8000, 1024, 8000),
 
 	apply_player = function(player)
 		player:set_sky("#110000", "plain", {})

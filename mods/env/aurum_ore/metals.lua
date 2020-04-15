@@ -1,5 +1,15 @@
 local S = minetest.get_translator()
 
+aurum.ore.register("aurum_ore:gloria", {
+	description = S"Gloria",
+	-- Don't want traders selling gloria for gloria.
+	no_treasurer = true,
+	texture = "aurum_ore_white.png^[colorize:#ffaaaa:255^aurum_ore_bumps.png",
+	level = 1, depth = b.WORLD.max.y,
+	rarity = 15, num = 3, size = 3,
+	realms = {"aurum:primus", "aurum:aurum"},
+})
+
 aurum.ore.register("aurum_ore:copper", {
 	description = S"Copper",
 	texture = "aurum_ore_white.png^[colorize:#b87333:255^aurum_ore_bumps.png",

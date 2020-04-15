@@ -1,16 +1,20 @@
 -- How far should mobs search for objectives?
 aurum.mobs.SEARCH_RADIUS = 32
 
+function aurum.mobs.helper_mob_id_to_object(search_pos, search_radius, id)
+	for _,object in ipairs(minetest.get_objects_inside_radius(search_pos, search_radius)) do
+		if object:get_luaentity() and object:get_luaentity()._aurum_mobs_id == id then
+			return object
+		end
+	end
+end
+
 function aurum.mobs.helper_ref_entity(self, ref_table)
 	if ref_table.type == "player" then
 		local player = minetest.get_player_by_name(ref_table.id)
 		return player:get_hp() > 0 and player or nil
 	elseif ref_table.type == "aurum_mob" then
-		for _,object in ipairs(minetest.get_objects_inside_radius(self.entity.object:get_pos(), aurum.mobs.SEARCH_RADIUS)) do
-			if object:get_luaentity() and object:get_luaentity()._aurum_mobs_id == ref_table.id then
-				return object
-			end
-		end
+		return aurum.mobs.helper_mob_id_to_object(self.entity.object:get_pos(), aurum.mobs.SEARCH_RADIUS, ref_table.id)
 	end
 end
 

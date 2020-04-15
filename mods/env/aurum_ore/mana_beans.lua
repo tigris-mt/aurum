@@ -7,6 +7,8 @@ aurum.ore.register("aurum_ore:mana_beans", {
 	rarity = 8, num = 3, size = 2,
 	growths = {-200, -400},
 
+	realms = {"aurum:primus", "aurum:aurum"},
+
 	ore = "aurum_ore:mana_bean_deposit",
 	ore_override = {
 		_doc_items_longdesc = S"A small deposit of mana. It is not very pure, but still useful.",

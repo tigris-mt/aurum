@@ -48,12 +48,47 @@ aurum.mobs.register("aurum_npcs:nomad_hermit", {
 		}),
 	},
 
+	entity_def = {
+		_mob_init = function(self)
+			local function t(...)
+				return (treasurer.select_random_treasures(1, ...)[1] or ItemStack""):to_string()
+			end
+			self._data.gemai.trades = {
+				{
+					cost = "aurum_ore:gloria_ingot 2",
+					item = t(0, 2),
+					has = 4,
+					max = 4,
+				},
+				{
+					cost = "aurum_ore:gloria_ingot 4",
+					item = t(0, 4),
+					has = 2,
+					max = 2,
+				},
+				{
+					cost = "aurum_ore:gloria_ingot 6",
+					item = t(0, 6),
+					has = 1,
+					max = 1,
+				},
+				{
+					cost = "aurum_ore:gloria_ingot 6",
+					item = t(0, 4, "scroll"),
+					has = 2,
+					max = 2,
+				},
+			}
+		end,
+	},
+
 	armor_groups = {psyche = 80},
 
 	gemai = {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_npcs:trading_regen",
 		},
 
 		global_events = {

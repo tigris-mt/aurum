@@ -20,11 +20,13 @@ minetest.register_on_mods_loaded(function()
 	-- Ore products.
 	local num_ores = #b.t.keys(aurum.ore.ores)
 	for k,v in pairs(aurum.ore.ores) do
-		if v.ingot then
-			treasurer.register_treasure(v.ingot, 0.3 / num_ores, v.level, {1, 10}, 0, {"processed"})
-		end
-		if v.block then
-			treasurer.register_treasure(v.block, 0.1 / num_ores, v.level + 1, {1, 10}, 0, {"processed"})
+		if not v.no_treasurer then
+			if v.ingot then
+				treasurer.register_treasure(v.ingot, 0.3 / num_ores, v.level, {1, 10}, 0, {"processed"})
+			end
+			if v.block then
+				treasurer.register_treasure(v.block, 0.1 / num_ores, v.level + 1, {1, 10}, 0, {"processed"})
+			end
 		end
 	end
 

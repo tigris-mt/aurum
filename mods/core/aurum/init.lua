@@ -152,6 +152,8 @@ function aurum.get_blame(object)
 				return b.ref_to_table(object)
 			elseif e._gprojectile then
 				return e._blame
+			elseif e.name == "aurum_effects:dummy" then
+				return e._blame
 			end
 		end
 	end

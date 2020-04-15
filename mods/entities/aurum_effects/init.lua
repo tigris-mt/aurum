@@ -9,9 +9,9 @@ doc.add_category("aurum_effects:effects", {
 	build_formspec = doc.entry_builders.text,
 })
 
--- Add the effect <name> at <level> to <object> for <duration>.
+-- Add the effect <name> at <level> to <object> for <duration>, blaming <blame> ref_table.
 -- Will do nothing if <object> already has <name> at a higher level, otherwise will replace any current <name> effect.
-function aurum.effects.add(object, name, level, duration)
+function aurum.effects.add(object, name, level, duration, blame)
 	local def = aurum.effects.effects[name]
 
 	if object:is_player() then
@@ -23,6 +23,7 @@ function aurum.effects.add(object, name, level, duration)
 		for i=1,level-1 do
 			playereffects.cancel_effect_type(name .. "_" .. i, true, object:get_player_name())
 		end
+		object:get_meta():set_string("aurum_effects:blame_" .. name, minetest.serialize(blame))
 		return playereffects.apply_effect_type(name .. "_" .. level, duration, object, 0)
 	else
 		local mob = aurum.mobs.get_mob(object)
@@ -33,11 +34,13 @@ function aurum.effects.add(object, name, level, duration)
 
 			mob.data.status_effects[name] = {
 				duration = duration,
-				next = def.repeat_interval,
+				next = 0,
 				level = level,
+				blame = blame,
 			}
 
 			def.apply(object, level)
+			return true
 		end
 	end
 	return false
@@ -58,23 +61,20 @@ function aurum.effects.remove(object, name)
 	end
 end
 
--- Get the level of effect <name> on <object> or false if it does not have that effect.
+-- Get the {level = x, [blame = x]} of effect <name> on <object> or nil if it does not have that effect.
 function aurum.effects.has(object, name)
 	if object:is_player() then
 		for level=1,aurum.effects.effects[name].maxlevel do
 			if playereffects.has_effect_type(object:get_player_name(), name .. "_" .. level) then
-				return level
+				return {level = level, blame = minetest.deserialize(object:get_meta():get_string("aurum_effects:blame_" .. name))}
 			end
 		end
 	else
 		local mob = aurum.mobs.get_mob(object)
 		if mob then
-			if mob.data.status_effects[name] then
-				return mob.data.status_effects[name].level
-			end
+			return mob.data.status_effects[name]
 		end
 	end
-	return false
 end
 
 function aurum.effects.register(name, def)
@@ -149,19 +149,21 @@ function aurum.effects.register(name, def)
 	aurum.effects.effects[name] = def
 end
 
-function aurum.effects.apply_tool_effects(stack, object)
+function aurum.effects.apply_tool_effects(stack, object, blame)
 	for k,v in pairs(aurum.tools.get_item_enchants(stack)) do
 		local e = aurum.effects.enchants[k]
 		if e then
-			aurum.effects.add(object, e.name, v, e.tool_duration(v))
+			aurum.effects.add(object, e.name, v, e.tool_duration(v), blame)
 		end
 	end
 end
 
 minetest.register_on_punchplayer(function(player, hitter)
 	if player:get_hp() > 0 then
-		aurum.effects.apply_tool_effects(hitter:get_wielded_item(), player)
+		aurum.effects.apply_tool_effects(hitter:get_wielded_item(), player, aurum.get_blame(hitter) or b.ref_to_table(hitter))
 	end
 end)
+
+b.dofile("dummy.lua")
 
 b.dodir("effects")

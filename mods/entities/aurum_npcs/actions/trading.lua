@@ -11,11 +11,27 @@ local function get(name, id)
 	return mob, player
 end
 
+awards.register_trigger("trade", {
+	type = "counted_key",
+	progress = "@1/@2 traded",
+	auto_description = { "Trade: @2", "Trade: @1×@2" },
+	auto_description_total = { "Trade @1 item.", "Trade @1 items." },
+	key_is_item = true,
+	get_key = function(self, def)
+		return def.trigger.item
+	end,
+})
+
 local form
 form = smartfs.create("aurum_npcs:trading", function(state)
 	if state.param.error then
-		state:size(6, 0.25)
+		state:size(6, 2)
 		state:label(0, 0, "error_label", S("Could not trade: @1", state.param.error))
+		state:button(0, 1, 3, 1, "ok", S"Continue Trading", true):onClick(function(self, state, name)
+			state.param.error = nil
+			minetest.after(0, form.show, form, name, table.copy(state.param))
+		end)
+		state:button(3, 1, 3, 1, "stop", S"Stop Trading", true)
 	else
 		local mob, player = get(state.location.player, state.param.id)
 		if mob then
@@ -49,6 +65,7 @@ form = smartfs.create("aurum_npcs:trading", function(state)
 										inv:add_item("main", ItemStack(do_trade.item))
 										do_trade.has = do_trade.has - 1
 										mob:fire_event("traded", mob.data.params)
+										awards.notify_trade(player, ItemStack(do_trade.item):get_name(), ItemStack(do_trade.item):get_count())
 										minetest.after(0, form.show, form, name, table.copy(state.param))
 									else
 										state.param.error = S"You cannot hold this trade"

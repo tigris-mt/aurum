@@ -159,7 +159,10 @@ function aurum.mobs.register(name, def)
 			self._data.nametag_attributes = self.object:get_nametag_attributes()
 			self._data.armor_groups = self.object:get_armor_groups()
 			self._data.gemai = self._gemai.data
-			return minetest.serialize(self._data)
+
+			local staticdata = minetest.serialize(self._data)
+			assert(#staticdata < 0xF000, "mob staticdata too long: " .. staticdata .. "\n" .. dump(self._data))
+			return staticdata
 		end,
 
 		on_step = function(self, dtime)

@@ -151,7 +151,6 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
-					"aurum_mobs:alert_herd",
 					"aurum_mobs:go",
 					"aurum_mobs:timeout",
 				},

@@ -85,7 +85,6 @@ aurum.mobs.register("aurum_mobs_animals:golden_goose", {
 			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
-					"aurum_mobs:alert_herd",
 					"aurum_mobs:go",
 					"aurum_mobs:timeout",
 				},

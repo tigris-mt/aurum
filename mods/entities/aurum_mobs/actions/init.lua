@@ -3,7 +3,8 @@ aurum.mobs.SEARCH_RADIUS = 32
 
 function aurum.mobs.helper_ref_entity(self, ref_table)
 	if ref_table.type == "player" then
-		return minetest.get_player_by_name(ref_table.id)
+		local player = minetest.get_player_by_name(ref_table.id)
+		return player:get_hp() > 0 and player or nil
 	elseif ref_table.type == "aurum_mob" then
 		for _,object in ipairs(minetest.get_objects_inside_radius(self.entity.object:get_pos(), aurum.mobs.SEARCH_RADIUS)) do
 			if object:get_luaentity() and object:get_luaentity()._aurum_mobs_id == ref_table.id then

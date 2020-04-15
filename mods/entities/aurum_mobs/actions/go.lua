@@ -26,7 +26,7 @@ function aurum.mobs.helper_go(invert)
 		-- Get the positions.
 		local pos = vector.round(self.entity.object:get_pos())
 		local target_pos = aurum.mobs.helper_target_pos(self, self.data.params.target)
-		if not target_pos then
+		if not target_pos or vector.distance(pos, target_pos) > aurum.mobs.SEARCH_RADIUS then
 			self:fire_event("lost")
 			return
 		end

@@ -3,7 +3,7 @@ local NEAR = 2
 
 b.t.merge(aurum.mobs.initial_data, {
 	moves = 0,
-	pathfinder = aurum.mobs.DEFAULT_PATHFINDER,
+	pathfinder = {},
 })
 
 -- Random offset so mobs are not always exactly in the center of a node.
@@ -47,7 +47,7 @@ function aurum.mobs.helper_go(invert)
 			-- Rebuild the path if there was no path or the target changed.
 			if not go.path or go.target ~= target_hash then
 				go.target = target_hash
-				go.path = b.pathfinder.path(b.t.combine(self.data.pathfinder, {from = pos, to = target}))
+				go.path = b.pathfinder.path(b.t.combine(self.entity._aurum_mobs_def.pathfinder or aurum.mobs.DEFAULT_PATHFINDER, self.data.pathfinder, {from = pos, to = target}))
 			end
 
 			-- If no path was found, we're stuck.

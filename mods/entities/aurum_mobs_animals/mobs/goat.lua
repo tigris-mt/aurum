@@ -16,10 +16,10 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 		food = {"group:flora"},
 		habitat_nodes = {"group:soil"},
 		drops = {"aurum_animals:raw_meat 5", "aurum_animals:bone 6"},
-		xmana = 4,
-		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
+		pathfinder = {
 			jump_height = 3,
-		}),
+		},
+		xmana = 4,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 3, impact = 3},
 		}),

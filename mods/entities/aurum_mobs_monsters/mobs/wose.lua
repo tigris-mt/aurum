@@ -18,10 +18,10 @@ aurum.mobs.register("aurum_mobs_monsters:wose", {
 		drops = {"aurum_trees:pander_sapling", "aurum_farming:fertilizer"},
 		habitat_nodes = {"group:leaves"},
 		xmana = 20,
-		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
+		pathfinder = {
 			clearance_height = 2,
 			drop_height = -1,
-		}),
+		},
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 6, impact = 6},
 		}),

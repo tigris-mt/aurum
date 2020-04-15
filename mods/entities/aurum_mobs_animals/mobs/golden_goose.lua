@@ -12,11 +12,12 @@ aurum.mobs.register("aurum_mobs_animals:golden_goose", {
 		hp_max = 25,
 	},
 
+	pathfinder = aurum.mobs.DEFAULT_FLY_PATHFINDER,
+
 	initial_data = {
 		habitat_nodes = {"aurum_base:aether_shell", "aurum_base:aether_skin", "aurum_base:aether_flesh"},
 		drops = {"aurum_animals:raw_meat 3", "aurum_animals:bone 3", "aurum_ore:gold_ingot 2"},
 		xmana = 16,
-		pathfinder = aurum.mobs.DEFAULT_FLY_PATHFINDER,
 		movement = "fly",
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 5, impact = 10},

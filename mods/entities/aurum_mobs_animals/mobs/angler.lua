@@ -12,11 +12,12 @@ aurum.mobs.register("aurum_mobs_animals:angler", {
 		hp_max = 15,
 	},
 
+	pathfinder = aurum.mobs.DEFAULT_SWIM_PATHFINDER,
+
 	initial_data = {
 		habitat_nodes = {"group:water"},
 		drops = {"aurum_animals:raw_meat 2", "aurum_animals:bone 2"},
 		xmana = 6,
-		pathfinder = aurum.mobs.DEFAULT_SWIM_PATHFINDER,
 		movement = "swim",
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 8},

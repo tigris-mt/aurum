@@ -17,10 +17,10 @@ aurum.mobs.register("aurum_mobs_monsters:ice_elemental", {
 	initial_data = {
 		habitat_nodes = {"group:snow", "group:ice"},
 		xmana = 20,
-		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
+		pathfinder = {
 			clearance_height = 2,
 			drop_height = -1,
-		}),
+		},
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {blade = 6, chill = 8},
 		}),

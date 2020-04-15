@@ -37,9 +37,9 @@ aurum.mobs.register("aurum_npcs:nomad_hermit", {
 			},
 		},
 		xmana = 8,
-		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
+		pathfinder = {
 			clearance_height = 2,
-		}),
+		},
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {chill = 10, pierce = 5},
 			distance = 24,

@@ -17,9 +17,9 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 		habitat_nodes = {"group:clay", "group:stone", "aurum_base:regret"},
 		drops = {"aurum_animals:raw_meat 1"},
 		xmana = 8,
-		pathfinder = b.t.combine(aurum.mobs.DEFAULT_PATHFINDER, {
+		pathfinder = {
 			jump_height = 3,
-		}),
+		},
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 2, blade = 2},
 			effects = {

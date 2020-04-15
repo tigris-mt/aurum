@@ -161,7 +161,7 @@ function aurum.mobs.register(name, def)
 			self._data.gemai = self._gemai.data
 
 			local staticdata = minetest.serialize(self._data)
-			assert(#staticdata < 0xF000, "mob staticdata too long: " .. staticdata .. "\n" .. dump(self._data))
+			assert(#staticdata < 0xC000, "mob staticdata too long: " .. staticdata .. "\n" .. dump(self._data))
 			return staticdata
 		end,
 

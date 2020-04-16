@@ -68,6 +68,5 @@ function aurum.mobs.helper_set_pos(self, pos, keep_path)
 	if not keep_path then
 		self.entity._go.path = nil
 	end
-	self.entity.object:set_velocity(vector.subtract(pos, self.entity._last_pos))
 	self.entity.object:move_to(pos, true)
 end

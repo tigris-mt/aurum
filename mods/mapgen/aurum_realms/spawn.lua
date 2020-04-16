@@ -1,11 +1,56 @@
 local S = minetest.get_translator()
 
--- Get the central spawn point for a realm.
-function aurum.realms.get_spawn(id)
+local search_positions = b.dofile("search_positions.lua")
+
+function aurum.realms.get_spawn_prelim(id)
 	-- Start out at 0,0,0.
 	local pos = screalms.gpos(id, vector.new(0, 0, 0))
+	local s = screalms.get(id).aurum_spawn_biomes
+
+	if s then
+		-- Look for an appropriate biome nearby.
+		for _,try_s in ipairs(search_positions) do
+			local try = screalms.gpos(id, vector.add(vector.multiply(try_s, 8), vector.new(0, 2, 0)))
+			local biome = minetest.get_biome_data(try)
+			if biome then
+				local biome_name = minetest.get_biome_name(biome.biome)
+				if s[biome_name] then
+					pos = try
+					break
+				end
+			end
+		end
+	end
+
 	-- Try to get the natural spawn level there.
-	pos = b.t.combine(pos, {y = minetest.get_spawn_level(pos.x, pos.z)})
+	return (function()
+		for x=-64,64 do
+			for z=-64,64 do
+				local test = vector.add(pos, vector.new(x * 8, 2, z * 8))
+				local level = minetest.get_spawn_level(test.x, test.y)
+				if level then
+					if s then
+						local biome = minetest.get_biome_data(test)
+						if biome then
+							local biome_name = minetest.get_biome_name(biome.biome)
+							if s[biome_name] then
+								test.level = level
+								return test
+							end
+						end
+					else
+						test.level = level
+						return test
+					end
+				end
+			end
+		end
+	end)() or pos
+end
+
+-- Get the central spawn point for a realm.
+aurum.realms.get_spawn = b.cache.simple(function(id)
+	local pos = aurum.realms.get_spawn_prelim(id)
 
 	-- Go up until a free space is found.
 	for y=0,250 do
@@ -22,7 +67,7 @@ function aurum.realms.get_spawn(id)
 
 	-- Just fall back to 0,0,0 (or the spawn_level, if it was found).
 	return pos
-end
+end, function(id) return id end)
 
 minetest.register_chatcommand("rteleport", {
 	params = S"<realm>",
@@ -38,7 +83,7 @@ minetest.register_chatcommand("rteleport", {
 			return false, S"No such realm."
 		end
 
-		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn(param), vector.new(0, 150, 0)), function(player)
+		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn_prelim(param), vector.new(0, 150, 0)), function(player)
 			aurum.player.teleport(player, aurum.realms.get_spawn(param))
 		end)
 		return true, S("Teleporting to @1", param)

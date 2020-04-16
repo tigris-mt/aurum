@@ -24,7 +24,7 @@ function aurum.player.spawn_realm(player)
 		player:set_pos(minetest.string_to_pos(minetest.settings:get("static_spawnpoint")))
 		return true
 	else
-		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn(realm_spawn), vector.new(0, 150, 0)), function(player)
+		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn_prelim(realm_spawn), vector.new(0, 150, 0)), function(player)
 			aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
 		end)
 		return true

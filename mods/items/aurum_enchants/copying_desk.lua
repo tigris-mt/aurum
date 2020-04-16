@@ -34,12 +34,12 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 
 	local function mana_cost(add)
 		local scroll = aurum.scrolls.get(get("src"))
-		return math.ceil(((add + 4) ^ 2) * get_count() * (1 + (scroll and scroll.level or 1) / 5))
+		return math.ceil((((add + 2) * 3) ^ 2) * get_count() * (1 + ((scroll and scroll.level or 1) ^ 1.5)))
 	end
 
 	local function can_add(add)
 		local scroll = aurum.scrolls.get(get("src"))
-		return scroll and (aurum.tools.enchants[scroll.name].max_level >= scroll.level + add)
+		return scroll and (aurum.tools.enchants[scroll.name].max_level >= scroll.level + add) and (scroll.level + add) > 0
 	end
 
 	local function work(add, pos, player)
@@ -71,17 +71,26 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 		set("dst", stack)
 	end
 
+	if can_add(-1) then
+		state:button(3.75, 0, 2.25, 1, "reduce", S("Reduce (@1 mana)", mana_cost(-1))):onClick(function(self, state, player)
+			work(-1, state.location.pos, minetest.get_player_by_name(player))
+		end)
+	end
+
 	if can_add(0) then
-		state:button(3.75, 0, 2.25, 1, "copy", S("Copy (@1 mana)", mana_cost(0))):onClick(function(self, state, player)
+		state:button(3.75, 1, 2.25, 1, "copy", S("Copy (@1 mana)", mana_cost(0))):onClick(function(self, state, player)
 			work(0, state.location.pos, minetest.get_player_by_name(player))
 		end)
 	end
 
+	-- TODO: Improve mechanic?
+	--[[
 	if can_add(1) then
-		state:button(3.75, 1, 2.25, 1, "improve", S("Improve (@1 mana)", mana_cost(25))):onClick(function(self, state, player)
+		state:button(3.75, 1, 2.25, 1, "improve", S("Improve (@1 mana)", mana_cost(1))):onClick(function(self, state, player)
 			work(1, state.location.pos, minetest.get_player_by_name(player))
 		end)
 	end
+	]]
 
 	state:inventory(0, 2, 8, 4, "main")
 

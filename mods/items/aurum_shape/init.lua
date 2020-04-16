@@ -129,6 +129,6 @@ minetest.register_craft{
 	output = "aurum_shape:chisel 4",
 	recipe = {
 		{"aurum_base:sticky_stick"},
-		{"aurum_ore:iron_ingot"},
+		{"aurum_ore:tin_ingot"},
 	},
 }

@@ -52,6 +52,22 @@ minetest.register_craft{
 	},
 }
 
+aurum.ladders.register("aurum_ladders:bone", {
+	description = S"Bone Ladder",
+	_texture = "aurum_ladders_bone.png",
+	groups = {dig_handle = 2},
+	sounds = aurum.sounds.stone(),
+})
+
+minetest.register_craft{
+	output = "aurum_ladders:bone 6",
+	recipe = {
+		{"group:bone", "", "group:bone"},
+		{"group:bone", "group:bone", "group:bone"},
+		{"group:bone", "", "group:bone"},
+	},
+}
+
 aurum.ladders.register("aurum_ladders:iron", {
 	description = S"Iron Ladder",
 	_texture = aurum.ore.ores["aurum_ore:iron"].texture,
@@ -60,10 +76,10 @@ aurum.ladders.register("aurum_ladders:iron", {
 })
 
 minetest.register_craft{
-		output = "aurum_ladders:iron 12",
-		recipe = {
-			{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
-			{"aurum_ore:iron_ingot", "aurum_ore:iron_ingot", "aurum_ore:iron_ingot"},
-			{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
-		},
-	}
+	output = "aurum_ladders:iron 12",
+	recipe = {
+		{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
+		{"aurum_ore:iron_ingot", "aurum_ore:iron_ingot", "aurum_ore:iron_ingot"},
+		{"aurum_ore:iron_ingot", "", "aurum_ore:iron_ingot"},
+	},
+}

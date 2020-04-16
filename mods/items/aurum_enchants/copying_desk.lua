@@ -109,7 +109,7 @@ end)
 minetest.register_node("aurum_enchants:copying_desk", {
 	description = S"Enchanter's Copying Desk",
 	_doc_items_longdesc = S"The all-in-one solution to duplicating scrolls of enchantment.",
-	_doc_items_usagehelp = S"Insert a scroll of enchantment in the source slot. Insert empty scrolls in the target slot, and mana beans in the mana bean slot. By spending mana, you can then copy (possibly with improvements) the enchant to the empty scrolls. This will consume as many mana beans as there are empty scrolls.",
+	_doc_items_usagehelp = S"Insert a scroll of enchantment in the source slot. Insert empty scrolls in the target slot, and mana beans in the mana bean slot. By spending mana, you can then copy the enchant to the empty scrolls. This will consume as many mana beans as there are empty scrolls.",
 	tiles = {"aurum_trees_birch_planks.png^aurum_enchants_copying_desk.png", "aurum_trees_birch_planks.png"},
 	drawtype = "nodebox",
 	node_box = {

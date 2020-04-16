@@ -43,3 +43,13 @@ R{
 	},
 	groups = C("general"),
 }
+
+R{
+	data = {
+		author = "Rith Mûneygróber",
+		title = S"The Tale of Gloria",
+		text = S"In the stones of Aurum exists a pink metal called gloria. Of old it was known as the currency of empires, but now we barter in raw ingots. Still, it is a useful material when one knows how to put it to work. It is said that, for the people of Aurum, holding gloria is like holding a dim memory of the warmth of the One Who Has Left Us.",
+	},
+	groups = C("general"),
+}
+

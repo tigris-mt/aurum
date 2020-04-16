@@ -5,6 +5,8 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 		return
 	end
 
+	local refresh = false
+
 	-- Loop through all equipment.
 	local inv = player:get_inventory()
 	for _,def in pairs(gequip.types) do
@@ -15,9 +17,17 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 				local eqdef = gequip.get_eqdef(item)
 				if eqdef.durability then
 					item:add_wear(aurum.TOOL_WEAR / eqdef.durability)
+					-- If destroyed, refresh to have the player fall.
+					if item:get_count() == 0 then
+						refresh = true
+					end
 				end
 			end
 		end
 		inv:set_list(def.list_name, list)
+	end
+
+	if refresh then
+		gequip.refresh(player)
 	end
 end)

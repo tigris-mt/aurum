@@ -78,7 +78,7 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 	end
 
 	if can_add(1) then
-		state:button(3.75, 1, 2.25, 1, "improve", S("Improve (@1 mana)", mana_cost(1))):onClick(function(self, state, player)
+		state:button(3.75, 1, 2.25, 1, "improve", S("Improve (@1 mana)", mana_cost(25))):onClick(function(self, state, player)
 			work(1, state.location.pos, minetest.get_player_by_name(player))
 		end)
 	end

@@ -73,7 +73,9 @@ form = smartfs.create("aurum_enchants:table", function(state)
 				})),
 			})
 			-- Consume scroll.
-			meta:get_inventory():set_list("scroll", {})
+			local scroll = meta:get_inventory():get_list("scroll")[1]
+			scroll:take_item()
+			meta:get_inventory():set_list("scroll", {scroll})
 			-- Consume half the required mana.
 			xmana.mana(player, -xmana.level_to_mana(info.required_mana) / 2, true, "enchanting")
 		end

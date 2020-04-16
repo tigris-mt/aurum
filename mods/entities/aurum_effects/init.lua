@@ -64,7 +64,7 @@ end
 -- Get the {level = x, [blame = x]} of effect <name> on <object> or nil if it does not have that effect.
 function aurum.effects.has(object, name)
 	if object:is_player() then
-		for level=1,aurum.effects.effects[name].maxlevel do
+		for level=1,aurum.effects.effects[name].max_level do
 			if playereffects.has_effect_type(object:get_player_name(), name .. "_" .. level) then
 				return {level = level, blame = minetest.deserialize(object:get_meta():get_string("aurum_effects:blame_" .. name))}
 			end

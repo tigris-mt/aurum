@@ -147,3 +147,12 @@ minetest.register_ore(b.t.combine(blob, {
 	wherein = "aurum_base:dark_grass",
 	clust_scarcity = 10 * 10 * 10,
 }))
+
+minetest.register_craft{
+	output = "aurum_farming:fertilizer",
+	recipe = {
+		{"aurum_base:paste", "aurum_base:paste", "aurum_base:paste"},
+		{"aurum_base:paste", "aurum_base:paste", "aurum_base:paste"},
+		{"aurum_base:paste", "aurum_base:paste", "aurum_base:paste"},
+	},
+}

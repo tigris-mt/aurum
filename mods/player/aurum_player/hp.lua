@@ -18,7 +18,7 @@ aurum.player.hp_max_monoid = player_monoids.make_monoid{
     identity = aurum.player.default_hp_max,
     apply = function(n, player)
 		if n < player:get_hp() then
-			player:set_hp(n)
+			player:set_hp(n, {aurum_player_hp_max = true})
 		end
         player:set_properties{hp_max = n}
     end,

@@ -5,6 +5,11 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 		return
 	end
 
+	-- Max HP changing should not wear equipment.
+	if reason.aurum_player_hp_max then
+		return
+	end
+
 	local refresh = false
 
 	-- Loop through all equipment.
@@ -16,7 +21,7 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 				-- If the equipment has durability, then wear it accordingly.
 				local eqdef = gequip.get_eqdef(item)
 				if eqdef.durability then
-					item:add_wear(aurum.TOOL_WEAR / eqdef.durability)
+					item:add_wear(b.random_whole(aurum.TOOL_WEAR / eqdef.durability * (-hp_change / 10)))
 					-- If destroyed, refresh to have the player fall.
 					if item:get_count() == 0 then
 						refresh = true

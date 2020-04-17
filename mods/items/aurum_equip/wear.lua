@@ -22,7 +22,6 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 				local eqdef = gequip.get_eqdef(item)
 				if eqdef.durability then
 					item:add_wear(b.random_whole(aurum.TOOL_WEAR / eqdef.durability * (-hp_change / 10)))
-					-- If destroyed, refresh to have the player fall.
 					if item:get_count() == 0 then
 						refresh = true
 					end

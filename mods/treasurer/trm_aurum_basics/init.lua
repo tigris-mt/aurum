@@ -73,11 +73,13 @@ minetest.register_on_mods_loaded(function()
 	list({
 		"aurum_chef:flatbread",
 		"aurum_trees:pine_nuts",
+		"aurum_chef:meat_patty",
 	}, 0.5, 2, {1, 5}, 0, {"food"})
 
 	-- Raw food.
 	list({
 		"aurum_chef:reed_dough",
+		"aurum_chef:salt",
 	}, 0.5, 2, {1, 5}, 0, {"raw_food"})
 
 	-- Dyes.

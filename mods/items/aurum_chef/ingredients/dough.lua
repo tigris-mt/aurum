@@ -11,7 +11,6 @@ minetest.register_craft{
 	recipe = {
 		{"aurum_flora:reed", "aurum_flora:reed"},
 		{"aurum_flora:reed", "aurum_flora:reed"},
-		{"aurum_flora:reed", "aurum_base:bucket_water"},
+		{"aurum_flora:reed", "aurum_flora:reed"},
 	},
-	replacements = {{"aurum_base:bucket_water", "bucket:bucket_empty"}},
 }

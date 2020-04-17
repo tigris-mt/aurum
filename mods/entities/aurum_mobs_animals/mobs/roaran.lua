@@ -1,35 +1,26 @@
 local S = minetest.get_translator()
 
-aurum.mobs.register("aurum_mobs_animals:spider", {
-	description = S"Spider",
-	herd = "aurum:loom",
-	longdesc = S"A warped arthropod emerging from the strange machinations of the loom.",
+aurum.mobs.register("aurum_mobs_animals:roaran", {
+	description = S"Roaran",
+	longdesc = S"An aggressive hunter.",
 
 	initial_properties = {
 		visual = "sprite",
-		textures = {"aurum_mobs_animals_spider.png"},
+		textures = {"aurum_mobs_animals_roaran.png"},
 		visual_size = {x = 1, y = 1},
 
-		hp_max = 14,
+		hp_max = 20,
 	},
 
 	initial_data = {
-		habitat_nodes = {"group:clay", "group:stone", "aurum_base:regret", "aurum_base:gravel"},
-		drops = {"aurum_animals:raw_meat 1"},
-		xmana = 8,
-		pathfinder = {
-			jump_height = 3,
-		},
+		drops = {"aurum_animals:raw_meat 5", "aurum_animals:bone 6"},
+		habitat_nodes = {"group:soil", "group:sand"},
+		xmana = 10,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
-			damage = {pierce = 2, blade = 2},
-			effects = {
-				["aurum_effects:poison"] = {level = 1, duration = 2},
-			},
+			damage = {pierce = 2, blade = 4},
 		}),
-		base_speed = 2.5,
+		base_speed = 1.75,
 	},
-
-	armor_groups = {pierce = 80, blade = 80, fall = 0, psyche = 50, burn = 80},
 
 	gemai = {
 		global_actions = {
@@ -55,6 +46,28 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 
 			roam = {
 				actions = {
+					"aurum_mobs:light_switch",
+				},
+
+				events = {
+					light_day = "passive_roam",
+					light_night = "hostile_roam",
+				},
+			},
+
+			stand = {
+				actions = {
+					"aurum_mobs:light_switch",
+				},
+
+				events = {
+					light_day = "passive_stand",
+					light_night = "hostile_stand",
+				},
+			},
+
+			hostile_roam = {
+				actions = {
 					"aurum_mobs:find_prey",
 					"aurum_mobs:find_habitat",
 					"aurum_mobs:find_random",
@@ -67,7 +80,7 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 				},
 			},
 
-			stand = {
+			hostile_stand = {
 				actions = {
 					"aurum_mobs:find_prey",
 					"aurum_mobs:timeout",
@@ -75,6 +88,24 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 
 				events = {
 					found_prey = "go_fight",
+				},
+			},
+
+			passive_roam = {
+				actions = {
+					"aurum_mobs:find_habitat",
+					"aurum_mobs:find_random",
+				},
+
+				events = {
+					found_habitat = "go",
+					found_random = "go",
+				},
+			},
+
+			passive_stand = {
+				actions = {
+					"aurum_mobs:timeout",
 				},
 			},
 
@@ -114,23 +145,8 @@ aurum.mobs.register("aurum_mobs_animals:spider", {
 })
 
 aurum.mobs.register_spawn{
-	mob = "aurum_mobs_animals:spider",
-	chance = 19 ^ 3,
-	biomes = b.set.to_array(b.set._or(
-		b.set(aurum.biomes.get_all_group("aurum:aurum", {"under"})),
-		b.set._and(
-			b.set(aurum.biomes.get_all_group("aurum:aurum")),
-			b.set(aurum.biomes.get_all_group("clay")),
-			b.set(aurum.biomes.get_all_group("barren"))
-		),
-		b.set(aurum.biomes.get_all_group("aurum:loom"))
-	)),
+	mob = "aurum_mobs_animals:roaran",
+	chance = 24 ^ 3,
+	biomes = b.set.to_array(b.set._or(b.set(aurum.biomes.get_all_group("green")), b.set(aurum.biomes.get_all_group("desert")))),
 	light_max = 9,
 }
-
-aurum.mobs.register_spawn{
-	mob = "aurum_mobs_animals:spider",
-	chance = 19 ^ 3,
-	biomes = aurum.biomes.get_all_group("aurum:loom"),
-}
-

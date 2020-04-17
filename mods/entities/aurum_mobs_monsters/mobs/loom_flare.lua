@@ -57,7 +57,6 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 		global_events = {
 			punch = "fight",
 			interact = "",
-			herd_alerted = "fight",
 		},
 
 		states = {
@@ -84,7 +83,6 @@ aurum.mobs.register("aurum_mobs_monsters:loom_flare", {
 				events = {
 					lost_sight = "roam",
 					lost = "roam",
-					herd_alerted = "",
 				},
 			},
 		},

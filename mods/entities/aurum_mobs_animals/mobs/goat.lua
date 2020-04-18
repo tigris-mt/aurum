@@ -31,6 +31,7 @@ aurum.mobs.register("aurum_mobs_animals:goat", {
 			"aurum_mobs:environment",
 			"aurum_mobs:regen_milk",
 			"aurum_mobs:reduce_satiation",
+			"aurum_mobs:regen",
 		},
 
 		global_events = {

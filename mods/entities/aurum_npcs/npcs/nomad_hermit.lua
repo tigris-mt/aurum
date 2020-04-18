@@ -89,6 +89,7 @@ aurum.mobs.register("aurum_npcs:nomad_hermit", {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
 			"aurum_npcs:trading_regen",
+			"aurum_mobs:regen",
 		},
 
 		global_events = {

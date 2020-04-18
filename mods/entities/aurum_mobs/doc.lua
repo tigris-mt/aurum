@@ -8,6 +8,13 @@ doc.add_category("aurum_mobs:mobs", {
 function aurum.mobs.add_doc(name)
 	local def = aurum.mobs.mobs[name]
 
+	-- Get all possible actions of this mob.
+	local actions = b.set{}
+	actions = b.set._or(actions, b.set(def.gemai.global_actions or {}))
+	for k,v in pairs(def.gemai.states or {}) do
+		actions = b.set._or(actions, b.set(v.actions or {}))
+	end
+
 	local docs = {}
 
 	local function a(t)
@@ -26,23 +33,32 @@ function aurum.mobs.add_doc(name)
 	local data = b.t.combine(aurum.mobs.initial_data, def.initial_data)
 
 	a{
-		S("--- Ordinary Data ---") .. "\n",
+		S"--- Ordinary Data ---",
+		"",
 		S("This mob moves at a base speed of @1 n/s", data.base_speed),
 		S("This mob contains @1 mana", data.xmana),
 	}
 
-	if data.adrenaline.time > 0 then
+	if actions["aurum_mobs:adrenaline"] then
 		a(S("This mob has @1 seconds of adrenaline with a @2 second cooldown", data.adrenaline.time, data.adrenaline.cooldown))
+	end
+
+	if actions["aurum_mobs:regen"] then
+		if data.regen_rate < 1 then
+			a(S("This mob regenerates 1 HP every @1 seconds", 1 / data.regen_rate))
+		else
+			a(S("This mob regenerates @1 HP every second", data.regen_rate))
+		end
 	end
 
 	if #data.food > 0 then
 		a(S("This mob will eat @1", table.concat(data.food, ", ")))
 	end
 
-	a("")
+	a""
 
 	if data.attack.fire_projectile then
-		a(S("This mob attacks at range."))
+		a(S"This mob attacks at range")
 	end
 
 	local damage = {}

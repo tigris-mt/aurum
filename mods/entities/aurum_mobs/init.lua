@@ -107,10 +107,12 @@ function aurum.mobs.register(name, def)
 			self._aurum_mobs_def = def
 			storage:set_int("uids", uids)
 
+			local deserialized = minetest.deserialize(staticdata) or {}
+
 			self._data = b.t.combine({
 				initialized = false,
 				gemai = {},
-			}, minetest.deserialize(staticdata) or {})
+			}, deserialized.compressed and minetest.deserialize(minetest.decompress(deserialized.compressed)) or deserialized)
 
 			self._data.gemai = b.t.combine(b.t.deep_copy(b.t.combine(aurum.mobs.initial_data, def.initial_data)), self._data.gemai)
 
@@ -162,7 +164,7 @@ function aurum.mobs.register(name, def)
 
 			-- TODO: Remove debug asserts.
 			self._gemai:assert(b.box.collide_point(b.WORLD.box, self.object:get_pos()), "object out of world")
-			local staticdata = minetest.serialize(self._data)
+			local staticdata = minetest.serialize{compressed = minetest.compress(minetest.serialize(self._data))}
 			self._gemai:assert(#staticdata < 0xC000, "mob staticdata too long: " .. staticdata .. "\n" .. dump(self._data))
 			return staticdata
 		end,

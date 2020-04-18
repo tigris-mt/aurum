@@ -146,7 +146,7 @@ aurum.mobs.register("aurum_mobs_animals:roaran", {
 
 aurum.mobs.register_spawn{
 	mob = "aurum_mobs_animals:roaran",
-	chance = 24 ^ 3,
+	chance = 26 ^ 3,
 	biomes = b.set.to_array(b.set._or(b.set(aurum.biomes.get_all_group("green")), b.set(aurum.biomes.get_all_group("desert")))),
 	light_max = 9,
 }

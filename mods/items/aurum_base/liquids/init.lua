@@ -18,7 +18,7 @@ function aurum.base.register_liquid(name, def, flowing_def)
 		pointable = false,
 		diggable = false,
 		sounds = aurum.sounds.water(),
-		drowning = 1,
+		drowning = 2,
 		drop = "",
 		liquid_alternative_source = name .. "_source",
 		liquid_alternative_flowing = name .. "_flowing",

@@ -43,5 +43,5 @@ aurum.mobs.DEFAULT_SWIM_PATHFINDER = {
 	jump_height = -5,
 	drop_height = -1,
 	node_passable = function(_, node) return (minetest.registered_nodes[node.name].liquidtype or "none") ~= "none" or not minetest.registered_nodes[node.name].walkable end,
-	node_walkable = function(_, node) return (minetest.registered_nodes[node.name].liquidtype or "none") ~= "none" or minetest.registered_nodes[node.name].walkable end,
+	node_walkable = function(_, node) return (minetest.registered_nodes[node.name].liquidtype or "none") ~= "none" end,
 }

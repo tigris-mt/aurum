@@ -237,7 +237,7 @@ function aurum.mobs.register(name, def)
 end
 
 function aurum.mobs.spawn(pos, name, data)
-	return minetest.add_entity(pos, name, minetest.serialize(data or {}))
+	return minetest.add_entity(pos, name, (type(data) == "string") and data or minetest.serialize(data or {}))
 end
 
 minetest.register_privilege("aurum_mobs", {

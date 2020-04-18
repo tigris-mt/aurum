@@ -45,7 +45,7 @@ end
 -- Player may be name or objectref.
 -- Quiet option may be respected, for times when the player does not need to be aware of protection.
 function aurum.is_protected(pos, player_or_name, quiet)
-	local name = (type(player_or_name) == "string") and player_or_name or player_or_name:get_player_name()
+	local name = player_or_name and ((type(player_or_name) == "string") and player_or_name or player_or_name:get_player_name()) or ""
 	if minetest.is_protected(pos, name) then
 		if not quiet then
 			minetest.record_protection_violation(pos, name)

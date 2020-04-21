@@ -13,11 +13,14 @@ for k,v in pairs{
 	["aurum:aether"] = {
 		color = "#aaaaaa",
 	},
+	["aurum:ultimus"] = {
+		color = "#440044",
+	},
 } do
 	aurum.portals.register(k, v)
 end
 
-local base_realms = {"aurum:aurum", "aurum:primus"}
+local base_realms = {"aurum:aurum", "aurum:primus", "aurum:ultimus"}
 local hub_realms = {"aurum:loom", "aurum:aether"}
 
 function aurum.portals.register_ritual(realm, allowed_from, recipe, replace)
@@ -103,3 +106,15 @@ aurum.portals.register_ritual("aurum:aether", hub_realms, {
 	{vector.new(0, 3, -1), "group:crystal_tree"},
 	{vector.new(1, 3, -1), "group:crystal_tree"},
 }, "aurum_base:aether_flesh")
+
+aurum.portals.register_ritual("aurum:ultimus", hub_realms, {
+	{vector.new(-1, 0, -1), "group:clay_brick"},
+	{vector.new(1, 0, -1), "group:clay_brick"},
+	{vector.new(-1, 1, -1), "group:clay_brick"},
+	{vector.new(1, 1, -1), "group:clay_brick"},
+	{vector.new(-1, 2, -1), "group:clay_brick"},
+	{vector.new(1, 2, -1), "group:clay_brick"},
+	{vector.new(-1, 3, -1), "group:glass"},
+	{vector.new(0, 3, -1), "group:glass"},
+	{vector.new(1, 3, -1), "group:glass"},
+}, "aurum_base:glowing_glass_white")

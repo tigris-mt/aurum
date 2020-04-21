@@ -3,35 +3,37 @@ local idx = 0
 
 local biome_map = {}
 
+aurum.features.default_decoration_def = {
+	-- What nodes to place on?
+	place_on = {},
+
+	-- Rarity per node, conflicts with noise.
+	rarity = nil,
+
+	-- Noise parameters, conflicts with rarity.
+	noise_params = nil,
+
+	-- Biomes to generate in.
+	biomes = {},
+
+	-- Called on generation.
+	on_generated = function(context) end,
+
+	-- Called on offsetting, return new pos or nil to cancel placement.
+	on_offset = function(base_context) return base_context.pos end,
+
+	-- Schematic specifier.
+	schematic = nil,
+
+	-- Schematic function, if table is nil.
+	-- Returns specifier or nil to cancel placement.
+	make_schematic = function(base_context) end,
+
+	force_placement = true,
+}
+
 function aurum.features.register_decoration(def)
-	local def = b.t.combine({
-		-- What nodes to place on?
-		place_on = {},
-
-		-- Rarity per node, conflicts with noise.
-		rarity = nil,
-
-		-- Noise parameters, conflicts with rarity.
-		noise_params = nil,
-
-		-- Biomes to generate in.
-		biomes = {},
-
-		-- Called on generation.
-		on_generated = function(context) end,
-
-		-- Called on offsetting, return new pos or nil to cancel placement.
-		on_offset = function(base_context) return base_context.pos end,
-
-		-- Schematic specifier.
-		schematic = nil,
-
-		-- Schematic function, if table is nil.
-		-- Returns specifier or nil to cancel placement.
-		make_schematic = function(base_context) end,
-
-		force_placement = true,
-	}, def)
+	local def = b.t.combine(aurum.features.default_decoration_def, def)
 
 	assert(def.rarity or def.noise_params, "decoration must specify noise parameters or rarity per node")
 
@@ -165,6 +167,73 @@ function aurum.features.structure_context(base, box, at, rotation)
 	}, {__index = metatable})
 end
 
+function aurum.features.place_decoration(pos, def, random)
+	local base_context = {
+		pos = pos,
+		random = random,
+		-- For individual structure use.
+		s = {},
+	}
+	base_context.pos = def.on_offset(base_context)
+	if base_context.pos then
+		local schematic = def.schematic or def.make_schematic(base_context)
+		if schematic then
+			if type(schematic) == "string" then
+				schematic = minetest.read_schematic(schematic, {})
+				for _,v in ipairs(schematic.data) do
+					if v.name == "aurum_features:null" then
+						v.name = "ignore"
+					end
+				end
+			end
+
+			-- Random rotation 0 to 270 degrees.
+			local rotation = base_context.random(0, 3)
+
+			-- Calculate limit.
+			local limit = vector.subtract(schematic.size, 1)
+
+			-- Center offset.
+			local halflimit = vector.apply(vector.divide(limit, 2), function(v)
+				return math.sign(v) * math.floor(math.abs(v))
+			end)
+
+			-- Shift pos by center offset.
+			local real_pos = b.t.combine(vector.subtract(base_context.pos, halflimit), {y = base_context.pos.y})
+
+			local function at(offset)
+				local actual = vector.new(0, offset.y, 0)
+				if rotation == 0 then
+					actual.x = offset.x
+					actual.z = offset.z
+				elseif rotation == 1 then
+					actual.z = limit.x - offset.x
+					actual.x = offset.z
+				elseif rotation == 2 then
+					actual.x = limit.x - offset.x
+					actual.z = limit.z - offset.z
+				elseif rotation == 3 then
+					actual.z = offset.x
+					actual.x = limit.z - offset.z
+				else
+					error("invalid rotation: " .. rotation)
+				end
+				return vector.add(real_pos, actual)
+			end
+
+			-- Place schematic.
+			local rotname = {"0", "90", "180", "270"}
+			minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, def.force_placement)
+
+			-- Run callback.
+			def.on_generated(aurum.features.structure_context(base_context, b.box.new(
+				at(vector.new(0, 0, 0)),
+				at(limit)
+			), at, rotation))
+		end
+	end
+end
+
 minetest.register_on_mods_loaded(function()
 	minetest.register_on_generated(function(minp, maxp, seed)
 		local center = vector.round(vector.divide(vector.add(minp, maxp), 2))
@@ -185,71 +254,8 @@ minetest.register_on_mods_loaded(function()
 
 			-- Look for suitable places.
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
-				local base_context = {
-					pos = pos,
-					random = random,
-					-- For individual structure use.
-					s = {},
-				}
-				if base_context.random() < rarity then
-					base_context.pos = def.on_offset(base_context)
-					if base_context.pos then
-						local schematic = def.schematic or def.make_schematic(base_context)
-						if schematic then
-							if type(schematic) == "string" then
-								schematic = minetest.read_schematic(schematic, {})
-								for _,v in ipairs(schematic.data) do
-									if v.name == "aurum_features:null" then
-										v.name = "ignore"
-									end
-								end
-							end
-
-							-- Random rotation 0 to 270 degrees.
-							local rotation = base_context.random(0, 3)
-
-							-- Calculate limit.
-							local limit = vector.subtract(schematic.size, 1)
-
-							-- Center offset.
-							local halflimit = vector.apply(vector.divide(limit, 2), function(v)
-								return math.sign(v) * math.floor(math.abs(v))
-							end)
-
-							-- Shift pos by center offset.
-							local real_pos = b.t.combine(vector.subtract(base_context.pos, halflimit), {y = base_context.pos.y})
-
-							local function at(offset)
-								local actual = vector.new(0, offset.y, 0)
-								if rotation == 0 then
-									actual.x = offset.x
-									actual.z = offset.z
-								elseif rotation == 1 then
-									actual.z = limit.x - offset.x
-									actual.x = offset.z
-								elseif rotation == 2 then
-									actual.x = limit.x - offset.x
-									actual.z = limit.z - offset.z
-								elseif rotation == 3 then
-									actual.z = offset.x
-									actual.x = limit.z - offset.z
-								else
-									error("invalid rotation: " .. rotation)
-								end
-								return vector.add(real_pos, actual)
-							end
-
-							-- Place schematic.
-							local rotname = {"0", "90", "180", "270"}
-							minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, def.force_placement)
-
-							-- Run callback.
-							def.on_generated(aurum.features.structure_context(base_context, b.box.new(
-								at(vector.new(0, 0, 0)),
-								at(limit)
-							), at, rotation))
-						end
-					end
+				if random() < rarity then
+					aurum.features.place_decoration(pos, def, random)
 				end
 			end
 		end

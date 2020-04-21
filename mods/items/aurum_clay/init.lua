@@ -17,7 +17,7 @@ end)
 aurum.dye.register_node("aurum_clay:brick", {
 	description = S"Clay Brick",
 	tiles = {"aurum_clay_brick.png"},
-	groups = {dig_pick = 2, shapable = 1},
+	groups = {dig_pick = 2, shapable = 1, clay_brick = 1},
 	sounds = aurum.sounds.stone(),
 	is_ground_content = false,
 })

@@ -4,7 +4,7 @@ local search_positions = b.dofile("search_positions.lua")
 
 function aurum.realms.get_spawn_prelim(id)
 	-- Start out at 0,0,0.
-	local pos = screalms.gpos(id, vector.new(0, 0, 0))
+	local pos = screalms.gpos(id, screalms.get(id).aurum_default_spawn or vector.new(0, 0, 0))
 	local s = screalms.get(id).aurum_spawn_biomes
 
 	if s then

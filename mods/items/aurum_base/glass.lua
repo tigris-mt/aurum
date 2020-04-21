@@ -19,3 +19,18 @@ minetest.register_craft{
 	output = "aurum_base:glass_white",
 	recipe = "aurum_base:sand",
 }
+
+aurum.dye.register_node("aurum_base:glowing_glass", {
+	description = S"Glowing Glass",
+	tiles = {
+		"aurum_base_glass.png",
+		"aurum_base_glass_detail.png",
+	},
+	groups = {dig_dig = 3, dig_handle = 2, glowing_glass = 1, shapable = 1},
+	sounds = aurum.sounds.glass(),
+	paramtype = "light",
+	drawtype = "glasslike_framed_optional",
+	sunlight_propagates = true,
+	use_texture_alpha = true,
+	light_source = 12,
+}, "group:glowing_glass")

@@ -162,11 +162,7 @@ function aurum.mobs.register(name, def)
 			self._data.armor_groups = self.object:get_armor_groups()
 			self._data.gemai = self._gemai.data
 
-			-- TODO: Remove debug asserts.
-			self._gemai:assert(b.box.collide_point(b.WORLD.box, self.object:get_pos()), "object out of world")
-			local staticdata = minetest.serialize{compressed = minetest.compress(minetest.serialize(self._data))}
-			self._gemai:assert(#staticdata < 0xC000, "mob staticdata too long: " .. staticdata .. "\n" .. dump(self._data))
-			return staticdata
+			return minetest.serialize{compressed = minetest.compress(minetest.serialize(self._data))}
 		end,
 
 		on_step = function(self, dtime)

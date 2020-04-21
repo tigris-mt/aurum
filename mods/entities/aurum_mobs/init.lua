@@ -138,7 +138,11 @@ function aurum.mobs.register(name, def)
 			gemai.attach_to_entity(self, def.gemai, self._data.gemai)
 
 			self._gemai.debug_desc = function(self)
-				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(vector.round(self.entity.object:get_pos())))
+				return ("(entity) %s %s"):format(self.entity._aurum_mob.name, minetest.pos_to_string(vector.round(self.entity.object:get_pos() or vector.new())))
+			end
+
+			self._gemai.is_valid = function(self)
+				return self.entity.object:get_pos() ~= nil
 			end
 
 			-- If the entity is new, fire the init event to start the gemai state.
@@ -147,6 +151,9 @@ function aurum.mobs.register(name, def)
 			end
 
 			self._last_pos = self.object:get_pos()
+
+			-- Tick state.
+			self._gemai:step(dtime)
 
 			self._data.initialized = true
 		end,

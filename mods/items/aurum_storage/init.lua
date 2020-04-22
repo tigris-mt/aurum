@@ -141,6 +141,7 @@ aurum.storage.register("aurum_storage:scroll_hole", {
 		tiles = {"aurum_base_stone_brick.png"},
 		sounds = aurum.sounds.stone(),
 		groups = {dig_pick = 2},
+		paramtype = "light",
 	},
 	valid_item = function(stack)
 		return minetest.get_item_group(stack:get_name(), "scroll") > 0 or minetest.get_item_group(stack:get_name(), "book") > 0

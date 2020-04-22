@@ -19,6 +19,7 @@ minetest.register_node("aurum_farming:green_pumpkin", {
 			{-0.35, -0.5, -0.35, 0.35, 0.2, 0.35},
 		},
 	},
+	paramtype = "light",
 })
 
 minetest.register_craft{

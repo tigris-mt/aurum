@@ -31,8 +31,10 @@ minetest.register_abm{
 	nodenames = {"group:dirt_spread"},
 	neighbors = {"group:dirt_base"},
 
-	interval = 20,
-	chance = 10,
+	interval = 100,
+	chance = 1,
+
+	catch_up = false,
 
 	action = aurum.base.dirt_spread,
 }
@@ -48,8 +50,10 @@ minetest.register_abm{
 	label = "Dirt Smothering",
 	nodenames = {"group:dirt_smother"},
 
-	interval = 20,
-	chance = 10,
+	interval = 100,
+	chance = 1,
+
+	catch_up = false,
 
 	action = function(pos, node)
 		local above = vector.add(pos, vector.new(0, 1, 0))

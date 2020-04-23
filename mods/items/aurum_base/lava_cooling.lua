@@ -21,6 +21,7 @@ if minetest.settings:get_bool("aurum.base.cool_lava", true) then
 		neighbors = {"group:cools_lava"},
 		interval = 2,
 		chance = 2,
+		catch_up = false,
 		action = function(pos, node)
 			local def = minetest.registered_nodes[node.name]
 			minetest.set_node(pos, {name = def._lava_cool_node or "aurum_base:stone"})

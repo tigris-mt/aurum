@@ -12,7 +12,7 @@ end
 function aurum.mobs.helper_ref_entity(self, ref_table)
 	if ref_table.type == "player" then
 		local player = minetest.get_player_by_name(ref_table.id)
-		return player:get_hp() > 0 and player or nil
+		return (player and player:get_hp() > 0) and player or nil
 	elseif ref_table.type == "aurum_mob" then
 		return aurum.mobs.helper_mob_id_to_object(self.entity.object:get_pos(), aurum.mobs.SEARCH_RADIUS, ref_table.id)
 	end

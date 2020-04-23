@@ -65,7 +65,7 @@ end
 minetest.register_abm{
 	label = "Flora Spread",
 	nodenames = {"group:flora"},
-	interval = 20,
-	chance = 150,
+	interval = 120,
+	chance = 25,
 	action = aurum.flora.spread,
 }

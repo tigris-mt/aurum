@@ -101,7 +101,7 @@ local metatable = {
 		if self._ph[n] then
 			return self._ph[n]
 		end
-		local poses = b.t.shuffled(minetest.find_nodes_in_area(self.box.a, self.box.b, "aurum_features:ph_" .. n))
+		local poses = self:shuffled(minetest.find_nodes_in_area(self.box.a, self.box.b, "aurum_features:ph_" .. n))
 		self._ph[n] = poses
 		for _,pos in ipairs(poses) do
 			minetest.remove_node(pos)
@@ -115,8 +115,8 @@ local metatable = {
 	end,
 
 	-- Shuffled function. Could potentially use seed.
-	shuffled = function(self, ...)
-		return b.t.shuffled(...)
+	shuffled = function(self, t)
+		return b.t.shuffled(t, function(...) return self:random(...) end)
 	end,
 
 	-- Add treasures to list at pos.
@@ -175,6 +175,8 @@ minetest.register_on_mods_loaded(function()
 			return
 		end
 
+		local random = b.seed_random(seed + 0x574C745)
+
 		-- For all decorations registered with this biome...
 		for _,name in ipairs(biome_map[biome_name] or {}) do
 			local def = aurum.features.decorations[name]
@@ -185,8 +187,7 @@ minetest.register_on_mods_loaded(function()
 			for _,pos in ipairs(minetest.find_nodes_in_area_under_air(minp, maxp, def.place_on)) do
 				local base_context = {
 					pos = pos,
-					-- TODO: Use the seed for structure choices.
-					random = math.random,
+					random = random,
 					-- For individual structure use.
 					s = {},
 				}
@@ -205,7 +206,7 @@ minetest.register_on_mods_loaded(function()
 							end
 
 							-- Random rotation 0 to 270 degrees.
-							local rotation = math.random(0, 3)
+							local rotation = base_context.random(0, 3)
 
 							-- Calculate limit.
 							local limit = vector.subtract(schematic.size, 1)

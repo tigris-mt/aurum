@@ -1,18 +1,18 @@
 local S = minetest.get_translator()
 
-local function make_headstone(pos)
+local function make_headstone(pos, random)
 	local name = aurum.flavor.generate_name()
-	local age = math.random(16, 110)
+	local age = random(16, 110)
 	for _=1,4 do
 		if age > 50 then
-			age = age - math.max(0, math.random(-30, 35))
+			age = age - math.max(0, random(-30, 35))
 		end
 	end
 	gtextitems.set_node(pos, {
 		title = S("Grave of @1", name),
 		text = S("They lived @1 years before @2 took them. I buried them @3. In life, they were @4. That is all I know.\n\nRequiescat in pace, @5.",
 			age,
-			b.t.weighted_choice{
+			b.t.weighted_choice({
 				{(age > 60) and S"old age" or S"sudden disease", age / 70 * 5},
 				{S"battle", 1},
 				{S"magical battle", 0.25},
@@ -38,8 +38,8 @@ local function make_headstone(pos)
 				{S"extreme sport", 0.5},
 				{S"fire", 0.5},
 				{S"five tall men", 0.05},
-			},
-			b.t.weighted_choice{
+			}, random),
+			b.t.weighted_choice({
 				{S"quickly", 1},
 				{S"after some time", 1},
 				{S"respectfully", 1},
@@ -60,8 +60,8 @@ local function make_headstone(pos)
 				{S"with nobody around", 1},
 				{S"under the watchful night", 1},
 				{S"in the uncaring earth", 1},
-			},
-			b.t.weighted_choice{
+			}, random),
+			b.t.weighted_choice({
 				{S"humble", 1},
 				{S"filled with pride", 1},
 				{S"kind", 1},
@@ -97,7 +97,7 @@ local function make_headstone(pos)
 				{S"glamorous", 1},
 				{S"attractive", 1},
 				{S"one of five tall men", 0.05},
-			},
+			}, random),
 			name
 		),
 		author = S"the Headstoner",
@@ -135,14 +135,15 @@ minetest.register_decoration{
 local did = minetest.get_decoration_id("aurum_structures:graveyard")
 
 minetest.set_gen_notify("decoration", {did})
-minetest.register_on_generated(function()
+minetest.register_on_generated(function(_, _, seed)
 	local g = minetest.get_mapgen_object("gennotify")
 	local d = g["decoration#" .. did]
 	if d then
+		local random = b.seed_random(seed + 537)
 		for _,pos in ipairs(d) do
 			pos.y = pos.y + 1
 			if minetest.get_node(pos).name == "aurum_books:stone_tablet_written" then
-				make_headstone(pos)
+				make_headstone(pos, random)
 			end
 		end
 	end

@@ -49,7 +49,7 @@ aurum.features.register_decoration{
 	}),
 
 	on_generated = function(c)
-		for i=1,math.random(0, #c:ph(1)) do
+		for i=1,c:random(0, #c:ph(1)) do
 			minetest.set_node(c:ph(1)[i], {name = "aurum_storage:scroll_hole"})
 			c:treasures(c:ph(1)[i], "main", c:random(0, 2), {
 				{

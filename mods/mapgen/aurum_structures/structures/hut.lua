@@ -47,12 +47,12 @@ aurum.features.register_decoration{
 			minetest.set_node(ph[1], {name = "aurum_storage:box"})
 			c:treasures(ph[1], "main", c:random(2, 4), {
 				{
-					count = math.random(1, 3),
+					count = c:random(1, 3),
 					preciousness = {0, 2},
 					groups = {"building_block", "crafting_component"},
 				},
 				{
-					count = math.random(-2, 1),
+					count = c:random(-2, 1),
 					groups = {"lorebook_aurum", "lorebook_general"},
 				},
 			})

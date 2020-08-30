@@ -256,7 +256,7 @@ for _,def in ipairs(l) do
 				})
 			end
 
-			for i=1,math.random(0, #c:ph(2)) do
+			for i=1,c:random(0, #c:ph(2)) do
 				minetest.set_node(c:ph(2)[i], {name = "aurum_storage:box"})
 				c:treasures(c:ph(2)[i], "main", c:random(1, 3), {
 					{
@@ -267,7 +267,7 @@ for _,def in ipairs(l) do
 				})
 			end
 
-			for i=1,math.random(-2, #c:ph(3)) do
+			for i=1,c:random(-2, #c:ph(3)) do
 				minetest.set_node(c:ph(3)[i], {name = "aurum_storage:box"})
 				c:treasures(c:ph(3)[i], "main", c:random(1, 3), {
 					{
@@ -278,22 +278,22 @@ for _,def in ipairs(l) do
 				})
 			end
 
-			for i=1,math.random(0, #c:ph(4)) do
+			for i=1,c:random(0, #c:ph(4)) do
 				local possible = {
 					"aurum_cook:smelter",
 					"aurum_storage:box",
 					"aurum_stamp:stamper",
 				}
-				minetest.set_node(c:ph(4)[i], {name = possible[math.random(#possible)]})
+				minetest.set_node(c:ph(4)[i], {name = possible[c:random(#possible)]})
 			end
 
-			for i=1,math.random(-2, #c:ph(5)) do
+			for i=1,c:random(-2, #c:ph(5)) do
 				local possible = {
 					"aurum_enchants:table",
 					"aurum_enchants:copying_desk",
 					"aurum_rods:table",
 				}
-				minetest.set_node(c:ph(5)[i], {name = possible[math.random(#possible)]})
+				minetest.set_node(c:ph(5)[i], {name = possible[c:random(#possible)]})
 			end
 
 			if #c:ph(6) > 0 then

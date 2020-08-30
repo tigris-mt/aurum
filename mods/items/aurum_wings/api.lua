@@ -5,11 +5,7 @@ function aurum.wings.flying(player)
 end
 
 -- Override callback.
-function aurum.wings.on_start_fly(player)
-	minetest.chat_send_all(player:get_player_name())
-end
+function aurum.wings.on_start_fly(player) end
 
 -- Override callback.
-function aurum.wings.on_stop_fly(player, damage)
-	minetest.chat_send_all(player:get_player_name() .. " " .. damage)
-end
+function aurum.wings.on_stop_fly(player, damage) end

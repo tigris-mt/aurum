@@ -40,6 +40,7 @@ end
 
 local old_start = aurum.wings.on_start_fly
 function aurum.wings.on_start_fly(player)
+	old_start(player)
 	local c, m = aurum.wings.get_wings(player)
 	hb.change_hudbar(player, "aurum_wings", c, m)
 	hb.unhide_hudbar(player, "aurum_wings")
@@ -47,6 +48,7 @@ end
 
 local old_stop = aurum.wings.on_stop_fly
 function aurum.wings.on_stop_fly(player)
+	old_stop(player)
 	hb.hide_hudbar(player, "aurum_wings")
 end
 

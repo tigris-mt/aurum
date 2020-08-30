@@ -10,9 +10,8 @@ minetest.register_node("aurum_features:placeholder", {
 	drop = "",
 	on_timer = function(pos)
 		local id = minetest.get_meta(pos):get_int("aurum_features:id")
-		-- TODO: Use the seed for the random function.
 		if callbacks[id] then
-			callbacks[id](pos, math.random)
+			callbacks[id](pos, b.seed_random(minetest.hash_node_position(pos) + 0x7ACE401D))
 		end
 		if minetest.get_node(pos).name == "aurum_features:placeholder" then
 			minetest.remove_node(pos)

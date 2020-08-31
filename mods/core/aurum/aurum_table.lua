@@ -11,5 +11,5 @@ aurum = {
 	--- PATCH is incremented for minor changes and bugfixes.
 	VERSION = "0.54.0.0",
 	-- Expected Minetest Engine version (>=).
-	MT_VERSION = "5.2.0",
+	MT_VERSION = "5.3.0",
 }

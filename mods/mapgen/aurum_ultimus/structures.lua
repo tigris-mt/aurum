@@ -27,6 +27,14 @@ aurum.ultimus.register_structure{
 }
 
 aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"garden_1.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
 	rarity = 0.1,
 	schematic = aurum.structures.f"machine_1.mts",
 	on_offset = function(c)
@@ -91,6 +99,22 @@ aurum.ultimus.register_structure{
 aurum.ultimus.register_structure{
 	rarity = 1,
 	schematic = aurum.structures.f"wild_room_2.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"wild_room_3.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"wild_room_4.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))
 	end,

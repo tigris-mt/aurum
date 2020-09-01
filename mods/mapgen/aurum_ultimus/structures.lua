@@ -44,6 +44,14 @@ aurum.ultimus.register_structure{
 
 aurum.ultimus.register_structure{
 	rarity = 1,
+	schematic = aurum.structures.f"regret_1.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
 	schematic = aurum.structures.f"regret_brick_pile.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))
@@ -75,6 +83,14 @@ aurum.ultimus.register_structure{
 aurum.ultimus.register_structure{
 	rarity = 1,
 	schematic = aurum.structures.f"wild_room_1.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"wild_room_2.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))
 	end,

@@ -20,6 +20,14 @@ aurum.ultimus.register_structure{
 
 aurum.ultimus.register_structure{
 	rarity = 1,
+	schematic = aurum.structures.f"doors_1.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
 	schematic = aurum.structures.f"flesh_tunnel.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))

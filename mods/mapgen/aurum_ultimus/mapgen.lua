@@ -51,9 +51,9 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 
 	local windows = random() < 0.9
 
-	local base_room_schematic = (function()
+	local function make_room_schematic(def)
 		local ret = {
-			size = vector.new(16, 8, 16),
+			size = def.size,
 			data = {},
 		}
 
@@ -62,9 +62,9 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 		for i in area:iterp(box.a, box.b) do
 			local pos = area:position(i)
 			-- Set wall nodes.
-			if not empty and (pos.x == box.a.x or pos.y == box.a.y or pos.z == box.a.z) then
+			if pos.x == box.a.x or pos.y == box.a.y or pos.z == box.a.z then
 				-- Is this a doorway?
-				local door_spot = ((pos.x == math.ceil((box.b.x + box.a.x) / 2) or pos.z == math.ceil((box.b.z + box.a.z) / 2)) and (pos.y == 1 or pos.y == 2))
+				local door_spot = ((pos.x == math.ceil((box.b.x + box.a.x) / 2) or pos.z == math.ceil((box.b.z + box.a.z) / 2)) and ((pos.y % 16) == 1 or (pos.y % 16) == 2))
 				ret.data[i] = door_spot and airn or b.t.weighted_choice({
 					-- Walls are usually solid.
 					{{name = wall}, 1},
@@ -77,31 +77,35 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 		end
 
 		return ret
-	end)()
+	end
 
-	-- Generate all rooms in the block.
-	for x=0,4 do
-		for y=0,9 do
-			for z=0,4 do
-				-- Where does this room start?
-				local start = vector.add(minp, vector.new(16 * x, 8 * y, 16 * z))
+	if empty then
+		local block_schematic = make_room_schematic{size = vector.new(80, 80, 80)}
 
-				-- Place the room base.
-				minetest.place_schematic_on_vmanip(vm, start, base_room_schematic)
+		minetest.place_schematic_on_vmanip(vm, minp, block_schematic)
 
-				-- Rare fire (could burn down wooden block).
-				if random() < (1 / 200) then
-					minetest.set_node(vector.add(start, vector.new(1, 1, 1)), {name = "fire:basic_flame"})
+		vm:calc_lighting()
+		vm:write_to_map()
+	else
+		local base_room_schematic = make_room_schematic{size = vector.new(16, 8, 16)}
+
+		-- Generate all rooms in the block.
+		for x=0,4 do
+			for y=0,9 do
+				for z=0,4 do
+					-- Where does this room start?
+					local start = vector.add(minp, vector.new(16 * x, 8 * y, 16 * z))
+
+					-- Place the room base.
+					minetest.place_schematic_on_vmanip(vm, start, base_room_schematic)
 				end
 			end
 		end
-	end
 
-	vm:calc_lighting()
-	vm:write_to_map()
+		vm:calc_lighting()
+		vm:write_to_map()
 
-	-- Generate structures (don't try in empty rooms).
-	if not empty and #aurum.ultimus.structures > 0 then
+		-- Generate structures.
 		for x=0,4 do
 			for y=0,9 do
 				for z=0,4 do

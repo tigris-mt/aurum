@@ -42,6 +42,41 @@ aurum.ultimus.register_structure{
 	end,
 }
 
+local ladder_step = {{"aurum_features:ph_1"}}
+
+aurum.ultimus.register_structure{
+	rarity = 5,
+	schematic = aurum.features.schematic(vector.new(1, 16, 1), {
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+		ladder_step,
+	}),
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+	on_generated = function(c)
+		for _,pos in ipairs(c:ph(1)) do
+			minetest.set_node(pos, {
+				name = "aurum_ladders:wood",
+				param2 = minetest.dir_to_wallmounted(c:dir(vector.new(0, 0, 1))),
+			})
+		end
+	end,
+}
+
 aurum.ultimus.register_structure{
 	rarity = 0.5,
 	schematic = aurum.structures.f"machine_1.mts",

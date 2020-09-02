@@ -1,6 +1,6 @@
 aurum.ultimus.structures = {
 	-- Empty room.
-	{nil, 10},
+	{nil, 1},
 }
 
 function aurum.ultimus.register_structure(def)
@@ -45,15 +45,8 @@ aurum.ultimus.register_structure{
 local ladder_step = {{"aurum_features:ph_1"}}
 
 aurum.ultimus.register_structure{
-	rarity = 5,
-	schematic = aurum.features.schematic(vector.new(1, 16, 1), {
-		ladder_step,
-		ladder_step,
-		ladder_step,
-		ladder_step,
-		ladder_step,
-		ladder_step,
-		ladder_step,
+	rarity = 10,
+	schematic = aurum.features.schematic(vector.new(1, 9, 1), {
 		ladder_step,
 		ladder_step,
 		ladder_step,
@@ -64,9 +57,6 @@ aurum.ultimus.register_structure{
 		ladder_step,
 		ladder_step,
 	}),
-	on_offset = function(c)
-		return vector.add(c.pos, vector.new(0, 1, 0))
-	end,
 	on_generated = function(c)
 		for _,pos in ipairs(c:ph(1)) do
 			minetest.set_node(pos, {

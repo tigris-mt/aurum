@@ -49,6 +49,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	-- In Ultimus, the lighting comes from magic(?) glass.
 	local glass = "aurum_base:glowing_glass_" .. b.t.weighted_choice(colors, random)
 
+	local doors = random() < 0.95
 	local windows = random() < 0.9
 
 	local function make_room_schematic(def)
@@ -64,7 +65,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 			-- Set wall nodes.
 			if pos.x == box.a.x or pos.y == box.a.y or pos.z == box.a.z then
 				-- Is this a doorway?
-				local door_spot = ((pos.x == math.ceil((box.b.x + box.a.x) / 2) or pos.z == math.ceil((box.b.z + box.a.z) / 2)) and ((pos.y % 16) == 1 or (pos.y % 16) == 2))
+				local door_spot = doors and ((pos.x == math.ceil((box.b.x + box.a.x) / 2) or pos.z == math.ceil((box.b.z + box.a.z) / 2)) and ((pos.y % 16) == 1 or (pos.y % 16) == 2))
 				ret.data[i] = door_spot and airn or b.t.weighted_choice({
 					-- Walls are usually solid.
 					{{name = wall}, 1},

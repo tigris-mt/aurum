@@ -43,10 +43,53 @@ aurum.ultimus.register_structure{
 }
 
 aurum.ultimus.register_structure{
-	rarity = 0.1,
+	rarity = 0.5,
 	schematic = aurum.structures.f"machine_1.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"machine_2.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+	on_generated = function(c)
+		for i=1,c:random(0, #c:ph(1)) do
+			minetest.set_node(c:ph(1)[i], {name = "aurum_storage:box"})
+			c:treasures(c:ph(1)[i], "main", c:random(1, 3), {
+				{
+					count = 1,
+					preciousness = {1, 5},
+					groups = {"building_block", "tool", "raw", "crafting_component", "building_block", "dye", "processed", "worker"},
+				},
+			})
+		end
+
+		for i=1,c:random(0, #c:ph(2)) do
+			local name = b.t.choice({
+				"aurum_cook:smelter",
+				"aurum_cook:oven",
+				"aurum_stamp:stamper",
+				"aurum_enchants:table",
+				"aurum_enchants:copying_desk",
+				"aurum_rods:table",
+			}, function(...) return c:random(...) end)
+
+			minetest.set_node(c:ph(2)[i], {name = name})
+
+			if name == "aurum_cook:smelter" or name == "aurum_cook:oven" then
+				c:treasures(c:ph(2)[i], "fuel", 1, {
+					{
+						count = 1,
+						preciousness = {1, 5},
+						groups = {"fuel"},
+					},
+				})
+			end
+		end
 	end,
 }
 

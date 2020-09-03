@@ -168,6 +168,8 @@ function m.register(name, def)
 		groups = {dig_snap = 3, flammable = 1, sapling = 1, attached_node = 1, grow_plant = 1},
 
 		_on_grow_plant = function(pos, node)
+			local meta = minetest.get_meta(pos)
+
 			-- Ensure there's at least some room above the sapling.
 			for y=1,3 do
 				if not aurum.is_air(minetest.get_node(vector.add(pos, vector.new(0, y, 0))).name) then
@@ -175,26 +177,30 @@ function m.register(name, def)
 				end
 			end
 
+			local all_terrain = meta:get_int("sapling_all_terrain") == 1
+
 			-- Ensure we're on valid terrain.
 			local below = vector.add(pos, vector.new(0, -1, 0))
-			if #minetest.find_nodes_in_area(below, below, def.terrain) == 0 then
+			if #minetest.find_nodes_in_area(below, below, def.terrain) == 0 and not all_terrain then
 				return false
 			end
+
+			local replace = meta:get_int("sapling_replace") == 1
+			local allow_rare = meta:get_int("sapling_rare") == 1
 
 			-- Select and place a random schematic.
 			local dkp = {}
 			for k,v in pairs(def.decorations) do
-				-- Disable growing the rarest trees from saplings.
+				-- Disable growing the rarest trees from saplings by default.
 				-- Rare trees can be huge.
-				if v >= 0.1 then
+				if v >= 0.1 or allow_rare then
 					table.insert(dkp, {k, v})
 				end
 			end
 			local dk = b.t.weighted_choice(dkp)
 			local d = def.decodefs[dk]
 			minetest.remove_node(pos)
-
-			minetest.place_schematic(pos, remove_force_place(d.schematic), d.rotation, {}, false, d.flags)
+			minetest.place_schematic(pos, replace and d.schematic or remove_force_place(d.schematic), d.rotation, {}, replace, d.flags)
 			return true
 		end,
 

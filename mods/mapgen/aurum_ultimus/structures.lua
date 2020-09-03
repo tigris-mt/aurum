@@ -1,6 +1,6 @@
 aurum.ultimus.structures = {
 	-- Empty room.
-	{nil, 1},
+	{nil, 7},
 }
 
 function aurum.ultimus.register_structure(def)
@@ -45,7 +45,7 @@ aurum.ultimus.register_structure{
 local ladder_step = {{"aurum_features:ph_1"}}
 
 aurum.ultimus.register_structure{
-	rarity = 10,
+	rarity = 3,
 	schematic = aurum.features.schematic(vector.new(1, 9, 1), {
 		ladder_step,
 		ladder_step,
@@ -139,6 +139,36 @@ aurum.ultimus.register_structure{
 	schematic = aurum.structures.f"regret_brick_pile.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 3,
+	make_schematic = function(c)
+		return aurum.features.schematic(vector.new(1, 1, 1), {
+			{{"aurum_features:ph_1"}},
+		})
+	end,
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+	on_generated = function(c)
+		local ph = c:ph(1)
+
+		if #ph > 0 then
+			minetest.set_node(ph[1], {name = b.t.choice({
+				"aurum_trees:oak_sapling",
+				"aurum_trees:birch_sapling",
+				"aurum_trees:pander_sapling",
+				"aurum_trees:white_crystal_sapling",
+			}, function(...) return c:random(...) end)})
+
+			minetest.get_meta(ph[1]):set_int("sapling_all_terrain", 1)
+			minetest.get_meta(ph[1]):set_int("sapling_replace", 1)
+			minetest.get_meta(ph[1]):set_int("sapling_rare", 1)
+
+			minetest.get_node_timer(ph[1]):start(0.1)
+		end
 	end,
 }
 

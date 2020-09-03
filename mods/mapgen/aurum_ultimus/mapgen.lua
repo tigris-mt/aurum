@@ -70,7 +70,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 					-- Walls are usually solid.
 					{{name = wall}, 1},
 					-- Sometimes there are glass windows.
-					{{name = glass}, windows and 0.05 or 0},
+					{{name = glass}, windows and 0.025 or 0},
 				}, random)
 			else
 				ret.data[i] = airn

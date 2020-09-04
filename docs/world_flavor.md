@@ -31,10 +31,13 @@ They are lesser than the titans, but with the old titan having abandoned the wor
 Most peaceful of all the archons, her domain is Aurum. She buries the dead. She is a giant monkey.
 
 #### Mister Decadence
-A bureaucratic archon. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.
+A bureaucratic archon from the Loom. He is not stronger than the loomspawn, but supports their efforts to spread decay. His goal is to bring the Loom into the Aether and sit on Hyperion's throne.
 
 #### Mors Vivi
-An impersonal archon. She has an insatiable appetite for the evolved, and prefers fresh "simple" life like plants and insects. She loves oxygen and hates fire.
+An impersonal archon in Primus Hortum. She has an insatiable appetite for the evolved, and prefers fresh "simple" life like plants and insects. She loves oxygen and hates fire.
+
+### Caligula
+The ascended mortal archon ruling Ultimus Hortum as if it were still tyrant of the great city.
 
 ### Loomspawn
 The natural forces of the Loom, performing their corruption.

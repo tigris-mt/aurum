@@ -4,6 +4,8 @@ aurum.mobs.initial_data.attack = {
 	speed = 1,
 	distance = 2.5,
 	effects = {},
+	-- Type of attack: instant melee ranged
+	type = "melee",
 	-- Name of projectile to fire if ranged.
 	fire_projectile = nil,
 	projectile_speed = 25,
@@ -27,10 +29,9 @@ gemai.register_action("aurum_mobs:attack", function(self)
 		return
 	end
 
-	local ranged = not not self.data.attack.fire_projectile
 	local too_far = vector.distance(target:get_pos(), self.entity.object:get_pos()) > self.data.attack.distance
 
-	if ranged then
+	if self.data.attack.type == "ranged" then
 		if not aurum.mobs.helper_can_see(self, target) or too_far then
 			self:fire_event("lost_sight", self.data.params)
 			return
@@ -47,7 +48,7 @@ gemai.register_action("aurum_mobs:attack", function(self)
 	local whole = math.floor(self.data.attack.moves)
 	self.data.attack.moves = self.data.attack.moves - whole
 	for _=1,whole do
-		if ranged then
+		if self.data.attack.type == "ranged" then
 			local start = vector.add(self.entity.object:get_pos(), vector.new(0, 0.25 + math.random() * 0.5, 0))
 			gprojectiles.spawn(self.data.attack.fire_projectile, {
 				pos = start,

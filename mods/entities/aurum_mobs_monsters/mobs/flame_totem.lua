@@ -3,7 +3,7 @@ local S = minetest.get_translator()
 aurum.mobs.register("aurum_mobs_monsters:flame_totem", {
 	description = S"Flame Totem",
 	herd = "aurum:servitors",
-	longdesc = S"A great guardian, an automaton belonging to the old servitors. In ancient times these proud creations were revered by all. Some say they are an uplifted form of the loom flare.",
+	longdesc = S"A great guardian, an automaton belonging to the old servitors. In ancient times these proud creations were revered by all. Some say they are an uplifted form of the loom flare, living proof that even the spawn of the loom can be redeemed.",
 
 	initial_properties = {
 		visual = "sprite",
@@ -24,6 +24,7 @@ aurum.mobs.register("aurum_mobs_monsters:flame_totem", {
 			distance = 32,
 			speed = 1,
 			fire_projectile = "aurum_mobs_monsters:loom_flare_shot",
+			type = "ranged",
 		}),
 		base_speed = 3,
 	},

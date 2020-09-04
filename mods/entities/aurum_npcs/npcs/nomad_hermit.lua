@@ -45,6 +45,7 @@ aurum.mobs.register("aurum_npcs:nomad_hermit", {
 			distance = 24,
 			speed = 1 / 2,
 			fire_projectile = "aurum_npcs:ice_shot",
+			type = "ranged",
 		}),
 	},
 

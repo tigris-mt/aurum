@@ -170,6 +170,31 @@ function aurum.effects.apply_tool_effects(stack, object, blame)
 	end
 end
 
+function aurum.effects.operate(object, effects, dtime)
+	local remove = {}
+
+	for name,state in pairs(effects) do
+		local def = aurum.effects.effects[name]
+		state.duration = state.duration - dtime
+		-- Only repeat if next is in the state.
+		if state.next then
+			state.next = state.next - dtime
+			if state.next < 0 then
+				def.apply(object, state.level)
+				state.next = def.repeat_interval - (-state.next)
+			end
+		end
+		if state.duration < 0 and not state.forever then
+			def.cancel(object, state.level)
+			table.insert(remove, name)
+		end
+	end
+
+	for _,name in ipairs(remove) do
+		effects[name] = nil
+	end
+end
+
 minetest.register_on_punchplayer(function(player, hitter)
 	if player:get_hp() > 0 then
 		aurum.effects.apply_tool_effects(hitter:get_wielded_item(), player, aurum.get_blame(hitter) or b.ref_to_table(hitter))

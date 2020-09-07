@@ -6,30 +6,6 @@ function aurum.effects.set_player(player, effects)
 	player:get_meta():set_string("aurum_effects", minetest.serialize(effects))
 end
 
-function aurum.effects.operate(object, effects, dtime)
-	local remove = {}
-
-	for name,state in pairs(effects) do
-		local def = aurum.effects.effects[name]
-		state.duration = state.duration - dtime
-		if state.next then
-			state.next = state.next - dtime
-			if state.next < 0 then
-				def.apply(object, state.level)
-				state.next = def.repeat_interval - (-state.next)
-			end
-		end
-		if state.duration < 0 and not state.forever then
-			def.cancel(object, state.level)
-			table.insert(remove, name)
-		end
-	end
-
-	for _,name in ipairs(remove) do
-		effects[name] = nil
-	end
-end
-
 local huds = {}
 
 minetest.register_globalstep(function(dtime)
@@ -41,7 +17,9 @@ minetest.register_globalstep(function(dtime)
 		local text = {}
 		for name,state in b.t.spairs(effects) do
 			local def = aurum.effects.effects[name]
-			table.insert(text, state.forever and def.description or ("%s (%ds)"):format(def.description, math.ceil(state.duration)))
+			if not def.hidden then
+				table.insert(text, state.forever and def.description or ("%s (%ds)"):format(def.description, math.ceil(state.duration)))
+			end
 		end
 		player:hud_change(huds[player:get_player_name()], "text", table.concat(text, "\n"))
 	end

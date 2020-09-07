@@ -44,6 +44,7 @@ Toughless levels range from 0 to 3.
 * `dye_colorable=1`: This item can be colored with dye. The base name is stored in `_aurum_dye_base` in the def.
 * `dye_source=1`: This item is dye source.
 * `equipment=1`: For equipment.
+* `fear=1`: This is a Fear item.
 * `glass=1`: This item is glass.
 * `raw_meat=1`: Some type of raw flesh.
 * `rod=1`: For rods.

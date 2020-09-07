@@ -38,3 +38,26 @@ gequip.register_action("aurum_wings:wings", {
 		player:get_meta():set_int("aurum_wings:wings", state.wings and 1 or 0)
 	end,
 })
+
+minetest.register_craftitem("aurum_wings:scale", {
+	description = S"Wing Scale",
+	inventory_image = "aurum_wings_scale.png",
+})
+
+minetest.register_craft{
+	output = "aurum_wings:scale",
+	recipe = {
+		{"", "aurum_fear:aurum", ""},
+		{"aurum_fear:ultimus", "aurum_fear:loom", "aurum_fear:primus"},
+		{"", "aurum_fear:aether", ""},
+	},
+}
+
+minetest.register_craft{
+	output = "aurum_wings:wings",
+	recipe = {
+		{"", "aurum_wings:scale", ""},
+		{"aurum_wings:scale", "aurum_wings:scale", "aurum_wings:scale"},
+		{"aurum_wings:scale", "aurum_wings:scale", "aurum_wings:scale"},
+	},
+}

@@ -58,7 +58,7 @@ function aurum.mobs.add_doc(name)
 	a""
 
 	if data.attack.fire_projectile then
-		a(S"This mob attacks at range")
+		a(S"This mob attacks with projectiles")
 	end
 
 	local damage = {}

@@ -38,6 +38,7 @@ aurum.effects.register("aurum_npcs:headstoner_hit", {
 	apply = function(object, level)
 		object:add_player_velocity(vector.multiply(vector.new(10 * (math.random() - 0.5), 5 * math.random(), 10 * (math.random() - 0.5)), 4))
 		if math.random() < 1/2 then
+			-- The Headstoner communicates in small yet somewhat sophisticated wording with neither capitals nor punctuation
 			aurum.info_message(object, b.t.choice{
 				S"i will bury you in the end",
 				S"die",
@@ -49,6 +50,10 @@ aurum.effects.register("aurum_npcs:headstoner_hit", {
 				S"if you truly ascend, i will witness",
 				S"nothing lasts forever",
 				S"not even a titan is eternal",
+				S"can you not understand what i am doing for the remnant",
+				S"so be it",
+				S"this must come to pass",
+				S"i will become your glory",
 			})
 		end
 	end,
@@ -84,6 +89,7 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 		xmana = 100,
 		movement = "fly",
 		hunt_prey = {"player"},
+		regen_rate = 1,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {psyche = 10},
 			distance = 12,
@@ -97,12 +103,19 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 		base_speed = 3,
 	},
 
+	entity_def = {
+		_mob_init = function(self)
+			self._data.gemai.drops = {"aurum_fear:aurum " .. math.random(1, 3)}
+		end,
+	},
+
 	armor_groups = {burn = 20},
 
 	gemai = {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_mobs:regen",
 		},
 
 		global_events = {

@@ -18,7 +18,7 @@ function aurum.player.realm_refresh(player)
 	local realm = screalms.pos_to_realm(vector.round(player:get_pos()))
 	realms[player:get_player_name()] = realm
 
-	playereffects.cancel_effect_group("aurum_realms", player:get_player_name())
+	aurum.effects.remove_group(player, "aurum_realms")
 
 	-- Restore default appearances.
 	player:set_sky{

@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-aurum.tools.register("aurum_tools:hand", b.t.combine(aurum_hand.def, {
+aurum.tools.register(":aurum_tools:hand", b.t.combine(aurum_hand.def, {
 	description = S"Hand",
 	_doc_items_longdesc = S"Tools were invented by the primates to surpass the limits of their own limbs, but your hand is not useless on its own. It can dig many nodes with no enhancements at all.",
 	_enchant_levels = 2,

@@ -2,6 +2,7 @@ local S = minetest.get_translator()
 aurum.effects = {
 	effects = {},
 	enchants = {},
+	groups = {},
 }
 
 doc.add_category("aurum_effects:effects", {
@@ -11,20 +12,25 @@ doc.add_category("aurum_effects:effects", {
 
 -- Add the effect <name> at <level> to <object> for <duration>, blaming <blame> ref_table.
 -- Will do nothing if <object> already has <name> at a higher level, otherwise will replace any current <name> effect.
+-- A duration < 0 indicates infinite duration until cancelled.
 function aurum.effects.add(object, name, level, duration, blame)
 	local def = aurum.effects.effects[name]
 
 	if object:is_player() then
-		for i=level+1,def.max_level do
-			if playereffects.has_effect_type(object:get_player_name(), name .. "_" .. i) then
-				return false
-			end
+		local effects = aurum.effects.get_player(object)
+		if effects[name] and effects[name].level > level then
+			return false
 		end
-		for i=1,level-1 do
-			playereffects.cancel_effect_type(name .. "_" .. i, true, object:get_player_name())
-		end
-		object:get_meta():set_string("aurum_effects:blame_" .. name, minetest.serialize(blame))
-		return playereffects.apply_effect_type(name .. "_" .. level, duration, object, 0)
+		effects[name] = {
+			duration = duration,
+			next = def.repeat_interval,
+			level = level,
+			blame = blame,
+			forever = duration < 0,
+		}
+		aurum.effects.set_player(object, effects)
+		def.apply(object, level)
+		return true
 	else
 		local mob = aurum.mobs.get_mob(object)
 		if mob then
@@ -34,9 +40,10 @@ function aurum.effects.add(object, name, level, duration, blame)
 
 			mob.data.status_effects[name] = {
 				duration = duration,
-				next = 0,
+				next = def.repeat_interval,
 				level = level,
 				blame = blame,
+				forever = duration < 0,
 			}
 
 			def.apply(object, level)
@@ -49,7 +56,12 @@ end
 -- Remove the effect <name> from <object> if that effect is active.
 function aurum.effects.remove(object, name)
 	if object:is_player() then
-		playereffects.cancel_effect_group(name, object:get_player_name())
+		local effects = aurum.effects.get_player(object)
+		if effects[name] then
+			aurum.effects.effects[name].cancel(object, effects[name].level)
+			effects[name] = nil
+			aurum.effects.set_player(object, effects)
+		end
 	else
 		local mob = aurum.mobs.get_mob(object)
 		if mob then
@@ -61,14 +73,17 @@ function aurum.effects.remove(object, name)
 	end
 end
 
+-- Remove all effects of group <group> from <object>.
+function aurum.effects.remove_group(object, group)
+	for _,effect in ipairs(aurum.effects.groups[group] or {}) do
+		aurum.effects.remove(object, effect)
+	end
+end
+
 -- Get the {level = x, [blame = x]} of effect <name> on <object> or nil if it does not have that effect.
 function aurum.effects.has(object, name)
 	if object:is_player() then
-		for level=1,aurum.effects.effects[name].max_level do
-			if playereffects.has_effect_type(object:get_player_name(), name .. "_" .. level) then
-				return {level = level, blame = minetest.deserialize(object:get_meta():get_string("aurum_effects:blame_" .. name))}
-			end
-		end
+		return aurum.effects.get_player(object)[name]
 	else
 		local mob = aurum.mobs.get_mob(object)
 		if mob then
@@ -103,16 +118,13 @@ function aurum.effects.register(name, def)
 		apply = function(object, level) end,
 		-- Cancel this level of effect to an object.
 		cancel = function(object, level) end,
+		-- Effect groups.
+		groups = {},
 	}, def, {name = name})
 
-	for level=1,def.max_level do
-		playereffects.register_effect_type(name .. "_" .. level, S("@1 @2", def.description, tostring(level)), def.icon, {name, "aurum_effects"},
-			function(object)
-				def.apply(object, level)
-			end,
-			function(effect, object, level)
-				def.cancel(object, level)
-			end, def.hidden, def.cancel_on_death, def.repeat_interval)
+	for _,group in ipairs(def.groups) do
+		aurum.effects.groups[group] = aurum.effects.groups[group] or {}
+		table.insert(aurum.effects.groups[group], def.name)
 	end
 
 	if def.enchant then
@@ -165,5 +177,6 @@ minetest.register_on_punchplayer(function(player, hitter)
 end)
 
 b.dofile("dummy.lua")
+b.dofile("player.lua")
 
 b.dodir("effects")

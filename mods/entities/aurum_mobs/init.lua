@@ -178,24 +178,7 @@ function aurum.mobs.register(name, def)
 			-- self.object:set_nametag_attributes{text = tag}
 			self._gemai:step(dtime)
 
-			local remove = {}
-			for name,state in pairs(self._gemai.data.status_effects) do
-				state.duration = state.duration - dtime
-				if state.duration < 0 then
-					aurum.effects.effects[name].cancel(self.object, state.level)
-					table.insert(remove, name)
-				elseif state.next then
-					state.next = state.next - dtime
-					if state.next < 0 then
-						aurum.effects.effects[name].apply(self.object, state.level)
-						state.next = aurum.effects.effects[name].repeat_interval
-					end
-				end
-			end
-
-			for _,name in ipairs(remove) do
-				self._gemai.data.status_effects[name] = nil
-			end
+			aurum.effects.operate(self.object, self._gemai.data.status_effects, dtime)
 		end,
 
 		on_death = function(self, killer)

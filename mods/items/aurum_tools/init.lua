@@ -56,7 +56,6 @@ doc.add_entry("basics", "enchants", {
 })
 
 b.dofile("enchants.lua")
-b.dofile("default_tools.lua")
 b.dofile("hammer_break.lua")
 
 b.dofile("enchant_command.lua")

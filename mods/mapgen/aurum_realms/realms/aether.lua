@@ -1,16 +1,20 @@
 local S = minetest.get_translator()
 
-playereffects.register_effect_type("aurum_realms:aether", S"Aether", nil, {"aurum_realms"},
-	function(player)
+aurum.effects.register("aurum_realms:aether", {
+	description = S"Aether",
+	hidden = true,
+	groups = {"aurum_realms"},
+	apply = function(player)
 		player_monoids.gravity:add_change(player, 1.5, "aurum_realms:aether")
 		player_monoids.jump:add_change(player, 2, "aurum_realms:aether")
 		player_monoids.speed:add_change(player, 2, "aurum_realms:aether")
 	end,
-	function(effect, player)
+	cancel = function(player)
 		player_monoids.gravity:del_change(player, "aurum_realms:aether")
 		player_monoids.jump:del_change(player, "aurum_realms:aether")
 		player_monoids.speed:del_change(player, "aurum_realms:aether")
-	end)
+	end,
+})
 
 screalms.register("aurum:aether", {
 	description = S"The Aether",
@@ -30,7 +34,7 @@ screalms.register("aurum:aether", {
 		}
 		screalms.apply_underground(player)
 
-		playereffects.apply_effect_type("aurum_realms:aether", 999, player)
+		aurum.effects.add(player, "aurum_realms:aether", 1, -1)
 	end,
 
 	aurum_dungeon_loot = function(pos)

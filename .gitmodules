@@ -67,9 +67,6 @@
 [submodule "mods/env/screalms"]
 	path = mods/mapgen/screalms
 	url = https://github.com/tigris-mt/screalms
-[submodule "mods/player/playereffects"]
-	path = mods/player/playereffects
-	url = https://repo.or.cz/minetest_playereffects.git
 [submodule "submodules/2bbcode"]
 	path = submodules/2bbcode
 	url = https://github.com/lilydjwg/2bbcode

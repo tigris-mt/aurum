@@ -17,6 +17,10 @@ function aurum.effects.add(object, name, level, duration, blame)
 	local def = aurum.effects.effects[name]
 
 	if object:is_player() then
+		-- Don't apply if player is dead.
+		if object:get_hp() <= 0 and def.cancel_on_death then
+			return false
+		end
 		local effects = aurum.effects.get_player(object)
 		if effects[name] and effects[name].level > level then
 			return false

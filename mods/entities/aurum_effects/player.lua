@@ -18,7 +18,7 @@ minetest.register_globalstep(function(dtime)
 		for name,state in b.t.spairs(effects) do
 			local def = aurum.effects.effects[name]
 			if not def.hidden then
-				table.insert(text, state.forever and def.description or ("%s (%ds)"):format(def.description, math.ceil(state.duration)))
+				table.insert(text, state.forever and ("%s %d"):format(def.description, state.level) or ("%s %d (%ds)"):format(def.description, state.level, math.ceil(state.duration)))
 			end
 		end
 		player:hud_change(huds[player:get_player_name()], "text", table.concat(text, "\n"))
@@ -40,4 +40,16 @@ end)
 
 minetest.register_on_leaveplayer(function(player)
 	huds[player:get_player_name()] = nil
+end)
+
+minetest.register_on_dieplayer(function(player)
+	local effects = aurum.effects.get_player(player)
+	for _,name in ipairs(b.t.keys(effects)) do
+		local def = aurum.effects.effects[name]
+		if def.cancel_on_death then
+			def.cancel(player, effects[name].level)
+			effects[name] = nil
+		end
+	end
+	aurum.effects.set_player(player, effects)
 end)

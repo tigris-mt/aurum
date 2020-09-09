@@ -40,7 +40,7 @@ local rod_def = {
 			spell.apply(pointed_thing, level, player)
 
 			-- Apply one use per spell level, but not for levels from the power boost.
-			stack:add_wear(aurum.TOOL_WEAR / durability * (level - power))
+			stack:add_wear(aurum.TOOL_WEAR / durability * (level - power) * spell.rod_cost)
 			return stack
 		end
 	end,

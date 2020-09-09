@@ -35,8 +35,9 @@ aurum.effects.register("aurum_npcs:headstoner_hit", {
 	description = S"Headstoner Hit",
 	hidden = true,
 	enchant = false,
+	max_level = 3,
 	apply = function(object, level)
-		object:add_player_velocity(vector.multiply(vector.new(10 * (math.random() - 0.5), 5 * math.random(), 10 * (math.random() - 0.5)), 4))
+		object:add_player_velocity(vector.multiply(vector.new(10 * (math.random() - 0.5), 5 * math.random() + level, 10 * (math.random() - 0.5)), 4))
 		if math.random() < 1/2 then
 			-- The Headstoner communicates in small yet somewhat sophisticated wording with neither capitals nor punctuation
 			aurum.info_message(object, b.t.choice{
@@ -67,6 +68,25 @@ aurum.effects.register("aurum_npcs:headstoner_hit", {
 	end,
 })
 
+local function make_attack(hp_ratio)
+	return b.t.combine(aurum.mobs.initial_data.attack, {
+		damage = {psyche = (hp_ratio < 0.5) and 15 or 10},
+		distance = (hp_ratio < 0.1) and 24 or 12,
+		speed = (hp_ratio < 0.25) and 0.5 or 0.25,
+		type = "instant",
+		effects = {
+			["aurum_npcs:headstoner_hit"] = {level = math.floor(3 - hp_ratio * 3 + 0.5), duration = 1},
+			["aurum_effects:poison"] = {level = 1, duration = 4 + (3 - hp_ratio * 3)},
+		},
+	})
+end
+
+gemai.register_action("aurum_npcs:avatar_headstoner", function(self)
+	local moves = self.data.attack.moves
+	self.data.attack = make_attack(self.entity.object:get_hp() / self.entity.object:get_properties().hp_max)
+	self.data.attack.moves = moves
+end)
+
 aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 	description = S"Avatar of the Headstoner",
 	herd = "aurum:servitors",
@@ -90,16 +110,7 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 		movement = "fly",
 		hunt_prey = {"player"},
 		regen_rate = 1,
-		attack = b.t.combine(aurum.mobs.initial_data.attack, {
-			damage = {psyche = 10},
-			distance = 12,
-			speed = 0.25,
-			type = "instant",
-			effects = {
-				["aurum_npcs:headstoner_hit"] = {level = 1, duration = 1},
-				["aurum_effects:poison"] = {level = 1, duration = 4},
-			},
-		}),
+		attack = make_attack(1),
 		base_speed = 3,
 	},
 
@@ -116,6 +127,7 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
 			"aurum_mobs:regen",
+			"aurum_npcs:avatar_headstoner",
 		},
 
 		global_events = {

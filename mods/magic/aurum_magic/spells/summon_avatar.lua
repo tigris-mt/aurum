@@ -6,6 +6,7 @@ aurum.magic.register_spell("summon_avatar", {
 	description = S"Summon Avatar",
 	max_level = 1,
 	rod_cost = 1000,
+	preciousness = 10,
 	longdesc = table.concat({
 		S"When used on a realm artifact; this spell will summon the avatar of that realm's Archon.",
 		S("It consumes @1 mana.", MANA),

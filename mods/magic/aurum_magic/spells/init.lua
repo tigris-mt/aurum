@@ -16,6 +16,9 @@ function aurum.magic.register_spell(name, def)
 		longdesc = nil,
 		max_level = 3,
 
+		-- Minimum preciousness for treasurer.
+		preciousness = 0,
+
 		-- Name of rod this spell uses according to level.
 		rod = function(level) return "aurum_rods:rod" end,
 

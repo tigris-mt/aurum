@@ -70,3 +70,13 @@ function aurum.mobs.helper_set_pos(self, pos, keep_path)
 	end
 	self.entity.object:move_to(pos, true)
 end
+
+-- Get the number of players near self.
+function aurum.mobs.helper_nearby_players(self)
+	local pos = self.entity.object:get_pos()
+	return #b.t.imap(minetest.get_connected_players(), function(player)
+		if vector.distance(pos, player:get_pos()) <= aurum.mobs.SEARCH_RADIUS then
+			return player
+		end
+	end)
+end

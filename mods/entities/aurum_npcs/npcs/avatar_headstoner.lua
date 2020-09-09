@@ -68,22 +68,24 @@ aurum.effects.register("aurum_npcs:headstoner_hit", {
 	end,
 })
 
-local function make_attack(hp_ratio)
+-- Become stronger with lower HP.
+-- More nearby players greatly increases attack speed.
+local function make_attack(hp_ratio, nearby)
 	return b.t.combine(aurum.mobs.initial_data.attack, {
 		damage = {psyche = (hp_ratio < 0.5) and 15 or 10},
 		distance = (hp_ratio < 0.1) and 24 or 12,
-		speed = (hp_ratio < 0.25) and 0.5 or 0.25,
+		speed = ((hp_ratio < 0.25) and 0.5 or 0.25) * math.max(1, nearby),
 		type = "instant",
 		effects = {
-			["aurum_npcs:headstoner_hit"] = {level = math.floor(3 - hp_ratio * 3 + 0.5), duration = 1},
+			["aurum_npcs:headstoner_hit"] = {level = 1 + math.floor(2 - hp_ratio * 2 + 0.5), duration = 1},
 			["aurum_effects:poison"] = {level = 1, duration = 4 + (3 - hp_ratio * 3)},
 		},
 	})
 end
 
-gemai.register_action("aurum_npcs:avatar_headstoner", function(self)
+gemai.register_action("aurum_npcs:avatar_headstoner_attack_modify", function(self)
 	local moves = self.data.attack.moves
-	self.data.attack = make_attack(self.entity.object:get_hp() / self.entity.object:get_properties().hp_max)
+	self.data.attack = make_attack(self.entity.object:get_hp() / self.entity.object:get_properties().hp_max, aurum.mobs.helper_nearby_players(self))
 	self.data.attack.moves = moves
 end)
 
@@ -110,7 +112,7 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 		movement = "fly",
 		hunt_prey = {"player"},
 		regen_rate = 1,
-		attack = make_attack(1),
+		attack = make_attack(1, 0),
 		base_speed = 3,
 	},
 
@@ -127,7 +129,7 @@ aurum.mobs.register("aurum_npcs:avatar_headstoner", {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
 			"aurum_mobs:regen",
-			"aurum_npcs:avatar_headstoner",
+			"aurum_npcs:avatar_headstoner_attack_modify",
 		},
 
 		global_events = {

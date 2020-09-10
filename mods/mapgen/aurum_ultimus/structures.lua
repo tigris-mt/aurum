@@ -143,6 +143,22 @@ aurum.ultimus.register_structure{
 }
 
 aurum.ultimus.register_structure{
+	rarity = 1,
+	schematic = aurum.structures.f"summon_scroll_1.mts",
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+	on_generated = function(c)
+		local ph = c:ph(1)
+
+		if #ph > 0 then
+			minetest.set_node(ph[1], {name = "aurum_storage:shell_box"})
+			minetest.get_meta(ph[1]):get_inventory():set_list("main", b.t.duplicate(aurum.magic.new_spell_scroll("summon_avatar", 1), c:random(1, 5)))
+		end
+	end,
+}
+
+aurum.ultimus.register_structure{
 	rarity = 3,
 	make_schematic = function(c)
 		return aurum.features.schematic(vector.new(1, 1, 1), {

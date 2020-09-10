@@ -4,7 +4,7 @@ local function make(pos, random)
 	local name = aurum.flavor.generate_name(random)
 	gtextitems.set_node(pos, {
 		title = S("The Words of @1", name),
-		text = S("@1 has said, \"@2 @3 @4.\"", name,
+		text = S("@1 has said, \"@2 @3 @4. @5\"", name,
 			b.t.weighted_choice({
 				{S"Read:", 5},
 				{S"Hear:", 5},
@@ -63,6 +63,16 @@ local function make(pos, random)
 				S"generates falsehoods",
 				S"speaks to all of us",
 				S"must be contemplated",
+			}, random),
+			b.t.choice({
+				S"Know this.",
+				S"Keep it within your heart.",
+				S"Do you see now why I told you all about it?",
+				S"This makes be happy.",
+				S"Very sad.",
+				S"I heard about it from five tall men.",
+				S"Perhaps you should write it on your headstone.",
+				S"That is my motto.",
 			}, random)
 		),
 		author = aurum.flavor.generate_name(random),
@@ -79,7 +89,7 @@ minetest.register_decoration{
 	place_on = {"group:soil"},
 	biomes = aurum.biomes.get_all_group("aurum:primus", {"base"}),
 	sidelen = 16,
-	fill_ratio = 0.00025,
+	fill_ratio = 0.001,
 }
 
 local did = minetest.get_decoration_id("aurum_structures:hidden_record")

@@ -60,6 +60,7 @@ local function make_headstone(pos, random)
 				{S"with nobody around", 1},
 				{S"under the watchful night", 1},
 				{S"in the uncaring earth", 1},
+				{S"in memory of five tall men", 0.05},
 			}, random),
 			b.t.weighted_choice({
 				{S"humble", 1},
@@ -139,7 +140,7 @@ minetest.register_on_generated(function(_, _, seed)
 	local g = minetest.get_mapgen_object("gennotify")
 	local d = g["decoration#" .. did]
 	if d then
-		local random = b.seed_random(seed + 537)
+		local random = b.seed_random(seed + aurum.structures.GRAVEYARD_NOISE.seed)
 		for _,pos in ipairs(d) do
 			pos.y = pos.y + 1
 			if minetest.get_node(pos).name == "aurum_books:stone_tablet_written" then

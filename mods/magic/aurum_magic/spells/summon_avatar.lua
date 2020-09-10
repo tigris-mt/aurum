@@ -15,7 +15,7 @@ aurum.magic.register_spell("summon_avatar", {
 		S"- A hidden record (Primus Hortum)",
 		S"- A law pillar (Ultimus Hortum)",
 		S"- A fiendish mocking (The Loom)",
-		S"- A lesser throne (The Aether)",
+		S"- A crown declaration (The Aether)",
 	}, "\n"),
 
 	apply_requirements = function(pointed_thing, _, player)

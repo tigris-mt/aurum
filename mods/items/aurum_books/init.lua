@@ -30,12 +30,14 @@ minetest.register_craft{
 }
 
 local t = "aurum_base_stone.png"
+local u = t .. "^aurum_books_stone_tablet.png"
+local w = t .. "^aurum_books_stone_tablet_written.png"
 
 gtextitems.register("aurum_books:stone_tablet", {
 	node = true,
 	item = {
 		description = S"Stone Tablet",
-		tiles = {t, t, t, t, t, t .. "^aurum_books_stone_tablet.png"},
+		tiles = {t, t, t, t, t, u},
 		drawtype = "nodebox",
 		node_box = {
 			type = "fixed",
@@ -54,7 +56,7 @@ gtextitems.register("aurum_books:stone_tablet", {
 	},
 	written = {
 		description = S"Written Stone Tablet",
-		tiles = {t, t, t, t, t, t .. "^aurum_books_stone_tablet_written.png"},
+		tiles = {t, t, t, t, t, w},
 	},
 })
 
@@ -64,5 +66,30 @@ minetest.register_craft{
 		{"aurum_ore:iron_ingot", "group:stone"},
 		{"aurum_ore:iron_ingot", "group:stone"},
 		{"aurum_ore:iron_ingot", "group:stone"},
+	},
+}
+
+gtextitems.register("aurum_books:stone_obelisk", {
+	node = true,
+	item = {
+		description = S"Stone Obelisk",
+		tiles = {t, t, u, u, u, u},
+		paramtype2 = "facedir",
+		on_place = aurum.rotate_node_and_after,
+		sounds = aurum.sounds.stone(),
+		groups = {
+			dig_pick = 2,
+		},
+	},
+	written = {
+		description = S"Written Stone Tablet",
+		tiles = {t, t, w, w, w, w},
+	},
+})
+
+minetest.register_craft{
+	output = "aurum_books:stone_obelisk",
+	recipe = {
+		{"aurum_books:stone_tablet", "group:stone", "aurum_books:stone_tablet"},
 	},
 }

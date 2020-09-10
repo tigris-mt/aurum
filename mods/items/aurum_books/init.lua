@@ -82,7 +82,7 @@ gtextitems.register("aurum_books:stone_obelisk", {
 		},
 	},
 	written = {
-		description = S"Written Stone Tablet",
+		description = S"Written Stone Obelisk",
 		tiles = {t, t, w, w, w, w},
 	},
 })

@@ -7,12 +7,8 @@ local syllables = {
 local vowels = "aeiouy"
 local consonants = "bcdfghjklmnpqrstvwxyz"
 
-local function choose(list)
-	return list[math.random(#list)]
-end
-
-local function schoose(str)
-	local i = math.random(#str)
+local function schoose(str, random)
+	local i = (random or math.random)(#str)
 	return str:sub(i, i)
 end
 
@@ -20,29 +16,29 @@ local function capitalize(s)
 	return s:sub(1, 1):upper() .. s:sub(2)
 end
 
-local function syllable()
-	return (b.t.weighted_choice{
-		{function() return choose(syllables) end, 10},
-		{function() return schoose(vowels) end, 1},
-		{function() return schoose(consonants) .. schoose(vowels) end, 1},
-		{function() return schoose(vowels) .. schoose(vowels) end, 1},
-		{function() return schoose(consonants) .. schoose(vowels) .. schoose(vowels) end, 1},
-	})()
+local function syllable(random)
+	return (b.t.weighted_choice({
+		{function() return b.t.choice(syllables, random) end, 10},
+		{function() return schoose(vowels, random) end, 1},
+		{function() return schoose(consonants, random) .. schoose(vowels, random) end, 1},
+		{function() return schoose(vowels, random) .. schoose(vowels, random) end, 1},
+		{function() return schoose(consonants, random) .. schoose(vowels, random) .. schoose(vowels, random) end, 1},
+	}, random))()
 end
 
-local function single()
-	return capitalize((b.t.weighted_choice{
-		{function() return syllable() .. "-" .. syllable() end, 0.25},
-		{function() return syllable() .. syllable() end, 1},
-		{function() return syllable() .. syllable() .. syllable() end, 1},
-	})())
+local function single(random)
+	return capitalize((b.t.weighted_choice({
+		{function() return syllable(random) .. "-" .. syllable(random) end, 0.25},
+		{function() return syllable(random) .. syllable(random) end, 1},
+		{function() return syllable(random) .. syllable(random) .. syllable(random) end, 1},
+	}, random))())
 end
 
-function aurum.flavor.generate_name()
-	return (choose{
-		function() return single() .. " of " .. single() end,
-		function() return single() .. " " .. single() end,
-		function() return single() .. " " .. single() .. " " .. single() end,
-		function() return single() .. " " .. single() end,
-	})()
+function aurum.flavor.generate_name(random)
+	return (b.t.choice({
+		function() return single(random) .. " of " .. single(random) end,
+		function() return single(random) .. " " .. single(random) end,
+		function() return single(random) .. " " .. single(random) .. " " .. single(random) end,
+		function() return single(random) .. " " .. single(random) end,
+	}, random))()
 end

@@ -1,7 +1,7 @@
 local S = minetest.get_translator()
 
 local function make_headstone(pos, random)
-	local name = aurum.flavor.generate_name()
+	local name = aurum.flavor.generate_name(random)
 	local age = random(16, 110)
 	for _=1,4 do
 		if age > 50 then

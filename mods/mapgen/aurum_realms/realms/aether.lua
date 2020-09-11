@@ -3,6 +3,7 @@ local S = minetest.get_translator()
 aurum.effects.register("aurum_realms:aether", {
 	description = S"Aether",
 	hidden = true,
+	enchant = false,
 	groups = {"aurum_realms"},
 	apply = function(player)
 		player_monoids.gravity:add_change(player, 1.5, "aurum_realms:aether")

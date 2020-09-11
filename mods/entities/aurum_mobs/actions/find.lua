@@ -1,3 +1,6 @@
+-- Parent ref table.
+aurum.mobs.initial_data.parent = nil
+
 -- TODO: Find only pathable nodes.
 function aurum.mobs.helper_find_nodes(self, event, nodenames)
 	local ent = self.entity
@@ -12,6 +15,21 @@ function aurum.mobs.helper_find_nodes(self, event, nodenames)
 	end
 	return false
 end
+
+-- Find the mob's parent (within SEARCH_RADIUS * 2).
+gemai.register_action("aurum_mobs:find_parent", function(self)
+	if self.data.parent then
+		local object = aurum.mobs.helper_ref_entity(self, self.data.parent)
+		if object and vector.distance(self.entity.object:get_pos(), object:get_pos()) < aurum.mobs.SEARCH_RADIUS * 2 then
+			self:fire_event("found_parent", {
+				target = {
+					type = "ref_table",
+					ref_table = self.data.parent,
+				},
+			})
+		end
+	end
+end)
 
 -- Find a habitat target node.
 gemai.register_action("aurum_mobs:find_habitat", function(self)

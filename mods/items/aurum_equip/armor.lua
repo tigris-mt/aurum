@@ -145,6 +145,23 @@ aurum.equip.register_armor_set("aurum_equip:bronze", {
 	},
 })
 
+aurum.equip.register_armor_set("aurum_equip:gloria", {
+	description = S"Gloria",
+	material = "aurum_ore:gloria_ingot",
+	enchant_levels = 6,
+	texture = aurum.ore.ores["aurum_ore:gloria"].texture,
+
+	durability = 50,
+
+	armor = {
+		blade = 0.85,
+		pierce = 0.9,
+		impact = 0.95,
+		burn = 0.7,
+		chill = 0.7,
+	},
+})
+
 aurum.equip.register_armor_set("aurum_equip:iron", {
 	description = S"Iron",
 	material = "aurum_ore:iron_ingot",

@@ -68,7 +68,7 @@ local function make(pos, random)
 				S"Know this.",
 				S"Keep it within your heart.",
 				S"Do you see now why I told you all about it?",
-				S"This makes be happy.",
+				S"This makes me happy.",
 				S"Very sad.",
 				S"I heard about it from five tall men.",
 				S"Perhaps you should write it on your headstone.",

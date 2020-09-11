@@ -33,6 +33,7 @@ aurum.magic.register_spell("summon_avatar", {
 				end
 			end)(({
 				["aurum_structures:gravestone"] = "aurum_npcs:avatar_headstoner",
+				["aurum_structures:hidden_record"] = "aurum_npcs:avatar_mors_vivi",
 			})[gtextitems.get_node(pointed_thing.under).id])
 		end
 		return false

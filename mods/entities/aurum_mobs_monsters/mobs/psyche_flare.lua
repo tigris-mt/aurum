@@ -1,5 +1,32 @@
 local S = minetest.get_translator()
 
+gprojectiles.register("aurum_mobs_monsters:psyche_flare_shot", {
+	initial_properties = {
+		collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
+		visual = "sprite",
+		textures = {"aurum_mobs_monsters_loom_flare_shot.png"},
+	},
+	on_collide = function(self, thing)
+		if thing.type == "object" then
+			local rt = b.ref_to_table(thing.ref)
+			if rt and (rt.name == "aurum_mobs_monsters:psyche_flare" or b.ref_table_equal(rt, self.data.parent)) then
+				-- No effect, pass through.
+			else
+				aurum.mobs.helper_do_attack(self.object, self.data.attack, thing.ref)
+				self:cancel()
+			end
+		elseif thing.type == "node" then
+			local nn = minetest.get_node(thing.under).name
+			local def = minetest.registered_items[nn]
+			if def then
+				if def.walkable or (def._liquidtype or "none") ~= "none" then
+					self:cancel()
+				end
+			end
+		end
+	end,
+})
+
 aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 	description = S"Psyche Flare",
 	longdesc = S"The sterotypical summoner's tool.",
@@ -22,10 +49,11 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 			damage = {psyche = 5},
 			distance = 32,
 			speed = 1,
-			fire_projectile = "aurum_mobs_monsters:loom_flare_shot",
+			fire_projectile = "aurum_mobs_monsters:psyche_flare_shot",
 			type = "ranged",
 		}),
 		base_speed = 3,
+		regen_rate = -1 / 5,
 	},
 
 	armor_groups = {psyche = 20, burn = 70, chill = 70},
@@ -34,6 +62,7 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_mobs:regen",
 		},
 
 		global_events = {
@@ -97,4 +126,3 @@ aurum.mobs.register_spawn{
 	chance = 25 ^ 3,
 	biomes = {"ultimus"},
 }
-

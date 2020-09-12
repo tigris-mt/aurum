@@ -41,8 +41,9 @@ local uids = storage:get_int("uids")
 
 local old = b.ref_to_table
 function b.ref_to_table(obj)
-	if obj:get_luaentity() and obj:get_luaentity()._aurum_mobs_id then
-		return {type = "aurum_mob", id = obj:get_luaentity()._aurum_mobs_id}
+	local l = obj:get_luaentity()
+	if l and l._aurum_mobs_id then
+		return {type = "aurum_mob", id = l._aurum_mobs_id, name = l.name}
 	else
 		return old(obj)
 	end
@@ -152,8 +153,10 @@ function aurum.mobs.register(name, def)
 
 			self._last_pos = self.object:get_pos()
 
-			-- Tick state.
-			self._gemai:step(dtime)
+			-- Tick state if this is a returning mob.
+			if self._data.initialized then
+				self._gemai:step(dtime)
+			end
 
 			self._data.initialized = true
 		end,
@@ -197,7 +200,8 @@ function aurum.mobs.register(name, def)
 		on_punch = function(self, puncher)
 			if puncher ~= self.object then
 				local ref_table = aurum.get_blame(puncher) or b.ref_to_table(puncher)
-				if ref_table then
+				local was_parent = self._gemai.data.parent and b.ref_table_equal(ref_table, self._gemai.data.parent)
+				if ref_table and not was_parent then
 					aurum.effects.apply_tool_effects(puncher:get_wielded_item(), self.object, ref_table)
 					self._gemai:fire_event("punch", {
 						other = ref_table,

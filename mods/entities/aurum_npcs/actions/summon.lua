@@ -9,6 +9,7 @@ gemai.register_action("aurum_npcs:summon", function(self)
 		if object then
 			local data = object:get_luaentity()._data.gemai
 			data.parent = b.ref_to_table(self.entity.object)
+			data.herd = self.data.herd
 		end
 	end
 end)

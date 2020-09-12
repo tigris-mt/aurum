@@ -80,3 +80,26 @@ function aurum.mobs.helper_nearby_players(self)
 		end
 	end)
 end
+
+function aurum.mobs.helper_same_herd(self, object)
+	if self.entity.object == object then
+		return true
+	end
+
+	local mob = aurum.mobs.get_mob(object)
+	local rt = b.ref_to_table(object)
+
+	if self.data.parent and rt and b.ref_table_equal(self.data.parent, rt) then
+		return true
+	end
+
+	if mob then
+		if self.data.parent and mob.data.parent and b.ref_table_equal(self.data.parent, mob.data.parent) then
+			return true
+		elseif mob.data.herd == self.data.herd then
+			return true
+		end
+	end
+
+	return false
+end

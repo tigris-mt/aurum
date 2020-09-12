@@ -15,13 +15,14 @@ aurum.mobs.register("aurum_npcs:summoner", {
 	},
 
 	initial_data = {
-		habitat_nodes = {"group:clay_brick"},
+		habitat_nodes = {"group:clay_brick", "group:clay", "group:dirt"},
+		xmana = 15,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {impact = 3},
 		}),
 		summon = {
 			mob = "aurum_mobs_monsters:psyche_flare",
-			time = 10,
+			time = 15,
 		},
 	},
 
@@ -51,6 +52,7 @@ aurum.mobs.register("aurum_npcs:summoner", {
 			punch = "fight",
 			lost = "roam",
 			interact = "",
+			herd_alerted = "",
 		},
 
 		states = {
@@ -63,10 +65,12 @@ aurum.mobs.register("aurum_npcs:summoner", {
 			roam = {
 				actions = {
 					"aurum_mobs:find_habitat",
+					"aurum_mobs:find_prey",
 					"aurum_mobs:find_random",
 				},
 
 				events = {
+					found_prey = "go_fight",
 					found_habitat = "go",
 					found_random = "go",
 				},
@@ -75,6 +79,10 @@ aurum.mobs.register("aurum_npcs:summoner", {
 			stand = {
 				actions = {
 					"aurum_mobs:timeout",
+					"aurum_mobs:find_prey",
+				},
+				events = {
+					found_prey = "go_fight",
 				},
 			},
 
@@ -92,6 +100,7 @@ aurum.mobs.register("aurum_npcs:summoner", {
 			go_fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
+					"aurum_mobs:alert_herd",
 					"aurum_mobs:go",
 					"aurum_mobs:timeout",
 				},
@@ -103,6 +112,7 @@ aurum.mobs.register("aurum_npcs:summoner", {
 			fight = {
 				actions = {
 					"aurum_mobs:adrenaline",
+					"aurum_mobs:alert_herd",
 					"aurum_mobs:attack",
 				},
 				events = {

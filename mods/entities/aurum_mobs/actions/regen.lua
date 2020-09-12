@@ -9,6 +9,8 @@ gemai.register_action("aurum_mobs:regen", function(self)
 				generic = damage,
 			},
 		})
-		self.entity.object:set_hp(math.min(self.entity.object:get_properties().hp_max, self.entity.object:get_hp()))
+		if self:is_valid() then
+			self.entity.object:set_hp(math.min(self.entity.object:get_properties().hp_max, self.entity.object:get_hp()))
+		end
 	end
 end)

@@ -9,7 +9,7 @@ gprojectiles.register("aurum_mobs_monsters:psyche_flare_shot", {
 	on_collide = function(self, thing)
 		if thing.type == "object" then
 			local rt = b.ref_to_table(thing.ref)
-			if rt and (rt.name == "aurum_mobs_monsters:psyche_flare" or b.ref_table_equal(rt, self.data.parent)) then
+			if rt and (rt.name == "aurum_mobs_monsters:psyche_flare" or (self.data.parent and b.ref_table_equal(rt, self.data.parent))) then
 				-- No effect, pass through.
 			else
 				aurum.mobs.helper_do_attack(self.object, self.data.attack, thing.ref)
@@ -43,7 +43,7 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 
 	initial_data = {
 		habitat_nodes = {"group:stone", "group:clay", "group:clay_brick", "group:wood", "group:sand", "aurum_base:gravel"},
-		xmana = 15,
+		xmana = 0,
 		movement = "fly",
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {psyche = 5},
@@ -70,6 +70,7 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 			interact = "",
 			lost = "roam",
 			stuck = "roam",
+			herd_alerted = "",
 		},
 
 		states = {
@@ -81,14 +82,13 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 
 			roam = {
 				actions = {
-					"aurum_mobs:find_prey",
 					"aurum_mobs:find_parent",
 					"aurum_mobs:find_habitat",
 					"aurum_mobs:find_random",
 				},
 
 				events = {
-					found_prey = "fight",
+					herd_alerted = "fight",
 					found_parent = "go",
 					found_habitat = "go",
 					found_random = "go",
@@ -97,11 +97,10 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 
 			go = {
 				actions = {
-					"aurum_mobs:find_prey",
 					"aurum_mobs:go",
 				},
 				events = {
-					found_prey = "fight",
+					herd_alerted = "fight",
 					reached = "roam",
 				},
 			},
@@ -109,6 +108,7 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 			fight = {
 				actions = {
 					"aurum_mobs:go",
+					"aurum_mobs:alert_herd",
 					"aurum_mobs:attack",
 				},
 				events = {
@@ -120,9 +120,3 @@ aurum.mobs.register("aurum_mobs_monsters:psyche_flare", {
 		},
 	},
 })
-
-aurum.mobs.register_spawn{
-	mob = "aurum_mobs_monsters:psyche_flare",
-	chance = 25 ^ 3,
-	biomes = {"ultimus"},
-}

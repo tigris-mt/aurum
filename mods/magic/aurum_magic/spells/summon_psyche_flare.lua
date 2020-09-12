@@ -14,6 +14,7 @@ aurum.magic.register_spell("summon_psyche_flare", {
 			local data = object:get_luaentity()._data.gemai
 			data.attack.damage.psyche = 5 * level
 			data.parent = b.ref_to_table(player)
+			data.herd = "player:" .. player:get_player_name()
 			return true
 		end
 		return false

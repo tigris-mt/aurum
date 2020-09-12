@@ -115,7 +115,9 @@ function aurum.mobs.register(name, def)
 				gemai = {},
 			}, deserialized.compressed and minetest.deserialize(minetest.decompress(deserialized.compressed)) or deserialized)
 
-			self._data.gemai = b.t.combine(b.t.deep_copy(b.t.combine(aurum.mobs.initial_data, def.initial_data)), self._data.gemai)
+			self._data.gemai = b.t.combine(b.t.deep_copy(b.t.combine(aurum.mobs.initial_data, {
+				herd = def.herd,
+			}, def.initial_data)), self._data.gemai)
 
 			self.object:set_armor_groups(b.t.combine(gdamage.armor_defaults(), def.armor_groups))
 

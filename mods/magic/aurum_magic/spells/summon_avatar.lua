@@ -1,6 +1,6 @@
 local S = minetest.get_translator()
 
-local MANA = 400
+local MANA = 200
 
 aurum.magic.register_spell("summon_avatar", {
 	description = S"Summon Avatar",

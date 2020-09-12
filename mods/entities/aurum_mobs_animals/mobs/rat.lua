@@ -32,6 +32,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 			punch = "fight",
 			lost = "roam",
 			interact = "",
+			herd_alerted = "",
 		},
 
 		states = {

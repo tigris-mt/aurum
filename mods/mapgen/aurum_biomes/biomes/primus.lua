@@ -23,10 +23,30 @@ aurum.biomes.register_all("aurum:primus", {
 	},
 })
 
+aurum.biomes.register_all("aurum:primus", {
+	name = "primus_swamp",
+	_groups = {"green", "dark"},
+	_color = b.color.convert"chocolate",
+	heat_point = 20,
+	humidity_point = 90,
+	_variants = {
+		base = v_base{
+			node_top = "aurum_farming:fertilizer",
+			depth_top = 1,
+			node_filler = "aurum_farming:fertilizer",
+			depth_filler = 4,
+			node_water = "aurum_farming:fertilizer",
+			node_cave_liquid = "aurum_farming:fertilizer",
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
+
 aurum.biomes.trees.register(b.t.combine({
 	name = "aurum_trees:pander",
-	biomes = {"primus_jungle"},
+	biomes = {"primus_jungle", "primus_swamp"},
 	rarity = 15,
+	terrain = {"group:soil", "group:fertilizer"},
 }, {
 	custom_schematics = aurum.trees.defaults.style.HUGE.pre,
 	post_schematics = aurum.trees.defaults.style.HUGE.post,

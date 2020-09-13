@@ -75,7 +75,7 @@ minetest.register_node("aurum_farming:fertilizer", {
 
 	tiles = {"aurum_farming_fertilizer.png"},
 
-	liquid_viscosity = 15,
+	liquid_viscosity = 14,
 
 	liquidtype = "source",
 	liquid_alternative_flowing = "aurum_farming:fertilizer",

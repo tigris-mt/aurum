@@ -25,7 +25,7 @@ function aurum.biomes.trees.register(def)
 		post_schematics = {},
 		-- Decoration biomes.
 		biomes = nil,
-		-- Custom tree types.
+		terrain = treedef.terrain,
 	}, def)
 
 	local total = sum_rarity(def.custom_schematics) + sum_rarity(treedef.decorations, def.schematics) + sum_rarity(def.post_schematics)
@@ -33,7 +33,7 @@ function aurum.biomes.trees.register(def)
 	for _,k in ipairs(def.schematics) do
 		minetest.register_decoration(b.t.combine({
 			deco_type = "schematic",
-			place_on = treedef.terrain,
+			place_on = def.terrain,
 			sidelen = 80,
 			fill_ratio = 0.005 * (def.rarity or 1) * (treedef.decorations[k] or 1) / total,
 			biomes = def.biomes,
@@ -43,7 +43,7 @@ function aurum.biomes.trees.register(def)
 	for schematic_name,rarity in pairs(def.custom_schematics) do
 		minetest.register_decoration(b.t.combine({
 			deco_type = "schematic",
-			place_on = treedef.terrain,
+			place_on = def.terrain,
 			sidelen = 80,
 			fill_ratio = 0.005 * (def.rarity or 1) * rarity / total,
 			biomes = def.biomes,
@@ -53,7 +53,7 @@ function aurum.biomes.trees.register(def)
 	for schematic_name, rarity in pairs(def.post_schematics) do
 		local deco = aurum.trees.generate_decoration(def.name, schematic_name)
 		aurum.features.register_decoration{
-			place_on = treedef.terrain,
+			place_on = def.terrain,
 			rarity = 0.005 * (def.rarity or 1) * rarity / total,
 			biomes = def.biomes,
 			schematic = deco.schematic,

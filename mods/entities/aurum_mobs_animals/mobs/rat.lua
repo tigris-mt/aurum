@@ -24,6 +24,7 @@ aurum.mobs.register("aurum_mobs_animals:rat", {
 		global_actions = {
 			"aurum_mobs:physics",
 			"aurum_mobs:environment",
+			"aurum_mobs:regen",
 		},
 
 		global_events = {

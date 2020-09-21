@@ -102,7 +102,7 @@ aurum.features.register_decoration{
 		offset = 0,
 		scale = 0.1,
 		spread = vector.new(200, 200, 200),
-		seed = 8402,
+		seed = 0xCA4E414E,
 		octaves = 3,
 		persist = 0.5,
 	},

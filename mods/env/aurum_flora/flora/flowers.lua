@@ -110,7 +110,7 @@ aurum.flora.register_flower("aurum_flora:snow_blood", 8402, {
 })
 
 local nln = {"group:soil", "group:stone", "group:ore_block", "aurum_base:aether_shell", "aurum_base:aether_flesh"}
-aurum.flora.register_flower("aurum_flora:night_light", 8402, {
+aurum.flora.register_flower("aurum_flora:night_light", 1956, {
 	description = S"Night Light",
 	_doc_items_longdesc = S"A living candle native to the Aether.",
 	_flora_spread_node = nln,
@@ -135,4 +135,39 @@ aurum.flora.register_flower("aurum_flora:night_light", 8402, {
 		b.set(aurum.biomes.get_all_group("green", {"base"})),
 		b.set(aurum.biomes.get_all_group("aurum:aether", {"base"}))
 	)),
+})
+
+local shdn = {"group:sand", "group:clay", "aurum_base:gravel", "group:soil"}
+
+aurum.flora.register_flower("aurum_flora:shilport", 1048, {
+	description = S"Shilport",
+	groups = {dye_source = 1, color_orange = 1},
+	tiles = {"aurum_flora_shilport.png"},
+	selection_box = single,
+	_flora_spread_node = shdn,
+}, {
+	place_on = shdn,
+	biomes = aurum.biomes.get_all_group("all", {"base"}),
+})
+
+aurum.flora.register_flower("aurum_flora:shaxal", 1049, {
+	description = S"Shaxal",
+	groups = {dye_source = 1, color_yellow = 1},
+	tiles = {"aurum_flora_shaxal.png"},
+	selection_box = single,
+	_flora_spread_node = shdn,
+}, {
+	place_on = shdn,
+	biomes = aurum.biomes.get_all_group("all", {"base"}),
+})
+
+aurum.flora.register_flower("aurum_flora:sholron", 1050, {
+	description = S"Sholron",
+	groups = {dye_source = 1, color_blue = 1},
+	tiles = {"aurum_flora_sholron.png"},
+	selection_box = single,
+	_flora_spread_node = shdn,
+}, {
+	place_on = shdn,
+	biomes = aurum.biomes.get_all_group("all", {"base"}),
 })

@@ -84,10 +84,10 @@ function aurum.biomes.get_all_group(group, variants)
 	return ret
 end
 
-function aurum.biomes.get_all_heat(hmin, hmax)
+function aurum.biomes.find(filter)
 	local ret = {}
 	for _,def in ipairs(aurum.biomes.all) do
-		if def.heat_point >= hmin and def.heat_point <= hmax then
+		if filter(def) then
 			table.insert(ret, def.name)
 		end
 	end

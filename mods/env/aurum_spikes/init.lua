@@ -22,6 +22,11 @@ for i,c in ipairs{
 		heat_range = {50, 75},
 	},
 	{
+		name = "green",
+		desc = "Green",
+		heat_range = {25, 75},
+	},
+	{
 		name = "blue",
 		desc = "Blue",
 		heat_range = {25, 50},
@@ -56,22 +61,30 @@ for i,c in ipairs{
 
 		is_ground_content = false,
 		groups = {dig_pick = 3},
+
+		sounds = aurum.sounds.glass(),
 	})
 
+	local place_on = {
+		"aurum_base:aether_shell",
+		"aurum_base:regret",
+		"aurum_base:gravel",
+		"aurum_base:stone",
+	}
+
 	aurum.features.register_decoration{
-		place_on = {
-			"aurum_base:stone",
-			"aurum_base:regret",
-		},
+		place_on = place_on,
 		noise_params = {
-			offset = 0,
+			offset = -0.025,
 			scale = 0.1,
-			spread = vector.new(200, 200, 200),
-			seed = 0x5914E + i,
+			spread = vector.new(480, 200, 480),
+			seed = 0x5914E + math.abs(c.heat_range[2] - c.heat_range[1]),
 			octaves = 3,
 			persist = 0.5,
 		},
-		biomes = b.set.to_array(b.set._and(b.set(aurum.biomes.get_all_group("all", {"under"})), b.set(aurum.biomes.get_all_heat(unpack(c.heat_range))))),
+		biomes = aurum.biomes.find(function(def)
+			return def.heat_point >= c.heat_range[1] and def.heat_point <= c.heat_range[2] and (aurum.match_item_list(def.node_stone, place_on) or aurum.match_item_list(def.node_top, place_on))
+		end),
 		schematic = aurum.features.schematic(vector.new(1, 1, 1), {{{"aurum_spikes:" .. c.name .. "_spike"}}}),
 		force_placement = true,
 		on_offset = function(c)

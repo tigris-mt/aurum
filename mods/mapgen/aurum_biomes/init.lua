@@ -1,5 +1,8 @@
 aurum.biomes = {}
 
+-- List of all biome definitions
+aurum.biomes.all = {}
+
 -- List of biomes per realm.
 aurum.biomes.realms = {}
 
@@ -10,7 +13,10 @@ aurum.biomes.biomes = {}
 
 -- Register a biome with the position limits defined relative to and limited by a realm's box.
 function aurum.biomes.register(realm, def)
-	local def = b.t.combine(screalms.get(realm).biome_default, def)
+	local def = b.t.combine({
+		heat_point = 50,
+		humidity_point = 50,
+	}, screalms.get(realm).biome_default, def)
 
 	-- Construct original biome box.
 	local min = b.t.combine(screalms.get(realm).local_box.a, {y = def.y_min}, def.min_pos or {})
@@ -23,6 +29,7 @@ function aurum.biomes.register(realm, def)
 
 	aurum.biomes.realms[realm] = aurum.biomes.realms[realm] or {}
 	table.insert(aurum.biomes.realms[realm], def.name)
+	table.insert(aurum.biomes.all, def)
 	return minetest.register_biome(def)
 end
 
@@ -72,6 +79,16 @@ function aurum.biomes.get_all_group(group, variants)
 					end
 				end
 			end
+		end
+	end
+	return ret
+end
+
+function aurum.biomes.get_all_heat(hmin, hmax)
+	local ret = {}
+	for _,def in ipairs(aurum.biomes.all) do
+		if def.heat_point >= hmin and def.heat_point <= hmax then
+			table.insert(ret, def.name)
 		end
 	end
 	return ret

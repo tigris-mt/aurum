@@ -15,7 +15,6 @@ aurum.magic.register_spell("summon_avatar", {
 		S"- A hidden record (Primus Hortum)",
 		S"- A law pillar (Ultimus Hortum)",
 		S"- A fiendish mocking (The Loom)",
-		S"- A crown declaration (The Aether)",
 	}, "\n"),
 
 	apply_requirements = function(pointed_thing, _, player)
@@ -35,7 +34,8 @@ aurum.magic.register_spell("summon_avatar", {
 				["aurum_structures:gravestone"] = "aurum_npcs:avatar_headstoner",
 				["aurum_structures:hidden_record"] = "aurum_npcs:avatar_mors_vivi",
 				["aurum_structures:fiendish_mocking"] = "aurum_npcs:avatar_decadence",
-			})[gtextitems.get_node(pointed_thing.under).id])
+				["aurum_ultimus:glowing_obelisk"] = "aurum_npcs:avatar_caligula",
+			})[gtextitems.get_node(pointed_thing.under).id or minetest.get_node(pointed_thing.under).name])
 		end
 		return false
 	end,

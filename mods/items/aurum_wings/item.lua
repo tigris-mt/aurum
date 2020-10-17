@@ -49,7 +49,7 @@ minetest.register_craft{
 	recipe = {
 		{"", "aurum_fear:aurum", ""},
 		{"aurum_fear:ultimus", "aurum_fear:loom", "aurum_fear:primus"},
-		{"", "aurum_fear:aether", ""},
+		{"", "aurum_mobs_animals:golden_egg", ""},
 	},
 }
 

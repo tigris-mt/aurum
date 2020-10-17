@@ -16,7 +16,7 @@ aurum.mobs.register("aurum_mobs_animals:golden_goose", {
 
 	initial_data = {
 		habitat_nodes = {"aurum_base:aether_shell", "aurum_base:aether_skin", "aurum_base:aether_flesh"},
-		drops = {"aurum_animals:raw_meat 3", "aurum_animals:bone 3", "aurum_ore:gold_ingot 2"},
+		drops = {"aurum_animals:raw_meat 3", "aurum_animals:bone 3", "aurum_ore:gold_ingot 2", "aurum_mobs_animals:golden_egg"},
 		xmana = 16,
 		movement = "fly",
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
@@ -101,6 +101,11 @@ aurum.mobs.register("aurum_mobs_animals:golden_goose", {
 
 aurum.mobs.register_spawn{
 	mob = "aurum_mobs_animals:golden_goose",
-	chance = 22 ^ 3,
+	chance = 20 ^ 3,
 	biomes = aurum.biomes.get_all_group("aurum:aether", {"base"}),
 }
+
+minetest.register_craftitem("aurum_mobs_animals:golden_egg", {
+	description = S"Golden Egg",
+	inventory_image = "aurum_mobs_animals_golden_egg.png",
+})

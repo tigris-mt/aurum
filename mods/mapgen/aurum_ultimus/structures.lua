@@ -190,6 +190,18 @@ aurum.ultimus.register_structure{
 
 aurum.ultimus.register_structure{
 	rarity = 1,
+	make_schematic = function(c)
+		return aurum.features.schematic(vector.new(1, 1, 1), {
+			{{"aurum_ultimus:glowing_obelisk"}},
+		})
+	end,
+	on_offset = function(c)
+		return vector.add(c.pos, vector.new(0, 1, 0))
+	end,
+}
+
+aurum.ultimus.register_structure{
+	rarity = 1,
 	schematic = aurum.structures.f"tunnel_1.mts",
 	on_offset = function(c)
 		return vector.add(c.pos, vector.new(0, 1, 0))

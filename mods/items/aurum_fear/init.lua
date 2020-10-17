@@ -23,9 +23,3 @@ minetest.register_craftitem("aurum_fear:loom", {
 	groups = {fear = 1},
 	inventory_image = "aurum_fear_fear.png^[colorize:#FF0000",
 })
-
-minetest.register_craftitem("aurum_fear:aether", {
-	description = S"The Fear of the Titan",
-	groups = {fear = 1},
-	inventory_image = "aurum_fear_fear.png",
-})

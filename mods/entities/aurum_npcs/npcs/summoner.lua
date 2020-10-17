@@ -20,10 +20,10 @@ aurum.mobs.register("aurum_npcs:summoner", {
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {impact = 3},
 		}),
-		summon = {
+		summon = b.t.combine(aurum.mobs.initial_data.summon, {
 			mob = "aurum_mobs_monsters:psyche_flare",
 			time = 15,
-		},
+		}),
 	},
 
 	entity_def = {

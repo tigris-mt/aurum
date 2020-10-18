@@ -1,5 +1,5 @@
 -- When should a mob be considered "at" its objective?
-local NEAR = 2
+local NEAR = 1.5
 
 b.t.merge(aurum.mobs.initial_data, {
 	moves = 0,
@@ -79,3 +79,19 @@ end
 gemai.register_action("aurum_mobs:go", aurum.mobs.helper_go(false))
 -- Escape from target.
 gemai.register_action("aurum_mobs:flee", aurum.mobs.helper_go(true))
+
+gemai.register_action("aurum_mobs:teleport", function(self)
+	-- Get the positions.
+	local pos = vector.round(self.entity.object:get_pos())
+	local target_pos = aurum.mobs.helper_target_pos(self, self.data.params.target)
+	if not target_pos or vector.distance(pos, target_pos) > aurum.mobs.SEARCH_RADIUS then
+		self:fire_event("lost")
+		return
+	end
+
+	local target = vector.round(vector.add(target_pos, vector.new(0, 1, 0)))
+
+	-- Teleport.
+	aurum.mobs.helper_set_pos(self, target)
+	self:fire_event("reached", self.data.params)
+end)

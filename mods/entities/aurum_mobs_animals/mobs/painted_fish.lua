@@ -110,7 +110,7 @@ aurum.mobs.register("aurum_mobs_animals:painted_fish", {
 
 aurum.mobs.register_spawn{
 	mob = "aurum_mobs_animals:painted_fish",
-	chance = 20 ^ 3,
+	chance = 19 ^ 3,
 	-- Aurum biomes with heat > 50.
 	biomes = b.set.to_array(b.set._and(b.set(aurum.biomes.find(function(def) return def.heat_point > 50 end)), b.set(aurum.biomes.get_all_group("aurum:aurum")))),
 }

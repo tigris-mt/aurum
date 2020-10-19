@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 function aurum.wings.get_wings(player)
 	local inv = player:get_inventory()

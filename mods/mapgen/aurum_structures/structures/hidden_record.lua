@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 local function make(pos, random)
 	local name = aurum.flavor.generate_name(random)

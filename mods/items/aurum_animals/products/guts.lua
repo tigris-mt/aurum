@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 minetest.register_craftitem("aurum_animals:bone", {
 	description = S"Bone",

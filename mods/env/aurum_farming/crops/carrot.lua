@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.farming.register_crop("aurum_farming:carrot", {
 	texture = "aurum_farming_carrot",

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 -- If the stack is a tool, copy tool_capabilities into the state and out into the meta.
 aurum.tools.register_enchant_callback{

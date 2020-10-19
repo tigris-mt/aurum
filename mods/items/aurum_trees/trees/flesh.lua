@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.trees.register("aurum_trees:aether_flesh", {
 	description = "Aether Flesh",

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.effects.register("aurum_npcs:mors_vivi_hit", {
 	description = S"Mors Vivi Hit",

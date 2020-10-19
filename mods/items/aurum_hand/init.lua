@@ -1,5 +1,3 @@
-local S = minetest.get_translator()
-
 aurum_hand = {}
 
 local function hand_dig(time)

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 local old = minetest.get_node_drops
 function minetest.get_node_drops(node, toolname)

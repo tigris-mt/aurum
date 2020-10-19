@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 aurum.portals = {}
 
 aurum.portals.min_delay = tonumber(minetest.settings:get("aurum.portals.min_delay")) or 5

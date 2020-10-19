@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 function aurum.equip.register_armor(name, def)
 	def = b.t.combine({

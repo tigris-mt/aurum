@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 -- If the stack is equipment, then copy eqdef into the state and write it back to the metadata.
 aurum.tools.register_enchant_callback{

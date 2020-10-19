@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 local TIMEOUT = 60
 local SECONDS_PER_REGEN = 60
 

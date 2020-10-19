@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 minetest.register_chatcommand("enchant", {
 	params = S"<enchant> <level>",

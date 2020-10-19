@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 doc.sub.items.register_factoid("tools", "use", function(itemstring, def)
 	if def._eqdef and def._eqdef.armor then

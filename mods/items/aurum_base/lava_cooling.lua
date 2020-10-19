@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 	if minetest.get_item_group(itemstring, "cools_lava") > 0 then

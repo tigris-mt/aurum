@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.mobs.register("aurum_mobs_monsters:flame_totem", {
 	description = S"Flame Totem",

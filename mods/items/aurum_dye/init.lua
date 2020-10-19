@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 aurum.dye = {}
 
 -- Register <name> as a colorable node with <base> being the item's group for redying or nil if no redying is allowed.

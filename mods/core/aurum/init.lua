@@ -159,6 +159,11 @@ function aurum.get_blame(object)
 	end
 end
 
+-- Get translator object for an aurum mod.
+function aurum.get_translator()
+	return minetest.get_translator(minetest.get_current_modname())
+end
+
 b.dofile("damage.lua")
 
 -- Node sounds.

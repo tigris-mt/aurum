@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 doc.add_category("aurum_magic:spells", {
 	name = S"Spells",

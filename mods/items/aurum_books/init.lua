@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 gtextitems.register("aurum_books:book", {
 	item = {

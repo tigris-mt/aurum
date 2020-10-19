@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.flora.register("aurum_flora:grass_spike", {
 	description = S"Grass Spike",

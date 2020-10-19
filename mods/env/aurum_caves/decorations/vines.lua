@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 local MAX_SEARCH_HEIGHT = 160
 
 for _,c in ipairs{

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 local BASE_FLIGHT_SPEED = 7.5
 

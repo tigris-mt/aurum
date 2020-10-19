@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 -- Flora search in a radius to grow.
 local RADIUS = 4

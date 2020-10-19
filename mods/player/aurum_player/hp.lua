@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.player.default_hp_max = tonumber(minetest.settings:get("aurum.player.hp_max")) or 100
 -- Builtin damage (fall damage, drown damage) must be scaled by this amount.

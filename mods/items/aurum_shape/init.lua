@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = minetest.get_translator("aurum_shape")
 
 aurum_shape = {
 	shaped = {},

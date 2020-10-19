@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 awards.register_award("aurum_awards:full_set", {
 	title = S"Complete Coverage",

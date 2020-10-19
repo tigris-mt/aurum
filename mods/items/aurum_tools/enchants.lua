@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 aurum.tools.enchants = {}
 
 function aurum.tools.get_category_enchants(category)

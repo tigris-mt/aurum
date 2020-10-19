@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 -- How close does water need to be for soil to maintain fertility?
 local RADIUS = 2

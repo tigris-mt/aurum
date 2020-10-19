@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 local R = aurum.flavor.books.register
 local C = aurum.flavor.books.categories
 

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 aurum.cage = {}
 
 minetest.register_craftitem("aurum_cage:empty_cage", {

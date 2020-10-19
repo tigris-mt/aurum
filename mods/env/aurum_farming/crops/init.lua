@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 local function new_uid(pos)
 	minetest.get_meta(pos):set_int("uid", math.random(0x1000000))

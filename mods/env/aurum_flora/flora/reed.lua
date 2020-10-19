@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 local HEIGHT = 4
 local grow = aurum.flora.stack_grow({"group:soil", "group:sand"}, HEIGHT, "group:water")
 

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 sfinv.override_page("sfinv:crafting", {
 	get = function(self, player, context)

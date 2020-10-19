@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.dye.register_node("aurum_base:glass", {
 	description = S"Glass",

@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 aurum.storage = {}
 
 doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)

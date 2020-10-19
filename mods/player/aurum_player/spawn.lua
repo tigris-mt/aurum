@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 function aurum.player.spawn_totem(player)
 	local pos = minetest.string_to_pos(player:get_meta():get_string("aurum_player:spawnpoint"))

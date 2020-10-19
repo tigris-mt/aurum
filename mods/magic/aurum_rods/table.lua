@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 local form
 form = smartfs.create("aurum_rods:table", function(state)

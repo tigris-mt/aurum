@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 gprojectiles.register("aurum_magic:ice_shot", {
 	initial_properties = {

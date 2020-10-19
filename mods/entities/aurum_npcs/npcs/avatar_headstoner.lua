@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 minetest.register_node("aurum_npcs:headstoner_dirt", {
 	description = S"Strange Dirt",

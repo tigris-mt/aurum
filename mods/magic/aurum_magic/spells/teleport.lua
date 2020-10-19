@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.magic.register_spell("teleport", {
 	description = S"Teleport",

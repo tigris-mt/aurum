@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 aurum.ore.register("aurum_ore:gloria", {
 	description = S"Gloria",

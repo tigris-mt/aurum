@@ -1,4 +1,4 @@
-local S = minetest.get_translator()
+local S = aurum.get_translator()
 
 gemai.register_action("aurum_npcs:avatar_caligula_attack_modify", function(self)
 	local nearby = math.max(1, aurum.mobs.helper_nearby_players(self))

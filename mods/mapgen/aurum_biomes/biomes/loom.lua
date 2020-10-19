@@ -33,6 +33,23 @@ aurum.biomes.register_all("aurum:loom", {
 })
 
 aurum.biomes.register_all("aurum:loom", {
+	name = "loom_hollow",
+	_groups = {"barren"},
+	_color = b.color.convert"darkgrey",
+	heat_point = 10,
+	humidity_point = 20,
+	_variants = {
+		base = v_base{
+			node_top = "aurum_base:regret",
+			depth_top = 2,
+			node_filler = "air",
+			depth_filler = 10,
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.register_all("aurum:loom", {
 	name = "loom_crystal_forest",
 	_color = b.color.convert"yellow",
 	_groups = {},

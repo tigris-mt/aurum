@@ -36,6 +36,7 @@ aurum.mobs.register("aurum_mobs_monsters:archer_construct", {
 
 	initial_data = {
 		habitat_nodes = {"group:stone", "aurum_base:regret"},
+		drops = {"aurum_ore:iron_ingot 3"},
 		xmana = 6,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {pierce = 8},

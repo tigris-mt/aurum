@@ -7,7 +7,7 @@ awards.register_award("aurum_awards:boss_aurum", {
 	difficulty = 1000,
 	trigger = {
 		type = "mob_kill",
-		item = "aurum_npcs:avatar_headstoner",
+		mob = "aurum_npcs:avatar_headstoner",
 		target = 1,
 	},
 })
@@ -19,7 +19,7 @@ awards.register_award("aurum_awards:boss_primus", {
 	difficulty = 1000,
 	trigger = {
 		type = "mob_kill",
-		item = "aurum_npcs:avatar_mors_vivi",
+		mob = "aurum_npcs:avatar_mors_vivi",
 		target = 1,
 	},
 })
@@ -31,7 +31,7 @@ awards.register_award("aurum_awards:boss_ultimus", {
 	difficulty = 1000,
 	trigger = {
 		type = "mob_kill",
-		item = "aurum_npcs:avatar_caligula",
+		mob = "aurum_npcs:avatar_caligula",
 		target = 1,
 	},
 })
@@ -43,7 +43,7 @@ awards.register_award("aurum_awards:boss_loom", {
 	difficulty = 1000,
 	trigger = {
 		type = "mob_kill",
-		item = "aurum_npcs:avatar_decadence",
+		mob = "aurum_npcs:avatar_decadence",
 		target = 1,
 	},
 })

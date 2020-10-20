@@ -15,7 +15,7 @@ aurum.mobs.register("aurum_npcs:summoner", {
 	},
 
 	initial_data = {
-		habitat_nodes = {"group:clay_brick", "group:clay", "group:dirt"},
+		habitat_nodes = {"group:clay_brick", "group:clay", "group:soil"},
 		xmana = 15,
 		attack = b.t.combine(aurum.mobs.initial_data.attack, {
 			damage = {impact = 3},

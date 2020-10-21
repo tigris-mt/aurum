@@ -1,6 +1,16 @@
 local S = aurum.get_translator()
 aurum.rods = {}
 
+awards.register_trigger("spell_rod_use", {
+	type = "counted_key",
+	progress = "@1/@2 cast",
+	auto_description = { "Cast: @2", "Cast: @1×@2" },
+	auto_description_total = { "Cast @1 spell.", "Cast @1 spells." },
+	get_key = function(self, def)
+		return def.trigger.spell
+	end,
+})
+
 local rod_def = {
 	description = S"Rod",
 	_doc_items_longdesc = "A bronze rod with a gold tip, intended for holding spells. It can be bespelled in a Rod Bespelling Table.",
@@ -36,6 +46,8 @@ local rod_def = {
 			if not spell.apply_requirements(pointed_thing, level, player) then
 				return
 			end
+
+			awards.notify_spell_rod_use(player, data.spell)
 
 			spell.apply(pointed_thing, level, player)
 

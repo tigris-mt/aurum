@@ -4,6 +4,7 @@ awards.register_award("aurum_awards:dig_all", {
 	title = S"Fledgling Sculptor",
 	description = S"Dig 250 nodes.",
 	icon = minetest.registered_items["aurum_tools:iron_pickaxe"].inventory_image,
+	requires = {"aurum_awards:copper"},
 	difficulty = 1,
 	trigger = {
 		type = "dig",
@@ -24,6 +25,19 @@ awards.register_award("aurum_awards:copper", {
 	trigger = {
 		type = "dig",
 		node = "aurum_ore:copper_ore",
+		target = 1,
+	},
+})
+
+awards.register_award("aurum_awards:gloria", {
+	title = S"Glorious",
+	description = S"Dig gloria.",
+	icon = ic"aurum_ore:gloria_ore",
+	requires = {"aurum_awards:copper"},
+	difficulty = 10,
+	trigger = {
+		type = "dig",
+		node = "aurum_ore:gloria_ore",
 		target = 1,
 	},
 })

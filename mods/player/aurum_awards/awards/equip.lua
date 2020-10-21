@@ -1,16 +1,25 @@
 local S = aurum.get_translator()
 
+awards.register_award("aurum_awards:equip", {
+	title = S"Ready for Action",
+	description = S"Equip anything.",
+	icon = minetest.registered_items["aurum_equip:copper_helmet"].inventory_image,
+	difficulty = 10,
+})
+
 awards.register_award("aurum_awards:full_set", {
 	title = S"Complete Coverage",
-	description = S"Equip your head, chest, legs, and feet slots as the same time.",
+	description = S"Equip your head, chest, legs, and feet slots at the same time.",
 	icon = minetest.registered_items["aurum_equip:iron_hauberk"].inventory_image,
 	difficulty = 75,
+	requires = {"aurum_awards:equip"},
 })
 
 awards.register_award("aurum_awards:wings", {
 	title = S"Rival of the Archons",
 	description = S"Equip a pair of wings.",
 	icon = "aurum_wings_wings.png",
+	requires = {"aurum_awards:equip"},
 	difficulty = 1000,
 })
 
@@ -26,6 +35,9 @@ function gequip.refresh(player)
 				slots[k] = true
 			end
 		end
+	end
+	if #b.t.keys(slots) > 0 then
+		awards.unlock(player:get_player_name(), "aurum_awards:equip")
 	end
 	if slots.head and slots.chest and slots.legs and slots.feet then
 		awards.unlock(player:get_player_name(), "aurum_awards:full_set")

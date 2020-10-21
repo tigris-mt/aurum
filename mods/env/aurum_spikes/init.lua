@@ -2,7 +2,7 @@ local S = aurum.get_translator()
 
 local box = {
 	type = "fixed",
-	fixed = {{-0.4, -0.5, -0.4, 0.4, 0.5, 0.4}},
+	fixed = {{-0.3, -0.5, -0.3, 0.3, 0.4, 0.3}},
 }
 
 for i,c in ipairs{
@@ -55,6 +55,7 @@ for i,c in ipairs{
 
 		selection_box = box,
 		collision_box = box,
+		walkable = false,
 
 		paramtype = "light",
 		light_source = 10,

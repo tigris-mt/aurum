@@ -4,7 +4,7 @@ minetest.register_node("aurum_npcs:headstoner_dirt", {
 	description = S"Strange Dirt",
 	tiles = {"aurum_farming_fertilizer.png"},
 	sounds = aurum.sounds.dirt(),
-	groups = {soil = 1, liquid = 1, dig_dig = 2, dig_long_handle = 1},
+	groups = {soil = 1, liquid = 1, dig_dig = 2, dig_long_handle = 1, not_in_creative_inventory = 1},
 	liquid_viscosity = 15,
 
 	liquidtype = "source",

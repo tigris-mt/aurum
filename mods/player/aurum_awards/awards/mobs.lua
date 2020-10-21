@@ -38,6 +38,7 @@ awards.register_award("aurum_awards:reaper", {
 awards.register_award("aurum_awards:milker", {
 	title = S"Titan, or Cyclops?",
 	description = S"Milk 50 mobs.",
+	requires = {"aurum_awards:eat"},
 	icon = minetest.registered_items["aurum_animals:bucket_milk"].inventory_image,
 	difficulty = 3,
 	trigger = {

@@ -9,7 +9,7 @@ aurum.mobs.register("aurum_mobs_animals:blink_frog", {
 		textures = {"aurum_mobs_animals_blink_frog.png"},
 		visual_size = {x = 1, y = 1},
 
-		hp_max = 10,
+		hp_max = 5,
 	},
 
 	initial_data = {

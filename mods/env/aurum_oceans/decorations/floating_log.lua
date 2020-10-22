@@ -1,5 +1,5 @@
 aurum.features.register_decoration{
-	place_on = {"group:water"},
+	place_on = {"aurum_base:water"},
 	rarity = 0.00005,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
 	schematic = aurum.features.schematic(vector.new(1, 5, 1), {
@@ -18,7 +18,7 @@ aurum.features.register_decoration{
 local ot = {name = "aurum_trees:oak_trunk", prob = 255, param2 = 12}
 
 aurum.features.register_decoration{
-	place_on = {"group:water"},
+	place_on = {"aurum_base:water"},
 	rarity = 0.00005,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
 	schematic = aurum.features.schematic(vector.new(5, 2, 1), {

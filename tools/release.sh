@@ -8,7 +8,7 @@ if ! [ "$(git rev-parse --abbrev-ref HEAD)" == "master" ]; then
 	exit 1
 fi
 
-if [ != "$1" "commit" ]; then
+if [ "$1" != "commit" ]; then
 	if ! git diff-index --quiet HEAD --; then
 		echo "Uncommitted changes, cannot procede."
 		exit 1

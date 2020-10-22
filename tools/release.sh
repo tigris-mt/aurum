@@ -18,7 +18,7 @@ fi
 echo "Updating..."
 tools/make_readme.sh
 git add .
-git commit -m "Release update: $(version)"
+git commit -m "Release update: $(version)" || echo "No changes in release..."
 
 echo "Tagging..."
 tools/tag.sh

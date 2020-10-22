@@ -32,7 +32,7 @@ for _,c in ipairs{
 			sunlight_propagates = true,
 			use_texture_alpha = true,
 			tiles = {tb:format("trunk")},
-			sounds = aurum.sounds.glass(),
+			sounds = aurum.sounds.crystal(),
 			groups = {dig_chop = 0, dig_pick = 3, flammable = 0, crystal_tree = 1, shapable = 0},
 		},
 
@@ -40,14 +40,14 @@ for _,c in ipairs{
 			paramtype = "light",
 			light_source = 11,
 			sunlight_propagates = true,
-			sounds = aurum.sounds.glass(),
+			sounds = aurum.sounds.crystal(),
 			groups = {flammable = 0, leaves = 0, dye_source = 1, ["color_" .. c.name] = 1},
 		},
 
 		sapling = {
 			paramtype = "light",
 			light_source = 7,
-			sounds = aurum.sounds.glass(),
+			sounds = aurum.sounds.crystal(),
 			groups = {flammable = 0},
 		},
 

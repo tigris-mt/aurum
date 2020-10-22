@@ -4,7 +4,7 @@ minetest.register_node("aurum_oceans:crystal", {
 	paramtype = "light",
 	light_source = 8,
 	groups = {dig_pick = 3},
-	sounds = aurum.sounds.glass(),
+	sounds = aurum.sounds.crystal(),
 })
 
 -- More common, shorter.

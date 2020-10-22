@@ -63,7 +63,7 @@ for i,c in ipairs{
 		is_ground_content = false,
 		groups = {dig_pick = 3},
 
-		sounds = aurum.sounds.glass(),
+		sounds = aurum.sounds.crystal(),
 	})
 
 	local place_on = {

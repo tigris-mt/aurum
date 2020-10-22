@@ -63,6 +63,10 @@ aurum.sounds.register("stone", {
 	dug = {name = "default_hard_footstep", gain = 1},
 })
 
+aurum.sounds.register("water", {
+	footstep = {name = "default_water_footstep", gain = 1 / 4},
+})
+
 aurum.sounds.register("wood", {
 	footstep = {name = "default_wood_footstep", gain = 1 / 3},
 	dug = {name = "default_wood_footstep", gain = 1},
@@ -71,10 +75,6 @@ aurum.sounds.register("wood", {
 aurum.sounds.crystal = aurum.sounds.glass
 aurum.sounds.flesh = aurum.sounds.grass
 aurum.sounds.leaves = aurum.sounds.grass
-
-aurum.sounds.register("water", {
-	footstep = {name = "default_water_footstep", gain = 1 / 4},
-})
 
 -- Suitable for tooldefs.
 function aurum.sounds.tool()

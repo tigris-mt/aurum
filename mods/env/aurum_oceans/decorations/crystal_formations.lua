@@ -25,6 +25,8 @@ minetest.register_decoration{
 	height_max = 4,
 	flags = "force_placement",
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"ocean"}),
+	num_spawn_by = 1,
+	spawn_by = {"group:water"},
 }
 
 -- Less common, taller.
@@ -45,4 +47,6 @@ minetest.register_decoration{
 	height_max = 12,
 	flags = "force_placement",
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"ocean"}),
+	num_spawn_by = 1,
+	spawn_by = {"group:water"},
 }

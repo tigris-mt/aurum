@@ -1,17 +1,20 @@
 local S = aurum.get_translator()
-aurum.cage = {}
+aurum.cage = {
+	MANA_FACTOR = 10,
+	MANA_MAX = 50,
+}
 
 minetest.register_craftitem("aurum_cage:empty_cage", {
 	description = S"Empty Mob Cage",
 	inventory_image = "aurum_cage_empty_cage.png",
 	stack_max = 1,
-	_doc_items_usagehelp = S"Use this cage on a mob to capture it. You must expend 10 times the mana that the mob contains.",
+	_doc_items_usagehelp = S("Use this cage on a mob to capture it. You must expend @1 times the mana that the mob contains. The mob not contain more than @2 mana.", aurum.cage.MANA_FACTOR, aurum.cage.MANA_MAX),
 	on_use = function(itemstack, user, thing)
 		if thing.type == "object" and user and user:is_player() and not user.is_fake_player then
 			local mob, name = aurum.mobs.get_mob(thing.ref)
 			if mob then
-				local expense = mob.data.xmana * 10
-				if xmana.mana(user) >= expense then
+				local expense = mob.data.xmana * aurum.cage.MANA_FACTOR
+				if xmana.mana(user) >= expense and mob.data.xmana <= aurum.cage.MANA_MAX then
 					xmana.mana(user, -expense, true, "mob capture")
 					itemstack:set_name("aurum_cage:full_cage")
 					local meta = itemstack:get_meta()

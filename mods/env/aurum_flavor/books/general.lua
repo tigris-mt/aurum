@@ -53,3 +53,11 @@ R{
 	groups = C("general"),
 }
 
+R{
+	data = {
+		author = "Jezert Desert",
+		title = S"Speedwalking",
+		text = S"It is said that in the Loom, space is twice as small as it is in our own realm. In the Aether, not only is space twice as small, but motion is twice as fast, which, according to my high mathematical understanding, results in three times the speed of travel.",
+	},
+	groups = C("general"),
+}

@@ -48,10 +48,13 @@ for i,c in ipairs{
 		drawtype = "mesh",
 		mesh = "aurum_spikes_spike.b3d",
 		visual_scale = 0.1,
+
+		inventory_image = "aurum_spikes_spike_inv.png^[colorize:" .. b.color.tostring(c.name) .. ":127",
+		wield_image = "aurum_spikes_spike_inv.png^[colorize:" .. b.color.tostring(c.name) .. ":127",
+
 		tiles = {"aurum_spikes_spike.png^[colorize:" .. b.color.tostring(c.name) .. ":127"},
 
 		paramtype2 = "facedir",
-		on_place = minetest.rotate_node,
 
 		selection_box = box,
 		collision_box = box,
@@ -61,7 +64,7 @@ for i,c in ipairs{
 		light_source = 10,
 
 		is_ground_content = false,
-		groups = {dig_pick = 3},
+		groups = {dig_pick = 3, attached_node = 1},
 
 		sounds = aurum.sounds.crystal(),
 	})

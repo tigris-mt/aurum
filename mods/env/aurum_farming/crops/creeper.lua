@@ -12,7 +12,7 @@ local function vine_grow(pos, node, random)
 			return vector.distance(pos, v) <= 1.5 and v or nil
 		end)
 		if #poses > 0 then
-			for i=1,math.min(2, random(#poses)) do
+			for i=1,random(math.min(2, #poses)) do
 				local vine_pos = vector.add(poses[i], vector.new(0, 1, 0))
 				minetest.set_node(vine_pos, {name = "aurum_farming:creeper_vine", param2 = random(0, node.param2 - 1)})
 				minetest.get_node_timer(vine_pos):start(time())

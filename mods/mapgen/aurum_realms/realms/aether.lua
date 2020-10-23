@@ -19,7 +19,7 @@ aurum.effects.register("aurum_realms:aether", {
 
 screalms.register("aurum:aether", {
 	description = S"The Aether",
-	size = vector.new(8000, 1024, 8000),
+	size = vector.new(4000, 1024, 4000),
 
 	apply_player = function(player)
 		local x = math.floor((math.sin(minetest.get_gametime() / 100) + 1) / 2 * 127) + 127

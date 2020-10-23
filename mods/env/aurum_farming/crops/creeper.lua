@@ -34,7 +34,11 @@ aurum.farming.register_crop("aurum_farming:creeper", {
 
 	time = time,
 
-	seed = {},
+	seed = {
+		description = S"Creeper Nuts",
+		groups = {edible = 4},
+		on_use = minetest.item_eat(4),
+	},
 
 	on_growth = function(pos, def, stage)
 		-- Mature plant, send out vines.
@@ -82,7 +86,7 @@ minetest.register_node("aurum_farming:creeper_vine", {
 	drop = {
 		max_items = 2,
 		items = {
-			{rarity = 20, items = {"aurum_farming:creeper_seed"}},
+			{rarity = 10, items = {"aurum_farming:creeper_seed"}},
 			{rarity = 1, items = {"aurum_farming:creeper_vine"}},
 		},
 	},

@@ -84,7 +84,6 @@ minetest.register_node("aurum_farming:creeper_vine", {
 	_on_grow_plant = function(pos, node) return vine_grow(pos, node, math.random) end,
 
 	drop = {
-		max_items = 2,
 		items = {
 			{rarity = 10, items = {"aurum_farming:creeper_seed"}},
 			{rarity = 1, items = {"aurum_farming:creeper_vine"}},

@@ -8,7 +8,7 @@ aurum.magic.register_spell("summon_avatar", {
 	rod_cost = 1000,
 	preciousness = 10,
 	longdesc = table.concat({
-		S"When used on a realm artifact; this spell will summon the avatar of that realm's Archon.",
+		S"When used on a realm artifact in that realm; this spell will summon the avatar of that realm's Archon.",
 		S("It consumes @1 mana.", MANA),
 		S"It may be used on:",
 		S"- A gravestone (Aurum)",
@@ -23,19 +23,21 @@ aurum.magic.register_spell("summon_avatar", {
 
 	apply = function(pointed_thing, _, player)
 		if pointed_thing.type == "node" then
+			local occur = ({
+				["aurum_structures:gravestone"] = {mob = "aurum_npcs:avatar_headstoner", realm = "aurum:aurum"},
+				["aurum_structures:hidden_record"] = {mob = "aurum_npcs:avatar_mors_vivi", realm = "aurum:primus"},
+				["aurum_structures:fiendish_mocking"] = {mob = "aurum_npcs:avatar_decadence", realm = "aurum:loom"},
+				["aurum_ultimus:glowing_obelisk"] = {mob = "aurum_npcs:avatar_caligula", realm = "aurum:ultimus"},
+			})[(gtextitems.get_node(pointed_thing.under) or {}).id or minetest.get_node(pointed_thing.under).name] or {}
+
 			return (function(mob)
-				if mob and aurum.mobs.spawn(pointed_thing.above, mob) then
+				if mob and screalms.pos_to_realm(pointed_thing.above) == occur.realm and aurum.mobs.spawn(pointed_thing.above, mob) then
 					xmana.mana(player, -MANA, true, "summon avatar spell")
 					return true
 				else
 					return false
 				end
-			end)(({
-				["aurum_structures:gravestone"] = "aurum_npcs:avatar_headstoner",
-				["aurum_structures:hidden_record"] = "aurum_npcs:avatar_mors_vivi",
-				["aurum_structures:fiendish_mocking"] = "aurum_npcs:avatar_decadence",
-				["aurum_ultimus:glowing_obelisk"] = "aurum_npcs:avatar_caligula",
-			})[gtextitems.get_node(pointed_thing.under).id or minetest.get_node(pointed_thing.under).name])
+			end)(occur.mob)
 		end
 		return false
 	end,

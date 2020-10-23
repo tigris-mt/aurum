@@ -67,6 +67,7 @@ minetest.register_on_mods_loaded(function()
 		"aurum_farming:carrot_seed",
 		"aurum_farming:pumpkin_seed",
 		"aurum_trees:pine_nuts",
+		"aurum_farming:creeper_seed",
 	}, 0.5, 2, {1, 5}, 0, {"seed"})
 
 	-- Food.

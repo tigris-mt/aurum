@@ -125,6 +125,9 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		final_fail = function(pos, def, node)
 			minetest.set_node(vector.add(pos, vector.new(0, -1, 0)), {name = "aurum_base:dirt"})
 		end,
+
+		-- Group overrides.
+		groups = {},
 	}, def)
 	local last_name = base_name .. "_" .. def.max
 
@@ -137,14 +140,14 @@ function aurum.farming.register_crop(base_name, def, decodef)
 			_aurum_farming = def,
 			description = S("@1 Plant", def.description),
 			_doc_items_usagehelp = S("Give this plant at least @1 light and wet, fertilized soil of level @2 or higher for growth and harvest. It grows in @3 stages.", def.light, def.level, def.max),
-			groups = {
+			groups = b.t.combine({
 				-- Disable default flora handling.
 				flora = 0,
 				not_in_creative_inventory = (i ~= 1) and 1 or 0,
 				-- 1 = potential to grow, 2 = fully mature.
 				farming_plant = next_name and 1 or 2,
 				grow_plant = next_name and 1 or 0
-			},
+			}, def.groups),
 			_doc_items_create_entry = (i == 1),
 			_on_grow_plant = next_name and (function(...)
 				return aurum.farming.grow_plant(i, next_name, def, ...)

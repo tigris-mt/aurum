@@ -6,6 +6,7 @@ aurum.mobs = {
 	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", false),
 	SPAWN_LIMIT = tonumber(minetest.settings:get("aurum.mobs.spawn_limit")) or 4,
 	SPAWN_RADIUS = 40,
+	SPAWN_CHECK_RADIUS = 80,
 }
 
 aurum.mobs.mobs = {}

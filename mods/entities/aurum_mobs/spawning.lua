@@ -51,7 +51,7 @@ if aurum.mobs.SPAWN_LIMIT ~= 0 then
 				local pos = player:get_pos()
 				local biome = minetest.get_biome_data(pos)
 				local biome_name = biome and minetest.get_biome_name(biome.biome)
-				local nearby_mobs = b.t.imap(minetest.get_objects_inside_radius(pos, aurum.mobs.SPAWN_RADIUS), function(v) return (v:get_luaentity() and v:get_luaentity()._aurum_mobs_id) and v or nil end)
+				local nearby_mobs = b.t.imap(minetest.get_objects_inside_radius(pos, aurum.mobs.SPAWN_CHECK_RADIUS), function(v) return (v:get_luaentity() and v:get_luaentity()._aurum_mobs_id) and v or nil end)
 
 				if biome_name then
 					for _,def in ipairs(aurum.mobs.spawn_biomes[biome_name] or {}) do

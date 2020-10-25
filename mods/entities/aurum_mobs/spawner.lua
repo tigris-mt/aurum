@@ -33,7 +33,7 @@ minetest.register_node("aurum_mobs:spawner", {
 		meta:set_string("infotext", "")
 		if minetest.registered_entities[def.mob] then
 			meta:set_string("infotext", minetest.registered_entities[def.mob].description)
-			local nearby = #b.t.imap(minetest.get_objects_inside_radius(pos, aurum.mobs.SPAWN_RADIUS), function(v) return (v:get_luaentity() and v:get_luaentity().name == def.mob) and v or nil end)
+			local nearby = #b.t.imap(minetest.get_objects_inside_radius(pos, aurum.mobs.SPAWN_CHECK_RADIUS), function(v) return (v:get_luaentity() and v:get_luaentity().name == def.mob) and v or nil end)
 			if def.limit < 0 or nearby < def.limit then
 				local function try(radius)
 					for _,bp in ipairs(b.box.poses(b.box.new(vector.new(-radius, 0, -radius), vector.new(radius, 1, radius)), vector.new(0, 0, 0))) do

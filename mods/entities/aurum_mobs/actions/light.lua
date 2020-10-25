@@ -2,7 +2,7 @@ aurum.mobs.initial_data.daylight = 13
 aurum.mobs.initial_data.sun_damage = 2
 
 gemai.register_action("aurum_mobs:light_switch", function(self)
-	self:fire_event((minetest.get_node_light(self.entity.object:get_pos()) >= self.data.daylight) and "light_day" or "light_night")
+	self:fire_event(((minetest.get_node_light(self.entity.object:get_pos()) or 0) >= self.data.daylight) and "light_day" or "light_night")
 end)
 
 gemai.register_action("aurum_mobs:sunlight_damage", function(self)

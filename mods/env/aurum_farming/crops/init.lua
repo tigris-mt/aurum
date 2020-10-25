@@ -91,7 +91,7 @@ function aurum.farming.register_crop(base_name, def, decodef)
 		max = 1,
 
 		-- How much light to grow?
-		light = 12,
+		light = 10,
 
 		-- Definition overrides for the nodes.
 		node = {},

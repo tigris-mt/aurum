@@ -59,7 +59,7 @@ minetest.register_craft{
 
 local function find_spot(pos)
 	local box = b.box.new_radius(pos, 1)
-	for _,target in ipairs(b.t.shuffled(minetest.find_nodes_in_area_under_air(box.a, box.b, {"group:soil"}))) do
+	for _,target in ipairs(b.t.shuffled(minetest.find_nodes_in_area_under_air(box.a, box.b, {"group:soil"}), math.random)) do
 		local place = vector.add(target, vector.new(0, 1, 0))
 		if vector.distance(pos, place) <= 1 then
 			return place
@@ -70,7 +70,7 @@ end
 local function find_green(pos)
 	local uid = minetest.get_meta(pos):get_int("uid")
 	local box = b.box.new_radius(pos, 1)
-	for _,target in ipairs(b.t.shuffled(minetest.find_nodes_in_area(box.a, box.b, {"aurum_farming:green_pumpkin"}))) do
+	for _,target in ipairs(b.t.shuffled(minetest.find_nodes_in_area(box.a, box.b, {"aurum_farming:green_pumpkin"}), math.random)) do
 		if minetest.get_meta(target):get_int("uid") == uid then
 			return target
 		end

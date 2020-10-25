@@ -3,7 +3,7 @@ local S = aurum.get_translator()
 -- Flora search in a radius to grow.
 local RADIUS = 4
 -- This much light is required for flora to grow.
-local LIGHT = 13
+local LIGHT = 10
 -- There can only grow LIMIT + 1 flora in an area.
 local LIMIT = 3
 

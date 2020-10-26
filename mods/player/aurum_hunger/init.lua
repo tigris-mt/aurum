@@ -20,7 +20,7 @@ end
 
 aurum.hunger = {
 	STARVE_HP = monoid(1),
-	REGEN_LIMIT = monoid(75),
+	REGEN_LIMIT = monoid(50),
 	REGEN_HP = monoid(1),
 	MAX = monoid(100),
 	LOSS = monoid(1 / 30), -- 50 minutes to empty.

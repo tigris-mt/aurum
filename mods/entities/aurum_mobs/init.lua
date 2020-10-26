@@ -176,6 +176,12 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_step = function(self, dtime)
+			-- Out of map? Don't do anything.
+			if minetest.get_node_or_nil(self.object:get_pos()) == nil then
+				minetest.log("warning", self._gemai:debug_desc() .. " tried to step inside nil")
+				return
+			end
+
 			self._last_pos = self.object:get_pos()
 
 			local tag = ("%s %d/%d%s%s"):format(self._aurum_mob.name, self.object:get_hp(), self.object:get_properties().hp_max, minetest.colorize("#ff0000", "♥"),

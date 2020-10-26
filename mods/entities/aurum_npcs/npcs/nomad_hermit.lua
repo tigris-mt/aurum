@@ -205,6 +205,7 @@ aurum.mobs.register("aurum_npcs:nomad_hermit", {
 
 aurum.mobs.register_spawn{
 	mob = "aurum_npcs:nomad_hermit",
-	chance = 32 ^ 3,
+	chance = 36 ^ 3,
 	biomes = aurum.biomes.get_all_group("aurum:aurum", {"base"}),
+	nodes = {"group:soil", "group:clay", "group:sand"},
 }

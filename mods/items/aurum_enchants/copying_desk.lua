@@ -129,7 +129,6 @@ minetest.register_node("aurum_enchants:copying_desk", {
 	},
 
 	paramtype2 = "facedir",
-	on_place = minetest.rotate_node,
 
 	paramtype = "light",
 	sunlight_propagates = true,

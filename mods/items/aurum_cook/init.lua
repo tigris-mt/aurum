@@ -299,7 +299,6 @@ aurum.cook.register("aurum_cook:smelter", {
 		},
 
 		paramtype2 = "facedir",
-		on_place = minetest.rotate_node,
 		sounds = aurum.sounds.stone(),
 
 		groups = {dig_pick = 2},
@@ -354,7 +353,6 @@ aurum.cook.register("aurum_cook:oven", {
 		},
 
 		paramtype2 = "facedir",
-		on_place = minetest.rotate_node,
 		sounds = aurum.sounds.stone(),
 
 		groups = {dig_pick = 2},

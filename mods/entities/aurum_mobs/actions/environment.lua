@@ -59,11 +59,21 @@ gemai.register_action("aurum_mobs:environment", function(self)
 				damage_groups = {[ndef._damage_type or "generic"] = ndef.damage_per_second},
 			})
 		end
-		if (self.data.movement == "swim" and not aurum.match_item_list(node.name, self.data.habitat_nodes)) or ndef.walkable then
+		if (self.data.movement == "swim" and not aurum.match_item_list(node.name, self.data.habitat_nodes)) then
 			self.entity.object:punch(self.entity.object, 1, {
 				full_punch_interval = 1.0,
 				damage_groups = {drown = 5},
 			})
+		elseif ndef.walkable then
+			local above_pos = vector.add(pos, vector.new(0, 1, 0))
+			if not minetest.registered_nodes[minetest.get_node(above_pos).name].walkable then
+				aurum.mobs.helper_set_pos(self, above_pos)
+			else
+				self.entity.object:punch(self.entity.object, 1, {
+					full_punch_interval = 1.0,
+					damage_groups = {drown = 2, impact = 2},
+				})
+			end
 		end
 		self.data.node_damage_timer = self.data.live_time
 	end

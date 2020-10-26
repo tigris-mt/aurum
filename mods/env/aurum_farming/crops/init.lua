@@ -73,7 +73,8 @@ function aurum.farming.timer(def, pos, dtime)
 				return false
 			end
 		else
-			return true
+			minetest.get_node_timer(pos):start(math.max(1, def.time() - dtime))
+			return false
 		end
 	end
 

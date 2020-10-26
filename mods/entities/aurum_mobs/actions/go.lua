@@ -8,7 +8,7 @@ b.t.merge(aurum.mobs.initial_data, {
 
 -- Random offset so mobs are not always exactly in the center of a node.
 local function roff()
-	return (math.random() - 0.5) / 2
+	return (math.random() - 0.5) / 5
 end
 
 function aurum.mobs.helper_acceptable_node(pos)

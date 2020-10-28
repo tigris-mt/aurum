@@ -36,8 +36,8 @@ form = smartfs.create("aurum_rods:table", function(state)
 		if info.valid then
 			-- Set rod spell.
 			meta:get_inventory():set_list("rod", {aurum.rods.set_item(ItemStack(info.rod), {
-					spell = info.scroll_info.name,
-					level = info.scroll_info.level,
+				spell = info.scroll_info.name,
+				level = info.scroll_info.level,
 			})})
 
 			-- Consume scroll.

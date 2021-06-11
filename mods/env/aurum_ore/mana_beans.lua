@@ -5,7 +5,7 @@ aurum.ore.register("aurum_ore:mana_beans", {
 	texture = "aurum_ore_white.png^[colorize:#7e00ff:255^aurum_ore_bumps.png",
 	level = 0, depth = b.WORLD.max.y,
 	rarity = 8, num = 3, size = 2,
-	growths = {-200, -400},
+	growths = {-200, -400, -900},
 
 	realms = {"aurum:primus", "aurum:aurum"},
 

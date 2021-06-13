@@ -14,8 +14,8 @@ function aurum.tools.register_variant(name)
 	minetest.override_item(name, properties)
 	minetest.register_tool(":" .. properties._enchanted, b.t.combine({_doc_items_create_entry = false}, def, properties, {
 		groups = b.t.combine({not_in_creative_inventory = 1}, def.groups),
-		inventory_image = (def.inventory_image and #def.inventory_image > 0) and (def.inventory_image .. "^aurum_tools_enchanted.png") or nil,
-		wield_image = (def.wield_image and #def.wield_image > 0) and (def.wield_image .. "^aurum_tools_enchanted.png") or nil,
+		inventory_image = (def.inventory_image and #def.inventory_image > 0 and not def._no_enchanted_inventory_image) and (def.inventory_image .. "^aurum_tools_enchanted.png") or nil,
+		wield_image = (def.wield_image and #def.wield_image > 0 and not def._no_enchanted_inventory_image) and (def.wield_image .. "^aurum_tools_enchanted.png") or nil,
 	}))
 	doc.add_entry_alias("tools", name, "tools", name .. "_enchanted")
 	aurum.tools.tools[name] = properties

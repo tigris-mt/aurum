@@ -1,11 +1,52 @@
 local S = aurum.get_translator()
 
-aurum.tools.register(":aurum_tools:hand", b.t.combine(aurum_hand.def, {
+aurum.tools.register("aurum_tools:hand", b.t.combine(aurum_hand.def, {
 	description = S"Hand",
 	_doc_items_longdesc = S"Tools were invented by the primates to surpass the limits of their own limbs, but your hand is not useless on its own. It can dig many nodes with no enhancements at all.",
-	_enchant_levels = 2,
-	_enchants = {"hand"},
 }))
+
+local hand_groups = {
+	times = {
+		[1] = 3,
+		[2] = 2,
+		[3] = 1,
+	},
+	uses = 0,
+	maxlevel = 3,
+}
+
+aurum.tools.register("aurum_tools:shaper_glove", {
+	description = S"Shaper Glove",
+	_doc_items_longdesc = S"An powerful magic tool that wraps the hand and provides the ability to shape the very earth itself.",
+
+	inventory_image = "aurum_tools_shaper_glove.png",
+	wield_image = "aurum_tools_shaper_glove.png",
+	wield_scale = vector.new(1, 1, 2.5),
+	tool_capabilities = {
+		full_punch_interval = 1,
+		groupcaps = {
+			dig_handle = hand_groups,
+			dig_long_handle = hand_groups,
+			dig_pick = hand_groups,
+			dig_chop = hand_groups,
+			dig_dig = hand_groups,
+			dig_snap = hand_groups,
+		},
+		damage_groups = {
+			impact = 6,
+			pierce = 3,
+		},
+	},
+
+	groups = {not_in_creative_inventory = 1, tool_hand = 1, tool = 1},
+
+	_enchant_levels = 12,
+	_enchants = {"hand", "tool"},
+
+	_no_enchanted_inventory_image = true,
+
+	on_use = function() end,
+})
 
 local function register(type, name, texture, def)
 	local odef = {

@@ -40,7 +40,7 @@ aurum_hand.def = {
 		},
 	},
 
-	groups = {not_in_creative_inventory = 1},
+	groups = {not_in_creative_inventory = 1, tool_hand = 1, tool = 1},
 
 	_enchant_levels = 2,
 	_enchants = {"hand"},
@@ -49,3 +49,7 @@ aurum_hand.def = {
 minetest.register_tool(":", b.t.combine(aurum_hand.def, {
 	type = "none",
 }))
+
+minetest.register_on_joinplayer(function(player)
+	player:get_inventory():set_size("hand", 1)
+end)

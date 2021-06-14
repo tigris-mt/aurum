@@ -47,8 +47,6 @@ aurum.tools.register("aurum_equip:shaper_gloves", {
 	},
 
 	groups = {equipment = 1, tool_hand = 1, tool = 1},
-
-	_no_enchanted_inventory_image = true,
 })
 
 minetest.register_craft{

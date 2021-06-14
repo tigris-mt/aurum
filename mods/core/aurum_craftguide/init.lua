@@ -3,4 +3,5 @@ b.t.merge(craftguide.group_stereotypes, {
 	tree = "aurum_trees:oak_trunk",
 	soil = "aurum_base:dirt",
 	stone = "aurum_base:stone",
+	glass = "aurum_base:glass_white",
 })

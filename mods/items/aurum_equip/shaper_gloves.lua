@@ -50,3 +50,11 @@ aurum.tools.register("aurum_equip:shaper_gloves", {
 
 	_no_enchanted_inventory_image = true,
 })
+
+minetest.register_craft{
+	output = "aurum_equip:shaper_gloves",
+	recipe = {
+		{"aurum_fear:aurum", "aurum_mobs_animals:golden_egg", "aurum_fear:loom"},
+		{"aurum_fear:ultimus", "aurum_equip:gold_gloves", "aurum_fear:primus"},
+	},
+}

@@ -85,3 +85,6 @@
 [submodule "mods/entities/gprojectiles"]
 	path = mods/entities/gprojectiles
 	url = https://github.com/tigris-mt/gprojectiles.git
+[submodule "mods/items/elevator"]
+	path = mods/items/elevator
+	url = https://github.com/shacknetisp/elevator

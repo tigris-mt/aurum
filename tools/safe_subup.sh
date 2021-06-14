@@ -13,6 +13,7 @@ SAFE="
 	mods/items/bucket
 	mods/items/doors
 	mods/items/dye
+	mods/items/elevator
 	mods/items/gtextitems
 	mods/mapgen/screalms
 	mods/player/creative

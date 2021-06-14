@@ -56,6 +56,20 @@ function aurum.equip.register_armor_set(prefix, def)
 		durability = 1,
 	}, def)
 
+	aurum.equip.register_armor(prefix .. "_gloves", {
+		description = S("@1 Gloves", def.description),
+		texture = ("%s^aurum_equip_gloves.png^[makealpha:255,0,255"):format(def.texture),
+		enchants = b.t.icombine({"armor", "gloves"}, def.enchants),
+		enchant_levels = def.enchant_levels,
+		armor = b.t.map(def.armor, function(n) return 1 - (1 - n) * 0.5 end),
+		slot = "hands",
+		durability = def.durability,
+		recipe = {
+			{def.material, "", def.material},
+			{def.material, "", def.material},
+		},
+	})
+
 	aurum.equip.register_armor(prefix .. "_boots", {
 		description = S("@1 Boots", def.description),
 		texture = ("%s^aurum_equip_boots.png^[makealpha:255,0,255"):format(def.texture),

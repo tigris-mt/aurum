@@ -45,7 +45,7 @@ local form = smartfs.create("aurum_player:equipment", function(state)
 	i(3.5, 1, gequip.types["chest"].list_name)
 	i(3.5, 2, gequip.types["legs"].list_name)
 	i(3.5, 3, gequip.types["feet"].list_name)
-	i(4.5, 1, "hand")
+	i(4.5, 1, gequip.types["hands"].list_name)
 
 	state:element("code", {name = "listrings", code = inventories .. "\n" .. listrings})
 

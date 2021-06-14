@@ -49,7 +49,3 @@ aurum_hand.def = {
 minetest.register_tool(":", b.t.combine(aurum_hand.def, {
 	type = "none",
 }))
-
-minetest.register_on_joinplayer(function(player)
-	player:get_inventory():set_size("hand", 1)
-end)

@@ -110,7 +110,7 @@ minetest.register_globalstep(function(dtime)
 			if timers[name] >= 0.5 then
 				entities[name] = minetest.add_entity(player:get_pos(), "aurum_wings:active_wings", name)
 				if entities[name] then
-					entities[name]:set_velocity(vector.multiply(player:get_player_velocity(), vector.new(1, 0.25, 1)))
+					entities[name]:set_velocity(vector.multiply(player:get_velocity(), vector.new(1, 0.25, 1)))
 					player:set_pos(entities[name]:get_pos())
 					player:set_attach(entities[name], "", vector.new(), vector.new())
 					timers[name] = 0

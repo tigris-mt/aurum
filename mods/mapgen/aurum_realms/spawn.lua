@@ -49,7 +49,7 @@ function aurum.realms.get_spawn_prelim(id)
 end
 
 -- Get the central spawn point for a realm.
-aurum.realms.get_spawn = b.cache.simple(function(id)
+aurum.realms.get_spawn, aurum.realms.get_spawn_cache = b.cache.simple(function(id)
 	local pos = aurum.realms.get_spawn_prelim(id)
 
 	-- Go up until a free space is found.

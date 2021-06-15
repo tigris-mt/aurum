@@ -15,6 +15,23 @@ end
 
 minetest.register_on_respawnplayer(aurum.player.spawn_totem)
 
+local spawning = {}
+
+local function show_spawn_fs(player)
+	minetest.show_formspec(player:get_player_name(), "aurum_player:spawn", ("size[3,1] label[0,0.25;%s]"):format(minetest.formspec_escape(b.t.choice{
+		"Arrival imminent!",
+		"Life awaits.",
+		"The void holds no claim on you.",
+		"A world unfolds.",
+	})))
+	spawning[player:get_player_name()] = true
+end
+
+local function close_spawn_fs(player)
+	minetest.close_formspec(player:get_player_name(), "aurum_player:spawn")
+	spawning[player:get_player_name()] = nil
+end
+
 local realm_spawn = minetest.settings:get("aurum.spawn_realm") or "aurum:aurum"
 function aurum.player.spawn_realm(player)
 	-- If the player has a spawn point, do nothing.
@@ -24,14 +41,31 @@ function aurum.player.spawn_realm(player)
 		player:set_pos(minetest.string_to_pos(minetest.settings:get("static_spawnpoint")))
 		return true
 	else
-		-- Teleport to the realm spawn point. This can take some time to load everything, so we'll stick the player at the default point while they wait.
-		aurum.player.teleport(player, aurum.realms.get_spawn_prelim(realm_spawn))
-		aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn_prelim(realm_spawn), vector.new(0, 150, 0)), function(player)
+		-- Teleport to the realm spawn point.
+		if aurum.realms.get_spawn_cache.stored[realm_spawn] then
+			-- If the point is cached, just teleport.
 			aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
-		end)
+		else
+			-- If the point is not cached, teleport to the next best thing with a waiting message, then generate, cache, and teleport.
+			show_spawn_fs(player)
+			aurum.player.teleport(player, aurum.realms.get_spawn_cache.f(realm_spawn))
+			aurum.player.teleport_guarantee(player, b.box.new_add(aurum.realms.get_spawn_prelim(realm_spawn), vector.new(0, 150, 0)), function(player)
+				aurum.player.teleport(player, aurum.realms.get_spawn(realm_spawn))
+				close_spawn_fs(player)
+			end)
+		end
 		return true
 	end
 end
+
+minetest.register_on_player_receive_fields(function(player, formname)
+	if formname == "aurum_player:spawn" then
+		if spawning[player:get_player_name()] then
+			show_spawn_fs(player)
+		end
+		return true
+	end
+end)
 
 -- If no static spawn is set, respawn in the spawn realm.
 if not minetest.settings:get("static_spawnpoint") then

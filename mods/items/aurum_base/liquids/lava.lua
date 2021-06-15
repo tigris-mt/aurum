@@ -55,6 +55,14 @@ aurum.base.register_liquid("aurum_base:lava", {
 	},
 })
 
+minetest.override_item("aurum_base:lava_source", {
+	_lava_cool_node = "aurum_base:shimmer_stone",
+})
+
+minetest.override_item("aurum_base:lava_flowing", {
+	_lava_cool_node = "aurum_base:sponge_stone",
+})
+
 bucket.register_liquid(
 	"aurum_base:lava_source",
 	"aurum_base:lava_flowing",

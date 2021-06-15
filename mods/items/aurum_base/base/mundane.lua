@@ -10,6 +10,24 @@ minetest.register_node("aurum_base:stone", {
 	_hammer_drop = "aurum_base:gravel",
 })
 
+minetest.register_node("aurum_base:shimmer_stone", {
+	description = S"Shimmer Stone",
+	_doc_items_longdesc = S"A hard, blast-proof stone, formed from cooling lava sources.",
+	tiles = {"aurum_base_shimmer_stone.png"},
+	sounds = aurum.sounds.stone(),
+	groups = {dig_pick = 1, shapable = 1, level = 3},
+	on_blast = function() end,
+})
+
+minetest.register_node("aurum_base:sponge_stone", {
+	description = S"Sponge Stone",
+	_doc_items_longdesc = S"Softer, porous stone.",
+	tiles = {"aurum_base_sponge_stone.png"},
+	sounds = aurum.sounds.stone(),
+	groups = {dig_pick = 3, dig_hammer = 3, stone = 1},
+	_hammer_drop = "aurum_base:gravel",
+})
+
 minetest.register_node("aurum_base:sand", {
 	description = S"Sand",
 	_doc_items_longdesc = S"Soft and unstable grains.",

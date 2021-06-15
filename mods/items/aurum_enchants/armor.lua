@@ -48,3 +48,18 @@ aurum.tools.register_enchant("psyche_shield", {
 		state.eqdef.armor.psyche = state.eqdef.armor.psyche / (1 + level / 3)
 	end,
 })
+
+aurum.tools.register_enchant("mapping", {
+	categories = {
+		helmet = true,
+	},
+	description = S"Mapping",
+	max_level = 2,
+	longdesc = S"Provides information about the surrounding area directly to the wearer's mind. (Provides minimap, level 2 includes radar.)",
+	apply = function(state, level)
+		state.eqdef.minimap = true
+		if level == 2 then
+			state.eqdef.minimap_radar = true
+		end
+	end,
+})

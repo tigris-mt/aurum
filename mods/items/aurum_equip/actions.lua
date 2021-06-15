@@ -63,3 +63,22 @@ gequip.register_action("aurum_equip:hp", {
 		aurum.player.hp_max_monoid:add_change(player, state.hp.max, "aurum_equip:hp")
 	end,
 })
+
+gequip.register_action("aurum_equip:minimap", {
+	init = function(state)
+		state.minimap = false
+		state.minimap_radar = false
+	end,
+
+	add = function(state, r)
+		state.minimap = r.minimap or state.minimap
+		state.minimap_radar = r.minimap_radar or state.minimap_radar
+	end,
+
+	apply = function(state, player)
+		player:hud_set_flags{
+			minimap = state.minimap,
+			minimap_radar = state.minimap_radar,
+		}
+	end,
+})

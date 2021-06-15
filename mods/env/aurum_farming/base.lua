@@ -70,7 +70,7 @@ minetest.register_node("aurum_farming:fertilizer", {
 	description = S"Fertilizer",
 	_doc_items_longdesc = S"It may not look good or have a nice smell, but fertilizer is vital for your survival. Just don't fall in!",
 	_doc_items_hidden = false,
-	groups = {fertilizer = 1, liquid = 1, disable_jump = 1, dig_dig = 2, flammable = 1, dig_long_handle = 1},
+	groups = {fertilizer = 1, liquid = 1, disable_jump = 1, dig_dig = 2, flammable = 1, dig_long_handle = 1, cools_lava = 1},
 	sounds = aurum.sounds.dirt(),
 
 	tiles = {"aurum_farming_fertilizer.png"},

@@ -45,13 +45,7 @@ for i,c in ipairs{
 	minetest.register_node("aurum_spikes:" .. c.name .. "_spike", {
 		description = S(c.desc .. " Crystal Spike"),
 
-		drawtype = "mesh",
-		mesh = "aurum_spikes_spike.b3d",
-		visual_scale = 0.1,
-
-		inventory_image = "aurum_spikes_spike_inv.png^[colorize:" .. b.color.tostring(c.name) .. ":127",
-		wield_image = "aurum_spikes_spike_inv.png^[colorize:" .. b.color.tostring(c.name) .. ":127",
-
+		drawtype = "plantlike",
 		tiles = {"aurum_spikes_spike.png^[colorize:" .. b.color.tostring(c.name) .. ":127"},
 
 		paramtype2 = "facedir",

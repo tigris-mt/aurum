@@ -21,6 +21,7 @@ Toughless levels range from 0 to 3.
 * `barren`: Devoid of life.
 * `green`: Living, green. Plant life.
 * `forest`: Lots of leafy trees.
+* `frozen`: Snow, cold, icy.
 * `desert`: This is a desert biome.
 * `clay`: This is a clay biome.
 

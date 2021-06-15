@@ -69,7 +69,7 @@ function aurum.player.teleport(player, pos)
 	player:set_pos(pos)
 	aurum.player.realm_refresh(player)
 	local new_realm = aurum.player.get_realm(player)
-	if old_realm ~= new_realm then
+	if old_realm ~= new_realm and new_realm then
 		awards.notify_realm_change(player, new_realm)
 	end
 end

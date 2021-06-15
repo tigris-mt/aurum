@@ -39,7 +39,7 @@ function gequip.refresh(player)
 	if #b.t.keys(slots) > 0 then
 		awards.unlock(player:get_player_name(), "aurum_awards:equip")
 	end
-	if slots.head and slots.chest and slots.legs and slots.feet then
+	if slots.head and slots.chest and slots.legs and slots.feet and slots.hands then
 		awards.unlock(player:get_player_name(), "aurum_awards:full_set")
 	end
 	if items["aurum_wings:wings"] or items["aurum_wings:wings_enchanted"] then

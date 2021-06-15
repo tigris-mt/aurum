@@ -120,6 +120,31 @@ aurum.biomes.trees.register(b.t.combine({
 }))
 
 aurum.biomes.register_all("aurum:primus", {
+	name = "primus_blue",
+	_groups = {"green", "forest"},
+	_color = b.color.convert"blue",
+	heat_point = 10,
+	humidity_point = 90,
+	_variants = {
+		base = v_base{
+			node_top = "aurum_base:grass",
+			depth_top = 1,
+			node_filler = "aurum_base:dirt",
+			depth_filler = 4,
+		},
+		under = aurum.biomes.v_under{},
+	},
+})
+
+aurum.biomes.trees.register(b.t.combine({
+	name = "aurum_trees:azure_birch",
+	biomes = {"primus_blue"},
+	rarity = 5,
+}, {
+	post_schematics = aurum.trees.defaults.style.STILTS.post,
+}))
+
+aurum.biomes.register_all("aurum:primus", {
 	name = "primus_dry",
 	_groups = {"forest", "barren"},
 	_color = b.color.convert"orange",

@@ -17,6 +17,12 @@ aurum.trees.register("aurum_trees:pander", {
 	decorations = aurum.trees.defaults.JUNGLE,
 })
 
+aurum.trees.register("aurum_trees:azure_birch", {
+	description = "Azure Birch",
+	texture_base = "aurum_trees_birch_%s.png^[colorize:#0000ff:64",
+	decorations = aurum.trees.defaults.STILTS,
+})
+
 aurum.trees.register("aurum_trees:drywood", {
 	description = "Drywood",
 	texture_base = "aurum_trees_drywood_%s.png",

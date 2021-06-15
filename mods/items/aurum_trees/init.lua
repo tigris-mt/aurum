@@ -193,7 +193,8 @@ function m.register(name, def)
 			for k,v in pairs(def.decorations) do
 				-- Disable growing the rarest trees from saplings by default.
 				-- Rare trees can be huge.
-				if v >= 0.1 or allow_rare then
+				-- Disable logs as well.
+				if (v >= 0.1 or allow_rare) and k:gmatch("[^,]+")() ~= "log" then
 					table.insert(dkp, {k, v})
 				end
 			end

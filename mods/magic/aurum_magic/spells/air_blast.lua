@@ -12,14 +12,7 @@ aurum.magic.register_spell("air_blast", {
 	end,
 
 	apply = function(_, level, player)
-		local vel = vector.multiply(player:get_look_dir(), -(5 + level * 2))
-
-		local wings = aurum.wings.flying(player)
-		if wings then
-			wings:add_velocity(vel)
-		else
-			player:add_player_velocity(vel)
-		end
+		(aurum.wings.flying(player) or player):add_velocity(vector.multiply(player:get_look_dir(), -(5 + level * 2)))
 	end,
 })
 

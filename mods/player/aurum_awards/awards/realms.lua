@@ -45,7 +45,7 @@ awards.register_award("aurum_awards:ultimus", {
 	icon = "aurum_clay_brick.png",
 	trigger = {
 		type = "realm_change",
-		realm = "aurum:primus",
+		realm = "aurum:ultimus",
 		target = 1,
 	},
 })

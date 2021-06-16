@@ -11,7 +11,7 @@ aurum.dye.register_node("aurum_base:glass", {
 	paramtype = "light",
 	drawtype = "glasslike_framed_optional",
 	sunlight_propagates = true,
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 }, "group:glass")
 
 minetest.register_craft{
@@ -31,6 +31,6 @@ aurum.dye.register_node("aurum_base:glowing_glass", {
 	paramtype = "light",
 	drawtype = "glasslike_framed_optional",
 	sunlight_propagates = true,
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	light_source = 12,
 }, "group:glowing_glass")

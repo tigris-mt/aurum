@@ -30,7 +30,7 @@ for _,c in ipairs{
 			drawtype = "glasslike",
 			light_source = 7,
 			sunlight_propagates = true,
-			use_texture_alpha = true,
+			use_texture_alpha = "blend",
 			tiles = {tb:format("trunk")},
 			sounds = aurum.sounds.crystal(),
 			groups = {dig_chop = 0, dig_pick = 3, flammable = 0, crystal_tree = 1, shapable = 0},

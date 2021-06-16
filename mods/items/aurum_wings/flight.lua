@@ -33,7 +33,7 @@ minetest.register_entity("aurum_wings:active_wings", {
 		self.object:set_velocity(vector.new(0.01, 0.01, 0.01))
 	end,
 
-	on_step = function(self, dtime)
+	on_step = function(self, dtime, moveresult)
 		local player = self.driver and minetest.get_player_by_name(self.driver)
 		if not player or player:get_attach() ~= self.object then
 			self.object:remove()
@@ -49,38 +49,41 @@ minetest.register_entity("aurum_wings:active_wings", {
 				self.wear_timer = 0
 			end
 
-			local v = self.object:get_velocity()
-			if v and self.old_vel then
-				local function t(c)
-					local p = self.object:get_pos()
-					p[c] = p[c] + math.sign(self.old_vel[c])
-					if v[c] == 0 and minetest.registered_nodes[minetest.get_node(p).name].walkable then
-						return math.max(0, math.abs(v[c] - self.old_vel[c]) - 5), true
+			local function stop_flying()
+				player:set_detach()
+				player:set_pos(self.object:get_pos())
+				self.object:remove()
+				entities[player:get_player_name()] = nil
+				timers[player:get_player_name()] = 0
+			end
+
+			if stuck_in(self.object:get_pos()) or player:get_meta():get_int("aurum_wings:wings") ~= 1 then
+				stop_flying()
+			end
+
+			if moveresult.collides then
+				local total = 0
+				local y_hit = false
+				for _,collision in ipairs(moveresult.collisions) do
+					y_hit = y_hit or (collision.axis == "y")
+					if collision.type == "node" then
+						if minetest.registered_nodes[minetest.get_node(collision.node_pos).name].walkable then
+							total = total + vector.distance(collision.old_velocity, collision.new_velocity)
+						end
 					end
-					return 0, false
 				end
-				local damage = 0
-				damage = damage + t"x"
-				damage = damage + t"z"
-				local dy, hy = t"y"
-				damage = damage + dy
-				damage = b.random_whole(damage)
-				if damage >= 1 then
-					self.player_damage = damage
-					player:punch(player, 1, {
-						full_punch_interval = 1,
-						damage_groups = {fall = damage},
-					})
-				end
-				if damage > 0 or hy or stuck_in(self.object:get_pos()) or player:get_meta():get_int("aurum_wings:wings") ~= 1 then
-					player:set_detach()
-					player:set_pos(self.object:get_pos())
-					self.object:remove()
-					entities[player:get_player_name()] = nil
-					timers[player:get_player_name()] = 0
+
+				local damage = b.random_whole(math.max(0, total - 5))
+				self.player_damage = damage
+				player:punch(player, 1, {
+					full_punch_interval = 1,
+					damage_groups = {fall = damage},
+				})
+
+				if damage > 0 or y_hit then
+					stop_flying()
 				end
 			end
-			self.old_vel = v
 		end
 	end,
 
@@ -89,7 +92,7 @@ minetest.register_entity("aurum_wings:active_wings", {
 	end,
 
 	on_detach_child = function(self, player)
-		aurum.wings.on_stop_fly(player, self.player_damage)
+		aurum.wings.on_stop_fly(player, self.player_damage or 0)
 	end,
 })
 

@@ -26,7 +26,7 @@ aurum.base.register_liquid("aurum_base:water", {
 	},
 	post_effect_color = {a = 100, r = 30, g = 60, b = 90},
 	groups = {water = 1, cools_lava = 1},
-	alpha = 150,
+	use_texture_alpha = "blend",
 	liquid_renewable = true,
 }, {
 	special_tiles = {
@@ -104,7 +104,7 @@ aurum.base.register_liquid("aurum_base:river_water", {
 	},
 	post_effect_color = {a = 100, r = 30, g = 80, b = 90},
 	groups = {water = 1, cools_lava = 1},
-	alpha = 150,
+	use_texture_alpha = "blend",
 	liquid_range = 2,
 }, {
 	special_tiles = {

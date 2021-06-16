@@ -28,7 +28,7 @@ aurum.base.register_liquid("aurum_animals:milk", {
 	},
 	post_effect_color = {a = 200, r = 255, g = 255, b = 255},
 	groups = {cools_lava = 1},
-	alpha = 250,
+	use_texture_alpha = "blend",
 }, {
 	special_tiles = {
 		{

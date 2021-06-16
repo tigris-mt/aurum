@@ -5,11 +5,24 @@ screalms.register("aurum:loom", {
 	size = vector.new(8000, 1024, 8000),
 
 	apply_player = function(player)
-		player:set_sky("#110000", "plain", {})
+		player:set_sky{
+			type = "plain",
+			base_color = "#110000",
+		}
+
 		player:set_clouds{
 			color = "#550000ff",
 			speed = {x = 0, z = -200},
 			height = 600,
+		}
+
+		player:set_sun{
+			visible = false,
+			sunrise_visible = false,
+		}
+
+		player:set_moon{
+			visible = false,
 		}
 
 		screalms.apply_underground(player)

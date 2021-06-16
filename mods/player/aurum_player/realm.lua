@@ -26,6 +26,7 @@ function aurum.player.realm_refresh(player)
 		sky_color = default_color,
 		clouds = true,
 	}
+
 	player:set_clouds{
 		density = 0.4,
 		color = "#fff0f0e5",
@@ -33,6 +34,15 @@ function aurum.player.realm_refresh(player)
 		thickness = 16,
 		speed = {x = 0, z = -2},
 		height = tonumber(minetest.settings:get("cloud_height")) or 120,
+	}
+
+	player:set_sun{
+		visible = true,
+		sunrise_visible = true,
+	}
+
+	player:set_moon{
+		visible = true,
 	}
 
 	bright_night.apply(player)

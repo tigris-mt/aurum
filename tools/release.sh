@@ -16,7 +16,7 @@ if [ "$1" != "commit" ]; then
 fi
 
 echo "Updating..."
-tools/make_readme.sh
+tools/make.sh
 git add .
 git commit -m "Release update: $(version)" || echo "No changes in release..."
 

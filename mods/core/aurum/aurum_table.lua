@@ -9,7 +9,7 @@ aurum = {
 	--- ITERATION is incremented for milestone releases.
 	--- MINOR is incremented for new features.
 	--- PATCH is incremented for minor changes and bugfixes.
-	VERSION = "0.56.3.2",
+	VERSION = "0.56.3.3",
 	-- Expected Minetest Engine version (>=).
 	MT_VERSION = "5.4.0",
 }

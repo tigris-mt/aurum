@@ -1,4 +1,6 @@
-gglobaltick.actions = {}
+gglobaltick.actions = {
+	actions = {},
+}
 
 local storage = minetest.get_mod_storage()
 
@@ -41,7 +43,7 @@ end
 function gglobaltick.actions.add_tick_action(tick, def)
 	local actions = gglobaltick.actions.get_tick_actions(tick)
 	table.insert(actions, def)
-	gglobaltick.actions.set_tick_actions(tick, def)
+	gglobaltick.actions.set_tick_actions(tick, actions)
 end
 
 function gglobaltick.actions.clear_tick(tick)
@@ -50,7 +52,7 @@ end
 
 function gglobaltick.actions.register(name, def)
 	def = b.t.combine({
-		func = function(...) end,
+		func = function(params) end,
 	}, def)
 	gglobaltick.actions.actions[name] = def
 end
@@ -69,7 +71,7 @@ function gglobaltick.actions.tick()
 	increment_tick()
 	for action in gglobaltick.actions.iterate_tick_actions(current_tick()) do
 		local def = gglobaltick.actions.actions[action.name]
-		def.func(unpack(action.params))
+		def.func(action.params)
 	end
 	gglobaltick.actions.clear_tick(current_tick())
 end

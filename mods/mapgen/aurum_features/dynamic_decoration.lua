@@ -7,6 +7,9 @@ minetest.register_node("aurum_features:placeholder", {
 	drawtype = "airlike",
 	groups = {dig_immediate = 3, not_in_creative_inventory = 1},
 	_doc_items_create_entry = false,
+	buildable_to = true,
+	walkable = false,
+	pointable = false,
 	drop = "",
 	on_timer = function(pos)
 		local id = minetest.get_meta(pos):get_int("aurum_features:id")

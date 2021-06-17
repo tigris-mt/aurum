@@ -16,6 +16,9 @@ aurum.player.hp_max (Maximum Player HP) int 100
 # Sets the minimum delay in seconds before the player can be teleported by a portal again after a portal teleport.
 aurum.portal.min_delay (Portal Minimum Delay) int 5
 
+# How long can sign text be?
+aurum.signs.max_length (Sign Maximum Length) int 512
+
 # Which realm holds the default spawn point?
 aurum.spawn_realm (Default Spawn Realm) string aurum:aurum
 

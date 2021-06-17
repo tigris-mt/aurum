@@ -88,3 +88,6 @@
 [submodule "mods/items/elevator"]
 	path = mods/items/elevator
 	url = https://github.com/shacknetisp/elevator
+[submodule "mods/items/signs_lib"]
+	path = mods/items/signs_lib
+	url = https://gitlab.com/shacknetisp/signs_lib

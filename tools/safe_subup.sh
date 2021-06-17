@@ -15,6 +15,7 @@ SAFE="
 	mods/items/dye
 	mods/items/elevator
 	mods/items/gtextitems
+	mods/items/signs_lib
 	mods/mapgen/screalms
 	mods/player/creative
 	mods/player/gequip

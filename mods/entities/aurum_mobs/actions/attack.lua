@@ -53,7 +53,7 @@ gemai.register_action("aurum_mobs:attack", function(self)
 			gprojectiles.spawn(self.data.attack.fire_projectile, {
 				pos = start,
 				blame = self.data.parent or b.ref_to_table(self.entity.object),
-				velocity = vector.multiply(vector.normalize(vector.subtract(vector.add(vector.add(target:get_pos(), vector.divide(target:is_player() and (target:get_attach() and target:get_attach():get_velocity() or target:get_player_velocity()) or target:get_velocity(), 2)), vector.new(0, (target:get_properties().collisionbox[5] + target:get_properties().collisionbox[2]) / 2, 0)), start)), self.data.attack.projectile_speed),
+				velocity = vector.multiply(vector.normalize(vector.subtract(vector.add(vector.add(target:get_pos(), vector.divide(target:is_player() and (target:get_attach() and target:get_attach():get_velocity() or target:get_velocity()) or target:get_velocity(), 2)), vector.new(0, (target:get_properties().collisionbox[5] + target:get_properties().collisionbox[2]) / 2, 0)), start)), self.data.attack.projectile_speed),
 				skip_first = self.entity.object,
 				data = {
 					attack = self.data.attack,

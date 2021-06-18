@@ -6,6 +6,7 @@ SAFE="
 	mods/core/b
 	mods/core/gdamage
 	mods/core/gemai
+	mods/core/gglobaltick
 	mods/core/gnode_augment
 	mods/env/bright_night
 	mods/env/fire

@@ -91,3 +91,6 @@
 [submodule "mods/items/signs_lib"]
 	path = mods/items/signs_lib
 	url = https://gitlab.com/shacknetisp/signs_lib.git
+[submodule "mods/core/gglobaltick"]
+	path = mods/core/gglobaltick
+	url = https://github.com/tigris-mt/gglobaltick

@@ -10,12 +10,25 @@ function aurum.carts.get_active_cart(id)
 	return (cart and cart.object:get_pos()) and cart or nil
 end
 
+local function cut_direction(direction)
+	local dir = vector.multiply(direction, vector.new(1, 0, 1))
+	if math.abs(dir.x) > math.abs(dir.z) then
+		dir.z = 0
+		dir.x = math.sign(dir.x)
+	else
+		dir.z = math.sign(dir.z)
+		dir.x = 0
+	end
+	return dir
+end
+
 function aurum.carts.register(name, def)
 	def = b.t.combine({
 		description = "?",
 		texture = "aurum_base_stone.png",
 		node_def = {},
 		speed = 5,
+		friction = 0.25,
 	}, def)
 
 	local ticks_per_node = gglobaltick.per_second_delay(def.speed)
@@ -87,7 +100,7 @@ function aurum.carts.register(name, def)
 					end
 
 					local want_turn = ctrl.left or ctrl.right
-					local turn_direction = ctrl.left and (-math.pi / 2) or (math.pi / 2)
+					local turn_direction = ctrl.left and (math.pi / 2) or (-math.pi / 2)
 
 					local direction = params.direction
 					local go_pos
@@ -121,6 +134,8 @@ function aurum.carts.register(name, def)
 
 					go_pos = want_turn and turn()
 
+					local hit_ignore = false
+
 					if not go_pos then
 						local next_pos = vector.add(params.at, direction)
 						local next_works, next_node = rail_at_pos(next_pos)
@@ -133,6 +148,7 @@ function aurum.carts.register(name, def)
 								at = params.at,
 								direction = direction,
 							})
+							hit_ignore = true
 						else
 							local above_pos = vector.add(next_pos, vector.new(0, 1, 0))
 							if rail_at_pos(above_pos) then
@@ -155,6 +171,15 @@ function aurum.carts.register(name, def)
 							at = go_pos,
 							direction = direction,
 						})
+					elseif not hit_ignore then
+						local next_pos = vector.add(params.at, direction)
+						local next_node = minetest.get_node(next_pos)
+						if not minetest.registered_nodes[next_node.name].walkable then
+							-- We're off the rails!
+							entity.object:move_to(next_pos, true)
+							entity.object:set_properties{physical = true}
+							entity.object:add_velocity(vector.multiply(direction, def.speed))
+						end
 					end
 				end
 			else
@@ -174,6 +199,7 @@ function aurum.carts.register(name, def)
 			visual = "wielditem",
 			visual_size = vector.new(1, 1, 1),
 			textures = {name},
+			collide_with_objects = false,
 		},
 
 		on_activate = function(self, staticdata)
@@ -183,18 +209,10 @@ function aurum.carts.register(name, def)
 
 		on_punch = function(self, puncher)
 			if puncher:get_player_name() == self.cart.driver then
-				local dir = vector.multiply(puncher:get_look_dir(), vector.new(1, 0, 1))
-				if math.abs(dir.x) > math.abs(dir.z) then
-					dir.z = 0
-					dir.x = math.sign(dir.x)
-				else
-					dir.z = math.sign(dir.z)
-					dir.x = 0
-				end
 				gglobaltick.actions.insert(action_name, 0, {
 					id = self.cart.id,
 					at = self.object:get_pos(),
-					direction = dir,
+					direction = cut_direction(puncher:get_look_dir()),
 				})
 				return false
 			else
@@ -235,6 +253,31 @@ function aurum.carts.register(name, def)
 			self.cart.driver = nil
 			player:set_properties{visual_size = vector.divide(player:get_properties().visual_size, 2)}
 			player:set_eye_offset(vector.add(player:get_eye_offset(), vector.new(0, 4, 0)))
+		end,
+
+		on_step = function(self, dtime, moveresult)
+			if self.object:get_properties().physical then
+				if rail_at_pos(self.object:get_pos()) then
+					local old_velocity = self.object:get_velocity()
+
+					-- Clear physics.
+					self.object:set_velocity(vector.new(0, 0, 0))
+					self.object:set_acceleration(vector.new(0, 0, 0))
+					self.object:set_properties{physical = false}
+
+					-- Force new position.
+					self.object:set_pos(vector.round(self.object:get_pos()))
+
+					-- And let's go back on the rails!
+					gglobaltick.actions.insert(action_name, 0, {
+						id = self.cart.id,
+						at = self.object:get_pos(),
+						direction = cut_direction(old_velocity),
+					})
+				else
+					self.object:set_acceleration(vector.add(aurum.GRAVITY, vector.multiply(self.object:get_velocity(), -def.friction)))
+				end
+			end
 		end,
 	})
 end

@@ -24,9 +24,11 @@ function aurum.carts.register(name, def)
 	local entity_name = name .. "_entity"
 	local action_name = name .. "_action"
 
+	local rlg = minetest.raillike_group("aurum_carts:rail")
+
 	local function rail_at_pos(pos)
 		local node = minetest.get_node(pos)
-		if minetest.get_item_group(node.name, "connect_to_raillike") == minetest.raillike_group("aurum_carts:rail") then
+		if minetest.get_item_group(node.name, "connect_to_raillike") == rlg then
 			return true, node
 		else
 			return false, node
@@ -78,8 +80,16 @@ function aurum.carts.register(name, def)
 					local go_pos
 
 					local next_pos = vector.add(params.at, direction)
-					if rail_at_pos(next_pos) then
+					local next_works, next_node = rail_at_pos(next_pos)
+					if next_works then
 						go_pos = next_pos
+					elseif next_node.name == "ignore" then
+						-- Hit ignore, try again in a second.
+						gglobaltick.actions.insert(action_name, gglobaltick.per_second_delay(1), {
+							id = params.id,
+							at = params.at,
+							direction = direction,
+						})
 					else
 						local above_pos = vector.add(next_pos, vector.new(0, 1, 0))
 						if rail_at_pos(above_pos) then

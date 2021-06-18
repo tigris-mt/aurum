@@ -88,7 +88,7 @@ aurum.ultimus.register_structure{
 				{
 					count = 1,
 					preciousness = {1, 5},
-					groups = {"building_block", "tool", "raw", "crafting_component", "building_block", "dye", "processed", "worker"},
+					groups = {"building_block", "tool", "raw", "crafting_component", "building_block", "dye", "processed", "worker", "transport_structure", "transport_vehicle"},
 				},
 			})
 		end
@@ -215,7 +215,7 @@ aurum.ultimus.register_structure{
 				{
 					count = c:random(1, 3),
 					preciousness = {0, 4},
-					groups = {"food", "tool", "building_block", "light"},
+					groups = {"food", "tool", "building_block", "light", "transport_structure", "transport_vehicle"},
 				},
 			})
 		end

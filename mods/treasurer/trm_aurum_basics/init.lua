@@ -62,6 +62,14 @@ minetest.register_on_mods_loaded(function()
 		"aurum_storage:scroll_hole",
 	}, 0.5, 3, {1, 10}, 0, {"worker"})
 
+	-- Signs.
+	list({
+		"aurum_signs:wood_sign_aurum_trees_oak",
+		"aurum_signs:wood_sign_aurum_trees_pine",
+		"aurum_signs:wood_sign_aurum_trees_birch",
+		"aurum_signs:wood_sign_aurum_trees_pander",
+	}, 0.25, 2, {1, 5}, 0, {"deco"})
+
 	-- Farming.
 	list({
 		"aurum_farming:carrot_seed",
@@ -88,4 +96,20 @@ minetest.register_on_mods_loaded(function()
 
 	-- Dyes.
 	list(b.t.map(dye.dyes, function(v) return "dye:" .. v[1] end), 0.25, 1, {1, 20}, 0, {"crafting_component", "dye"})
+
+	-- Transport
+	list({
+		"aurum_carts:rail",
+	}, 0.25, 2, {10, 60}, 0, {"transport_structure"})
+
+	list({
+		"aurum_carts:cart_aurum_trees_oak",
+		"aurum_carts:cart_aurum_trees_birch",
+		"aurum_carts:cart_aurum_trees_pine",
+		"aurum_carts:cart_aurum_trees_pander",
+	}, 0.25, 3, {1, 2}, 0, {"transport_vehicle"})
+
+	treasurer.register_treasure("elevator:elevator_off", 0.15, 5, {1, 3}, 0, {"transport_vehicle"})
+	treasurer.register_treasure("elevator:motor", 0.1, 6, {1, 2}, 0, {"transport_structure"})
+	treasurer.register_treasure("elevator:shaft", 0.3, 4, {1, 99}, 0, {"transport_structure"})
 end)

@@ -26,23 +26,25 @@ minetest.register_on_mods_loaded(function()
 	local total = 0
 	local queue = {}
 	for k,v in pairs(aurum.tools.tools) do
-		local groups = b.set{"enchantable"}
-		if minetest.get_item_group(k, "tool_hammer") > 0 then
-			groups.melee_weapon = true
-		elseif minetest.get_item_group(k, "tool") > 0 then
-			groups.minetool = true
-		elseif minetest.get_item_group(k, "equipment") > 0 then
-			groups.equipment = true
-		else
-			groups = nil
-		end
-		if groups then
-			total = total + 1
-			-- Use queue of functions so we have access to the total number of tools registered to set rarity.
-			table.insert(queue, function()
-				local stack = ItemStack(k)
-				trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.max(minetest.get_item_group(stack:get_name(), "trm_aurum_tools_preciousness"), math.floor(stack:get_definition()._enchant_levels / 2))), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))
-			end)
+		if k ~= "aurum_tools:hand" then
+			local groups = b.set{"enchantable"}
+			if minetest.get_item_group(k, "tool_hammer") > 0 then
+				groups.melee_weapon = true
+			elseif minetest.get_item_group(k, "tool") > 0 then
+				groups.minetool = true
+			elseif minetest.get_item_group(k, "equipment") > 0 then
+				groups.equipment = true
+			else
+				groups = nil
+			end
+			if groups then
+				total = total + 1
+				-- Use queue of functions so we have access to the total number of tools registered to set rarity.
+				table.insert(queue, function()
+					local stack = ItemStack(k)
+					trm_aurum_tools.register(stack, 0.5 / total, math.min(10, math.max(minetest.get_item_group(stack:get_name(), "trm_aurum_tools_preciousness"), math.floor(stack:get_definition()._enchant_levels / 2))), 1, {1, aurum.TOOL_WEAR}, b.set.to_array(groups))
+				end)
+			end
 		end
 	end
 	for _,f in ipairs(queue) do

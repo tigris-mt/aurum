@@ -39,6 +39,11 @@ for _,def in ipairs(defs) do
 						groups = {"minetool"},
 					},
 					{
+						count = 2,
+						preciousness = {0, 6},
+						groups = {"transport_vehicle", "transport_structure"},
+					},
+					{
 						count = 1,
 						preciousness = {0, 6},
 						groups = {"equipment", "food"},

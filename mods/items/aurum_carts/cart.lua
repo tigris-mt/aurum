@@ -115,7 +115,16 @@ function aurum.carts.register(name, def)
 					end
 
 					local want_turn = ctrl.left or ctrl.right
-					local turn_direction = ctrl.left and (math.pi / 2) or (-math.pi / 2)
+					local turn_direction = (math.pi / 2)
+					if want_turn then
+						if ctrl.right then
+							turn_direction = -turn_direction
+						end
+					else
+						if math.random() < 0.5 then
+							turn_direction = -turn_direction
+						end
+					end
 
 					local direction = params.direction
 					local go_pos

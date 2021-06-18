@@ -27,11 +27,26 @@ function aurum.carts.register(name, def)
 		description = "?",
 		texture = "aurum_base_stone.png",
 		node_def = {},
-		speed = 5,
-		friction = 0.25,
+		punch_speed = 5,
+		max_speed = 15,
+		brake_speed = 1,
+		downhill_speed = 1,
+		uphill_friction = 1,
+		rail_friction = 0.25,
+		air_friction = 0.25,
 	}, def)
 
-	local ticks_per_node = gglobaltick.per_second_delay(def.speed)
+	local function speed(entity)
+		return math.max(0, math.min(def.max_speed, entity.cart.speed or 0))
+	end
+
+	local function add_speed(entity, delta)
+		entity.cart.speed = speed(entity) + delta
+	end
+
+	local function ticks_per_node(entity)
+		return gglobaltick.per_second_delay(speed(entity))
+	end
 
 	local entity_name = name .. "_entity"
 	local action_name = name .. "_action"
@@ -49,7 +64,7 @@ function aurum.carts.register(name, def)
 
 	minetest.register_node(name, b.t.combine({
 		description = def.description,
-		_doc_items_longdesc = S"A mana-infused cart design to roll along rails.",
+		_doc_items_longdesc = S"A cart designed to roll along rails.",
 		_doc_items_usagehelp = S"Place the cart on rails to use it. Punch it to get it back. Right-click to get in and get out.\nOnce inside, punch it to move forward, and use the direction keys to control its path and brake.",
 
 		tiles = {def.texture},
@@ -96,7 +111,7 @@ function aurum.carts.register(name, def)
 
 					-- Driver hit the brakes.
 					if ctrl.down then
-						return
+						add_speed(entity, -def.brake_speed)
 					end
 
 					local want_turn = ctrl.left or ctrl.right
@@ -165,12 +180,23 @@ function aurum.carts.register(name, def)
 					end
 
 					if go_pos then
+						-- Add friction.
+						if go_pos.y > params.at.y then
+							add_speed(entity, -def.uphill_friction)
+						elseif go_pos.y < params.at.y then
+							add_speed(entity, def.downhill_speed)
+						else
+							add_speed(entity, -def.rail_friction)
+						end
+
 						entity.object:move_to(go_pos, true)
-						gglobaltick.actions.insert(action_name, ticks_per_node, {
-							id = params.id,
-							at = go_pos,
-							direction = direction,
-						})
+						if speed(entity) > 0 then
+							gglobaltick.actions.insert(action_name, ticks_per_node(entity), {
+								id = params.id,
+								at = go_pos,
+								direction = direction,
+							})
+						end
 					elseif not hit_ignore then
 						local next_pos = vector.add(params.at, direction)
 						local next_node = minetest.get_node(next_pos)
@@ -178,7 +204,7 @@ function aurum.carts.register(name, def)
 							-- We're off the rails!
 							entity.object:move_to(next_pos, true)
 							entity.object:set_properties{physical = true}
-							entity.object:add_velocity(vector.multiply(direction, def.speed))
+							entity.object:add_velocity(vector.multiply(direction, speed(entity)))
 						end
 					end
 				end
@@ -209,6 +235,7 @@ function aurum.carts.register(name, def)
 
 		on_punch = function(self, puncher)
 			if puncher:get_player_name() == self.cart.driver then
+				add_speed(self, math.max(0, def.punch_speed - speed(self)))
 				gglobaltick.actions.insert(action_name, 0, {
 					id = self.cart.id,
 					at = self.object:get_pos(),
@@ -275,7 +302,7 @@ function aurum.carts.register(name, def)
 						direction = cut_direction(old_velocity),
 					})
 				else
-					self.object:set_acceleration(vector.add(aurum.GRAVITY, vector.multiply(self.object:get_velocity(), -def.friction)))
+					self.object:set_acceleration(vector.add(aurum.GRAVITY, vector.multiply(self.object:get_velocity(), -def.air_friction)))
 				end
 			end
 		end,

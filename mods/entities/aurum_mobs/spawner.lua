@@ -5,7 +5,7 @@ local defaults = {
 	mob = "",
 	-- Number of mobs that should be spawned in the area at any time.
 	-- Negative number to be unlimited.
-	limit = aurum.mobs.SPAWN_LIMIT,
+	limit = aurum.mobs.SPAWNER_LIMIT,
 	-- How long until the next spawn attempt? Passed to math.random.
 	time = {10, 40},
 	-- If set, will replace the spawner with this node table after spawning the first mob. No more mobs will be spawned.

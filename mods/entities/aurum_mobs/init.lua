@@ -4,7 +4,8 @@ local storage = minetest.get_mod_storage()
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
 	CHEAP = minetest.settings:get_bool("aurum.mobs.cheap_pathfinding", false),
-	SPAWN_LIMIT = tonumber(minetest.settings:get("aurum.mobs.spawn_limit")) or 4,
+	SPAWN_LIMIT = tonumber(minetest.settings:get("aurum.mobs.spawn_limit")) or 1,
+	SPAWNER_LIMIT = tonumber(minetest.settings:get("aurum.mobs.spawner_limit")) or 4,
 	SPAWN_RADIUS = 40,
 	SPAWN_CHECK_RADIUS = 80,
 }

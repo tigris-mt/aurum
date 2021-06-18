@@ -1,3 +1,5 @@
+local S = aurum.get_translator()
+
 aurum.carts.active_carts = {}
 
 local HIT_IGNORE_DELAY = 1
@@ -13,7 +15,7 @@ function aurum.carts.register(name, def)
 		description = "?",
 		texture = "aurum_base_stone.png",
 		node_def = {},
-		speed = 10,
+		speed = 5,
 	}, def)
 
 	local ticks_per_node = gglobaltick.per_second_delay(def.speed)
@@ -34,6 +36,9 @@ function aurum.carts.register(name, def)
 
 	minetest.register_node(name, b.t.combine({
 		description = def.description,
+		_doc_items_longdesc = S"A mana-infused cart design to roll along rails.",
+		_doc_items_usagehelp = S"Place the cart on rails to use it. Punch it to get it back. Right-click to get in and get out.\nOnce inside, punch it to move forward, and use the direction keys to control its path and brake.",
+
 		tiles = {def.texture},
 		drawtype = "nodebox",
 		node_box = {
@@ -73,55 +78,71 @@ function aurum.carts.register(name, def)
 			local entity = aurum.carts.get_active_cart(params.id)
 			if entity then
 				if vector.equals(entity.object:get_pos(), params.at) then
+					local driver = entity.cart.driver and minetest.get_player_by_name(entity.cart.driver)
+					local ctrl = driver and driver:get_player_control() or {}
+
+					-- Driver hit the brakes.
+					if ctrl.down then
+						return
+					end
+
+					local want_turn = ctrl.left or ctrl.right
+					local turn_direction = ctrl.left and (-math.pi / 2) or (math.pi / 2)
+
 					local direction = params.direction
 					local go_pos
 
-					local next_pos = vector.add(params.at, direction)
-					local next_works, next_node = rail_at_pos(next_pos)
-					if next_works then
-						go_pos = next_pos
-					elseif next_node.name == "ignore" then
-						-- Hit ignore, try again later.
-						gglobaltick.actions.insert(action_name, HIT_IGNORE_DELAY * gglobaltick.TICK_TIME, {
-							id = params.id,
-							at = params.at,
-							direction = direction,
-						})
-					else
-						local above_pos = vector.add(next_pos, vector.new(0, 1, 0))
-						if rail_at_pos(above_pos) then
-							go_pos = above_pos
-						else
-							local below_pos = vector.subtract(next_pos, vector.new(0, 1, 0))
-							if rail_at_pos(below_pos) then
-								go_pos = below_pos
-							else
-								local angle = math.atan2(direction.z, direction.x)
-								for i=1,3 do
-									angle = angle + math.pi / 2
-									if i ~= 2 then
-										local new_direction = vector.new(math.floor(math.cos(angle) + 0.5), 0, math.floor(math.sin(angle) + 0.5))
-										local turn_pos = vector.add(params.at, new_direction)
-										if rail_at_pos(turn_pos) then
+					local function turn()
+						local angle = math.atan2(direction.z, direction.x)
+						for i=1,3 do
+							angle = angle + turn_direction
+							if i ~= 2 then
+								local new_direction = vector.new(math.floor(math.cos(angle) + 0.5), 0, math.floor(math.sin(angle) + 0.5))
+								local turn_pos = vector.add(params.at, new_direction)
+								if rail_at_pos(turn_pos) then
+									direction = new_direction
+									return turn_pos
+								else
+									local above_turn_pos = vector.add(turn_pos, vector.new(0, 1, 0))
+									if rail_at_pos(above_turn_pos) then
+										direction = new_direction
+										return above_turn_pos
+									else
+										local below_turn_pos = vector.subtract(turn_pos, vector.new(0, 1, 0))
+										if rail_at_pos(below_turn_pos) then
 											direction = new_direction
-											go_pos = turn_pos
-											break
-										else
-											local above_turn_pos = vector.add(turn_pos, vector.new(0, 1, 0))
-											if rail_at_pos(above_turn_pos) then
-												direction = new_direction
-												go_pos = above_turn_pos
-												break
-											else
-												local below_turn_pos = vector.subtract(turn_pos, vector.new(0, 1, 0))
-												if rail_at_pos(below_turn_pos) then
-													direction = new_direction
-													go_pos = below_turn_pos
-													break
-												end
-											end
+											return below_turn_pos
 										end
 									end
+								end
+							end
+						end
+					end
+
+					go_pos = want_turn and turn()
+
+					if not go_pos then
+						local next_pos = vector.add(params.at, direction)
+						local next_works, next_node = rail_at_pos(next_pos)
+						if next_works then
+							go_pos = next_pos
+						elseif next_node.name == "ignore" then
+							-- Hit ignore, try again later.
+							gglobaltick.actions.insert(action_name, HIT_IGNORE_DELAY * gglobaltick.TICK_TIME, {
+								id = params.id,
+								at = params.at,
+								direction = direction,
+							})
+						else
+							local above_pos = vector.add(next_pos, vector.new(0, 1, 0))
+							if rail_at_pos(above_pos) then
+								go_pos = above_pos
+							else
+								local below_pos = vector.subtract(next_pos, vector.new(0, 1, 0))
+								if rail_at_pos(below_pos) then
+									go_pos = below_pos
+								else
+									go_pos = turn()
 								end
 							end
 						end

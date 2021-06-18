@@ -8,6 +8,25 @@ local function current_tick()
 	return storage:get_int("tick")
 end
 
+(function()
+	local st = storage:to_table()
+	local removed = 0
+	local current = current_tick()
+	st.fields = b.t.map(st.fields, function(v, k)
+		local n = tonumber(k:match("tick_(.*)"))
+		if n and n < current then
+			removed = removed + 1
+			return nil
+		else
+			return v
+		end
+	end)
+	storage:from_table(st)
+	if removed > 0 then
+		minetest.log("action", ("[gglobaltick] Cleared %d old tick queues."):format(removed))
+	end
+end)()
+
 local function next_tick()
 	return current_tick() + 1
 end
@@ -59,9 +78,10 @@ end
 
 -- Insert an action into the queue, with a specified delay.
 -- A delay of 0 means the next tick, 1 means the tick after that, etc.
+-- The delay will be floored.
 function gglobaltick.actions.insert(name, delay, params)
 	assert(gglobaltick.actions.actions[name], name .. " is not a registered action")
-	gglobaltick.actions.add_tick_action(next_tick() + delay, {
+	gglobaltick.actions.add_tick_action(next_tick() + math.floor(delay), {
 		name = name,
 		params = params,
 	})

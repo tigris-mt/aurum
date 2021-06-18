@@ -1,14 +1,11 @@
 aurum.carts.active_carts = {}
 
+local HIT_IGNORE_DELAY = 1
+local UNLOADED_DELAY = 3
+
 function aurum.carts.get_active_cart(id)
 	local cart = aurum.carts.active_carts[id]
-	if cart then
-		if cart.object:get_pos() == nil then
-			aurum.carts.active_carts[id] = nil
-		else
-			return cart
-		end
-	end
+	return (cart and cart.object:get_pos()) and cart or nil
 end
 
 function aurum.carts.register(name, def)
@@ -84,8 +81,8 @@ function aurum.carts.register(name, def)
 					if next_works then
 						go_pos = next_pos
 					elseif next_node.name == "ignore" then
-						-- Hit ignore, try again in a second.
-						gglobaltick.actions.insert(action_name, gglobaltick.per_second_delay(1), {
+						-- Hit ignore, try again later.
+						gglobaltick.actions.insert(action_name, HIT_IGNORE_DELAY * gglobaltick.TICK_TIME, {
 							id = params.id,
 							at = params.at,
 							direction = direction,
@@ -139,6 +136,13 @@ function aurum.carts.register(name, def)
 						})
 					end
 				end
+			else
+				-- Our cart is unloaded, try again later.
+				gglobaltick.actions.insert(action_name, UNLOADED_DELAY * gglobaltick.TICK_TIME, {
+					id = params.id,
+					at = params.at,
+					direction = params.direction,
+				})
 			end
 		end,
 	})
@@ -175,12 +179,14 @@ function aurum.carts.register(name, def)
 			else
 				aurum.drop_item(self.object:get_pos(), name)
 				self.object:remove()
+				aurum.carts.active_carts[self.cart.id] = nil
 				return true
 			end
 		end,
 
 		on_death = function(self)
 			aurum.drop_item(self.object:get_pos(), name)
+			aurum.carts.active_carts[self.cart.id] = nil
 		end,
 
 		get_staticdata = function(self)

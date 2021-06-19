@@ -19,7 +19,7 @@ aurum.villages.register_village("aurum_villages:ruined", {
 		{
 			names = {"aurum_villages:ruined_sign"},
 			min = 0,
-			max = 1,
+			max = 2,
 		},
 		--[[
 		{
@@ -52,7 +52,7 @@ aurum.villages.register_village("aurum_villages:ruined_jungle", {
 		{
 			names = {"aurum_villages:ruined_sign_jungle"},
 			min = 0,
-			max = 1,
+			max = 2,
 		},
 		--[[
 		{

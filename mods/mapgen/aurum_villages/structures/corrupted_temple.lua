@@ -4,13 +4,13 @@ local PH_CONTRABAND = 3
 local PH_MOCKING = 4
 
 aurum.villages.register_structure("aurum_villages:corrupted_temple", {
-	size = vector.new(11, 19, 10),
+	size = vector.new(11, 18, 10),
 	foundation = {"aurum_base:stone_brick"},
 
 	schematic = aurum.structures.f"corrupted_temple.mts",
 
 	on_offset = function(context)
-		return vector.add(context.pos, vector.new(0, -6, 0))
+		return vector.add(context.pos, vector.new(0, -5, 0))
 	end,
 
 	on_generated = function(c)

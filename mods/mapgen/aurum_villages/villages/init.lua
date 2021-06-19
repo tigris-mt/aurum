@@ -183,13 +183,13 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 			local corner = get_actual_corner(s.pos, s.def.size)
 			s.center = corner_to_center(corner, s.def.size)
 
+			if aurum.villages.get_village_id_at(s.center) then
+				log("Collision with an existing village, will not generate.")
+				return false
+			end
+
 			params.box.a.y = math.min(params.box.a.y, corner.y)
 			params.box.b.y = math.max(params.box.b.y, vector.add(corner, s.def.size).y)
-		end
-
-		if #aurum.villages.get_villages_ids_in(params.box) > 0 then
-			log("Collision with an existing village, will not generate.")
-			return false
 		end
 
 		local village_id = assert(areastore:insert_area(params.box.a, params.box.b, ""), "could not add village to areastore")

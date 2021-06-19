@@ -1,4 +1,4 @@
-local pl = "aurum_trees:drywood_planks"
+local pl = {name = "aurum_trees:drywood_planks", prob = 240}
 local air = "air"
 
 aurum.villages.register_structure("aurum_villages:ruined_hut", {

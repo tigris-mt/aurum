@@ -1,5 +1,4 @@
 local pl = "aurum_trees:drywood_planks"
-local wa = "aurum_base:water_source"
 local air = "air"
 
 aurum.villages.register_structure("aurum_villages:ruined_well", {
@@ -19,7 +18,7 @@ aurum.villages.register_structure("aurum_villages:ruined_well", {
 		},
 		{
 			{pl, pl, pl},
-			{pl, wa, pl},
+			{pl, air, pl},
 			{pl, pl, pl},
 		},
 	}),

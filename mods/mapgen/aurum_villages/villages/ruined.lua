@@ -58,7 +58,7 @@ aurum.features.register_dynamic_decoration{
 	decoration = {
 		place_on = {"aurum_base:gravel"},
 		sidelen = 16,
-		fill_ratio = 0.000025,
+		fill_ratio = 0.00003,
 		biomes = {"aurum_barrens"},
 	},
 
@@ -73,7 +73,7 @@ aurum.features.register_dynamic_decoration{
 	decoration = {
 		place_on = {"group:soil"},
 		sidelen = 16,
-		fill_ratio = 0.00005,
+		fill_ratio = 0.00006,
 		biomes = {"aurum_jungle"},
 	},
 

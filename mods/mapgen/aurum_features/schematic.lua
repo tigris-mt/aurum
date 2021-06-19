@@ -13,7 +13,7 @@ function aurum.features.schematic(size, nodes)
 			for x,xn in ipairs(zn) do
 				local x = x - 1
 				local pos = vector.new(x, y, z)
-				assert(area:containsp(pos))
+				assert(area:containsp(pos), "position not in area")
 				local nd = type(xn) == "string" and {name = xn, prob = 255} or xn
 				ret.data[area:indexp(pos)] = nd
 			end

@@ -1,38 +1,38 @@
-local op = "aurum_trees:oak_planks"
+local pl = "aurum_trees:drywood_planks"
 local air = "air"
 
 aurum.villages.register_structure("aurum_villages:ruined_hut", {
 	size = vector.new(5, 4, 5),
-	foundation = {"aurum_base:stone_brick"},
+	foundation = {"aurum_base:gravel"},
 
 	schematic = aurum.features.schematic(vector.new(5, 4, 5), {
 		{
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
 		},
 		{
-			{op, op, op, op, op},
-			{op, air, air, air, op},
-			{op, air, air, air, op},
-			{op, air, air, air, op},
-			{op, op, air, op, op},
+			{pl, pl, pl, pl, pl},
+			{pl, air, air, air, pl},
+			{pl, air, air, air, pl},
+			{pl, air, air, air, pl},
+			{pl, pl, air, pl, pl},
 		},
 		{
-			{op, op, op, op, op},
-			{op, "aurum_features:ph_1", air, "aurum_features:ph_1", op},
-			{op, air, air, air, op},
-			{op, "aurum_features:ph_1", air, "aurum_features:ph_1", op},
-			{op, op, air, op, op},
+			{pl, pl, pl, pl, pl},
+			{pl, "aurum_features:ph_1", air, "aurum_features:ph_1", pl},
+			{pl, air, air, air, pl},
+			{pl, "aurum_features:ph_1", air, "aurum_features:ph_1", pl},
+			{pl, pl, air, pl, pl},
 		},
 		{
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
-			{op, op, op, op, op},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
+			{pl, pl, pl, pl, pl},
 		},
 	}),
 

@@ -225,10 +225,10 @@ function aurum.features.place_decoration(pos, def, random, on_generated)
 			local rotname = {"0", "90", "180", "270"}
 			minetest.place_schematic(real_pos, schematic, rotname[rotation + 1], {}, def.force_placement)
 
-			local context = aurum.features.structure_context(base_context, b.box.new(
+			local context = aurum.features.structure_context(base_context, b.box.extremes(b.box.new(
 				at(vector.new(0, 0, 0)),
 				at(limit)
-			), at, rotation)
+			)), at, rotation)
 
 			-- Run callbacks.
 			def.on_generated(context)

@@ -21,13 +21,11 @@ aurum.villages.register_village("aurum_villages:ruined", {
 			min = 0,
 			max = 2,
 		},
-		--[[
 		{
 			names = {"aurum_villages:corrupted_temple"},
-			min = 0,
+			min = -1,
 			max = 1,
 		},
-		]]
 	},
 })
 
@@ -54,13 +52,11 @@ aurum.villages.register_village("aurum_villages:ruined_jungle", {
 			min = 0,
 			max = 2,
 		},
-		--[[
 		{
 			names = {"aurum_villages:corrupted_temple"},
-			min = 0,
+			min = -1,
 			max = 1,
 		},
-		]]
 	},
 })
 

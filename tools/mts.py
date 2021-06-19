@@ -102,5 +102,6 @@ if __name__ == "__main__":
 	s = Schematic4()
 	fd = open(sys.argv[1], "rb").read()
 	s.load(fd)
+	print(s)
 	sd = s.save()
 	assert fd == sd

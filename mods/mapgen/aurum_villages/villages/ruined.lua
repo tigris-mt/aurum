@@ -16,6 +16,11 @@ aurum.villages.register_village("aurum_villages:ruined", {
 			min = 1,
 			max = 2,
 		},
+		{
+			names = {"aurum_villages:ruined_sign"},
+			min = 0,
+			max = 1,
+		},
 		--[[
 		{
 			names = {"aurum_villages:corrupted_temple"},
@@ -43,6 +48,11 @@ aurum.villages.register_village("aurum_villages:ruined_jungle", {
 			names = {"aurum_villages:ruined_well_jungle"},
 			min = 1,
 			max = 2,
+		},
+		{
+			names = {"aurum_villages:ruined_sign_jungle"},
+			min = 0,
+			max = 1,
 		},
 		--[[
 		{

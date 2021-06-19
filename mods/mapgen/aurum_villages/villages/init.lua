@@ -1,4 +1,39 @@
+local storage = minetest.get_mod_storage()
+local areastore = AreaStore()
+
 aurum.villages.villages = {}
+
+if storage:contains("villages_areastore") then
+	areastore:from_string(minetest.decode_base64(storage:get_string("villages_areastore")))
+end
+
+function aurum.villages.save_areastore()
+	storage:set_string("villages_areastore", minetest.encode_base64(areastore:to_string()))
+end
+
+function aurum.villages.get_village_id_at(pos)
+	return b.t.keys(areastore:get_areas_for_pos(pos))[1]
+end
+
+function aurum.villages.get_villages_ids_in(box)
+	return areastore:get_areas_in_area(box.a, box.b, true)
+end
+
+function aurum.villages.get_village(id)
+	if storage:contains("village_" .. tostring(id)) then
+		return minetest.deserialize(storage:get_string("village_" .. tostring(id)))
+	end
+end
+
+function aurum.villages.set_village(id, data)
+	storage:set_string("village_" .. tostring(id), minetest.serialize(data))
+end
+
+function aurum.villages.delete_village(id)
+	areastore:remove_area(id)
+	aurum.villages.save_areastore()
+	storage:set_string("village_" .. tostring(id), "")
+end
 
 function aurum.villages.register_village(name, def)
 	def = b.t.combine({
@@ -146,9 +181,28 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 	local function generate()
 		for _,s in ipairs(generate_queue) do
 			local corner = get_actual_corner(s.pos, s.def.size)
-			local center = corner_to_center(corner, s.def.size)
+			s.center = corner_to_center(corner, s.def.size)
 
-			aurum.features.place_decoration(center, s.def, params.random, function(c)
+			params.box.a.y = math.min(params.box.a.y, corner.y)
+			params.box.b.y = math.max(params.box.b.y, vector.add(corner, s.def.size).y)
+		end
+
+		if #aurum.villages.get_villages_ids_in(params.box) > 0 then
+			log("Collision with an existing village, will not generate.")
+			return false
+		end
+
+		local village_id = assert(areastore:insert_area(params.box.a, params.box.b, ""), "could not add village to areastore")
+		aurum.villages.save_areastore()
+		aurum.villages.set_village(village_id, {
+			id = village_id,
+			box = params.box,
+			name = aurum.flavor.generate_village_name(params.random),
+			founder = aurum.flavor.generate_name(params.random),
+		})
+
+		for _,s in ipairs(generate_queue) do
+			aurum.features.place_decoration(s.center, s.def, params.random, function(c)
 				-- Build foundation.
 				local e = b.box.extremes(c.box)
 				for x=e.a.x,e.b.x do
@@ -164,6 +218,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 		end
 
 		log(("Success, %d structures."):format(#generate_queue))
+		return true
 	end
 
 	if params.emerge then
@@ -173,9 +228,8 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				generate()
 			end
 		end)
+		return true
 	else
-		generate()
+		return generate()
 	end
-
-	return true
 end

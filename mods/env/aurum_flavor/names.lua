@@ -42,3 +42,36 @@ function aurum.flavor.generate_name(random)
 		function() return single(random) .. " " .. single(random) end,
 	}, random))()
 end
+
+local village_suffix = {
+	"Town",
+	"Hole",
+	"Den",
+	"Village",
+	"Hamlet",
+	"Housen",
+	"Place",
+	"Locale",
+}
+
+local village_suffix_immediate = {
+	"ton",
+	"town",
+	"hol",
+	"hole",
+	"den",
+	"vil",
+	"ham",
+	"house",
+	"place",
+	"locale",
+}
+
+function aurum.flavor.generate_village_name(random)
+	return (b.t.choice({
+		function() return single(random) end,
+		function() return single(random) .. "-" .. single(random) end,
+		function() return single(random) .. " " .. b.t.choice(village_suffix, random) end,
+		function() return single(random) .. b.t.choice(village_suffix_immediate, random) end,
+	}, random))()
+end

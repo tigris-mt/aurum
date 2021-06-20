@@ -19,8 +19,11 @@ aurum.features.default_decoration_def = {
 	-- Called on generation.
 	on_generated = function(context) end,
 
+	-- Default offset.
+	offset = vector.new(0, 0, 0),
+
 	-- Called on offsetting, return new pos or nil to cancel placement.
-	on_offset = function(base_context) return base_context.pos end,
+	on_offset = function(base_context) return vector.add(base_context.pos, base_context.def.offset) end,
 
 	-- Schematic specifier.
 	schematic = nil,
@@ -171,6 +174,7 @@ function aurum.features.place_decoration(pos, def, random, on_generated)
 	local base_context = {
 		pos = pos,
 		random = random,
+		def = def,
 		-- For individual structure use.
 		s = {},
 	}

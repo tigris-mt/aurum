@@ -13,6 +13,7 @@ local function ruined_sign(random)
 		aurum.flavor.generate_name() .. " was here",
 		aurum.flavor.generate_name() .. ", if you see this, I am gone",
 		aurum.flavor.generate_village_name() .. " is already destroyed",
+		"they let in the corruption",
 	}, random)
 end
 
@@ -51,6 +52,7 @@ for _,def in ipairs({
 					signs_lib.update_sign(pos, {
 						text = b.t.choice({
 							("Wel om  to %s!\nFo nded by %s"):format(village.name, village.founder),
+							("%s\nPopulation: #4DEAD"):format(village.name),
 							ruined_sign(c.base.random),
 						}, c.base.random),
 					})

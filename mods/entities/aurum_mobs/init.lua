@@ -1,5 +1,4 @@
 local S = aurum.get_translator()
-local storage = minetest.get_mod_storage()
 
 aurum.mobs = {
 	DEBUG = minetest.settings:get_bool("aurum.mobs.debug", false),
@@ -38,8 +37,6 @@ function aurum.mobs.get_mob(object)
 		return l._gemai, l.name, l._aurum_mobs_id
 	end
 end
-
-local uids = storage:get_int("uids")
 
 local old = b.ref_to_table
 function b.ref_to_table(obj)
@@ -105,10 +102,8 @@ function aurum.mobs.register(name, def)
 		end,
 
 		on_activate = function(self, staticdata, dtime)
-			uids = uids + 1
-			self._aurum_mobs_id = uids
+			self._aurum_mobs_id = b.new_uid()
 			self._aurum_mobs_def = def
-			storage:set_int("uids", uids)
 
 			local deserialized = minetest.deserialize(staticdata) or {}
 

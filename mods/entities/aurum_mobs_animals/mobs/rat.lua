@@ -100,4 +100,5 @@ aurum.mobs.register_spawn{
 	mob = "aurum_mobs_animals:rat",
 	chance = 2000,
 	biomes = aurum.biomes.get_all_group("aurum:aurum"),
+	nodes = {"group:stone", "aurum_base:gravel"},
 }

@@ -16,7 +16,7 @@ aurum.villages.register_structure("aurum_villages:corrupted_temple", {
 			c:treasures(pos, "main", c:random(1, 2), {
 				{
 					count = c:random(1, 2),
-					preciousness = {0, 2},
+					preciousness = {0, 3},
 					groups = {"scroll", "lore_aurum"},
 				},
 			})

@@ -13,8 +13,8 @@ function aurum.villages.get_village_id_at(pos)
 	return b.t.keys(areastore:get_areas_for_pos(pos))[1]
 end
 
-function aurum.villages.get_villages_ids_in(box)
-	return areastore:get_areas_in_area(box.a, box.b, true)
+function aurum.villages.get_village_ids_in(box)
+	return b.t.keys(areastore:get_areas_in_area(box.a, box.b, true))
 end
 
 function aurum.villages.get_village(id)

@@ -77,15 +77,10 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 		return ret
 	end)()
 
-	local plots = {}
+	local plots = AreaStore()
 
 	local function hits_plot(plot)
-		for _,check in pairs(plots) do
-			if b.box.collide_box(plot, check) then
-				return true
-			end
-		end
-		return false
+		return #b.t.keys(plots:get_areas_in_area(plot.a, plot.b, true)) > 0
 	end
 
 	-- Finds a new plot and returns the corner position, or nil if none found.
@@ -94,7 +89,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 		for _,pos in b.t.ro_ipairs(poses) do
 			local plot = b.box.new_add(vector.new(pos.x, 0, pos.z), maxed_size)
 			if not hits_plot(plot) then
-				table.insert(plots, plot)
+				plots:insert_area(plot.a, plot.b, "")
 				return vector.new(pos.x, v_pos.y, pos.z)
 			end
 		end
@@ -139,14 +134,11 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 	local generate_queue = b.t.icombine(structures_needed, structures_wanted)
 
 	local function generate()
+
+		-- Calculate actual corners for structures and the real village box size.
 		for _,s in ipairs(generate_queue) do
 			local corner = get_actual_corner(s.pos, s.def.size)
 			s.center = corner_to_center(corner, s.def.size)
-
-			if aurum.villages.get_village_id_at(s.center) then
-				log("Collision with an existing village, will not generate.")
-				return false
-			end
 
 			local real_corner = vector.add(corner, s.def.offset)
 			local real_limit = vector.add(real_corner, vector.subtract(get_max_size(s.def.size), vector.new(1, 1, 1)))
@@ -155,6 +147,11 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				params.box.a[coord] = math.min(params.box.a[coord], real_corner[coord])
 				params.box.b[coord] = math.max(params.box.b[coord], real_limit[coord])
 			end
+		end
+
+		if #aurum.villages.get_village_ids_in(params.box) > 0 then
+			log("Collision with an existing village, will not generate.")
+			return false
 		end
 
 		local village_id = aurum.villages.new_village(params.box)

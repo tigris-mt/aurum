@@ -168,7 +168,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				local e = b.box.extremes(c.box)
 				assert(not vector.equals(e.a, e.b))
 
-				local radius = vector.distance(vector.new(e.a.x, 0, e.a.z), vector.new(e.b.x, 0, e.b.z)) / 2
+				local radius = vector.distance(e.a, e.b) / 2
 				local center_pos = vector.add(vector.new(e.a.x, 0, e.a.z), vector.divide(vector.subtract(vector.new(e.b.x, 0, e.b.z), vector.new(e.a.x, 0, e.a.z)), 2))
 
 				local y = c.box.a.y

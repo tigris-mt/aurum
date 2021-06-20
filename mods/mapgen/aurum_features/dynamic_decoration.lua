@@ -24,9 +24,8 @@ minetest.register_node("aurum_features:placeholder", {
 })
 
 function aurum.features.register_dynamic_decoration(def)
-	local id = b.new_uid()
 	local decoration = b.t.combine(def.decoration, {
-		name = "aurum_features:dynamic_decoration_" .. id,
+		name = "aurum_features:dynamic_decoration_" .. b.new_uid(),
 		deco_type = "simple",
 		decoration = "aurum_features:placeholder",
 	})
@@ -36,7 +35,7 @@ function aurum.features.register_dynamic_decoration(def)
 	local deco_id = minetest.get_decoration_id(decoration.name)
 	minetest.set_gen_notify({decoration = true}, {deco_id})
 
-	defs[id] = {
+	defs[deco_id] = {
 		deco_id = deco_id,
 		key = "decoration#" .. deco_id,
 		callback = def.callback,

@@ -86,7 +86,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 	-- Finds a new plot and returns the corner position, or nil if none found.
 	local function get_plot(size)
 		local maxed_size = get_max_size(size)
-		for _,pos in b.t.ro_ipairs(poses) do
+		for _,pos in b.t.ro_ipairs(poses, params.random) do
 			local plot = b.box.new_add(vector.new(pos.x, 0, pos.z), maxed_size)
 			if not hits_plot(plot) then
 				plots:insert_area(plot.a, plot.b, "")

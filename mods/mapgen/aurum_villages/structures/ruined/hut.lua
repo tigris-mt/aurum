@@ -14,7 +14,8 @@ for _,def in ipairs({
 	local air = "air"
 
 	aurum.villages.register_structure(def.name, {
-		size = vector.new(5, 4, 5),
+		size = vector.new(5, 5, 5),
+		offset = vector.new(0, -1, 0),
 		foundation = def.foundation,
 
 		schematic = aurum.features.schematic(vector.new(5, 4, 5), {
@@ -47,10 +48,6 @@ for _,def in ipairs({
 				{pl, pl, pl, pl, pl},
 			},
 		}),
-
-		on_offset = function(context)
-			return vector.add(context.pos, vector.new(0, -1, 0))
-		end,
 
 		on_generated = function(c)
 			local ph = c:ph(1)

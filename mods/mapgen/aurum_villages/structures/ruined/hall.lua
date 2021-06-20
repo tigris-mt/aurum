@@ -16,13 +16,10 @@ for _,def in ipairs({
 }) do
 	aurum.villages.register_structure(def.name, {
 		size = vector.new(7, 9, 9),
+		offset = vector.new(0, -1, 0),
 		foundation = def.foundation,
 
 		schematic = aurum.structures.f(def.schematic),
-
-		on_offset = function(context)
-			return vector.add(context.pos, vector.new(0, -1, 0))
-		end,
 
 		on_generated = function(c)
 			for _,pos in ipairs(c:ph(PH_STORAGE)) do

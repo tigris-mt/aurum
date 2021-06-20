@@ -5,13 +5,10 @@ local PH_MOCKING = 4
 
 aurum.villages.register_structure("aurum_villages:corrupted_temple", {
 	size = vector.new(11, 18, 10),
+	offset = vector.new(0, -5, 0),
 	foundation = {"aurum_base:stone_brick"},
 
 	schematic = aurum.structures.f"corrupted_temple.mts",
-
-	on_offset = function(context)
-		return vector.add(context.pos, vector.new(0, -5, 0))
-	end,
 
 	on_generated = function(c)
 		for _,pos in ipairs(c:ph(PH_SCROLL_HOLE)) do
@@ -52,7 +49,7 @@ aurum.villages.register_structure("aurum_villages:corrupted_temple", {
 
 		for _,pos in ipairs(c:ph(PH_MOCKING)) do
 			if village then
-				minetest.set_node(pos, {name = "aurum_books:stone_tablet_written"})
+				minetest.set_node(pos, {name = "aurum_books:stone_tablet_written", param2 = minetest.dir_to_facedir(c:dir(vector.new(-1, 0, 0)))})
 				gtextitems.set_node(pos, {
 					title = village.name,
 					text = ("Our %s servant %s has brought about the end of %s."):format(aurum.flavor.generate_mocking(c:random(4), c.base.random), aurum.flavor.generate_name(c.base.random), village.name),

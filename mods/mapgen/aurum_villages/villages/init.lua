@@ -91,6 +91,11 @@ local function corner_to_center(corner, size)
 	return vector.add(corner, offset)
 end
 
+local function get_max_size(size)
+	local max_coord = math.max(size.x, size.z)
+	return vector.new(max_coord, size.y, max_coord)
+end
+
 function aurum.villages.generate_village(v_name, v_pos, params)
 	local function log(message)
 		minetest.log("action", ("[aurum_villages] %s at %s: %s"):format(v_name, minetest.pos_to_string(v_pos), message))
@@ -131,8 +136,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 
 	-- Finds a new plot and returns the corner position, or nil if none found.
 	local function get_plot(size)
-		local max_coord = math.max(size.x, size.z)
-		local maxed_size = vector.new(max_coord, size.y, max_coord)
+		local maxed_size = get_max_size(size)
 		for _,pos in b.t.ro_ipairs(poses) do
 			local plot = b.box.new_add(vector.new(pos.x, 0, pos.z), maxed_size)
 			if not hits_plot(plot) then
@@ -190,8 +194,13 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				return false
 			end
 
-			params.box.a.y = math.min(params.box.a.y, corner.y)
-			params.box.b.y = math.max(params.box.b.y, vector.add(corner, s.def.size).y)
+			local real_corner = vector.add(corner, s.def.offset)
+			local real_limit = vector.add(real_corner, vector.subtract(get_max_size(s.def.size), vector.new(1, 1, 1)))
+
+			for _,coord in ipairs{"x", "y", "z"} do
+				params.box.a[coord] = math.min(params.box.a[coord], real_corner[coord])
+				params.box.b[coord] = math.max(params.box.b[coord], real_limit[coord])
+			end
 		end
 
 		local village_id = assert(areastore:insert_area(params.box.a, params.box.b, ""), "could not add village to areastore")

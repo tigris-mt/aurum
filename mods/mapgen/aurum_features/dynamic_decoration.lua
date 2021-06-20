@@ -54,7 +54,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			for _,pos in ipairs(gn[def.key]) do
 				local above = vector.add(pos, vector.new(0, 1, 0))
 				minetest.get_meta(above):set_int("aurum_features:id", id)
-				minetest.after(1, start_timer, above)
 			end
 		end
 	end

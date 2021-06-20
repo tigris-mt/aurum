@@ -36,6 +36,7 @@ function aurum.features.register_dynamic_decoration(def)
 
 	defs[id] = {
 		deco_id = deco_id,
+		key = "decoration#" .. deco_id,
 		callback = def.callback,
 	}
 end
@@ -49,9 +50,8 @@ end
 minetest.register_on_generated(function(minp, maxp, seed)
 	local gn = minetest.get_mapgen_object("gennotify")
 	for id,def in pairs(defs) do
-		local key = "decoration#" .. def.deco_id
-		if gn[key] then
-			for _,pos in ipairs(gn[key]) do
+		if gn[def.key] then
+			for _,pos in ipairs(gn[def.key]) do
 				local above = vector.add(pos, vector.new(0, 1, 0))
 				minetest.get_meta(above):set_int("aurum_features:id", id)
 				minetest.after(0, start_timer, above)

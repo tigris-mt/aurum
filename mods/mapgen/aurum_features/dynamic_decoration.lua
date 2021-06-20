@@ -41,6 +41,12 @@ function aurum.features.register_dynamic_decoration(def)
 	}
 end
 
+local function start_timer(pos)
+	if not minetest.get_node_timer(pos):is_started() then
+		minetest.get_node_timer(pos):start(0)
+	end
+end
+
 minetest.register_on_generated(function(minp, maxp, seed)
 	local gn = minetest.get_mapgen_object("gennotify")
 	for id,def in pairs(defs) do
@@ -54,13 +60,22 @@ minetest.register_on_generated(function(minp, maxp, seed)
 end)
 
 minetest.register_lbm{
-	label = "Activate Placeholders",
+	label = "Activate Placeholders LBM",
 	name = "aurum_features:dynamic_decoration",
 	nodenames = {"aurum_features:placeholder"},
 	run_at_every_load = true,
 	action = function(pos, node)
-		if not minetest.get_node_timer(pos):is_started() then
-			minetest.get_node_timer(pos):start(0)
-		end
+		start_timer(pos)
+	end,
+}
+
+minetest.register_abm{
+	label = "Activate Placeholders ABM",
+	name = "aurum_features:dynamic_decoration",
+	nodenames = {"aurum_features:placeholder"},
+	interval = 5,
+	chance = 2,
+	action = function(pos, node)
+		start_timer(pos)
 	end,
 }

@@ -166,14 +166,31 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 			aurum.features.place_decoration(s.center, s.def, params.random, function(c)
 				-- Build foundation.
 				local e = b.box.extremes(c.box)
-				for x=e.a.x,e.b.x do
-					for z=e.a.z,e.b.z do
-						local foundation_pos = vector.new(x, c.box.a.y - 1, z)
-						while can_replace(foundation_pos, true) do
-							minetest.set_node(foundation_pos, {name = b.t.choice(s.def.foundation, params.random)})
-							foundation_pos.y = foundation_pos.y - 1
+				assert(not vector.equals(e.a, e.b))
+
+				local radius = vector.distance(vector.new(e.a.x, 0, e.a.z), vector.new(e.b.x, 0, e.b.z)) / 2
+				local center_pos = vector.add(vector.new(e.a.x, 0, e.a.z), vector.divide(vector.subtract(vector.new(e.b.x, 0, e.b.z), vector.new(e.a.x, 0, e.a.z)), 2))
+
+				local y = c.box.a.y
+				while true do
+					y = y - 1
+					center_pos.y = y
+
+					if radius > 0 then
+						for x=e.a.x,e.b.x do
+							for z=e.a.z,e.b.z do
+								local foundation_pos = vector.new(x, y, z)
+								local distance = vector.distance(center_pos, foundation_pos)
+								if distance <= radius and can_replace(foundation_pos, true) then
+									minetest.set_node(foundation_pos, {name = b.t.choice(s.def.foundation, params.random)})
+								end
+							end
 						end
+					else
+						return
 					end
+
+					radius = radius - 1
 				end
 			end)
 		end

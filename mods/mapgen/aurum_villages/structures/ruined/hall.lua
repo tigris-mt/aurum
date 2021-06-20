@@ -6,12 +6,12 @@ for _,def in ipairs({
 	{
 		name = "aurum_villages:ruined_hall",
 		schematic = "ruined_hall.mts",
-		foundation = {"aurum_base:gravel"},
+		foundation = {"aurum_base:gravel", "aurum_base:stone"},
 	},
 	{
 		name = "aurum_villages:ruined_hall_jungle",
 		schematic = "ruined_hall_jungle.mts",
-		foundation = {"aurum_base:dirt"},
+		foundation = {"aurum_base:dirt", "aurum_base:stone"},
 	},
 }) do
 	aurum.villages.register_structure(def.name, {

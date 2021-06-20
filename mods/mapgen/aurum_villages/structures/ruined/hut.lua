@@ -2,7 +2,7 @@ for _,def in ipairs({
 	{
 		name = "aurum_villages:ruined_hut",
 		pl = {name = "aurum_trees:drywood_planks", prob = 240},
-		foundation = {"aurum_base:gravel"},
+		foundation = {"aurum_base:gravel", "aurum_base:stone"},
 	},
 	{
 		name = "aurum_villages:ruined_hut_jungle",

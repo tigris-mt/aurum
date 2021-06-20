@@ -21,7 +21,7 @@ for _,def in ipairs({
 		name = "aurum_villages:ruined_sign",
 		pl = "aurum_trees:drywood_planks",
 		si = "aurum_signs:wood_sign_aurum_trees_drywood_yard",
-		foundation = {"aurum_base:gravel"},
+		foundation = {"aurum_base:stone"},
 	},
 	{
 		name = "aurum_villages:ruined_sign_jungle",

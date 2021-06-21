@@ -10,7 +10,6 @@ function aurum.villages.register_village(name, def)
 		path = {
 			base = "aurum_base:stone_brick",
 			stairs = "aurum_base:stone_brick_sh_stairs",
-			ladder = "aurum_ladders:wood",
 		},
 	}, def)
 

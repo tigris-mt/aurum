@@ -15,11 +15,6 @@ local function can_replace(pos, foundation)
 	end
 end
 
-local function can_ladder_in(pos)
-	local node = minetest.get_node(pos)
-	return aurum.is_air(node.name) or minetest.registered_nodes[node.name].buildable_to
-end
-
 local get_build_pos = b.cache.simple(function(pos)
 	local check = vector.new(pos)
 
@@ -227,8 +222,6 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 
 		local face_xp = minetest.dir_to_facedir(vector.new(-1, 0, 0))
 		local face_xm = minetest.dir_to_facedir(vector.new(1, 0, 0))
-		local face_xpl = 3
-		local face_xml = 2
 		for _,path in ipairs(x_paths) do
 			for x=path.start.x,path.finish.x do
 				for z=path.start.z,path.finish.z do
@@ -253,25 +246,8 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 					elseif y_diff == -1 then
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_xp})
 						clear()
-					elseif y_diff > 1 then
-						for i=1,y_diff do
-							pos.y = pos.y + 1
-							if not can_ladder_in(pos) then
-								break
-							end
-							minetest.set_node(pos, {name = def.path.ladder, param2 = face_xml})
-						end
+					elseif y_diff == 0 then
 						clear()
-					elseif y_diff < -1 then
-						clear()
-						pos.y = pos.y - def.path_clear_above
-						for i=-1,y_diff,-1 do
-							if not can_ladder_in(pos) then
-								break
-							end
-							minetest.set_node(pos, {name = def.path.ladder, param2 = face_xpl})
-							pos.y = pos.y - 1
-						end
 					end
 				end
 			end
@@ -279,8 +255,6 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 
 		local face_zp = minetest.dir_to_facedir(vector.new(0, 0, -1))
 		local face_zm = minetest.dir_to_facedir(vector.new(0, 0, 1))
-		local face_zpl = 5
-		local face_zml = 4
 		for _,path in ipairs(z_paths) do
 			for x=path.start.x,path.finish.x do
 				for z=path.start.z,path.finish.z do
@@ -307,25 +281,8 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 					elseif y_diff == -1 then
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_zp})
 						clear()
-					elseif y_diff > 1 then
-						for i=1,y_diff do
-							pos.y = pos.y + 1
-							if not can_ladder_in(pos) then
-								break
-							end
-							minetest.set_node(pos, {name = def.path.ladder, param2 = face_zml})
-						end
+					elseif y_diff == 0 then
 						clear()
-					elseif y_diff < -1 then
-						clear()
-						pos.y = pos.y - def.path_clear_above
-						for i=-1,y_diff,-1 do
-							if not can_ladder_in(pos) then
-								break
-							end
-							minetest.set_node(pos, {name = def.path.ladder, param2 = face_zpl})
-							pos.y = pos.y - 1
-						end
 					end
 				end
 			end

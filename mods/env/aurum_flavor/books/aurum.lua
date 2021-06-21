@@ -38,3 +38,12 @@ R{
 	},
 	groups = C("aurum"),
 }
+
+R{
+	data = {
+		author = "Larleth Ruminar",
+		title = S"Corruption",
+		text = S[[So many villages have fallen prey to the corruption. They lie dead now; the last inhabitants were consumed long ago. Perhaps, one day, these barren places shall be full of life once more, as spoken of by the scion Cēr.]]
+	},
+	groups = C("aurum"),
+}

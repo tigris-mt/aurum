@@ -15,6 +15,31 @@ local function can_replace(pos, foundation)
 	end
 end
 
+local function can_ladder_in(pos)
+	local node = minetest.get_node(pos)
+	return aurum.is_air(node.name) or minetest.registered_nodes[node.name].buildable_to
+end
+
+local get_build_pos = b.cache.simple(function(pos)
+	local check = vector.new(pos)
+
+	-- Go down to the ground.
+	check.y = check.y - 1
+	while can_replace(check) do
+		check.y = check.y - 1
+	end
+
+	-- Go back to center.
+	check.y = check.y + 1
+
+	-- Go to lowest possible.
+	while not can_replace(check) do
+		check.y = check.y + 1
+	end
+
+	return check
+end, function(pos) return minetest.hash_node_position(vector.new(pos.x, 0, pos.z)) end)
+
 local function get_actual_corner(start, size)
 	-- Go down to the ground.
 	local down_check = vector.new(start)
@@ -68,7 +93,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 
 	local poses = (function()
 		local ret = {}
-		local STEP = 8
+		local STEP = 3
 		for x=params.box.a.x,params.box.b.x,STEP do
 			for z=params.box.a.z,params.box.b.z,STEP do
 				table.insert(ret, vector.new(x, 0, z))
@@ -93,6 +118,44 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				return vector.new(pos.x, v_pos.y, pos.z)
 			end
 		end
+	end
+
+	local num_x_paths = math.floor((params.box.b.x - params.box.a.x) / (def.path_width + def.path_spacing))
+	local num_z_paths = math.floor((params.box.b.x - params.box.a.x) / (def.path_width + def.path_spacing))
+
+	local x_paths_all = {}
+	local z_paths_all = {}
+
+	for i=0,num_x_paths-1 do
+		b.t.random_insert(x_paths_all, {
+			start = vector.new(params.box.a.x, 0, params.box.a.z + i * (def.path_width + def.path_spacing) - math.floor(def.path_width / 2)),
+			finish = vector.new(params.box.b.x, 1, params.box.a.z + i * (def.path_width + def.path_spacing) + math.ceil(def.path_width / 2)),
+		}, params.random)
+	end
+
+	for i=0,num_z_paths-1 do
+		b.t.random_insert(z_paths_all, {
+			start = vector.new(params.box.a.x + i * (def.path_width + def.path_spacing) - math.floor(def.path_width / 2), 0, params.box.a.z),
+			finish = vector.new(params.box.a.x + i * (def.path_width + def.path_spacing) + math.ceil(def.path_width / 2), 1, params.box.b.z),
+		}, params.random)
+	end
+
+	local x_paths = {}
+	if #x_paths_all > 0 then
+		for i=1,params.random(#x_paths_all) do
+			table.insert(x_paths, x_paths_all[i])
+		end
+	end
+
+	local z_paths = {}
+	if #z_paths_all > 0 then
+		for i=1,params.random(#z_paths_all) do
+			table.insert(z_paths, z_paths_all[i])
+		end
+	end
+
+	for _,path in ipairs(b.t.icombine(x_paths, z_paths)) do
+		plots:insert_area(path.start, path.finish, "")
 	end
 
 	local structures_needed = {}
@@ -161,6 +224,112 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 			name = aurum.flavor.generate_village_name(params.random),
 			founder = aurum.flavor.generate_name(params.random),
 		})
+
+		local face_xp = minetest.dir_to_facedir(vector.new(-1, 0, 0))
+		local face_xm = minetest.dir_to_facedir(vector.new(1, 0, 0))
+		local face_xpl = 3
+		local face_xml = 2
+		for _,path in ipairs(x_paths) do
+			for x=path.start.x,path.finish.x do
+				for z=path.start.z,path.finish.z do
+					local pos = vector.new(get_build_pos(vector.new(x, params.box.b.y, z)))
+					pos.y = pos.y - 1
+					minetest.set_node(pos, {name = def.path.base})
+
+					local next_pos = get_build_pos(vector.new(x + 1, params.box.b.y, z))
+					local y_diff = next_pos.y - pos.y - 1
+
+					local function clear()
+						for i=1,def.path_clear_above do
+							pos.y = pos.y + 1
+							minetest.remove_node(pos)
+						end
+					end
+
+					if y_diff == 1 then
+						pos.y = pos.y + 1
+						minetest.set_node(pos, {name = def.path.stairs, param2 = face_xm})
+						clear()
+					elseif y_diff == -1 then
+						minetest.set_node(pos, {name = def.path.stairs, param2 = face_xp})
+						clear()
+					elseif y_diff > 1 then
+						for i=1,y_diff do
+							pos.y = pos.y + 1
+							if not can_ladder_in(pos) then
+								break
+							end
+							minetest.set_node(pos, {name = def.path.ladder, param2 = face_xml})
+						end
+						clear()
+					elseif y_diff < -1 then
+						clear()
+						pos.y = pos.y - def.path_clear_above
+						for i=-1,y_diff,-1 do
+							if not can_ladder_in(pos) then
+								break
+							end
+							minetest.set_node(pos, {name = def.path.ladder, param2 = face_xpl})
+							pos.y = pos.y - 1
+						end
+					end
+				end
+			end
+		end
+
+		local face_zp = minetest.dir_to_facedir(vector.new(0, 0, -1))
+		local face_zm = minetest.dir_to_facedir(vector.new(0, 0, 1))
+		local face_zpl = 5
+		local face_zml = 4
+		for _,path in ipairs(z_paths) do
+			for x=path.start.x,path.finish.x do
+				for z=path.start.z,path.finish.z do
+					local pos = vector.new(get_build_pos(vector.new(x, params.box.b.y, z)))
+					pos.y = pos.y - 1
+					if minetest.get_node(pos).name ~= def.path.ladder then
+						minetest.set_node(pos, {name = def.path.base})
+					end
+
+					local next_pos = get_build_pos(vector.new(x, params.box.b.y, z + 1))
+					local y_diff = next_pos.y - pos.y - 1
+
+					local function clear()
+						for i=1,def.path_clear_above do
+							pos.y = pos.y + 1
+							minetest.remove_node(pos)
+						end
+					end
+
+					if y_diff == 1 then
+						pos.y = pos.y + 1
+						minetest.set_node(pos, {name = def.path.stairs, param2 = face_zm})
+						clear()
+					elseif y_diff == -1 then
+						minetest.set_node(pos, {name = def.path.stairs, param2 = face_zp})
+						clear()
+					elseif y_diff > 1 then
+						for i=1,y_diff do
+							pos.y = pos.y + 1
+							if not can_ladder_in(pos) then
+								break
+							end
+							minetest.set_node(pos, {name = def.path.ladder, param2 = face_zml})
+						end
+						clear()
+					elseif y_diff < -1 then
+						clear()
+						pos.y = pos.y - def.path_clear_above
+						for i=-1,y_diff,-1 do
+							if not can_ladder_in(pos) then
+								break
+							end
+							minetest.set_node(pos, {name = def.path.ladder, param2 = face_zpl})
+							pos.y = pos.y - 1
+						end
+					end
+				end
+			end
+		end
 
 		for _,s in ipairs(generate_queue) do
 			aurum.features.place_decoration(s.center, s.def, params.random, function(c)

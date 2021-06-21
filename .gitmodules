@@ -94,3 +94,6 @@
 [submodule "mods/core/gglobaltick"]
 	path = mods/core/gglobaltick
 	url = https://github.com/tigris-mt/gglobaltick
+[submodule "mods/items/boats"]
+	path = mods/items/boats
+	url = https://github.com/tigris-mt/boats

@@ -17,6 +17,8 @@ minetest.register_on_mods_loaded(function()
 		"aurum_clay:clay_white",
 	}, 0.35, 0, {1, 30}, 0, {"raw"})
 
+	treasurer.register_treasure("aurum_glee:glee", 0.1, 4, {1, 10}, 0, {"raw"})
+
 	-- Ore products.
 	local num_ores = #b.t.keys(aurum.ore.ores)
 	for k,v in pairs(aurum.ore.ores) do

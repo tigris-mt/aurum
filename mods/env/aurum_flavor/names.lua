@@ -36,7 +36,7 @@ end
 
 function aurum.flavor.generate_name(random)
 	return (b.t.choice({
-		function() return single(random) .. " of " .. single(random) end,
+		function() return single(random) .. " of " .. aurum.flavor.generate_village_name(random) end,
 		function() return single(random) .. " " .. single(random) end,
 		function() return single(random) .. " " .. single(random) .. " " .. single(random) end,
 		function() return single(random) .. " " .. single(random) end,

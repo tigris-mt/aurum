@@ -11,6 +11,7 @@ SAFE="
 	mods/env/bright_night
 	mods/env/fire
 	mods/entities/gprojectiles
+	mods/items/boats
 	mods/items/bucket
 	mods/items/doors
 	mods/items/dye

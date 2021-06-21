@@ -232,22 +232,11 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 					local next_pos = get_build_pos(vector.new(x + 1, params.box.b.y, z))
 					local y_diff = next_pos.y - pos.y - 1
 
-					local function clear()
-						for i=1,def.path_clear_above do
-							pos.y = pos.y + 1
-							minetest.remove_node(pos)
-						end
-					end
-
 					if y_diff == 1 then
 						pos.y = pos.y + 1
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_xm})
-						clear()
 					elseif y_diff == -1 then
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_xp})
-						clear()
-					elseif y_diff == 0 then
-						clear()
 					end
 				end
 			end
@@ -260,29 +249,16 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 				for z=path.start.z,path.finish.z do
 					local pos = vector.new(get_build_pos(vector.new(x, params.box.b.y, z)))
 					pos.y = pos.y - 1
-					if minetest.get_node(pos).name ~= def.path.ladder then
-						minetest.set_node(pos, {name = def.path.base})
-					end
+					minetest.set_node(pos, {name = def.path.base})
 
 					local next_pos = get_build_pos(vector.new(x, params.box.b.y, z + 1))
 					local y_diff = next_pos.y - pos.y - 1
 
-					local function clear()
-						for i=1,def.path_clear_above do
-							pos.y = pos.y + 1
-							minetest.remove_node(pos)
-						end
-					end
-
 					if y_diff == 1 then
 						pos.y = pos.y + 1
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_zm})
-						clear()
 					elseif y_diff == -1 then
 						minetest.set_node(pos, {name = def.path.stairs, param2 = face_zp})
-						clear()
-					elseif y_diff == 0 then
-						clear()
 					end
 				end
 			end

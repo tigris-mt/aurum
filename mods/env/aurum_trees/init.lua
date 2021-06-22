@@ -1,70 +1,10 @@
 local S = aurum.get_translator()
--- Schematic parameter delimiter.
-local SCHEMATIC_DELIM = ","
 local m = {}
 aurum.trees = m
 
 m.types = {}
 
 b.dofile("defaults.lua")
-
--- Map names to more generic schematics.
-m.translation = {
-	simple = "tree,5,2",
-	wide = "tree,6,4,0.3,0.25",
-	tall = "tree,8,2",
-	very_tall = "tree,14,5",
-	huge = "tree,14,7",
-	giant = "tree,26,12",
-	double = "tree,7,5",
-}
-
-local function remove_force_place(schematic)
-	local ret = table.copy(schematic)
-	for _,v in ipairs(ret.data) do
-		v.force_place = nil
-	end
-	return ret
-end
-
-local modpath = minetest.get_modpath(minetest.get_current_modname())
-
--- Returns a decoration for tree according to decoration schematic n.
-aurum.trees.generate_decoration = b.cache.simple(function(tree, n)
-	local t_begin = minetest.get_us_time()
-
-	n = m.translation[n] or n
-
-	-- Split up decoration name by delimiter.
-	local split = n:split(SCHEMATIC_DELIM, true)
-	local name = split[1]
-	local params = {}
-	for i=2,#split do
-		table.insert(params, split[i])
-	end
-
-	-- Execute decoration schematic generator according to def and params.
-	local schematic, offset = dofile(modpath .. "/decorations/" .. name .. ".lua")(m.types[tree], unpack(params))
-	offset = offset or 0
-
-	-- Warn if elapsed time was lengthy.
-	local t_sec = (minetest.get_us_time() - t_begin) / 1000000
-	if t_sec > 0.1 then
-		minetest.log("warning", ("Registering tree decoration %s (%s) took %.4f seconds."):format(tree, n, t_sec))
-	end
-
-	return {
-		schematic = schematic,
-		rotation = "random",
-		flags = {place_center_x = true, place_center_y = false, place_center_z = true},
-		place_offset_y = offset,
-	}
-end, function(tree, n) return tree .. " " .. (m.translation[n] or n) end)
-
--- Add decoration schematic n to tree's default.
-local function add_decoration(tree, n)
-	m.types[tree].decodefs[n] = aurum.trees.generate_decoration(tree, n)
-end
 
 function m.register(name, def)
 	assert(not m.types[name], "tree type already exists")
@@ -93,8 +33,6 @@ function m.register(name, def)
 		decorations = m.defaults.ALL,
 	}, def, {
 		name = name,
-
-		decodefs = {},
 	})
 
 	-- Register and set a part of the tree.
@@ -198,10 +136,11 @@ function m.register(name, def)
 					table.insert(dkp, {k, v})
 				end
 			end
-			local dk = b.t.weighted_choice(dkp)
-			local d = def.decodefs[dk]
+
 			minetest.remove_node(pos)
-			minetest.place_schematic(pos, replace and d.schematic or remove_force_place(d.schematic), d.rotation, {}, replace, d.flags)
+			aurum.trees.spawn_tree(pos, name, b.t.weighted_choice(dkp), {
+				replace = replace,
+			})
 			return true
 		end,
 
@@ -250,10 +189,6 @@ function m.register(name, def)
 	end
 
 	m.types[name] = def
-
-	for n in pairs(b.t.map(def.decorations, function(v) return (v > 0) and v or nil end)) do
-		add_decoration(name, n)
-	end
 end
 
 minetest.register_chatcommand("growtree", {
@@ -280,16 +215,9 @@ minetest.register_chatcommand("growtree", {
 			return false, S"Invalid parameters."
 		end
 
-		local err, emsg = pcall(add_decoration, type, decoration)
+		local ok, emsg = pcall(m.spawn_tree, pos, type, decoration)
 
-		if not err then
-			return false, emsg
-		end
-
-		local d = m.types[type].decodefs[decoration]
-		minetest.place_schematic(pos, remove_force_place(d.schematic), d.rotation, {}, false, d.flags)
-
-		return true, "Tree grown."
+		return ok, (ok and "Tree grown." or emsg)
 	end,
 })
 
@@ -303,7 +231,8 @@ doc.sub.items.register_factoid("nodes", "use", function(itemstring, def)
 end)
 
 b.dofile("leafdecay.lua")
+b.dofile("generation.lua")
 
-b.dofile("decorations/init.lua")
+b.dodir("decorations")
 b.dodir("trees")
 b.dofile("fuel.lua")

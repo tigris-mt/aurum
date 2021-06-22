@@ -5,6 +5,31 @@ minetest.register_craftitem("aurum_glee:glee", {
 	inventory_image = "aurum_glee_glee.png",
 })
 
+minetest.register_node("aurum_glee:glee_block", {
+	description = S"Glee Block",
+	tiles = {"aurum_glee_glee_block.png"},
+	groups = {dig_pick = 3},
+	sounds = aurum.sounds.stone(),
+	light_source = 14,
+	paramtype = "light",
+})
+
+minetest.register_craft{
+	output = "aurum_glee:glee_block",
+	recipe = {
+		{"aurum_glee:glee", "aurum_glee:glee", "aurum_glee:glee"},
+		{"aurum_glee:glee", "aurum_glee:glee", "aurum_glee:glee"},
+		{"aurum_glee:glee", "aurum_glee:glee", "aurum_glee:glee"},
+	},
+}
+
+minetest.register_craft{
+	output = "aurum_glee:glee 9",
+	recipe = {
+		{"aurum_glee:glee_block"},
+	},
+}
+
 minetest.register_node("aurum_glee:glee_in_stone", {
 	description = S"Glee in Stone",
 	tiles = {"aurum_base_stone.png^aurum_glee_glee.png"},

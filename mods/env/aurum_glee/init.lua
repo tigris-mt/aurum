@@ -53,7 +53,7 @@ minetest.register_craft{
 
 minetest.register_node("aurum_glee:glee_shard_in_stone", {
 	description = S"Glee Shard in Stone",
-	tiles = {"aurum_base_stone.png^aurum_glee_glee_shard.png"},
+	tiles = {"aurum_base_stone.png^aurum_glee_glee_shard_ore.png"},
 	groups = {dig_pick = 3},
 	sounds = aurum.sounds.stone(),
 	drop = {
@@ -72,7 +72,7 @@ minetest.register_node("aurum_glee:glee_shard_in_stone", {
 
 minetest.register_node("aurum_glee:glee_shard_in_regret", {
 	description = S"Glee Shard in Regret",
-	tiles = {minetest.registered_nodes["aurum_base:regret"].tiles[1] .. "^aurum_glee_glee_shard.png"},
+	tiles = {minetest.registered_nodes["aurum_base:regret"].tiles[1] .. "^aurum_glee_glee_shard_ore.png"},
 	groups = {dig_pick = 2, level = 2},
 	sounds = aurum.sounds.stone(),
 	drop = {
@@ -96,9 +96,9 @@ minetest.register_node("aurum_glee:glee_in_aether_flesh", {
 	sounds = aurum.sounds.flesh(),
 	drop = {
 		items = {
-			{items = {"aurum_glee:glee_shard"}, rarity = 1},
-			{items = {"aurum_glee:glee_shard"}, rarity = 2},
-			{items = {"aurum_glee:glee_shard"}, rarity = 3},
+			{items = {"aurum_glee:glee"}, rarity = 1},
+			{items = {"aurum_glee:glee"}, rarity = 3},
+			{items = {"aurum_glee:glee"}, rarity = 5},
 		},
 	},
 	light_source = 10,

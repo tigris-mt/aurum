@@ -9,6 +9,13 @@ for k,l_def in pairs{
 		axiom = "FFFFFAFFBF",
 		rules_a = "[&&&FFFFF&&FFFF][&&&++++FFFFF&&FFFF][&&&----FFFFF&&FFFF]",
 		rules_b = "[&&&++FFFFF&&FFFF][&&&--FFFFF&&FFFF][&&&------FFFFF&&FFFF]",
+		trunk_type = "single",
+		thin_branches = true,
+	},
+	l_tall_flowing_fruit = {
+		axiom = "FFFFFFFFFAFFFBFF",
+		rules_a = "[&&&FFFFF&&FFFF][&&&++++FFFFF&&FFFF][&&&----FFFFF&&FFFF]",
+		rules_b = "[&&&++FFFFF&&FFFF][&&&--FFFFF&&FFFF][&&&------FFFFF&&FFFF]",
 		trunk_type = "double",
 		thin_branches = true,
 	},

@@ -5,10 +5,8 @@ aurum.trees.register("aurum_trees:apple", {
 	texture_base = "aurum_trees_oak_%s.png^[colorize:#666600:160",
 
 	decorations = {
-		["tree,10,4,,,,,aurum_trees:apple"] = 1,
-		["tree,12,5,,,,,aurum_trees:apple"] = 1,
-		["tree,14,4,,,,,aurum_trees:apple"] = 1,
-		["l_flowing_fruit,aurum_trees:apple"] = 2,
+		["l_flowing_fruit,aurum_trees:apple"] = 1,
+		["l_tall_flowing_fruit,aurum_trees:apple"] = 1,
 	},
 })
 

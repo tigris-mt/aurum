@@ -12,13 +12,16 @@ minetest.register_node("aurum_features:placeholder", {
 	drop = "",
 	on_timer = function(pos)
 		local id = minetest.get_meta(pos):get_int("aurum_features:id")
+
+		-- Remove node before so that the callback doesn't see anything here.
+		if minetest.get_node(pos).name == "aurum_features:placeholder" then
+			minetest.remove_node(pos)
+		end
+
 		if defs[id] then
 			defs[id].callback(pos, b.seed_random(minetest.hash_node_position(pos) + 0x7ACE401D))
 		else
 			minetest.log("warning", ("[aurum_features] Placeholder with id %d at %s was not valid."):format(id, minetest.pos_to_string(pos)))
-		end
-		if minetest.get_node(pos).name == "aurum_features:placeholder" then
-			minetest.remove_node(pos)
 		end
 	end,
 })

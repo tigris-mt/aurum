@@ -83,6 +83,12 @@ function m.spawn_tree(pos, tree, schematic, options)
 	if gdef.type == "schematic_generator" then
 		local deco = m.generate_schematic_decoration(tree, schematic)
 		minetest.place_schematic(pos, options.replace and deco.schematic or remove_force_place(deco.schematic), deco.rotation, {}, false, deco.flags)
+	elseif gdef.type == "l_system" then
+		local l, offset_y = gdef.func(m.types[tree], unpack(params))
+		minetest.spawn_tree(vector.add(pos, vector.new(0, offset_y or 0, 0)), b.t.combine(l, {
+			seed = options.random(1000000000),
+			angle = options.random(10, 50),
+		}))
 	else
 		error("unsupported generator type: " .. gdef.type)
 	end

@@ -123,7 +123,7 @@ for realm,rdef in pairs{
 			y_max = layer[1],
 			y_min = layer[2],
 			clust_scarcity = layer[3] ^ 3,
-			clust_num_ores = rdef.size * 2,
+			clust_num_ores = math.ceil(rdef.size ^ 2.5),
 			clust_size = rdef.size,
 		}
 	end

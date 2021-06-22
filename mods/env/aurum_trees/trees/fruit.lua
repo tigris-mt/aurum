@@ -8,6 +8,7 @@ aurum.trees.register("aurum_trees:apple", {
 		["tree,10,4,,,,,aurum_trees:apple"] = 1,
 		["tree,12,5,,,,,aurum_trees:apple"] = 1,
 		["tree,14,4,,,,,aurum_trees:apple"] = 1,
+		["l_flowing_fruit,aurum_trees:apple"] = 2,
 	},
 })
 

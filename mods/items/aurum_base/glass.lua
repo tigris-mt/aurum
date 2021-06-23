@@ -33,4 +33,10 @@ aurum.dye.register_node("aurum_base:glowing_glass", {
 	sunlight_propagates = true,
 	use_texture_alpha = "clip",
 	light_source = 12,
-}, "group:glowing_glass")
+}, "group:glowing_glass", function(name, dye_name, colored_name)
+	minetest.register_craft{
+		output = colored_name,
+		type = "shapeless",
+		recipe = {"aurum_base:glass_" .. dye_name, "aurum_glee:glee_shard"},
+	}
+end)

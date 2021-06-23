@@ -29,7 +29,7 @@ minetest.register_craft{
 minetest.register_node("aurum_glee:glee_block", {
 	description = S"Glee Block",
 	tiles = {"aurum_glee_glee_block.png"},
-	groups = {dig_pick = 3},
+	groups = {dig_pick = 3, shapable = 1},
 	sounds = aurum.sounds.stone(),
 	light_source = 14,
 	paramtype = "light",

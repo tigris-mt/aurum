@@ -1,7 +1,10 @@
 local S = aurum.get_translator()
 
 b.t.merge(signs_lib.standard_wood_groups, {dig_chop = 3, dig_handle = 2, flammable = 1})
+
 signs_lib.standard_wood_pole_texture = minetest.registered_items["aurum_trees:oak_planks"].tiles[1]
+
+signs_lib.glow_item = "aurum_glee:glee_shard"
 
 local function register_tree_sign(tree)
 	local tree_def = aurum.trees.types[tree]

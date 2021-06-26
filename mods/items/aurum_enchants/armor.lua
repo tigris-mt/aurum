@@ -63,3 +63,15 @@ aurum.tools.register_enchant("mapping", {
 		end
 	end,
 })
+
+aurum.tools.register_enchant("breath", {
+	categories = {
+		helmet = true,
+	},
+	description = S"Breath",
+	max_level = 3,
+	longdesc = S"Regenerates the user's breath even when submerged.",
+	apply = function(state, level)
+		state.eqdef.breath_regen = state.eqdef.breath_regen + level
+	end,
+})

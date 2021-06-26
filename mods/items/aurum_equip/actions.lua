@@ -8,6 +8,7 @@ gequip.register_eqdef_init(function(eqdef)
 	eqdef.armor = b.t.combine(gdamage.armor_defaults(1), eqdef.armor or {})
 	eqdef.durability = eqdef.durability or 1
 	eqdef.hp_max = eqdef.hp_max or 1
+	eqdef.breath_regen = 0
 	eqdef.effects = b.t.combine(default_effects, eqdef.effects or {})
 end)
 
@@ -80,5 +81,23 @@ gequip.register_action("aurum_equip:minimap", {
 			minimap = state.minimap,
 			minimap_radar = state.minimap_radar,
 		}
+	end,
+})
+
+gequip.register_action("aurum_equip:breath", {
+	init = function(state)
+		state.breath_regen = 0
+	end,
+
+	add = function(state, r)
+		state.breath_regen = state.breath_regen + r.breath_regen
+	end,
+
+	apply = function(state, player)
+		if state.breath_regen > 0 then
+			aurum.effects.add(player, "aurum_effects:breath_regen", state.breath_regen, -1)
+		else
+			aurum.effects.remove(player, "aurum_effects:breath_regen")
+		end
 	end,
 })

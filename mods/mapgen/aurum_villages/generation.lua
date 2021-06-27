@@ -1,5 +1,4 @@
-local function can_replace(pos, foundation)
-	local node = minetest.get_node(pos)
+local function can_replace(node, foundation)
 	-- Air is replacable, of course.
 	if aurum.is_air(node.name) then
 		return true
@@ -15,12 +14,21 @@ local function can_replace(pos, foundation)
 	end
 end
 
+local function can_replace_check(want, pos, ...)
+	local node = minetest.get_node(pos)
+	if node.name == "ignore" then
+		return false
+	else
+		return can_replace(node, ...) == want
+	end
+end
+
 local get_build_pos = b.cache.simple(function(pos)
 	local check = vector.new(pos)
 
 	-- Go down to the ground.
 	check.y = check.y - 1
-	while can_replace(check) do
+	while can_replace_check(true, check) do
 		check.y = check.y - 1
 	end
 
@@ -28,7 +36,7 @@ local get_build_pos = b.cache.simple(function(pos)
 	check.y = check.y + 1
 
 	-- Go to lowest possible.
-	while not can_replace(check) do
+	while can_replace_check(false, check) do
 		check.y = check.y + 1
 	end
 
@@ -39,7 +47,7 @@ local function get_actual_corner(start, size)
 	-- Go down to the ground.
 	local down_check = vector.new(start)
 	down_check.y = down_check.y - 1
-	while can_replace(down_check, true) do
+	while can_replace_check(true, down_check, true) do
 		down_check.y = down_check.y - 1
 	end
 
@@ -50,7 +58,7 @@ local function get_actual_corner(start, size)
 	for x=start.x,start.x+size.x-1 do
 		for z=start.z,start.z+size.z-1 do
 			local up_check = vector.new(x, new_y, z)
-			while not can_replace(up_check) do
+			while can_replace_check(false, up_check) do
 				up_check.y = up_check.y + 1
 			end
 			new_y = up_check.y
@@ -283,7 +291,7 @@ function aurum.villages.generate_village(v_name, v_pos, params)
 							for z=e.a.z,e.b.z do
 								local foundation_pos = vector.new(x, y, z)
 								local distance = vector.distance(center_pos, foundation_pos)
-								if distance <= radius and can_replace(foundation_pos, true) then
+								if distance <= radius and can_replace_check(true, foundation_pos, true) then
 									minetest.set_node(foundation_pos, {name = b.t.choice(s.def.foundation, params.random)})
 								end
 							end

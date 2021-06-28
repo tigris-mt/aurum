@@ -10,11 +10,13 @@ function aurum.equip.register_armor(name, def)
 		slot = "?",
 		recipe = nil,
 		durability = 1,
+		item_def = {},
 	}, def)
 
-	aurum.tools.register(name, {
+	aurum.tools.register(name, b.t.combine({
 		description = def.description,
 		inventory_image = def.texture,
+		wield_image = def.texture,
 		sound = aurum.sounds.tool(),
 
 		_enchants = def.enchants,
@@ -27,7 +29,7 @@ function aurum.equip.register_armor(name, def)
 		},
 
 		groups = {equipment = 1},
-	})
+	}, def.item_def))
 
 	if def.recipe then
 		minetest.register_craft{
@@ -64,6 +66,9 @@ function aurum.equip.register_armor_set(prefix, def)
 		armor = b.t.map(def.armor, function(n) return 1 - (1 - n) * 0.5 end),
 		slot = "hands",
 		durability = def.durability,
+		item_def = {
+			wield_scale = vector.new(1, 1, 2.5),
+		},
 		recipe = {
 			{def.material, "", def.material},
 			{def.material, "", def.material},

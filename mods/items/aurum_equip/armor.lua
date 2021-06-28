@@ -70,7 +70,7 @@ function aurum.equip.register_armor_set(prefix, def)
 			wield_scale = vector.new(1, 1, 2.5),
 		},
 		recipe = {
-			{def.material, "", def.material},
+			{"", def.material, ""},
 			{def.material, "", def.material},
 		},
 	})

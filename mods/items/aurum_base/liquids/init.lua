@@ -24,6 +24,7 @@ function aurum.base.register_liquid(name, def, flowing_def)
 		liquid_alternative_flowing = name .. "_flowing",
 		liquid_renewable = false,
 		liquid_range = 8,
+		waving = 3,
 	}
 	local flowing_defaults = {
 		drawtype = "flowingliquid",

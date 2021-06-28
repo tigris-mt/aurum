@@ -6,7 +6,7 @@ signs_lib.standard_wood_pole_texture = minetest.registered_items["aurum_trees:oa
 
 signs_lib.glow_item = "aurum_glee:glee_shard"
 
-local function register_tree_sign(tree)
+aurum.trees.once_and_future(function(tree)
 	local tree_def = aurum.trees.types[tree]
 	local planks_def = minetest.registered_nodes[tree_def.planks]
 	if planks_def then
@@ -44,16 +44,4 @@ local function register_tree_sign(tree)
 			burntime = 5,
 		}
 	end
-end
-
--- Register all once and future trees.
-for tree in pairs(aurum.trees.types) do
-	register_tree_sign(tree)
-end
-
-local old = aurum.trees.register
-function aurum.trees.register(name, ...)
-	local ret = old(name, ...)
-	register_tree_sign(name)
-	return ret
-end
+end)

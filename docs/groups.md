@@ -54,7 +54,6 @@ Toughless levels range from 0 to 3.
 * `tool=1`: For tools.
 
 # Interaction
-* `flammable=1`: This node can burn.
 * `book=1`: This node is a paper book.
 * `cook_temp=x`: This node can only be cooked in a cooker with a temperature range including x.
 	* `Smelter`: 10-20
@@ -67,7 +66,9 @@ Toughless levels range from 0 to 3.
 * `dirt_spread=1`: This node will spread to nodes with light.
 * `edible=x`: This node will provide x nutrition.
 * `edible_morale=x`: This node will add an x (1-3) morale effect for 10 minutes.
+* `fence=1`: This node is a fence.
 * `fertilizer=x`: This fertilizer will turn the soil under it into fertile soil of level x when placed and right-clicked with a shovel.
+* `flammable=1`: This node can burn.
 * `flora=1`: This node will spread to soil or `_flora_spread_node` in def.
 	* If `_on_flora_spread(pos, node)` is defined, then it will be called before the actual spreading. If it returns false, spread will be cancelled.
 	* It may return a second node name for the node to spread.

@@ -1,6 +1,6 @@
 local S = aurum.get_translator()
 
-local function register_tree_cart(tree)
+aurum.trees.once_and_future(function(tree)
 	local tree_def = aurum.trees.types[tree]
 	local planks_def = minetest.registered_nodes[tree_def.planks]
 	if planks_def then
@@ -26,16 +26,4 @@ local function register_tree_cart(tree)
 			burntime = 25,
 		}
 	end
-end
-
--- Register all once and future trees.
-for tree in pairs(aurum.trees.types) do
-	register_tree_cart(tree)
-end
-
-local old = aurum.trees.register
-function aurum.trees.register(name, ...)
-	local ret = old(name, ...)
-	register_tree_cart(name)
-	return ret
-end
+end)

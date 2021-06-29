@@ -1,16 +1,16 @@
 export aurum=$(shell pwd)
 
-all: game.conf README.bbcode README.md menu mods/mapgen/aurum_villages
+all: game.conf README.bbcode README.md menu screenshot.png mods/mapgen/aurum_villages
 
 .PHONY: .FORCE
 
 mods/mapgen/aurum_villages: .FORCE
 	$(MAKE) -C $@
 
-$(shell find menu): $(shell find screenshots)
-	tools/images.sh
-
 config = mods/core/aurum/aurum_table.lua tools/config.sh
+
+screenshot.png $(shell find menu): $(shell find screenshots) $(config)
+	tools/images.sh
 
 game.conf: docs/game.sh.conf $(config)
 	tools/make_sh_doc.sh < $< > $@

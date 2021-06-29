@@ -10,6 +10,10 @@ aurum = {
 	--- MINOR is incremented for new features.
 	--- PATCH is incremented for minor changes and bugfixes.
 	VERSION = "0.59.1.0",
+
 	-- Expected Minetest Engine version (>=).
 	MT_VERSION = "5.4.0",
+
+	-- Base screenshot image; relative to screenshots/ directory.
+	SCREENSHOT = "aurum_graveyard.0.23.2.png",
 }

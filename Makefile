@@ -1,15 +1,12 @@
-export aurum=$(shell pwd)
-
-all: game.conf README.bbcode README.md menu screenshot.png mods/mapgen/aurum_villages
-
-.PHONY: .FORCE
-
-mods/mapgen/aurum_villages: .FORCE
-	$(MAKE) -C $@
-
+# Config dependencies
 config = mods/core/aurum/aurum_table.lua tools/config.sh
+mods = mods/mapgen/aurum_villages
 
-screenshot.png $(shell find menu): $(shell find screenshots) $(config)
+all: game.conf README.bbcode README.md menu screenshot.png $(mods)
+
+# Game documentation & imaging.
+
+screenshot.png menu: $(shell find screenshots) $(config)
 	tools/images.sh
 
 game.conf: docs/game.sh.conf $(config)
@@ -20,3 +17,10 @@ README.md: docs/README.sh.md $(config)
 
 README.bbcode: README.md
 	pandoc -f gfm -t tools/pandoc_bbcode_phpbb.lua -o $@ $<
+
+# Mods
+
+mods/mapgen/aurum_villages: mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts
+
+mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts: mods/mapgen/aurum_villages/schematics/ruined_hall.mts
+	tools/mts_replace.py < $< aurum_trees:drywood aurum_trees:pander > $@

@@ -38,6 +38,19 @@ aurum.tools.register_enchant("speed", {
 	end,
 })
 
+aurum.tools.register_enchant("antigravity", {
+	categories = {
+		boots = true,
+		wings = true,
+	},
+	description = S"Antigravity",
+	longdesc = S"Reduces the effect of gravity on the wearer and reduces fall damage.",
+	apply = function(state, level)
+		state.eqdef.effects.gravity = state.eqdef.effects.gravity * (1 - level / 5)
+		state.eqdef.armor.fall = state.eqdef.armor.fall / (1 + level / 5)
+	end,
+})
+
 aurum.tools.register_enchant("psyche_shield", {
 	categories = {
 		helmet = true,

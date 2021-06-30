@@ -6,9 +6,9 @@ Aurum is currently in its rapid development stage. Contributions are very welcom
 [Github Repository](https://github.com/tigris-mt/aurum)
 
 ## Getting Aurum
-The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.59.1.1, developed for Minetest 5.4.0 and later.
+The [latest stable version](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip) of Aurum is 0.59.1.2, developed for Minetest 5.4.0 and later.
 
-* Direct download: [Stable 0.59.1.1](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
+* Direct download: [Stable 0.59.1.2](https://github.com/tigris-mt/aurum-compiled/archive/stable.zip)
 * Direct download: [Development](https://github.com/tigris-mt/aurum-compiled/archive/master.zip)
 * Source repository (has lots of submodules): [Development](https://github.com/tigris-mt/aurum)
 * Source repository (automatically generated, no submodules): [Compiled](https://github.com/tigris-mt/aurum-compiled)

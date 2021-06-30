@@ -6,7 +6,7 @@ all: game.conf README.bbcode README.md menu screenshot.png $(mods)
 
 # Game documentation & imaging.
 
-menu: $(shell find screenshots)
+menu: $(shell find screenshots) $(config)
 	tools/make_menu.sh
 
 screenshot.png: screenshots/$(shell bash -c '. tools/config.sh; screenshot') $(config)

@@ -6,11 +6,11 @@ all: game.conf README.bbcode README.md menu screenshot.png $(mods)
 
 # Game documentation & imaging.
 
-menu: $(shell find screenshots) $(config)
-	tools/make_images.sh
+menu: $(shell find screenshots)
+	tools/make_menu.sh
 
-screenshot.png: $(shell find screenshots) $(config)
-	tools/make_screenshot.sh
+screenshot.png: screenshots/$(shell bash -c '. tools/config.sh; screenshot') $(config)
+	ln -sfvn $< $@
 
 game.conf: docs/game.sh.conf $(config)
 	tools/make_sh_doc.sh < $< > $@
@@ -23,6 +23,7 @@ README.bbcode: README.md
 
 # Mods
 
+.PHONY: mods/mapgen/aurum_villages
 mods/mapgen/aurum_villages: mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts
 
 mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts: mods/mapgen/aurum_villages/schematics/ruined_hall.mts

@@ -25,7 +25,6 @@ README.bbcode: README.md
 
 # Mods
 
-.PHONY: mods/mapgen/aurum_villages
 mods/mapgen/aurum_villages: mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts
 
 mods/mapgen/aurum_villages/schematics/ruined_hall_jungle.mts: mods/mapgen/aurum_villages/schematics/ruined_hall.mts

@@ -60,8 +60,13 @@ aurum.player.inventory_y_monoid = player_monoids.make_monoid{
 }
 
 function aurum.player.inventory_size(player)
-	return {
-		x = aurum.player.inventory_x_monoid:value(player),
-		y = aurum.player.inventory_y_monoid:value(player),
-	}
+	if type(player) == "string" then
+		local p = minetest.get_player_by_name(player)
+		return p and aurum.player.inventory_size(p) or default_size
+	else
+		return {
+			x = aurum.player.inventory_x_monoid:value(player),
+			y = aurum.player.inventory_y_monoid:value(player),
+		}
+	end
 end

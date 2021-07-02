@@ -48,9 +48,10 @@ function aurum.cook.register(name, def)
 	end
 
 	local form = smartfs.create(name, function(state)
-		state:size(8, 8)
+		local s = aurum.player.inventory_size(state.location.player)
+		state:size(math.max(8, s.x), s.y + 4)
 
-		local pos = state.location.pos
+		local pos = state.param.pos
 		local meta = minetest.get_meta(pos)
 		local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
@@ -62,7 +63,7 @@ function aurum.cook.register(name, def)
 
 		state:inventory(4.5, 1, 2, 2, "dst"):setLocation(invloc)
 
-		state:inventory(0, 4, 8, 4, "main")
+		state:inventory(0, 4, s.x, s.y, "main")
 
 		state:element("code", {name = "listring", code = [[
 			listring[]] .. invloc .. [[;dst]

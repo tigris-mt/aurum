@@ -1,15 +1,16 @@
 local S = aurum.get_translator()
 
 local form
-form = smartfs.create("aurum_stamp:stamper", function(state)
-	state:size(8, 6)
+form = aurum.gui.node_smartfs("aurum_stamp:stamper", function(state)
+	local s = aurum.player.inventory_size(state.location.player)
+	state:size(math.max(8, s.x), s.y + 2)
 
-	local pos = state.location.pos
+	local pos = state.param.pos
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
 	state:inventory(0, 0, 1, 1, "item"):setLocation(invloc)
-	state:inventory(0, 2, 8, 4, "main")
+	state:inventory(0, 2, s.x, s.y, "main")
 
 	state:field(1.75, 0.4, 5, 1, "text", S"Text")
 
@@ -17,7 +18,7 @@ form = smartfs.create("aurum_stamp:stamper", function(state)
 
 	state:button(7, 0, 1, 1, "stamp", S"Stamp"):onClick(function(self, state, name)
 		local player = minetest.get_player_by_name(name)
-		if not player or aurum.is_protected(state.location.pos, player) then
+		if not player or aurum.is_protected(state.param.pos, player) then
 			return
 		end
 
@@ -35,7 +36,7 @@ form = smartfs.create("aurum_stamp:stamper", function(state)
 			meta:get_inventory():set_list("item", {stack})
 		end
 
-		form:attach_to_node(state.location.pos)
+		form:reshow(pos)
 	end)
 
 	if meta:get_inventory():get_list("item")[1]:get_count() > 0 then
@@ -78,7 +79,10 @@ minetest.register_node("aurum_stamp:stamper", {
 
 	on_construct = function(pos)
 		minetest.get_meta(pos):get_inventory():set_size("item", 1)
-		form:attach_to_node(pos)
+	end,
+
+	on_rightclick = function(pos, _, clicker)
+		form:show(pos, clicker)
 	end,
 
 	on_receive_fields = smartfs.nodemeta_on_receive_fields,
@@ -94,11 +98,11 @@ minetest.register_node("aurum_stamp:stamper", {
 	end,
 
 	on_metadata_inventory_put = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_metadata_inventory_take = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_blast = aurum.drop_all_blast,

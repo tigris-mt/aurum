@@ -8,8 +8,9 @@ gequip.register_eqdef_init(function(eqdef)
 	eqdef.armor = b.t.combine(gdamage.armor_defaults(1), eqdef.armor or {})
 	eqdef.durability = eqdef.durability or 1
 	eqdef.hp_max = eqdef.hp_max or 1
-	eqdef.breath_regen = 0
+	eqdef.breath_regen = eqdef.breath_regen or 0
 	eqdef.effects = b.t.combine(default_effects, eqdef.effects or {})
+	eqdef.inv_size = b.t.combine({x = 0, y = 0}, eqdef.inv_size or {})
 end)
 
 gequip.register_action("aurum_equip:armor", {
@@ -28,6 +29,23 @@ gequip.register_action("aurum_equip:armor", {
 
 	apply = function(state, player)
 		armor_monoid.monoid:add_change(player, state.armor, "aurum_equip:armor")
+	end,
+})
+
+gequip.register_action("aurum_equip:inv_size", {
+	init = function(state)
+		state.inv_size = {x = 0, y = 0}
+	end,
+
+	add = function(state, r)
+		for k,v in pairs(r.inv_size) do
+			state.inv_size[k] = state.inv_size[k] + v
+		end
+	end,
+
+	apply = function(state, player)
+		aurum.player.inventory_x_monoid:add_change(player, state.inv_size.x, "aurum_equip:armor")
+		aurum.player.inventory_y_monoid:add_change(player, state.inv_size.y, "aurum_equip:armor")
 	end,
 })
 

@@ -26,6 +26,30 @@ aurum.tools.register_enchant("health_augmentation", {
 	end,
 })
 
+aurum.tools.register_enchant("belt", {
+	categories = {
+		hauberk = true,
+	},
+	description = S"Belt",
+	longdesc = S"Increases the wearer's inventory width and hotbar size.",
+	max_level = 2,
+	apply = function(state, level)
+		state.eqdef.inv_size.x = state.eqdef.inv_size.x + level
+	end,
+})
+
+aurum.tools.register_enchant("pouches", {
+	categories = {
+		pants = true,
+	},
+	description = S"Pouches",
+	longdesc = S"Increases the wearer's inventory height.",
+	max_level = 2,
+	apply = function(state, level)
+		state.eqdef.inv_size.y = state.eqdef.inv_size.y + level
+	end,
+})
+
 aurum.tools.register_enchant("speed", {
 	categories = {
 		boots = true,

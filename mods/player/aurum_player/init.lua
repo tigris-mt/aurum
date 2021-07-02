@@ -1,6 +1,7 @@
 aurum.player = {}
 
 b.dofile("death.lua")
+b.dofile("inventory.lua")
 b.dofile("hp.lua")
 b.dofile("realm.lua")
 b.dofile("spawn.lua")

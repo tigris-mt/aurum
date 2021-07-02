@@ -1,5 +1,29 @@
 local S = aurum.get_translator()
 
+-- Override sfinv formspec builder with dynamic inventory rendering.
+function sfinv.make_formspec(player, context, content, show_inv, size)
+	local s = aurum.player.inventory_size(player)
+
+	local default_inv_fs = {}
+	if show_inv then
+		for i=1,s.x do
+			table.insert(default_inv_fs, ("image[%d,5.2;1,1;gui_hb_bg.png]"):format(i - 1))
+		end
+		table.insert(default_inv_fs, ("list[current_player;main;0,5.2;%d,1;]"):format(s.x))
+		if s.y > 1 then
+			table.insert(default_inv_fs, ("list[current_player;main;0,6.35;%d,%d;%d]"):format(s.x, s.y - 1, s.x))
+		end
+	end
+
+	local tmp = {
+		size or (show_inv and ("size[%f,%f]"):format(math.max(8, s.x), s.y + 5.1) or "size[8,9.1]"),
+		sfinv.get_nav_fs(player, context, context.nav_titles, context.nav_idx),
+		table.concat(default_inv_fs, ""),
+		content
+	}
+	return table.concat(tmp, "")
+end
+
 sfinv.override_page("sfinv:crafting", {
 	get = function(self, player, context)
 		return sfinv.make_formspec(player, context, [[
@@ -71,8 +95,8 @@ end)
 local old = gequip.refresh
 function gequip.refresh(player)
 	local ret = old(player)
-	if sfinv.get_page(player) == "aurum_player:equipment" then
-		sfinv.set_page(player, "aurum_player:equipment")
+	if sfinv.get_page(player) then
+		sfinv.set_page(player, sfinv.get_page(player))
 	end
 	return ret
 end

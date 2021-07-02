@@ -1,10 +1,11 @@
 local S = aurum.get_translator()
 
 local form
-form = smartfs.create("aurum_enchants:copying_desk", function(state)
-	state:size(8, 6)
+form = aurum.gui.node_smartfs("aurum_enchants:copying_desk", function(state)
+	local s = aurum.player.inventory_size(state.location.player)
+	state:size(math.max(8, s.x), s.y + 2)
 
-	local pos = state.location.pos
+	local pos = state.param.pos
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
@@ -69,17 +70,19 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 		local stack = aurum.enchants.new_scroll(scroll.name, scroll.level + add)
 		stack:set_count(get("dst"):get_count())
 		set("dst", stack)
+
+		form:reshow(pos)
 	end
 
 	if can_add(-1) then
 		state:button(3.75, 0, 2.25, 1, "reduce", S("Reduce (@1 mana)", mana_cost(-1))):onClick(function(self, state, player)
-			work(-1, state.location.pos, minetest.get_player_by_name(player))
+			work(-1, pos, minetest.get_player_by_name(player))
 		end)
 	end
 
 	if can_add(0) then
 		state:button(3.75, 1, 2.25, 1, "copy", S("Copy (@1 mana)", mana_cost(0))):onClick(function(self, state, player)
-			work(0, state.location.pos, minetest.get_player_by_name(player))
+			work(0, pos, minetest.get_player_by_name(player))
 		end)
 	end
 
@@ -87,12 +90,12 @@ form = smartfs.create("aurum_enchants:copying_desk", function(state)
 	--[[
 	if can_add(1) then
 		state:button(3.75, 1, 2.25, 1, "improve", S("Improve (@1 mana)", mana_cost(1))):onClick(function(self, state, player)
-			work(1, state.location.pos, minetest.get_player_by_name(player))
+			work(1, pos, minetest.get_player_by_name(player))
 		end)
 	end
 	]]
 
-	state:inventory(0, 2, 8, 4, "main")
+	state:inventory(0, 2, s.x, s.y, "main")
 
 	state:element("code", {name = "listring", code = [[
 		listring[]] .. invloc .. [[;src]
@@ -142,10 +145,11 @@ minetest.register_node("aurum_enchants:copying_desk", {
 		minetest.get_meta(pos):get_inventory():set_size("dst", 1)
 		minetest.get_meta(pos):get_inventory():set_size("catalyst", 1)
 		minetest.get_meta(pos):get_inventory():set_size("library", 2)
-		form:attach_to_node(pos)
 	end,
 
-	on_receive_fields = smartfs.nodemeta_on_receive_fields,
+	on_rightclick = function(pos, _, clicker)
+		form:show(pos, clicker)
+	end,
 
 	allow_metadata_inventory_put = function(pos, listname, _, stack, player)
 		if listname == "src" then
@@ -176,15 +180,15 @@ minetest.register_node("aurum_enchants:copying_desk", {
 	end,
 
 	on_metadata_inventory_put = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_metadata_inventory_move = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_metadata_inventory_take = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_blast = aurum.drop_all_blast,

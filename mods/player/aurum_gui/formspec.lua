@@ -7,20 +7,17 @@ local mt = {
 		self.poses[k][player_name] = state
 	end,
 
-	update = function(self, pos)
-		local k = minetest.pos_to_string(pos)
-		for name,state in pairs(self.poses[k] or {}) do
-			state:show()
-		end
-	end,
-
-	reshow = function(self, pos, params)
+	_reshow = function(self, pos, params)
 		local k = minetest.pos_to_string(pos)
 		for name,state in pairs(self.poses[k] or {}) do
 			if state.players:get_first() then
 				self.poses[k][name] = self.form:show(name, self:make_params(pos, params))
 			end
 		end
+	end,
+
+	reshow = function(self, ...)
+		minetest.after(0, self._reshow, self, ...)
 	end,
 
 	make_params = function(self, pos, params)

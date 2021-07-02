@@ -25,20 +25,21 @@ function aurum.storage.register(name, def)
 		protected = false,
 	}, def)
 
-	local form = smartfs.create(name, function(state)
-		state:size(math.max(8, def.width), def.height + 0.5 + 4)
+	local form = aurum.gui.node_smartfs(name, function(state)
+		local s = aurum.player.inventory_size(state.location.player)
+		state:size(math.max(8, def.width, s.x), def.height + 0.5 + s.y)
 
-		local pos = state.location.pos
+		local pos = state.param.pos
 		local meta = minetest.get_meta(pos)
 		local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
 		state:inventory(state:getSize().w / 2 - def.width / 2, 0, def.width, def.height, "main"):setLocation(invloc)
 
-		local pix = state:getSize().w / 2 - 8 / 2
+		local pix = state:getSize().w / 2 - s.x / 2
 		local piy = def.height + 0.5
 
 		state:element("code", {name = "player_main", code = [[
-			list[current_player;main;]] .. pix .. [[,]] .. piy .. [[;8,4]
+			list[current_player;main;]] .. pix .. [[,]] .. piy .. [[;]] .. s.x .. [[,]] .. s.y .. [[]
 		]]})
 
 		state:element("code", {name = "listring", code = [[
@@ -50,10 +51,11 @@ function aurum.storage.register(name, def)
 	local ndef = b.t.combine({
 		on_construct = function(pos)
 			minetest.get_meta(pos):get_inventory():set_size("main", def.width * def.height)
-			form:attach_to_node(pos)
 		end,
 
-		on_receive_fields = smartfs.nodemeta_on_receive_fields,
+		on_rightclick = function(pos, _, clicker)
+			form:show(pos, clicker)
+		end,
 
 		allow_metadata_inventory_put = function(pos, listname, _, stack, player)
 			if def.protected and aurum.is_protected(pos, player) then

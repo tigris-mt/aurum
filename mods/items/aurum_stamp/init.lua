@@ -85,8 +85,6 @@ minetest.register_node("aurum_stamp:stamper", {
 		form:show(pos, clicker)
 	end,
 
-	on_receive_fields = smartfs.nodemeta_on_receive_fields,
-
 	allow_metadata_inventory_put = function(pos, listname, _, stack, player)
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()
 	end,

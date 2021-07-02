@@ -118,8 +118,6 @@ function aurum.cook.register(name, def)
 			})
 		end,
 
-		on_receive_fields = smartfs.nodemeta_on_receive_fields,
-
 		on_timer = function(pos, elapsed)
 			local node = minetest.get_node(pos)
 			local meta = minetest.get_meta(pos)

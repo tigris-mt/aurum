@@ -1,10 +1,11 @@
 local S = aurum.get_translator()
 
 local form
-form = smartfs.create("aurum_rods:table", function(state)
-	state:size(8, 5.5)
+form = aurum.gui.node_smartfs("aurum_rods:table", function(state)
+	local s = aurum.player.inventory_size(state.location.player)
+	state:size(math.max(8, s.x), s.y + 2)
 
-	local pos = state.location.pos
+	local pos = state.param.pos
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
@@ -28,7 +29,7 @@ form = smartfs.create("aurum_rods:table", function(state)
 
 	state:button(3.5, 0, 1, 2, "bespell", S"Bespell"):onClick(function(self, state, name)
 		local player = minetest.get_player_by_name(name)
-		if not player or aurum.is_protected(state.location.pos, player) then
+		if not player or aurum.is_protected(pos, player) then
 			return
 		end
 
@@ -44,10 +45,10 @@ form = smartfs.create("aurum_rods:table", function(state)
 			meta:get_inventory():set_list("scroll", {})
 		end
 
-		form:attach_to_node(state.location.pos)
+		form:reshow(pos)
 	end)
 
-	state:inventory(0, 2, 8, 4, "main")
+	state:inventory(0, 2, s.x, s.y, "main")
 
 	state:element("code", {name = "listring", code = [[
 		listring[]] .. invloc .. [[;scroll]
@@ -80,8 +81,10 @@ minetest.register_node("aurum_rods:table", {
 		local inv = minetest.get_meta(pos):get_inventory()
 		inv:set_size("scroll", 1)
 		inv:set_size("rod", 1)
+	end,
 
-		form:attach_to_node(pos)
+	on_rightclick = function(pos, _, clicker)
+		form:show(pos, clicker)
 	end,
 
 	on_receive_fields = smartfs.nodemeta_on_receive_fields,
@@ -112,11 +115,11 @@ minetest.register_node("aurum_rods:table", {
 	end,
 
 	on_metadata_inventory_put = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_metadata_inventory_take = function(pos)
-		form:attach_to_node(pos)
+		form:reshow(pos)
 	end,
 
 	on_blast = aurum.drop_all_blast,

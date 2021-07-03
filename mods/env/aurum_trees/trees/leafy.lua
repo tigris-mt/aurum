@@ -13,7 +13,7 @@ aurum.trees.register("aurum_trees:birch", {
 -- "Pander"? I dunno, "jungle tree" sounded too generic.
 aurum.trees.register("aurum_trees:pander", {
 	description = "Pander",
-	texture_base = "aurum_trees_oak_%s.png^[colorize:#001100:160",
+	texture_base = "aurum_trees_oak_%s.png^[colorize:#001100:140",
 	decorations = aurum.trees.defaults.JUNGLE,
 })
 

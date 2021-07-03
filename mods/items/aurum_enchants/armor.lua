@@ -112,3 +112,15 @@ aurum.tools.register_enchant("breath", {
 		state.eqdef.breath_regen = state.eqdef.breath_regen + level
 	end,
 })
+
+aurum.tools.register_enchant("blubber", {
+	categories = {
+		hauberk = true,
+	},
+	description = S"Blubber",
+	max_level = 5,
+	longdesc = S"Increases the wearer's food storage.",
+	apply = function(state, level)
+		state.eqdef.food_storage = state.eqdef.food_storage * (1 + (2 ^ level) / 16)
+	end,
+})

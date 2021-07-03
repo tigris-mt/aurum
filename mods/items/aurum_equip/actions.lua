@@ -11,6 +11,7 @@ gequip.register_eqdef_init(function(eqdef)
 	eqdef.breath_regen = eqdef.breath_regen or 0
 	eqdef.effects = b.t.combine(default_effects, eqdef.effects or {})
 	eqdef.inv_size = b.t.combine({x = 0, y = 0}, eqdef.inv_size or {})
+	eqdef.food_storage = eqdef.food_storage or 1
 end)
 
 gequip.register_action("aurum_equip:armor", {
@@ -80,6 +81,20 @@ gequip.register_action("aurum_equip:hp", {
 
 	apply = function(state, player)
 		aurum.player.hp_max_monoid:add_change(player, state.hp.max, "aurum_equip:hp")
+	end,
+})
+
+gequip.register_action("aurum_equip:food_storage", {
+	init = function(state)
+		state.food_storage = 1
+	end,
+
+	add = function(state, r)
+		state.food_storage = state.food_storage * r.food_storage
+	end,
+
+	apply = function(state, player)
+		aurum.hunger.MAX:add_change(player, state.food_storage, "aurum_equip:food_storage")
 	end,
 })
 

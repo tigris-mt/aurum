@@ -13,7 +13,10 @@ local function monoid(identity)
 			return r
 		end,
 		identity = identity,
-		apply = function(n, player) end,
+		apply = function(n, player)
+			-- Update HUD.
+			aurum.hunger.hunger(player, 0, true)
+		end,
 		on_change = function() return end,
 	}
 end

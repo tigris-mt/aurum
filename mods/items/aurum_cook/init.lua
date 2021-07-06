@@ -257,6 +257,16 @@ function aurum.cook.register(name, def)
 			meta:set_int("mana_num", 0)
 		end,
 
+		on_dig = function(pos, node, digger, ...)
+			local mana_num = meta:get_int("mana_num")
+			local mana = meta:get_int("mana")
+			local dug = minetest.node_dig(pos, node, digger, ...)
+			if dug then
+				aurum.player.mana_sparks(digger, vector.add(pos, vector.new(0, 1, 0)), "smelting", mana_num, mana)
+			end
+			return dug
+		end,
+
 		on_blast = aurum.drop_all_blast,
 
 		on_destruct = aurum.drop_all,

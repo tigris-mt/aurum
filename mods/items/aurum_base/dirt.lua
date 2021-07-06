@@ -31,8 +31,8 @@ minetest.register_abm{
 	nodenames = {"group:dirt_spread"},
 	neighbors = {"group:dirt_base"},
 
-	interval = 100,
-	chance = 1,
+	interval = 10,
+	chance = 10,
 
 	catch_up = false,
 
@@ -50,8 +50,8 @@ minetest.register_abm{
 	label = "Dirt Smothering",
 	nodenames = {"group:dirt_smother"},
 
-	interval = 100,
-	chance = 1,
+	interval = 10,
+	chance = 10,
 
 	catch_up = false,
 

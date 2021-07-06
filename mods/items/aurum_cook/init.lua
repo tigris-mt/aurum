@@ -70,6 +70,9 @@ function aurum.cook.register(name, def)
 		local meta = minetest.get_meta(pos)
 		local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
+		-- Invisible delegate.
+		state:inventory(-2, -2, 1, 1, "delegate"):setLocation(invloc)
+
 		state:inventory(1.5, 0.5, 1, 1, "src"):setLocation(invloc)
 		state:image(1.5, 1.5, 1, 1, "fireimage", ("default_furnace_fire_bg.png^[lowpart:%s:default_furnace_fire_fg.png"):format(100 - (state.param.fuel or 100) * 100))
 		state:inventory(1.5, 2.5, 1, 1, "fuel"):setLocation(invloc)
@@ -81,6 +84,9 @@ function aurum.cook.register(name, def)
 		state:inventory(0, 4, s.x, s.y, "main")
 
 		state:element("code", {name = "listring", code = [[
+			listring[current_player;main]
+			listring[]] .. invloc .. [[;delegate]
+			listring[current_player;main]
 			listring[]] .. invloc .. [[;dst]
 			listring[current_player;main]
 			listring[]] .. invloc .. [[;src]
@@ -91,7 +97,7 @@ function aurum.cook.register(name, def)
 	end)
 
 	def.node = b.t.combine({
-		allow_metadata_inventory_put = allow_metadata_inventory_put,
+		allow_metadata_inventory_put = aurum.allow_metadata_inventory_put_delegate({"src", "fuel"}, allow_metadata_inventory_put),
 		allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 		allow_metadata_inventory_take = allow_metadata_inventory_take,
 
@@ -103,6 +109,7 @@ function aurum.cook.register(name, def)
 			inv:set_size("src", 1)
 			inv:set_size("dst", 2 * 2)
 			inv:set_size("fuel", 1)
+			inv:set_size("delegate", 1)
 		end,
 
 		on_rightclick = function(pos, _, clicker)
@@ -241,11 +248,11 @@ function aurum.cook.register(name, def)
 			end
 		end,
 
-		on_metadata_inventory_put = function(pos)
+		on_metadata_inventory_put = aurum.on_metadata_inventory_put_delegate({"src", "fuel"}, function(pos)
 			if not minetest.get_node_timer(pos):is_started() then
 				minetest.get_node_timer(pos):start(1)
 			end
-		end,
+		end),
 
 		on_metadata_inventory_take = function(pos, listname, _, _, player)
 			if listname ~= "dst" then

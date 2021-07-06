@@ -164,6 +164,61 @@ function aurum.get_translator()
 	return minetest.get_translator(minetest.get_current_modname())
 end
 
+local function mipd(action)
+	return function(lists, f)
+		return function(pos, listname, index, stack, player, ...)
+			if listname == "delegate" then
+				local node = minetest.get_node(pos)
+				local def = minetest.registered_nodes[node.name]
+				local allow = def.allow_metadata_inventory_put or function(_, _, _, stack) return stack:get_count() end
+				for _,list in ipairs(lists) do
+					local r = allow(pos, list, index, stack, player, ...)
+					if r == -1 or r > 0 then
+						return action(r, def, pos, list, index, stack, player, ...)
+					end
+				end
+				return 0
+			elseif f then
+				return f(pos, listname, index, stack, player, ...)
+			else
+				return stack:get_count()
+			end
+		end
+	end
+end
+
+aurum.allow_metadata_inventory_put_delegate = mipd(function(r, def, pos, listname, _, stack)
+	if r > 0 and not minetest.get_meta(pos):get_inventory():room_for_item(listname, stack:peek_item(r)) then
+		return 0
+	else
+		return r
+	end
+end)
+
+aurum.on_metadata_inventory_put_delegate = mipd(function(r, def, pos, listname, index, stack, player, ...)
+	local inv = minetest.get_meta(pos):get_inventory()
+	inv:set_list("delegate", {})
+	if r > 0 then
+		local taken = stack:take_item(r)
+		local old_list = inv:get_list(listname)
+		inv:add_item(listname, taken)
+		local new_list = inv:get_list(listname)
+		local index = 0
+		for i=1,math.max(#old_list, #new_list) do
+			if old_list[i] == nil then
+				index = i
+				break
+			elseif old_list[i]:get_count() ~= new_list[i]:get_count() then
+				index = i
+				break
+			end
+		end
+		if def.on_metadata_inventory_put then
+			def.on_metadata_inventory_put(pos, listname, index, taken, player, ...)
+		end
+	end
+end)
+
 b.dofile("damage.lua")
 
 -- Node sounds.

@@ -9,6 +9,9 @@ form = aurum.gui.node_smartfs("aurum_enchants:table", function(state)
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
+	-- Invisible delegate.
+	state:inventory(-2, -2, 1, 1, "delegate"):setLocation(invloc)
+
 	state:label(1.5, 0, "scroll_label", S"Enchantment Scroll")
 	state:inventory(2, 0.5, 1, 1, "scroll"):setLocation(invloc)
 	state:label(6, 0, "tool_label", S"Tool")
@@ -87,6 +90,9 @@ form = aurum.gui.node_smartfs("aurum_enchants:table", function(state)
 	state:inventory(0, 2, s.x, s.y, "main")
 
 	state:element("code", {name = "listring", code = [[
+		listring[current_player;main]
+		listring[]] .. invloc .. [[;delegate]
+		listring[current_player;main]
 		listring[]] .. invloc .. [[;scroll]
 		listring[current_player;main]
 		listring[]] .. invloc .. [[;tool]
@@ -112,6 +118,7 @@ minetest.register_node("aurum_enchants:table", {
 		local inv = minetest.get_meta(pos):get_inventory()
 		inv:set_size("scroll", 1)
 		inv:set_size("tool", 1)
+		inv:set_size("delegate", 1)
 	end,
 
 	on_rightclick = function(pos, _, clicker)
@@ -120,7 +127,7 @@ minetest.register_node("aurum_enchants:table", {
 
 	on_receive_fields = smartfs.nodemeta_on_receive_fields,
 
-	allow_metadata_inventory_put = function(pos, listname, _, stack, player)
+	allow_metadata_inventory_put = aurum.allow_metadata_inventory_put_delegate({"scroll", "tool"}, function(pos, listname, _, stack, player)
 		if aurum.is_protected(pos, player) then
 			return 0
 		end
@@ -137,7 +144,7 @@ minetest.register_node("aurum_enchants:table", {
 		end
 
 		return stack:get_count()
-	end,
+	end),
 
 	allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 
@@ -145,9 +152,9 @@ minetest.register_node("aurum_enchants:table", {
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()
 	end,
 
-	on_metadata_inventory_put = function(pos)
+	on_metadata_inventory_put = aurum.on_metadata_inventory_put_delegate({"scroll", "tool"}, function(pos)
 		form:reshow(pos)
-	end,
+	end),
 
 	on_metadata_inventory_take = function(pos)
 		form:reshow(pos)

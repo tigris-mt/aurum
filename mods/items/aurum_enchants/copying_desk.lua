@@ -9,6 +9,9 @@ form = aurum.gui.node_smartfs("aurum_enchants:copying_desk", function(state)
 	local meta = minetest.get_meta(pos)
 	local invloc = ("nodemeta:%d,%d,%d"):format(pos.x, pos.y, pos.z)
 
+	-- Invisible delegate.
+	state:inventory(-2, -2, 1, 1, "delegate"):setLocation(invloc)
+
 	state:label(0, 0, "src_label", S"Source")
 	state:inventory(0, 0.7, 1, 1, "src"):setLocation(invloc)
 
@@ -98,6 +101,9 @@ form = aurum.gui.node_smartfs("aurum_enchants:copying_desk", function(state)
 	state:inventory(0, 2, s.x, s.y, "main")
 
 	state:element("code", {name = "listring", code = [[
+		listring[current_player;main]
+		listring[]] .. invloc .. [[;delegate]
+		listring[current_player;main]
 		listring[]] .. invloc .. [[;src]
 		listring[current_player;main]
 		listring[]] .. invloc .. [[;dst]
@@ -141,17 +147,19 @@ minetest.register_node("aurum_enchants:copying_desk", {
 	sounds = aurum.sounds.wood(),
 
 	on_construct = function(pos)
-		minetest.get_meta(pos):get_inventory():set_size("src", 1)
-		minetest.get_meta(pos):get_inventory():set_size("dst", 1)
-		minetest.get_meta(pos):get_inventory():set_size("catalyst", 1)
-		minetest.get_meta(pos):get_inventory():set_size("library", 2)
+		local inv = minetest.get_meta(pos):get_inventory()
+		inv:set_size("src", 1)
+		inv:set_size("dst", 1)
+		inv:set_size("catalyst", 1)
+		inv:set_size("delegate", 1)
+		inv:set_size("library", 2)
 	end,
 
 	on_rightclick = function(pos, _, clicker)
 		form:show(pos, clicker)
 	end,
 
-	allow_metadata_inventory_put = function(pos, listname, _, stack, player)
+	allow_metadata_inventory_put = aurum.allow_metadata_inventory_put_delegate({"src", "dst", "catalyst"}, function(pos, listname, _, stack, player)
 		if listname == "src" then
 			local scroll = aurum.scrolls.get(stack)
 			if not (scroll and scroll.type == "enchant") then
@@ -171,7 +179,7 @@ minetest.register_node("aurum_enchants:copying_desk", {
 			end
 		end
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()
-	end,
+	end),
 
 	allow_metadata_inventory_move = aurum.metadata_inventory_move_delegate,
 
@@ -179,9 +187,9 @@ minetest.register_node("aurum_enchants:copying_desk", {
 		return aurum.is_protected(pos, player) and 0 or stack:get_count()
 	end,
 
-	on_metadata_inventory_put = function(pos)
+	on_metadata_inventory_put = aurum.on_metadata_inventory_put_delegate({"src", "dst", "catalyst"}, function(pos)
 		form:reshow(pos)
-	end,
+	end),
 
 	on_metadata_inventory_move = function(pos)
 		form:reshow(pos)
